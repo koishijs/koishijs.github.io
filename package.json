@@ -1,0 +1,11 @@
+{
+  "name": "koishi-docs",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Shigma <1700011071@pku.edu.cn>",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.2.0"
+  }
+}

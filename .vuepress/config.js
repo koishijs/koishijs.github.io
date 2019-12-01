@@ -11,6 +11,11 @@ module.exports = {
       ],
       '/guide/': [
         '/guide/',
+        '/guide/receive-send',
+        '/guide/command-system',
+        '/guide/plugin-development',
+        '/guide/using-database',
+        '/guide/official-plugins',
       ],
     },
   },

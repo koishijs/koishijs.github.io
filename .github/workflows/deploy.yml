@@ -1,7 +1,9 @@
 name: Deploy
 
 on:
-- push
+  push:
+    branches:
+    - docs
 
 jobs:
   build:
@@ -21,5 +23,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v2.5.0
       env:
         ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        PUBLISH_BRANCH: gh-pages
+        PUBLISH_BRANCH: master
         PUBLISH_DIR: ./.vuepress/dist
+      with:
+        emptyCommits: false

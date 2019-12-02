@@ -1,3 +1,7 @@
+---
+sidebarDepth: 2
+---
+
 # 接收和发送信息
 
 ## 接收器
@@ -11,7 +15,5 @@ app.receiver.on('message', (meta) => {
 ## 发送器
 
 ## 中间件
-
-## 上下文
 
 ## Meta 对象

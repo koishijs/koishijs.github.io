@@ -90,7 +90,7 @@ app.middleware(async (meta, next) => {
 ```
 
 ::: warning 注意
-上述代码中的 return 是必须的。如果删去将会导致时序错误，这在 Koishi 中将会抛出一个运行时警告。
+上述代码中 next 前面的 return 是必须的。如果删去将可能会导致时序错误，这在 Koishi 中将会抛出一个运行时警告。
 :::
 
 ### 注册前置中间件

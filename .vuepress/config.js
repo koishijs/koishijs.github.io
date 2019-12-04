@@ -18,16 +18,25 @@ module.exports = {
         '/api/command',
         '/api/utils',
       ],
-      '/guide/': [
-        '/guide/about-koishi',
-        '/guide/getting-started',
-        '/guide/config-file',
-        '/guide/receive-and-send',
-        '/guide/plugin-and-context',
-        '/guide/command-system',
-        '/guide/using-database',
-        '/guide/multiple-bots',
-      ],
+      '/guide/': [{
+        title: '指南',
+        collapsable: false,
+        children: [
+          '/guide/about-koishi',
+          '/guide/getting-started',
+          '/guide/config-file',
+        ],
+      }, {
+        title: '深入',
+        collapsable: false,
+        children: [
+          '/guide/receive-and-send',
+          '/guide/plugin-and-context',
+          '/guide/command-system',
+          '/guide/using-database',
+          '/guide/multiple-bots',
+        ],
+      }],
       '/plugins/': [
         '/plugins/common',
         '/plugins/teach',

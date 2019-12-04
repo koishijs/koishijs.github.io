@@ -16,6 +16,7 @@ module.exports = {
         '/api/receiver',
         '/api/sender',
         '/api/command',
+        '/api/database',
         '/api/utils',
       ],
       '/guide/': [{

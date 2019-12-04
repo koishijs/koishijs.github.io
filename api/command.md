@@ -25,3 +25,21 @@ sidebarDepth: 2
 ## cmd.execute(config, next?)
 
 ## cmd.end()
+
+## 类型定义
+
+### CommandConfig
+
+```ts
+export interface CommandConfig {
+  checkUnknown?: boolean
+  checkRequired?: boolean
+  checkArgCount?: boolean
+  usageName?: string
+  description?: string
+  authority?: number
+  maxUsage?: number
+  minInterval?: number
+  showWarning?: boolean
+}
+```

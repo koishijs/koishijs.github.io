@@ -6,8 +6,9 @@ sidebarDepth: 2
 
 ## 起步
 
-Koishi 基于 CoolQ 和 CQHTTP，因此你需要先安装它们。
+Koishi 基于 Node.js，CoolQ 和 CQHTTP，因此你需要先安装它们。
 
+- Node.js：[https://nodejs.org](https://nodejs.org/)
 - CoolQ：[https://cqp.cc](https://cqp.cc)
 - CQHTTP：[https://cqhttp.cc](https://cqhttp.cc)
 
@@ -44,7 +45,7 @@ koishi run
 
 ## 调用 Koishi
 
-如果你对 JavaScript 和 NodeJS 非常熟悉，你或许也希望在 NodeJS 中直接调用 Koishi——没问题，我们也提供了这样一套方案。
+如果你对 JavaScript 和 Node.js 非常熟悉，你或许也希望在 Node.js 中直接调用 Koishi——没问题，我们也提供了这样一套方案。
 
 首先初始化你的机器人目录：
 

@@ -291,7 +291,7 @@ export interface Credentials {
 
 ## sender.getRecord(file, outFormat, fullPath?)
 
-获取语音：并不是真的获取语音，而是转换语音到指定的格式，然后返回 `data\record` 目录下的语音文件名。注意，要使用此接口，需要安装 CoolQ 的 [语音组件](https://cqp.cc/t/21132)。
+获取语音：并不是真的获取语音，而是转换语音到指定的格式，然后返回 `data/record` 目录下的语音文件名。注意，要使用此接口，需要安装 CoolQ 的 [语音组件](https://cqp.cc/t/21132)。
 
 - file: `string` 语音文件名
 - outFormat: `'mp3' | 'amr' | 'wma' | 'm4a' | 'spx' | 'ogg' | 'wav' | 'flac'`
@@ -300,7 +300,7 @@ export interface Credentials {
 
 ## sender.getImage(file)
 
-获取图片：与上面类似，不过返回 `data\image` 目录下的图片路径。
+获取图片：与上面类似，不过返回 `data/image` 目录下的图片路径。
 
 - file: `string` 图片文件名
 - 返回值: `Promise<string>` 图片的完整路径

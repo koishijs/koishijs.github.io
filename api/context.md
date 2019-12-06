@@ -51,10 +51,10 @@ sidebarDepth: 2
 
 在当前上下文中注册或修改一个指令。
 
-- rawName: `string` 指令名（以及可能的参数），参见 [定义指令](../guide/command-system.md#定义指令)
+- rawName: `string` 指令名以及可能的参数
 - description?: `string` 指令的描述
-- config?: [`CommandConfig`](./command.md#commandconfig)
-- 返回值：[`Command`](./command.md) 定义或修改的指令
+- config?: [`CommandConfig`](../guide/command-system.md#commandconfig-对象) 指令的配置
+- 返回值：[`Command`](./command.md) 注册或修改的指令
 
 ## ctx.getCommand(name, meta?)
 

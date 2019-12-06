@@ -396,13 +396,36 @@ ctx.command('foo.bar/abc.xyz')
 
 ### CommandConfig 对象
 
+- checkUnknown: `boolean` 是否对未知选项进行检测，默认为 `false`
+- checkRequired: `boolean` 是否对必选选项进行检测，默认为 `false`
+- checkArgCount: `boolean` 是否对参数个数进行检测，默认为 `false`
+- authority: `number` 最低调用权限，默认为 `1`
+- maxUsage: `number` 每天最多调用次数，默认为 `Infinity`
+- minInterval: `number` 每次调用最短时间间隔，默认为 `0`
+- showWarning: `boolean` 当小于最短间隔时是否进行提醒，默认为 `false`
+- usageName: `string` 调用标识符，默认为指令名，如果多个指令使用同一个标识符，则它们的调用次数将合并计算
+
 ### OptionConfig 对象
+
+- default: `any` 选项的默认值
+- hidden: `boolean` 此选项在帮助中不可见
+- authority: `number` 调用此选项的最低权限
+- notUsage: `boolean` 调用此选项将不计入调用次数
+- isString: `boolean` 保持参数为字符串，不进行类型转换
+- noNegated: `boolean` 对以 `--no-` 开头的参数不进行取反操作
 
 ### ShortcutConfig 对象
 
-### ParsedCommandLine 对象
+- hidden: `boolean` 此选项在帮助中不可见
+- authority: `number` 调用此快捷方式的最低权限
+- prefix: `boolean` 调用时要求保留前缀
+- fuzzy: `boolean` 允许在快捷方式后带参数
+- oneArg: `boolean` 将所有后面的内容解析成一个参数
+- options: `boolean` 要带的选项列表，将与传入的参数合并
 
-一个指令的 `action` 回调函数的第一个参数是一个对象，被称为 ParsedCommandLine 对象。本节将介绍其上的全部属性。
+### ActionConfig 对象
+
+一个指令的 `action` 回调函数的第一个参数是一个对象，被称为 ActionConfig 对象。本节将介绍其上的全部属性。
 
 - args: `string[]` 由全部参数构成的数组
 - options: `Record<string, any>` 由传入选项构成的键值对

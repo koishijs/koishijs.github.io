@@ -403,6 +403,7 @@ ctx.command('foo.bar/abc.xyz')
 - maxUsage: `number` 每天最多调用次数，默认为 `Infinity`
 - minInterval: `number` 每次调用最短时间间隔，默认为 `0`
 - showWarning: `boolean` 当小于最短间隔时是否进行提醒，默认为 `false`
+- noHelpOption: `boolean` 不默认注册 `-h, --help` 选项，默认为 `false`
 - usageName: `string` 调用标识符，默认为指令名，如果多个指令使用同一个标识符，则它们的调用次数将合并计算
 
 ### OptionConfig 对象

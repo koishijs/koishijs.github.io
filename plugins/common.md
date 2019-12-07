@@ -8,7 +8,7 @@ koishi-plugin-common 包含了一些基本插件，它们在你使用 `koishi` �
 
 ```js
 module.exports = {
-  pluginConfig: {
+  plugins: ['common', {
     // 禁用此功能
     repeater: false,
     // 配置应答器
@@ -16,7 +16,7 @@ module.exports = {
       match: /^(.+)一时爽$/,
       reply: (_, str) => `一直${str}一直爽`,
     }],
-  },
+  }],
 }
 ```
 
@@ -45,12 +45,12 @@ interface RepeaterOptions {
 
 ```js
 module.exports = {
-  pluginConfig: {
+  plugins: ['common', {
     repeater: {
       repeatCheck: (repeated, times) => repeated && times >= 5 && Math.random() > 0.5,
       repeatCheckText: (userId) => `[CQ:at,qq=${userId}] 在？为什么打断复读？`,
     },
-  },
+  }],
 }
 ```
 
@@ -64,7 +64,7 @@ respondent 插件允许设置一套内置问答，就像这样：
 
 ```js
 module.exports = {
-  pluginConfig: {
+  plugins: ['common', {
     respondent: [{
       match: 'awsl',
       reply: '爱我苏联',
@@ -72,7 +72,7 @@ module.exports = {
       match: /^(.+)一时爽$/,
       reply: (_, str) => `一直${str}一直爽`,
     }],
-  },
+  }],
 }
 ```
 
@@ -86,11 +86,40 @@ welcome 插件用于欢迎群中的新人。欢迎信息默认是“欢迎新大
 
 ```js
 module.exports = {
-  pluginConfig: {
+  plugins: ['common', {
     welcome: ({ userId }) => `欢迎新大佬 [CQ:at,qq=${userId}]！群地位-1`,
-  },
+  }],
 }
 ```
+
+## 插件：authorize
+
+authorize 插件用于设置某个群中默认的玩家权限：
+
+```js
+module.exports = {
+  plugins: ['common', {
+    authorize: {
+      // 设置全群玩家权限为 2 级
+      111222333: 2,
+      // 默认行为：全群玩家权限为 1 级
+      444555666: {},
+      // 分别设置每类成员
+      777888999: {
+        memberAuthority: 1,
+        adminAuthority: 2,
+        ownerAuthority: 3,
+      },
+    }
+  }],
+}
+```
+
+这里的权限设置不仅会在机器人每次启动时生效，也会在有人加群时生效。
+
+::: warning 注意
+由于 CoolQ 的机制问题，机器人刚加某个群时可能无法获取成员列表，从而导致插件无法运行。遇到这种情况一般等待 1-2 天即可恢复正常。
+:::
 
 ## 插件：requestHandler
 
@@ -98,21 +127,20 @@ requestHandler 插件用于处理好友和群申请。默认情况下 Koishi 会
 
 ```js
 module.exports = {
-  pluginConfig: {
-    requestHandler: {
-      handleFriend: true, // 通过所有好友申请
-      handleGroupAdd: undefined, // 忽略所有加群申请（当然这没必要写出来）
-      async handleGroupInvite (meta) {
-        // 拒绝所有来自 1 级以下，通过所有来自 3 级或以上权限用户的加群邀请，其他不处理
-        const user = await ctx.database.getUser(meta.userId, 0, ['authority'])
-        if (user.authority >= 3) {
-          return true
-        } else if (user.authority <= 1) {
-          return ctx.sender.setGroupAddRequest(meta.flag, 'invite', false)
-        }
-      },
+  plugins: ['common', {
+    // requestHandler 的配置被拆分成了这三个
+    handleFriend: true, // 通过所有好友申请
+    handleGroupAdd: undefined, // 忽略所有加群申请（当然这没必要写出来）
+    async handleGroupInvite (meta) {
+      // 拒绝所有来自 1 级以下，通过所有来自 3 级或以上权限用户的加群邀请，其他不处理
+      const user = await ctx.database.getUser(meta.userId, 0, ['authority'])
+      if (user.authority >= 3) {
+        return true
+      } else if (user.authority <= 1) {
+        return ctx.sender.setGroupAddRequest(meta.flag, 'invite', false)
+      }
     },
-  },
+  }],
 }
 ```
 
@@ -151,11 +179,11 @@ broadcast foo bar baz     # 向所有群发送 foo bar baz
 
 ```js
 module.exports = {
-  pluginConfig: {
+  plugins: ['common', {
     broadcast: {
       broadcastInterval: 1000, // 默认值为 1s
     },
-  },
+  }],
 }
 ```
 
@@ -165,10 +193,43 @@ contextify 指令可以让你临时切换上下文调用指令。例如这样（
 
 ```sh
 teach foo bar                       # 无效，因为 teach 指令只对群上下文生效
-contextify -g 456 -- teach foo bar  # 有效，相当于在群 456 调用 teach foo bar
+contextify -g 456 teach foo bar     # 有效，相当于在群 456 调用 teach foo bar
 ```
 
 尽管切换了调用上下文，但 contextify 指令的输出仍然产生在原上下文中。这在你想调用群指令的时候是很有用的。
+
+## 指令：exit
+
+exit 指令可以让你退出或重启机器人进程：
+
+```sh
+Koishi，关机            # 退出进程，相当于 exit -c 0
+Koishi，重启            # 重启进程，相当于 exit -c 1
+```
+
+::: tip 提示
+Koishi 的命令行工具使用**子进程**来实现对机器人的管理。当子进程退出时，主进程可以通过查看 exit code 来确定退出的原因，并执行相应的操作。
+:::
+
+## 指令：info
+
+info 指令用于查看用户的信息：
+
+```sh
+info                    # 查看自己的用户信息
+info -u 123456789       # 查看其他用户的信息，需要额外的权限
+```
+
+如果你是插件开发者，你也可以为这个指令添加其他输出结果：
+
+```js
+const { registerUserInfo } = require('koishi-plugin-common')
+
+// registerUserInfo 传入两个参数
+// 第一个参数是回调函数，传入用户数据，返回输出结果
+// 第二个参数是需要用到的字段列表（可选）
+registerUserInfo(user => `余额：${user.money}￥`, ['money'])
+```
 
 ## 指令：likeme
 
@@ -176,14 +237,14 @@ likeme 指令用于让四季酱为你点赞。点赞的次数可以自行配置�
 
 ```js
 module.exports = {
-  pluginConfig: {
+  plugins: ['common', {
     likeme: {
       userFields: [/* 所需字段 */],
       likeCount (user) {
         return // 点赞次数
       },
     },
-  },
+  }],
 }
 ```
 
@@ -197,14 +258,14 @@ callme 指令用于修改四季酱对你的称呼。可以自行配置禁止使�
 
 ```js
 module.exports = {
-  pluginConfig: {
+  plugins: ['common', {
     callme: {
       validateName (name, meta) {
         if (name === meta.$user.name) return '称呼未发生变化。'
         if (name.includes('foo')) return '称呼中禁止含有 foo。'
       },
     },
-  },
+  }],
 }
 ```
 

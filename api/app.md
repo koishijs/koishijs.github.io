@@ -18,37 +18,41 @@ sidebarDepth: 2
 
 当前 App 创建时传入的配置。参见 [配置文件](../guide/config-file.md)。
 
+## app.version
+
+当前 App 的版本信息。参见 [`VersionInfo`](./sender.md#sender-getsersioninfo)。
+
 ## app.users
 
-由当前 App 内所有用户事件构成的上下文。
+由当前 App 内所有用户事件构成的上下文。特别地，你可以使用 `app.users.exclude(...ids)` 创建除去某些用户外所有用户的上下文。
 
 ## app.groups
 
-由当前 App 内所有群事件构成的上下文。
+由当前 App 内所有群事件构成的上下文。特别地，你可以使用 `app.groups.exclude(...ids)` 创建除去某些群外所有群的上下文。
 
 ## app.discusses
 
-由当前 App 内所有讨论组事件构成的上下文。
+由当前 App 内所有讨论组事件构成的上下文。特别地，你可以使用 `app.discusses.exclude(...ids)` 创建除去某些讨论组外所有讨论组的上下文。
 
-## app.user(userId)
+## app.user(...userIds)
 
 创建对特定用户的上下文。
 
-- userId: `number` 用户 ID
+- userIds: `number[]` 用户 ID
 - 返回值: [`Context`](./context.md) 新的上下文
 
-## app.group(groupId)
+## app.group(...groupIds)
 
 创建对特定群的上下文。
 
-- groupId: `number` 群 ID
+- groupIds: `number[]` 群 ID
 - 返回值: [`Context`](./context.md) 新的上下文
 
-## app.discuss(discussId)
+## app.discuss(...discussIds)
 
 创建对特定讨论组的上下文。
 
-- discussId: `number` 讨论组 ID
+- discussIds: `number[]` 讨论组 ID
 - 返回值: [`Context`](./context.md) 新的上下文
 
 ## app.start()

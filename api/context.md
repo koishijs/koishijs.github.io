@@ -18,6 +18,40 @@ sidebarDepth: 2
 
 当前上下文的接收器对象。参见 [接收器](./receiver.md)。
 
+## ctx.plus(context)
+
+在已有上下文的基础上加上其他上下文。
+
+- context: `Context` 要加上的上下文
+- 返回值: `Context` 新的上下文
+
+## ctx.minus(context)
+
+在已有上下文的基础上除去其他上下文。
+
+- context: `Context` 要除去的上下文
+- 返回值: `Context` 新的上下文
+
+## ctx.inverse()
+
+求出当前上下文的补集。
+
+- 返回值: `Context` 新的上下文
+
+## ctx.match(meta)
+
+测试上下文能否匹配元信息对象。
+
+- meta: `Meta` 元信息对象
+- 返回值: `boolean` 匹配结果
+
+## ctx.contain(context)
+
+判断当前上下文是否完全包含了另一个上下文。
+
+- context: `Context` 要比较的上下文
+- 返回值: `boolean` 比较结果
+
 ## ctx.plugin(plugin, options?)
 
 当前上下文中安装一个插件。

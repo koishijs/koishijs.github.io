@@ -4,17 +4,19 @@ sidebarDepth: 2
 
 # 全局 API
 
-## apps
+## appList
 
-## selfIds
-
-## createApp()
-
-## eachApp()
+## appMap
 
 ## startAll()
 
+## onStart(callback)
+
 ## stopAll()
+
+## onStop(callback)
+
+## getSelfIds
 
 ## getContextId(meta)
 

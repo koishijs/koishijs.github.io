@@ -86,6 +86,9 @@ app.discusses.except(987654321).plugin(require('koishi-plugin-tools'))
 // 返回两个上下文的并集
 context1.plus(context2)
 
+// 返回两个上下文的交集
+context1.intersect(context2)
+
 // 返回两个上下文的差集
 context1.minus(context2)
 

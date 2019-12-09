@@ -1,6 +1,18 @@
 module.exports = {
   title: 'Koishi',
+  head: [
+    ['link', { rel: 'icon', href: `/koishi.png` }],
+    // ['link', { rel: 'manifest', href: '/manifest.json' }],
+    ['meta', { name: 'theme-color', content: '#5546a3' }],
+    // ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    // ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    // ['link', { rel: 'apple-touch-icon', href: `/icons/apple-touch-icon-152x152.png` }],
+    // ['link', { rel: 'mask-icon', href: '/icons/safari-pinned-tab.svg', color: '#5546a3' }],
+    // ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
+    // ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
+  ],
   themeConfig: {
+    logo: '/koishi.png',
     nav: [
       { text: '主页', link: '/' },
       { text: '指南', link: '/guide/getting-started.html' },

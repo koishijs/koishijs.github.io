@@ -32,6 +32,13 @@ sidebarDepth: 2
 - context: `Context` 要除去的上下文
 - 返回值: `Context` 新的上下文
 
+## ctx.intersect(context)
+
+给出当前上下文和其他上下文的交集
+
+- context: `Context` 要求交集的上下文
+- 返回值: `Context` 新的上下文
+
 ## ctx.inverse()
 
 求出当前上下文的补集。

@@ -145,7 +145,7 @@ interface AppOptions {
 
 ## getContextId(meta)
 
-获得上下文 ID，可用于 [`sender.sendContextMsg()`](./sender.md#sender-sendcontextmsg-contextid-message-autoescape)。
+获得上下文 ID，可用于 [`sender.sendContextMsg()`](./sender.md#sender-sendcontextmsg)。
 
 - meta: `Meta` 元信息对象
 - 返回值: `string` 上下文 ID

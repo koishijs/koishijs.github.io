@@ -1,3 +1,5 @@
+const { remove: removeDiacritics } = require('diacritics')
+
 module.exports = {
   title: 'Koishi',
   head: [
@@ -11,6 +13,23 @@ module.exports = {
     // ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
     // ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
   ],
+  plugins: [
+    [require('./highlight')],
+  ],
+  markdown: {
+    slugify (str) {
+      const rControl = /[\u0000-\u001f]/g
+      const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'“”‘’<>,.?/]+/g
+      return removeDiacritics(str)
+        .replace(rControl, '')
+        .replace(/\(.+/, '')
+        .replace(rSpecial, '-')
+        .replace(/\-{2,}/g, '-')
+        .replace(/^\-+|\-+$/g, '')
+        .replace(/^(\d)/, '_$1')
+        .toLowerCase()
+    }
+  },
   themeConfig: {
     logo: '/koishi.png',
     nav: [

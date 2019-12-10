@@ -8,7 +8,7 @@ sidebarDepth: 2
 
 向特定上下文发送信息。
 
-- contextId: `string` 上下文 ID，参见 [getContextId](./index.md#getcontextid-meta)
+- contextId: `string` 上下文 ID，参见 [getContextId](./index.md#getcontextid)
 - message: `string` 要发送的内容
 - autoEsacpe: `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
 - 返回值: `Promise<number>` 新信息的 messageId

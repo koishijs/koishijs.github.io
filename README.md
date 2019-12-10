@@ -31,7 +31,7 @@ koishi run
 
 现在可以对你的机器人说话了：
 
-```
+```text
 echo hello world
 > hello world
 ```

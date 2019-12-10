@@ -5,7 +5,15 @@
   "main": "index.js",
   "author": "Shigma <1700011071@pku.edu.cn>",
   "license": "MIT",
+  "scripts": {
+    "dev": "vuepress dev .",
+    "build": "vuepress build ."
+  },
   "devDependencies": {
     "vuepress": "^1.2.0"
+  },
+  "dependencies": {
+    "highlight.js": "^9.16.2",
+    "shiki": "^0.1.6"
   }
 }

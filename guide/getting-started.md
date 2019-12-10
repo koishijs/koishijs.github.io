@@ -6,13 +6,17 @@ sidebarDepth: 2
 
 ## 起步
 
-Koishi 基于 Node.js，CoolQ 和 CQHTTP，因此你需要先安装它们。
+Koishi 基于 NodeJS，CoolQ 和 CQHTTP，因此你需要先安装它们。
 
-- Node.js：[https://nodejs.org](https://nodejs.org/)
+- NodeJS：[https://nodejs.org](https://nodejs.org/)
 - CoolQ：[https://cqp.cc](https://cqp.cc)
 - CQHTTP：[https://cqhttp.cc](https://cqhttp.cc)
 
 进行相应的配置并运行 CoolQ 和 CQHTTP 后，你就可以愉快地使用 Koishi 了。
+
+::: tip 提示
+CoolQ Air 和 CoolQ Pro 是两个不同的版本，它们都能配合 Koishi 运行。后者需要收取一定的费用，但同时比前者增加了一些功能（例如可以发图）。因此，如果你发现你的机器人无法发图，请先确保自己使用的是可以发图的版本。
+:::
 
 ## 全局安装
 
@@ -32,7 +36,7 @@ npm i koishi -g
 利用 `koishi init` 指令迅速创建一个 `koishi.config.js` 文件：
 
 ```sh
-koishi init --port 7070
+koishi init
 ```
 
 最后运行程序：
@@ -64,11 +68,12 @@ npm i koishi -D
 新建 `index.js`，并写下这段代码：
 
 ```js
-const { createApp } = require('koishi')
+const { App } = require('koishi')
 
-const app = createApp({
+const app = new App({
+  type: 'http',
   port: 7070,
-  sendUrl: 'http://localhost:5700',
+  server: 'http://localhost:5700',
   // 在这里加上其他配置信息
 })
 

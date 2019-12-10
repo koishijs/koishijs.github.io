@@ -40,9 +40,10 @@ module.exports = {
 对于 Koishi API 的使用者，你需要手动引入这个数据库，并将相同的配置传入 [App](../api/app.md) 的构造选项中：
 
 ```js
+const { App, startAll } = require('koishi')
 require('koishi-database-mysql')
 
-const app = new App({
+new App({
   database: {
     mysql: {
       host: '[host]',
@@ -53,6 +54,8 @@ const app = new App({
     },
   },
 })
+
+startAll()
 ```
 
 ### 安装多个数据库

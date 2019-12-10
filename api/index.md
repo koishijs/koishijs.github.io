@@ -4,6 +4,31 @@ sidebarDepth: 2
 
 # 全局 API
 
+本章节收录了由包 koishi-core 导出的主要 API。
+
+## new App(options)
+
+机器人实例的构造函数。
+
+- options: `AppOptions` 构造选项
+- 返回值: [`App`](./app.md)
+
+```ts
+type ServerType = 'http' | 'ws'
+
+interface AppOptions {
+  type?: ServerType
+  server?: string
+  port?: number
+  name?: string
+  token?: string
+  secret?: string
+  selfId?: number
+  database?: DatabaseConfig
+  similarityCoefficient?: number
+}
+```
+
 ## appList
 
 当前所有 [App](./app.md) 实例构成的数组。
@@ -40,6 +65,76 @@ sidebarDepth: 2
 添加停止钩子。
 
 - callback: `() => any` 当全部机器人停止运行后会调用此函数
+- 返回值: `void`
+
+## UserFlag
+
+所有用户 flag 构成的枚举类型。
+
+## userFlags
+
+所有用户 flag 构成的列表。
+
+## userFields
+
+所有用户字段构成的列表。
+
+## extendUser(getter)
+
+扩展用户字段。
+
+- getter: `(id: number, authority: number) => object` 新字段的初始化函数，返回值应该是一个由要扩展的字段和它们的默认值构成的键值对
+- 返回值: `void`
+
+## createUser(id, authority)
+
+创建一个新用户数据对象。
+
+- id: `number` 用户 ID
+- authority: `number` 权限等级
+- 返回值: `UserData`
+
+## GroupFlag
+
+所有群 flag 构成的枚举类型。
+
+## groupFlags
+
+所有群 flag 构成的列表。
+
+## groupFields
+
+所有群字段构成的列表。
+
+## extendGroup(getter)
+
+扩展群字段。
+
+- getter: `(id: number, assignee: number) => object` 新字段的初始化函数，返回值应该是一个由要扩展的字段和它们的默认值构成的键值对
+- 返回值: `void`
+
+## createGroup(id, assignee)
+
+创建一个新群数据对象。
+
+- id: `number` 用户 ID
+- assignee: `number` 代理者的 ID
+- 返回值: `GroupData`
+
+## registerDatabase(name, subdatabase)
+
+注册一种新数据库。
+
+- name: `string` 数据库名
+- subdatabase: `new (config) => object` 新的数据库类
+- 返回值: `void`
+
+## injectMethods(name, methods)
+
+向某个数据库注入一批方法。
+
+- name: `string` 数据库名
+- methods: `Record<string, Function>` 要注入的方法
 - 返回值: `void`
 
 ## getSelfIds()

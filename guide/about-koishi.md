@@ -6,6 +6,8 @@ sidebarDepth: 2
 
 Koishi 是一个在 Node.js 环境下运行，基于 CoolQ 和 CQHTTP 的 QQ 机器人框架。
 
+它的名字来源于东方 Project 中的角色古明地恋（Komeiji Koishi）。
+
 ## 特性
 
 ### 开箱即用的 CLI
@@ -53,7 +55,7 @@ Koishi 在开发时借助了下面的工具：
 
 这保证了其代码的正确性和可读性。
 
-## 为什么不用……
+## 为什么选择 Koishi
 
 读到这里，可能有些人会产生这样的疑问：为什么不使用其他的 CoolQ SDK 呢？因此，本节将对 Koishi 和其他基于 Node.js 的机器人实现进行一些简单的对比。
 

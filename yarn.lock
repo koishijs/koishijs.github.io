@@ -7062,11 +7062,6 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
-"vscode-textmate@git+https://github.com/octref/vscode-textmate.git":
-  version "4.0.1"
-  uid e65aabe2227febda7beaad31dd0fca1228c5ddf3
-  resolved "git+https://github.com/octref/vscode-textmate.git#e65aabe2227febda7beaad31dd0fca1228c5ddf3"
-
 "vscode-textmate@https://github.com/octref/vscode-textmate":
   version "4.0.1"
   resolved "https://github.com/octref/vscode-textmate#e65aabe2227febda7beaad31dd0fca1228c5ddf3"
@@ -7151,13 +7146,6 @@ vuepress-plugin-container@^2.0.2:
   integrity sha512-Df5KoIDMYiFg45GTfFw2hIiLGSsjhms4f3ppl2UIBf5nWMxi2lfifcoo8MooMSfxboxRZjoDccqQfu0fypaKrQ==
   dependencies:
     markdown-it-container "^2.0.0"
-
-vuepress-plugin-shiki@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/vuepress-plugin-shiki/-/vuepress-plugin-shiki-0.1.6.tgz#4698ec757ab44b3cd8b9ad965b862de5d7832575"
-  integrity sha512-SvIsyNEZwy3Dkgx+7m5XExAL9v4ksdPfYwUHLRCNysXiThHaf8QfkUMXrGzd4/D1rlSmMBx1Jao5tZDBZRsNgA==
-  dependencies:
-    shiki "^0.1.6"
 
 vuepress-plugin-smooth-scroll@^0.0.3:
   version "0.0.3"

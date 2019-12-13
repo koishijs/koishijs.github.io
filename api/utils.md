@@ -8,7 +8,16 @@ sidebarDepth: 2
 
 ## noop()
 
+不进行任何操作（no operation）。
+
+- 返回值: `void`
+
 ## sleep(ms?)
+
+等待一段时间。
+
+- ms: `number` 要等待的毫秒数
+- 返回值: `Promise<void>`
 
 ## observe(target, update?, label?)
 

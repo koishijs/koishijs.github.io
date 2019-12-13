@@ -74,6 +74,23 @@ const app = new App({
 })
 ```
 
+### 解决数据库冲突
+
+尽管我们可以让多个数据库同时运行，但是上面的配置却无法指定每个数据库管理哪部分数据。也就是说数据库之间可能存在在 API 冲突。这种情况下可能需要你手动解决这些冲突，方法很简单，只需在 `config.database` 中加入一个 `$tables` 属性，显式地说明哪张表用哪个数据库管理即可：
+
+```js
+module.exports = {
+  database: {
+    $tables: {
+      user: 'mysql',
+      group: 'level',
+    },
+    mysql: { /* mysql configuration */ },
+    level: { /* leveldb configuration */ },
+  },
+}
+```
+
 ## 调用数据库
 
 你可以通过访问 `ctx.database` 来调用数据库接口：
@@ -184,13 +201,14 @@ extendUser(() => ({ foo: 'bar' }))
 
 ### 注入方法
 
-向数据库中添加新的表，你并不需要对表进行描述（只有这样才能让其他人对你的表进行二次注入，但如果你没有这种需求你可以不这么做），只需调用 `injectMethods()` 方法添加新的数据库方法：
+向数据库中添加新的表，你并不需要对表进行描述（虽然只有这样才能让其他人对你的表进行二次注入，但如果你没有这种需求你当然可以不这么做），只需调用 `injectMethods()` 方法添加新的数据库方法：
 
 ```js
 const { injectMethods } = require('koishi')
 
 // 第一个参数声明这个方法依赖于 mysql 数据库
-injectMethods('mysql', {
+// 第二个参数表明这次调用注入的是 user 表
+injectMethods('mysql', 'user', {
   myMethod (...args) {
     // 此时这里的 this 就变成了一个 MysqlDatabase 对象
     // 这也是 koishi-database-mysql 的导出之一
@@ -220,7 +238,7 @@ declare module 'koishi-core/dist/database' {
   }
 }
 
-injectMethods('mysql', {
+injectMethods('mysql', 'myTable', {
   myMethod (...args) {
     // 这里已经可以进行类型推断了
     return this.query(sql)
@@ -307,5 +325,5 @@ registerDatabase('mysql', MysqlDatabase)
 在本章的最后，我们简单介绍一个 Koishi 的数据库访问原理。尽管 Koishi 的核心库 koishi-core 本身不含任何具体的数据库逻辑，但是它却提供了一批注入接口。
 
 - 当用户调用 `registerDatabase()` 时，会向 koishi-core 提交一个新的**子数据库**类型。
-- 当用户调用 `injectMethods()` 时，koishi-core 会将新的方法记录在对应的数据库上。
-- 当用户进行 `config.database.mysql` 配置时，koishi-core 也会自动寻找已经定义过的子数据库 mysql，一旦找到，就会利用配置的选项构造出 `MysqlDatabase` 实例，接着将所有注入的方法绑定这个实例并传入 `app.database` 中，这就实现了完整的注入和 `this` 绑定。
+- 当用户调用 `injectMethods()` 时，koishi-core 会将新的方法记录在对应的数据库和对应的表上。
+- 当用户进行 `config.database.mysql` 配置时，koishi-core 也会自动寻找已经定义过的子数据库 mysql，一旦找到，就会利用配置的选项构造出 `MysqlDatabase` 实例，接着根据 `config.database.$tables` 提供的信息选取出要注入的方法，将这些方法绑定这个实例并传入 `app.database` 中，这就实现了完整的注入和 `this` 绑定。

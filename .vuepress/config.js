@@ -37,7 +37,7 @@ module.exports = {
       { text: '指南', link: '/guide/getting-started.html' },
       { text: 'API', link: '/api/' },
       { text: '官方插件', link: '/plugins/common.html' },
-      { text: 'GitHub', link: 'https://github.com/koishijs' },
+      { text: 'GitHub', link: 'https://github.com/koishijs/koishi' },
     ],
     sidebar: {
       '/api': [

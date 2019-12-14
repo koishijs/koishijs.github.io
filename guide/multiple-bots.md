@@ -55,18 +55,19 @@ new { App, startAll } = require('koishi')
 new App({
   type: 'http',
   port: 8080,
+  server: 'http://localhost:5700',
   selfId: 10000,
 })
 
 new App({
   type: 'ws',
-  port: 'http://localhost:6700',
+  server: 'http://localhost:6700',
   selfId: 20000,
 })
 
 const app3 = new App({
   type: 'ws',
-  serer: 'http://localhost:6701',
+  server: 'http://localhost:6701',
   selfId: 30000,
 })
 

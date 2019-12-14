@@ -3,6 +3,8 @@ const { getHighlighter } = require('shiki')
 let highlighter
 
 module.exports = (options, ctx) => ({
+  name: 'highlight',
+
   async ready () {
     highlighter = await getHighlighter({
       theme: 'monokai',

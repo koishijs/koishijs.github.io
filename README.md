@@ -36,3 +36,6 @@ echo hello world
 > hello world
 ```
 
+::: tip 提示
+Koishi 要求您的 Node.js 的版本不小于 10，CQHTTP 的版本不小于 3.4。如果使用 WebSocket，Koishi 要求 CQHTTP 版本不小于 4.6。
+:::

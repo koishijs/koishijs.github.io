@@ -31,7 +31,7 @@ app.plugin(require('koishi-plugin-foo'), options)
 module.exports = {
   plugins: {
     // 在群 123456789 中安装插件 bar
-    '/group/123456789/': [
+    '+group:123456789': [
       ['bar', options],
     ],
   },
@@ -116,6 +116,19 @@ context.match(meta)
 
 // 判断当前上下文是否完全包含了另一个上下文
 context1.contain(context2)
+```
+
+最后，你也可以在配置文件中使用上下文组合，不过语法会略有差别：
+
+```js
+module.exports = {
+  plugins: {
+    // 在群 123 上下文和除 321 以外的用户上下文中安装插件
+    '+group:123;-user:321': [
+      ['bar', options],
+    ],
+  },
+}
 ```
 
 ## 开发插件

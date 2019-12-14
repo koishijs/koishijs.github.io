@@ -4,6 +4,8 @@ sidebarDepth: 2
 
 # 发送器 (Sender)
 
+一个发送器封装了一套标准的 [CQHTTP API](https://cqhttp.cc/docs/4.12/#/API)。请注意尽管 Koishi 总体支持 CQHTTP 3.4，但是部分接口需要更高的 CQHTTP 版本才能进行调用。
+
 ## sender.sendContextMsg(contextId, message, autoEscape?)
 
 向特定上下文发送信息。
@@ -73,7 +75,7 @@ sidebarDepth: 2
 - duration: `number` 禁言时长（秒），设为 0 表示解除禁言
 - 返回值: `Promise<void>`
 
-## sender.setGroupAnonymousBan(groupId, anonymous, duration?)
+## sender.setGroupAnonymousBan(groupId, anonymous, duration?) <Badge text="CQHTTP 4.2"/>
 
 群组匿名用户禁言。
 
@@ -150,7 +152,7 @@ sidebarDepth: 2
 - remark: `string` 好友备注名（仅当同意时有效）
 - 返回值: `Promise<void>`
 
-## sender.setGroupAddRequest(flag, subType, approve?, reason?)
+## sender.setGroupAddRequest(flag, subType, approve?, reason?) <Badge text="CQHTTP 4.2"/>
 
 处理加群请求或邀请。
 
@@ -188,7 +190,7 @@ export interface StrangerInfo extends AccountInfo {
 }
 ```
 
-## sender.getFriendList()
+## sender.getFriendList() <Badge text="CQHTTP 4.12"/>
 
 获取好友列表。
 
@@ -213,7 +215,7 @@ export interface ListedGroupInfo {
 }
 ```
 
-## sender.getGroupInfo(groupId, noCache?)
+## sender.getGroupInfo(groupId, noCache?) <Badge text="CQHTTP 4.12"/>
 
 获取群信息。
 
@@ -267,7 +269,7 @@ export interface GroupMemberInfo extends SenderInfo {
 
 获取 Cookies。
 
-- domain: `string` 需要获取 cookies 的域名
+- domain: `string` 需要获取 cookies 的域名 <Badge text="CQHTTP 4.11"/>
 - 返回值: `Promise<string>` cookies
 
 ## sender.getCsrfToken()
@@ -276,7 +278,7 @@ export interface GroupMemberInfo extends SenderInfo {
 
 - 返回值: `Promise<string>` CSRF Token
 
-## sender.getCredentials()
+## sender.getCredentials() <Badge text="CQHTTP 4.3"/>
 
 获取 QQ 相关接口凭证，相当于上面两个接口的合并。
 
@@ -295,23 +297,23 @@ export interface Credentials {
 
 - file: `string` 语音文件名
 - outFormat: `'mp3' | 'amr' | 'wma' | 'm4a' | 'spx' | 'ogg' | 'wav' | 'flac'`
-- fullPath: `boolean` 是否返回文件的绝对路径
+- fullPath: `boolean` 是否返回文件的绝对路径 <Badge text="CQHTTP 4.8"/>
 - 返回值: `Promise<string>` 语音文件名
 
-## sender.getImage(file)
+## sender.getImage(file) <Badge text="CQHTTP 4.8"/>
 
 获取图片：与上面类似，不过返回 `data/image` 目录下的图片路径。
 
 - file: `string` 图片文件名
 - 返回值: `Promise<string>` 图片的完整路径
 
-## sender.canSendImage()
+## sender.canSendImage() <Badge text="CQHTTP 4.8"/>
 
 检查是否可以发送图片。
 
 - 返回值: `Promise<boolean>` 是否可以发送图片
 
-## sender.canSendRecord()
+## sender.canSendRecord() <Badge text="CQHTTP 4.8"/>
 
 检查是否可以发送语音。
 
@@ -364,7 +366,7 @@ export interface VersionInfo {
 - dataDir: `'image' | 'record' | 'show' | 'bface'` 要清理的目录名
 - 返回值: `Promise<void>`
 
-## sender.cleanPluginLog()
+## sender.cleanPluginLog() <Badge text="CQHTTP 4.1"/>
 
 清空插件的日志文件。
 

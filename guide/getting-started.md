@@ -15,6 +15,10 @@ Koishi 基于 NodeJS，CoolQ 和 CQHTTP，因此你需要先安装它们。
 进行相应的配置并运行 CoolQ 和 CQHTTP 后，你就可以愉快地使用 Koishi 了。
 
 ::: tip 提示
+Koishi 要求您的 Node.js 的版本不小于 10，CQHTTP 的版本不小于 3.4。如果使用 WebSocket，Koishi 要求 CQHTTP 版本不小于 4.6。
+:::
+
+::: tip 提示
 CoolQ Air 和 CoolQ Pro 是两个不同的版本，它们都能配合 Koishi 运行。后者需要收取一定的费用，但同时比前者增加了一些功能（例如可以发图）。因此，如果你发现你的机器人无法发图，请先确保自己使用的是可以发图的版本。
 :::
 

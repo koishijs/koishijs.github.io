@@ -21,16 +21,22 @@ sidebarDepth: 2
 ```js
 // 数组的每一个元素对应一个机器人的配置
 module.exports = [{
+  // 对于 HTTP，通常需要配置 port 和 server 两个属性
+  // port 用于监听端口获取事件
+  // server 用于向 CQHTTP 发送请求
   type: 'http',
   port: 8080,
+  server: 'http://localhost:5700',
   selfId: 10000,
 }, {
+  // 而对于 WebSocket，通常只需要 server 一个属性
+  // 这是因为获取事件和发送请求都通过同一个链接完成
   type: 'ws',
-  port: 8081,
+  server: 'http://localhost:6700',
   selfId: 20000,
 }, {
   type: 'ws',
-  port: 8082,
+  server: 'http://localhost:6701',
   selfId: 30000,
   plugins: [
     // 只对第三个机器人生效

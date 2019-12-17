@@ -230,15 +230,16 @@ import { injectMethods } from 'koishi'
 
 // 这里需要手动导入 MysqlDatabase 的类型
 // 你应该将 koishi-database-mysql 作为插件的 devDependency
-import 'koishi-database-mysql'
+// 尽量使用 import {}，这样可以不产生任何输出，有助于明确依赖关系
+import {} from 'koishi-database-mysql'
 
 declare module 'koishi-core/dist/database' {
-  interface Database {
+  interface UserMethods {
     myMethod (...args: SomeType): SomeType
   }
 }
 
-injectMethods('mysql', 'myTable', {
+injectMethods('mysql', 'user', {
   myMethod (...args) {
     // 这里已经可以进行类型推断了
     return this.query(sql)
@@ -250,7 +251,37 @@ injectMethods('mysql', 'myTable', {
 在所有注入方法中，你的 `this` 都可以访问到同时注册的其他方法和这些注入方法绑定的子数据库本身。
 :::
 
-### 定义新的数据库
+### 注入表
+
+尽管注入表不需要你在 JavaScript 中进行额外的操作，但是如果你是 TypeScript 使用者，你需要对注入的表进行定义，就像这样：
+
+```ts
+interface MyTableData {
+  myData: SomeType
+}
+
+interface MyTableMethods {
+  myMethod (...args: SomeType): MyTableData
+}
+
+declare module 'koishi-core/dist/database' {
+  interface TableData {
+    myTable: MyTableData
+  }
+
+  interface TableMethods {
+    myTable: MyTableMethods
+  }
+}
+
+injectMethods('mysql', 'myTable', {
+  myMethod () {
+    return this.query(sql)
+  },
+}
+```
+
+## 定义新的数据库
 
 最后，让我们介绍一下如何定义新的数据库。与上面介绍的方法类似，我们也采用注入的方式，不过这次我们需要先实现一个类。我们用 mysql 来举个例子：
 
@@ -302,7 +333,7 @@ class MysqlDatabase {
     this.pool = createPool(config)
   }
 
-  query = (sql: string, values?: any): Promise<any> => {
+  query (sql: string, values?: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.pool.query(sql, values, (error, results, fields) => {
         if (error) {
@@ -318,12 +349,128 @@ class MysqlDatabase {
 registerDatabase('mysql', MysqlDatabase)
 ```
 
-当然，完整的 [`koishi-database-mysql`](https://github.com/koishijs/koishi-database-mysql) 要比上面的例子复杂的多，感兴趣的朋友可以去看看源代码。
+当然，完整的 [`koishi-database-mysql`](https://github.com/koishijs/koishi-database-mysql) 要比上面的例子复杂的多，我们还需要处理有关数据库的更多细节。
 
-## 深入数据库访问原理
+### 数据库的启动和停止
+
+然而很多数据库并没有像上面写的这么简单——例如数据库的加载可能包含一些异步操作，这些操作是不适合在构造函数中完成的；如果你希望你的应用平稳地停止，也最好提供一个数据库的中止函数。这些接口将由你来提供，只需在你传入的 Database 类中添加 `start` 和 `stop` 两个方法即可。这两个方法都可以是异步的：
+
+```js
+class CustomDatabase {
+  async start () {
+    await doSomeAsyncWorks()
+  }
+
+  async stop () {
+    await doSomeAsyncWorks()
+  }
+}
+
+registerDatabase('custom', CustomDatabase)
+```
+
+### 数据库的复用
+
+在 [多机器人开发](./multiple-bots.md) 一章中，我们会讨论到数据库实例的复用。诚然，复用数据库实例这件事是 Koishi 内部完成的，但如果你在某些时刻的确需要使用独立的数据库实例，你就需要了解数据库复用的原理。
+
+最简单的方式就是在对应数据库的参数中手动设置 `identifier` 属性，不同的标识符将提示 Koishi 构造不同的数据库实例：
+
+```js
+new App({
+  database: {
+    custom: {
+      identifier: 1,
+      // other configurations
+    },
+  },
+})
+
+new App({
+  database: {
+    custom: {
+      identifier: 2,
+      // other configurations
+    },
+  },
+}]
+```
+
+除此以外，Koishi 也提供了隐式的标识符设计。向你的数据库类添加一个静态方法 `identiy`，这个函数将传入一个将要传给构造函数的 `config` 对象，返回一个字符串或数字，这个返回值将会成为该数据库的标识符，并将作为传入构造函数的配置的 `identifier` 属性。
+
+```js
+class CustomDatabase {
+  static identify (config) {
+    return config.path
+  }
+
+  constructor (config) {
+    console.log(config.identifier)
+  }
+}
+
+registerDatabase('custom', CustomDatabase)
+
+new App({
+  database: {
+    custom: { path: 'foo' },
+  },
+})
+
+new App({
+  database: {
+    custom: { path: 'bar' },
+  },
+})
+
+new App({
+  database: {
+    custom: { path: 'bar' },
+  },
+})
+```
+
+例如上面的代码将只产生两个输出。
+
+### 配置每个表
+
+很多数据库都提供了表（Table）作为二级结构，Koishi 也为这种结构提供了原生的支持。然而，像 leveldb 这种基于键值对的数据库并没有这种结构，对于这种情况，Koishi 中则将表封装成了一个子数据库。因此在这种情况下，你甚至可以对每个表分别进行配置。额外的配置可以作为 `injectMethods` 的第三个参数，同时它们将被传入你的数据库的构造函数，就像这样：
+
+```js
+class LevelDatabase {
+  constructor (config, tables) {
+    console.log(tables)
+  }
+}
+
+registerDatabase('level', LevelDatabase)
+
+injectMethods('level', 'user', {
+  // some methods
+}, {
+  keyEncoding: 'utf8',
+})
+
+injectMethods('level', 'group', {
+  // some methods
+}, {
+  valueEncoding: 'json',
+})
+```
+
+这里的输出结果将形如：
+
+```json
+{
+  "user": { "keyEncoding": "utf8" },
+  "group": { "valueEncoding": "json" },
+}
+```
+
+### 数据库访问原理
 
 在本章的最后，我们简单介绍一个 Koishi 的数据库访问原理。尽管 Koishi 的核心库 koishi-core 本身不含任何具体的数据库逻辑，但是它却提供了一批注入接口。
 
-- 当用户调用 `registerDatabase()` 时，会向 koishi-core 提交一个新的**子数据库**类型。
-- 当用户调用 `injectMethods()` 时，koishi-core 会将新的方法记录在对应的数据库和对应的表上。
-- 当用户进行 `config.database.mysql` 配置时，koishi-core 也会自动寻找已经定义过的子数据库 mysql，一旦找到，就会利用配置的选项构造出 `MysqlDatabase` 实例，接着根据 `config.database.$tables` 提供的信息选取出要注入的方法，将这些方法绑定这个实例并传入 `app.database` 中，这就实现了完整的注入和 `this` 绑定。
+- 当用户调用 `registerDatabase()` 时，会向 koishi-core 提交一个新的子数据库类型。
+- 当用户调用 `injectMethods()` 时，koishi-core 会将新的方法记录在对应的数据库和对应的表上。同时如果传入了第三个参数，将先被保存下来。
+- 当用户进行 `config.database.mysql` 配置时，koishi-core 也会自动寻找已经定义过的子数据库 mysql，一旦找到，首先会根据 `identifier` 或者 `identify` 生成标识符，接着检查该数据库是否已经被构造，如果没有就构造出一个新的 `MysqlDatabase` 实例。再之后根据 `config.database.$tables` 提供的信息选取出要注入的方法，将这些方法绑定这个实例并传入 `app.database` 中，这就实现了完整的注入和 `this` 绑定。
+- 当用户调用 `app.start()` 或 `startAll()` 时，koishi-core 会检查每个已经存在的数据库是否拥有 `start` 方法，如果有就进行调用；当用户调用 `app.stop()` 或 `stopAll()` 时同理。

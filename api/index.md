@@ -58,7 +58,7 @@ interface AppOptions {
 
 停止所有机器人。
 
-- 返回值: `void`
+- 返回值: `Promise<void>`
 
 ## onStop(callback)
 
@@ -126,15 +126,16 @@ interface AppOptions {
 注册一种新数据库。
 
 - name: `string` 数据库名
-- subdatabase: `new (config) => object` 新的数据库类
+- subdatabase: `new (config) => object` 新的数据库类，参见 [定义新的数据库](../guide/using-database.md#定义新的数据库)
 - 返回值: `void`
 
-## injectMethods(name, methods)
+## injectMethods(name, methods, config?)
 
 向某个数据库注入一批方法。
 
-- name: `string` 数据库名
+- name: `string` 表名
 - methods: `Record<string, Function>` 要注入的方法
+- config: `any` 对应表的配置
 - 返回值: `void`
 
 ## getSelfIds()

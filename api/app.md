@@ -59,13 +59,13 @@ sidebarDepth: 2
 
 启动此应用。
 
-- 返回值: `void`
+- 返回值: `Promise<void>`
 
 ## app.stop()
 
 停止此应用。
 
-- 返回值: `void`
+- 返回值: `Promise<void>`
 
 ## app.emitWarning(error)
 

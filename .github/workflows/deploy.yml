@@ -36,3 +36,4 @@ jobs:
         PUBLISH_DIR: ./.vuepress/dist
       with:
         emptyCommits: false
+        forceOrphan: true

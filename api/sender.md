@@ -6,8 +6,34 @@ sidebarDepth: 2
 
 一个发送器封装了一套标准的 [CQHTTP API](https://cqhttp.cc/docs/4.12/#/API)。
 
-::: warning 注意
-尽管 Koishi 总体支持 CQHTTP 3.4，但是部分接口需要更高的 CQHTTP 版本才能进行调用。
+::: tip 提示
+1. 尽管 Koishi 总体支持 CQHTTP 3.4，但是部分接口需要更高的 CQHTTP 版本才能进行调用，所需的版本会标在对应 API 的后面。
+2. 用黄色的版本标识标识这是一个实验性 API，可能在未来发生变动。
+:::
+
+## sender.get(action, params?)
+
+直接向 CoolQ 服务器调用 API。
+
+- action: `string` API 名称
+- params: `object` 参数对象
+- 返回值: `Promise<any>`
+
+::: tip 提示
+在实际使用中，你应该尽量使用下文所描述的方法而不是本方法，它们对本方法进行了更好的封装。
+:::
+
+## sender.async(action, params?) <Badge text="CQHTTP 4.0"/>
+
+直接向 CoolQ 服务器调用 API，不等待调用结果。这个方法可以用于调用某些可能耗时较大的 API（例如发送含有大量图片的信息、清除缓存数据等等）。
+
+- action: `string` API 名称
+- params: `object` 参数对象
+- 返回值: `Promise<void>`
+
+::: tip 提示
+1. 在实际使用中，你应该尽量使用下文所描述的方法而不是本方法，它们对本方法进行了更好的封装。
+2. 虽然这个方法的名字是 async，但是其他方法也是异步调用的。取这个名字只是为了与 CQHTTP 保持一致。在下面看到有以 Async 结尾的方法也是基于同样的道理。
 :::
 
 ## sender.sendContextMsg(contextId, message, autoEscape?)
@@ -19,6 +45,15 @@ sidebarDepth: 2
 - autoEsacpe: `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
 - 返回值: `Promise<number>` 新信息的 messageId
 
+## sender.sendContextMsgAsync(contextId, message, autoEscape?)
+
+向特定上下文发送信息，不等待发送结果。
+
+- contextId: `string` 上下文 ID，参见 [getContextId](./index.md#getcontextid)
+- message: `string` 要发送的内容
+- autoEsacpe: `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
+- 返回值: `Promise<void>`
+
 ## sender.sendPrivateMsg(userId, message, autoEscape?)
 
 发送私聊消息。
@@ -27,6 +62,15 @@ sidebarDepth: 2
 - message: `string` 要发送的内容
 - autoEsacpe: `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
 - 返回值: `Promise<number>` 新信息的 messageId
+
+## sender.sendPrivateMsgAsync(userId, message, autoEscape?)
+
+发送私聊消息，不等待发送结果。
+
+- userId: `number` 对方 QQ 号
+- message: `string` 要发送的内容
+- autoEsacpe: `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
+- 返回值: `Promise<void>`
 
 ## sender.sendGroupMsg(groupId, message, autoEscape?)
 
@@ -37,6 +81,15 @@ sidebarDepth: 2
 - autoEsacpe: `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
 - 返回值: `Promise<number>` 新信息的 messageId
 
+## sender.sendGroupMsgAsync(groupId, message, autoEscape?)
+
+发送群消息，不等待发送结果。
+
+- groupId: `number` 群号
+- message: `string` 要发送的内容
+- autoEsacpe: `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
+- 返回值: `Promise<void>`
+
 ## sender.sendDiscussMsg(discussId, message, autoEscape?)
 
 发送讨论组信息。
@@ -46,7 +99,16 @@ sidebarDepth: 2
 - autoEsacpe: `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
 - 返回值: `Promise<number>` 新信息的 messageId
 
-## sender.deleteMsg(messageId)
+## sender.sendDiscussMsgAsync(discussId, message, autoEscape?)
+
+发送讨论组信息，不等待发送结果。
+
+- discussId: `number` 讨论组 ID
+- message: `string` 要发送的内容
+- autoEsacpe: `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
+- 返回值: `Promise<void>`
+
+## sender.deleteMsg(messageId) <Badge text="CQHTTP 3.3"/>
 
 撤回信息。
 
@@ -183,6 +245,22 @@ export interface AccountInfo {
 }
 ```
 
+## sender.getVipInfo() <Badge text="CQHTTP 4.3.1" type="warn"/>
+
+获取会员信息。
+
+- 返回值: `Promise<VipInfo>` 会员信息
+
+```ts
+export interface VipInfo extends AccountInfo {
+  level: number
+  levelSpeed: number
+  vipLevel: number
+  vipGrowthSpeed: number
+  vipGrowthTotal: string
+}
+```
+
 ## sender.getStrangerInfo(userId, noCache?)
 
 获取陌生人信息。
@@ -273,6 +351,43 @@ export interface GroupMemberInfo extends SenderInfo {
 - groupId: `number` 目标群号
 - 返回值: `Promise<GroupMemberInfo[]>` 群成员列表
 
+## sender.getGroupNotice(groupId) <Badge text="CQHTTP 4.9" type="warn"/>
+
+获取群公告列表。部分字段具体含义可能需要自行理解。
+
+- groupId: `number` 目标群号
+- 返回值: `Promise<GroupNoticeInfo[]>` 群公告列表
+
+```ts
+export interface GroupNoticeInfo {
+  cn: number
+  fid: string
+  fn: number
+  msg: {
+    text: string
+    textFace: string
+    title: string
+  }
+  pubt: number
+  readNum: number
+  settings: {
+    isShowEditCard: number
+    remindTs: number
+  }
+  u: number
+  vn: number
+}
+```
+
+## sender.sendGroupNotice(groupId, title, content) <Badge text="CQHTTP 4.9" type="warn"/>
+
+发布群公告。
+
+- groupId: `number` 群号
+- title: `string` 标题
+- content: `string` 内容
+- 返回值: `Promise<void>`
+
 ## sender.getCookies(domain?)
 
 获取 Cookies。
@@ -299,7 +414,7 @@ export interface Credentials {
 }
 ```
 
-## sender.getRecord(file, outFormat, fullPath?)
+## sender.getRecord(file, outFormat, fullPath?) <Badge text="CQHTTP 3.3"/>
 
 获取语音：并不是真的获取语音，而是转换语音到指定的格式，然后返回 `data/record` 目录下的语音文件名。注意，要使用此接口，需要安装 CoolQ 的 [语音组件](https://cqp.cc/t/21132)。
 
@@ -353,23 +468,46 @@ export interface StatusInfo {
 ```ts
 export interface VersionInfo {
   coolqDirectory: string
-  coolqEdition: string
+  coolqEdition: 'air' | 'pro'
   pluginVersion: string
+  pluginMajorVersion: number
+  pluginMinorVersion: number
+  pluginPatchVersion: number
   pluginBuildNumber: number
-  pluginBuildConfiguration: string
+  pluginBuildConfiguration: 'debug' | 'release'
 }
 ```
 
-## sender.setRestartPlugin(delay?)
+## sender.setRestart(cleanLog?, cleanCache?, cleanEvent?) <Badge text="CQHTTP 3.0.2" type="warn"/>
+
+重启 CoolQ，并以当前登录号自动登录（需勾选快速登录）。
+
+- cleanLog: `boolean` 是否在重启时清空 CoolQ 的日志数据库（log*.db）
+- cleanCache: `boolean` 是否在重启时清空 CoolQ 的缓存数据库（cache.db）
+- cleanEvent: `boolean` 是否在重启时清空 CoolQ 的事件数据库（eventv2.db）
+- 返回值: `Promise<void>`
+
+::: warning 警告
+由于强行退出可能导致 酷Q 数据库损坏而影响功能，此接口除非必要请尽量避免使用。
+:::
+
+## sender.setRestartPlugin(delay?) <Badge text="CQHTTP 3.2"/>
 
 重启 HTTP API 插件。
 
 - delay: `string` 要延迟的毫秒数，如果默认情况下无法重启，可以尝试设置延迟为 2000 左右
 - 返回值: `Promise<void>`
 
-## sender.cleanDataDir(dataDir)
+## sender.cleanDataDir(dataDir) <Badge text="CQHTTP 3.3.4"/>
 
 清理积攒了太多旧文件的数据目录。
+
+- dataDir: `'image' | 'record' | 'show' | 'bface'` 要清理的目录名
+- 返回值: `Promise<void>`
+
+## sender.cleanDataDirAsync(dataDir) <Badge text="CQHTTP 4.0"/>
+
+清理积攒了太多旧文件的数据目录，不等待清理完成。
 
 - dataDir: `'image' | 'record' | 'show' | 'bface'` 要清理的目录名
 - 返回值: `Promise<void>`
@@ -377,5 +515,11 @@ export interface VersionInfo {
 ## sender.cleanPluginLog() <Badge text="CQHTTP 4.1"/>
 
 清空插件的日志文件。
+
+- 返回值: `Promise<void>`
+
+## sender.cleanPluginLogAsync() <Badge text="CQHTTP 4.1"/>
+
+清空插件的日志文件，不等待清理完成。
 
 - 返回值: `Promise<void>`

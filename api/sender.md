@@ -4,7 +4,11 @@ sidebarDepth: 2
 
 # 发送器 (Sender)
 
-一个发送器封装了一套标准的 [CQHTTP API](https://cqhttp.cc/docs/4.12/#/API)。请注意尽管 Koishi 总体支持 CQHTTP 3.4，但是部分接口需要更高的 CQHTTP 版本才能进行调用。
+一个发送器封装了一套标准的 [CQHTTP API](https://cqhttp.cc/docs/4.12/#/API)。
+
+::: warning 注意
+尽管 Koishi 总体支持 CQHTTP 3.4，但是部分接口需要更高的 CQHTTP 版本才能进行调用。
+:::
 
 ## sender.sendContextMsg(contextId, message, autoEscape?)
 
@@ -51,11 +55,15 @@ sidebarDepth: 2
 
 ## sender.sendLike(userId, times?)
 
-给好友点赞。（注意：只能给好友点赞）
+给好友点赞。
 
 - userId: `number` 好友 QQ 号
 - times: `number` 点赞次数
 - 返回值: `Promise<void>`
+
+::: warning 注意
+由于 CoolQ 的限制，本功能只能由四季酱的好友使用。
+:::
 
 ## sender.setGroupKick(groupId, userId, rejectAddRequest?)
 

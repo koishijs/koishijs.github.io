@@ -38,7 +38,7 @@ app.receiver.on('message', (meta) => {
 
 ```js
 // 向服务器发送信息
-app.sender.sendPrivateMessage(123456789, 'Hello world')
+await app.sender.sendPrivateMsg(123456789, 'Hello world')
 
 // 从服务器获取信息
 const groupInfo = await app.sender.getGroupInfo(987654321)

@@ -67,26 +67,30 @@ interface AppOptions {
 - callback: `() => any` 当全部机器人停止运行后会调用此函数
 - 返回值: `void`
 
-## UserFlag
+## Database Related
+
+这里包含了一些数据库相关的全局方法。
+
+### UserFlag
 
 所有用户 flag 构成的枚举类型。
 
-## userFlags
+### userFlags
 
 所有用户 flag 构成的列表。
 
-## userFields
+### userFields
 
 所有用户字段构成的列表。
 
-## extendUser(getter)
+### extendUser(getter)
 
 扩展用户字段。
 
 - getter: `(id: number, authority: number) => object` 新字段的初始化函数，返回值应该是一个由要扩展的字段和它们的默认值构成的键值对
 - 返回值: `void`
 
-## createUser(id, authority)
+### createUser(id, authority)
 
 创建一个新用户数据对象。
 
@@ -94,26 +98,26 @@ interface AppOptions {
 - authority: `number` 权限等级
 - 返回值: `UserData`
 
-## GroupFlag
+### GroupFlag
 
 所有群 flag 构成的枚举类型。
 
-## groupFlags
+### groupFlags
 
 所有群 flag 构成的列表。
 
-## groupFields
+### groupFields
 
 所有群字段构成的列表。
 
-## extendGroup(getter)
+### extendGroup(getter)
 
 扩展群字段。
 
 - getter: `(id: number, assignee: number) => object` 新字段的初始化函数，返回值应该是一个由要扩展的字段和它们的默认值构成的键值对
 - 返回值: `void`
 
-## createGroup(id, assignee)
+### createGroup(id, assignee)
 
 创建一个新群数据对象。
 
@@ -121,7 +125,7 @@ interface AppOptions {
 - assignee: `number` 代理者的 ID
 - 返回值: `GroupData`
 
-## registerDatabase(name, subdatabase)
+### registerDatabase(name, subdatabase)
 
 注册一种新数据库。
 
@@ -129,7 +133,7 @@ interface AppOptions {
 - subdatabase: `new (config) => object` 新的数据库类，参见 [定义新的数据库](../guide/using-database.md#定义新的数据库)
 - 返回值: `void`
 
-## injectMethods(name, methods, config?)
+### injectMethods(name, methods, config?)
 
 向某个数据库注入一批方法。
 
@@ -138,34 +142,38 @@ interface AppOptions {
 - config: `any` 对应表的配置
 - 返回值: `void`
 
-## getSelfIds()
+## Runtime Utilities
+
+这里包含了一些运行时的工具。
+
+### getSelfIds()
 
 获取所有机器人的 QQ 号。已经获取到的将不再获取。
 
 - 返回值: `Promise<number[]>` 所有机器人的 QQ 号
 
-## getContextId(meta)
+### getContextId(meta)
 
 获得上下文 ID，可用于 [`sender.sendContextMsg()`](./sender.md#sender-sendcontextmsg)。
 
 - meta: `Meta` 元信息对象
 - 返回值: `string` 上下文 ID
 
-## getTargetId(target)
+### getTargetId(target)
 
 获得目标用户 QQ 号。传入一个字符串，可能是 QQ 号本身或是 @ 群内成员。
 
 - target: `string` 要解析的字符串
 - 返回值: `number` 目标 QQ 号
 
-## getSenderName(meta)
+### getSenderName(meta)
 
 获得发言者称呼。当用户在数据库中已经设置了称呼，则使用设置的称呼；否则依次使用用户在群中的群名片和昵称。
 
 - meta: `Meta` 元信息对象
 - 返回值: `string` 用户称呼
 
-## showSuggestions(options)
+### showSuggestions(options)
 
 尝试显示候选输入。
 
@@ -186,7 +194,7 @@ interface SuggestOptions {
 }
 ```
 
-## updateActivity(activity, groupId)
+### updateActivity(activity, groupId)
 
 更新活动数据。
 

@@ -27,7 +27,7 @@ module.exports = {
 }
 ```
 
-- `type` 是你的机器人的类型，目前支持 `http`（默认）和 `ws`
+- `type` 是你的机器人的类型，目前支持 `http` 和 `ws`
 - `port` 是你的机器人服务器要监听的端口号，默认为 `8080`（这也是 CQHTTP 的默认值）
 - `server` 是你的 CQHTTP 服务器的网址，默认为 `http://localhost:5700`（这也是 CQHTTP 的默认值）
 - `token` 是你的 CQHTTP 配置中的 `token` 项，如果不一致则 CQHTTP 服务器不会处理你的信息发送
@@ -101,3 +101,5 @@ module.exports = [{
   // 第二个机器人的特有配置
 }]
 ```
+
+有关多机器人的详细使用方法，可以参见 [多机器人开发](./multiple-bots.md) 一章。

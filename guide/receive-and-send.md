@@ -44,7 +44,34 @@ await app.sender.sendPrivateMsg(123456789, 'Hello world')
 const groupInfo = await app.sender.getGroupInfo(987654321)
 ```
 
-如果你熟悉 CQHTTP API 的话，这对你一定不陌生。没错，这套接口和 CQHTTP 提供的接口是一一对应的。除此以外，由于 Koishi 全部使用 TypeScript 编写，我们还提供了完整的类型定义，让你在编写代码时再也不无需查看 CQHTTP 文档。
+如果你熟悉 CQHTTP API 的话，这对你一定不陌生。没错，这套接口和 CQHTTP 提供的接口是一一对应的。除此以外，由于 Koishi 全部使用 TypeScript 编写，我们还提供了完整的类型定义，让你在编写代码时再也不无需查看 CQHTTP 文档。你可以在 [发送器](../api/sender.md) 一章中看到完整的 Sender API。
+
+::: tip 提示
+尽管 Koishi 总体支持 CQHTTP 3.0，但是部分接口需要更高的 CQHTTP 版本才能进行调用。因此，我们建议你永远使用最新的 CQHTTP 版本。
+:::
+
+### 异步调用
+
+CQHTTP 提出了**异步调用**的概念，当 CQHTTP 服务器受到异步调用请求时，如果调用正确，将直接返回 200。这样做的好处是，如果某些操作有较长的耗时（例如发送含有大量图片的信息或清空数据目录等）或你不关心调用结果，使用异步调用可以有效防止阻塞。但是另一方面，你也无法得知调用是否成功被执行。与此同时，没有副作用的异步调用毫无意义（因为这些调用本身就是为了获取某些信息，但是异步调用是无法获取调用结果的）。Koishi 为除此以外的所有异步调用都提供了 API，它们的调用接口与非异步的版本除了在方法后面加了一个 `Async` 外没有任何区别：
+
+```js
+// 普通版本
+const messageId = await app.sender.sendPrivateMsgAsync(123456789, 'Hello world')
+
+// 异步版本，无法获得调用结果
+await app.sender.sendPrivateMsgAsync(123456789, 'Hello world')
+```
+
+::: tip 提示
+1. 虽然异步调用方法的名字以 Async 结尾，但是其他方法也是**异步函数**，它们都会返回一个 `Promise` 对象。取这样的名字只是为了与 CQHTTP 保持一致。
+2. CQHTTP 的异步调用是在 4.0 版本引入的，但 Koishi 会自动检测当前使用的 CQHTTP 版本并做出 polyfill，因此所有函数的异步版本所需的最低 CQHTTP 版本都与非异步版本一致。
+:::
+
+### 快捷操作
+
+Koishi 还提供了一套快捷操作 API。它们会根据事件的类型绑定在 Meta 对象上。例如，当收到一个群消息时，对应的 Meta 对象会自动附加一个 `$delete` 方法，调用这个方法可以快速实现对此信息的撤回（需要群主或管理员权限）；又例如，当收到一个好友申请时，对应的 Meta 对象会自动附加一个 `$approve` 方法，调用这个方法可以快速实现通过好友申请，并写上备注名。快捷操作的响应速度会高于普通的 Sender API 调用，但是同上面的异步调用一样，这些操作也是无法获得调用结果的。完整的快捷操作列表参见 [Koishi 添加的属性](#koishi-添加的属性)。
+
+这里也简单介绍一下快捷操作的原理。当正常使用 HTTP 模式时，每个事件上报和 API 调用都使用了不同的连接。那么快捷操作则相当于将 API 调用作为事件上报的响应。当然，这种做法有着很多限制，例如对 WebSocket 无效，同一个事件只能响应一次，以及需要手动处理响应超时的问题。因此，默认情况下这种优化是不开启的。如果手动配置了 `quickOperationTimeout`，则会将这个配置项作为时间限制，在这个时间限制内第一个调用快捷操作的会享受这种优化（事实上大部分操作都只有一个响应，所以这种优化对 HTTP 往往是非常有效的），之后的所有快捷操作调用都会自动转化为异步调用，这样可以保证快捷操作永远都是可用的。
 
 ## 中间件 (middleware)
 
@@ -178,70 +205,80 @@ app.premiddleware((meta, next) => {
 
 ### 基本属性
 
-- postType: `'message' | 'notice' | 'request'| 'meta_event'`
-- selfId: `number` 机器人自身 ID
-- userId: `number` 涉及的用户 ID
-- groupId: `number` 涉及的群 ID
-- discussId: `number` 涉及的讨论组 ID
+- **postType:** `'message' | 'notice' | 'request'| 'meta_event'`
+- **selfId:** `number` 机器人自身 ID
+- **userId:** `number` 涉及的用户 ID
+- **groupId:** `number` 涉及的群 ID
+- **discussId:** `number` 涉及的讨论组 ID
 
 ### message 型元数据属性
 
-- messageType: `'private' | 'group' | 'discuss'`
-- subType:
+- **messageType:** `'private' | 'group' | 'discuss'`
+- **subType:**
   - 如果是私聊消息：`'friend' | 'group' | 'discuss' | 'other'`
   - 如果是群消息：`'normal' | 'anonymous' | 'notice'`
-- messageId: `number` 信息 ID，用于撤回等
-- message: `string` 消息内容
-- rawMessage: `string` 原始消息内容
-- font: `number` 字体
-- sender: `SenderInfo` 发送人信息
-  - userId: `number` 用户 ID
-  - nickname: `string` 昵称
-  - sex: `'male' | 'female' | 'unknown'`
-  - age: `number` 年龄
-  - title: `string` 专属头衔（仅限群消息）
-  - card: `string` 群名片 / 备注（仅限群消息）
-  - area: `string` 地区（仅限群消息）
-  - level: `string` 成员等级（仅限群消息）
-  - role: `'owner' | 'admin' | 'member'`（仅限群消息）
-- anonymous: `AnonymousInfo` 匿名信息
-  - id: `number` 匿名用户 ID
-  - name: `string` 用户名称
-  - flag: `string` 匿名用户 flag，在调用禁言 API 时需要传入
+- **messageId:** `number` 信息 ID，用于撤回等
+- **message:** `string` 消息内容
+- **rawMessage:** `string` 原始消息内容
+- **font:** `number` 字体
+- **sender:** `SenderInfo` 发送人信息
+  - **userId:** `number` 用户 ID
+  - **nickname:** `string` 昵称
+  - **sex:** `'male' | 'female' | 'unknown'`
+  - **age:** `number` 年龄
+  - **title:** `string` 专属头衔（仅限群消息）
+  - **card:** `string` 群名片 / 备注（仅限群消息）
+  - **area:** `string` 地区（仅限群消息）
+  - **level:** `string` 成员等级（仅限群消息）
+  - **role:** `'owner' | 'admin' | 'member'`（仅限群消息）
+- **anonymous:** `AnonymousInfo` 匿名信息
+  - **id:** `number` 匿名用户 ID
+  - **name:** `string` 用户名称
+  - **flag:** `string` 匿名用户 flag，在调用禁言 API 时需要传入
 
 ### notice 型元数据属性
 
-- noticeType: `'group_upload' | 'group_admin' | 'group_increase' | 'group_ban' | 'friend_add'`
-- subType:
+- **noticeType:** `'group_upload' | 'group_admin' | 'group_increase' | 'group_ban' | 'friend_add'`
+- **subType:**
   - 如果是管理员变动：`'set' | 'unset'`
   - 如果是群成员增加：`'approve' | 'invite'`
   - 如果是群成员减少：`'leave' | 'kick' | 'kick_me'`
   - 如果是群禁言：`'ban' | 'lift_ban'`
-- operatorId: `number` 操作者 ID
-- duration: `number` 禁言时长（秒）
-- file: `FileInfo` 文件信息
-  - id: `string` 文件 ID
-  - name: `string` 文件名
-  - size: `number` 文件大小（字节）
-  - busid: `number`
+- **operatorId:** `number` 操作者 ID
+- **duration:** `number` 禁言时长（秒）
+- **file:** `FileInfo` 文件信息
+  - **id:** `string` 文件 ID
+  - **name:** `string` 文件名
+  - **size:** `number` 文件大小（字节）
+  - **busid:** `number`
 
 ### request 型元数据属性
 
-- requestType: `'friend' | 'group'`
-- subType: `'add' | 'invite'`（如果是加群请求）
-- comment: `string` 验证信息
-- flag: `string` 请求 flag，在调用处理请求的 API 时需要传入
+- **requestType:** `'friend' | 'group'`
+- **subType:** `'add' | 'invite'`（如果是加群请求）
+- **comment:** `string` 验证信息
+- **flag:** `string` 请求 flag，在调用处理请求的 API 时需要传入
 
 ### metaEvent 型元数据属性
 
-- metaEventType: `'lifecycle' | 'heartbeat'`
-- subType: `'enable' | 'disable'`（如果是生命周期）
-- interval: `number` 到下次心跳的间隔（毫秒）
-- status: `StatusInfo` 状态信息，请参考 [getStatus](../api/sender.md#sender-getstatus) 的返回值
+- **metaEventType:** `'lifecycle' | 'heartbeat'`
+- **subType:** `'enable' | 'disable'`（如果是生命周期）
+- **interval:** `number` 到下次心跳的间隔（毫秒）
+- **status:** `StatusInfo` 状态信息，请参考 [getStatus](../api/sender.md#sender-getstatus) 的返回值
 
 ### Koishi 添加的属性
 
-- $path: `string` 当前上下文的路径，参见 [上下文](./plugin-development.md#上下文)
-- $user: `User` 一个观测中的用户数据对象（仅当配置数据库时生效）
-- $group: `GroupData` 一个群数据对象（仅当配置数据库时生效）
-- $send: `(message: string) => Promise<void>` 向当前上下文发送信息
+- **$ctxId:** `number` 事件发生的上下文 ID
+- **$ctxType:** `'user' | 'group' | 'discuss'` 事件发生的上下文类型
+- 数据库相关属性：
+  - **$user:** `User` 一个观测中的用户数据对象
+  - **$group:** `GroupData` 一个群数据对象
+- message 事件相关属性：
+  - **$send:** `(message: string, autoEscape?: boolean) => Promise<void>` 向当前上下文发送信息
+  - 以下三个方法为群消息事件特有，且执行时需要群主或管理员权限：
+    - **$ban:** `(duration?: number) => Promise<void>` 将发言用户禁言
+    - **$kick:** `() => Promise<void>` 将发言用户踢出该群
+    - **$delete:** `() => Promise<void>` 撤回当前信息
+- request 事件相关属性：
+  - **$approve:** `(remark?: string) => Promise<void>` 同意申请，且如果是好友申请可以设置备注名
+  - **$reject:** `(reason?: string) => Promise<void>` 拒绝申请，且如果是群申请可以设置拒绝理由

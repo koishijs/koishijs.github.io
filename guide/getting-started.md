@@ -15,7 +15,7 @@ Koishi 基于 NodeJS，CoolQ 和 CQHTTP，因此你需要先安装它们。
 进行相应的配置并运行 CoolQ 和 CQHTTP 后，你就可以愉快地使用 Koishi 了。
 
 ::: tip 提示
-Koishi 要求您的 Node.js 的版本不小于 10，CQHTTP 的版本不小于 3.4。如果使用 WebSocket，Koishi 要求 CQHTTP 版本不小于 4.6。
+Koishi 要求您的 Node.js 的版本不小于 10，CQHTTP 的版本不小于 3.0。如果使用 WebSocket，Koishi 要求 CQHTTP 版本不小于 4.6。
 :::
 
 ::: tip 提示

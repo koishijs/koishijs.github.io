@@ -10,9 +10,9 @@ sidebarDepth: 2
 
 向数据库请求用户数据。其中的后两个参数可以写任意一个，都可以识别。如果对应的用户不存在，且默认权限非负，则立即生成一个用户对象返回；如果默认权限为正数，则将生成的用户对象写入数据库。
 
-- userId: `number` 用户 ID
-- defaultAuthority: `number` 默认权限，默认值为 `0`
-- fields: `UserField[]` 请求的字段，默认为全部字段
+- **userId:** `number` 用户 ID
+- **defaultAuthority:** `number` 默认权限，默认值为 `0`
+- **fields:** `UserField[]` 请求的字段，默认为全部字段
 - 返回值: `Promise<Partial<UserData>>` 用户数据
 
 ::: tip 提示
@@ -23,17 +23,17 @@ sidebarDepth: 2
 
 上一个方法的监视器版本。
 
-- userId: `number` 用户 ID
-- defaultAuthority: `number` 默认权限，默认值为 `0`
-- fields: `UserField[]` 请求的字段，默认为全部字段
+- **userId:** `number` 用户 ID
+- **defaultAuthority:** `number` 默认权限，默认值为 `0`
+- **fields:** `UserField[]` 请求的字段，默认为全部字段
 - 返回值: `Promise<Partial<User>>` 用户数据
 
 ## db.getUsers(ids?, fields?)
 
 向数据库请求多位用户数据。如果数据不存在，则不会在返回的列表中。
 
-- ids: `number[]` 用户 ID 列表，默认为全部用户
-- fields: `UserField[]` 请求的字段，默认为全部字段
+- **ids:** `number[]` 用户 ID 列表，默认为全部用户
+- **fields:** `UserField[]` 请求的字段，默认为全部字段
 - 返回值: `Promise<Partial<UserData>[]>` 用户数据列表
 
 ::: tip 提示
@@ -44,8 +44,8 @@ sidebarDepth: 2
 
 向数据库写入用户数据。
 
-- id: `number` 用户 ID
-- data: `Partial<UserData>` 要修改的数据
+- **id:** `number` 用户 ID
+- **data:** `Partial<UserData>` 要修改的数据
 - 返回值: `Promise<any>`
 
 ## db.getUserCount()
@@ -59,26 +59,26 @@ sidebarDepth: 2
 
 向数据库请求群数据。其中的后两个参数可以写任意一个，都可以识别。如果对应的群不存在，则立即生成一个群对象返回；且如果默认代理者为正数，则将生成的群对象写回数据库。
 
-- groupId: `number` 群 ID
-- assignee: `number` 默认代理者，默认为 `0`
-- fields: `GroupField[]` 请求的字段，默认为全部字段
+- **groupId:** `number` 群 ID
+- **assignee:** `number` 默认代理者，默认为 `0`
+- **fields:** `GroupField[]` 请求的字段，默认为全部字段
 - 返回值: `Promise<Partial<GroupData>>` 群数据
 
 ## db.observeGroup(groupId, assignee?, fields?)
 
 上一个方法的监视器版本。
 
-- groupId: `number` 群 ID
-- assignee: `number` 默认代理者，默认为 `0`
-- fields: `GroupField[]` 请求的字段，默认为全部字段
+- **groupId:** `number` 群 ID
+- **assignee:** `number` 默认代理者，默认为 `0`
+- **fields:** `GroupField[]` 请求的字段，默认为全部字段
 - 返回值: `Promise<Partial<Group>>` 群数据
 
 ## db.getAllGroups(fields?, assignees?)
 
 向数据库请求被特定机器人管理的所有群数据。这里的两个参数可以写任意一个，都可以识别。
 
-- fields: `GroupField[]` 请求的字段，默认为全部字段
-- assignees: `number[]` 机器人 ID 列表，默认为当前进程全部机器人
+- **fields:** `GroupField[]` 请求的字段，默认为全部字段
+- **assignees:** `number[]` 机器人 ID 列表，默认为当前进程全部机器人
 - 返回值: `Promise<Partial<GroupData>[]>` 群数据列表
 
 ::: warning 注意
@@ -89,8 +89,8 @@ sidebarDepth: 2
 
 向数据库写入群数据。
 
-- id: `number` 群 ID
-- data: `Partial<GroupData>` 要修改的数据
+- **id:** `number` 群 ID
+- **data:** `Partial<GroupData>` 要修改的数据
 - 返回值: `Promise<any>`
 
 ## db.getGroupCount()

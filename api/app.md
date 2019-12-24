@@ -38,21 +38,21 @@ sidebarDepth: 2
 
 创建对特定用户的上下文。
 
-- userIds: `number[]` 用户 ID
+- **userIds:** `number[]` 用户 ID
 - 返回值: [`Context`](./context.md) 新的上下文
 
 ## app.group(...groupIds)
 
 创建对特定群的上下文。
 
-- groupIds: `number[]` 群 ID
+- **groupIds:** `number[]` 群 ID
 - 返回值: [`Context`](./context.md) 新的上下文
 
 ## app.discuss(...discussIds)
 
 创建对特定讨论组的上下文。
 
-- discussIds: `number[]` 讨论组 ID
+- **discussIds:** `number[]` 讨论组 ID
 - 返回值: [`Context`](./context.md) 新的上下文
 
 ## app.start()
@@ -71,13 +71,13 @@ sidebarDepth: 2
 
 生成一个运行时警告。如果使用了 Koishi 的命令行工具将会被显示在控制台。
 
-- error: `Error` 一个错误
+- **error:** `Error` 一个错误
 - 返回值: `void`
 
 ## app.parseCommandLine(message, meta)
 
 解析一段指令调用文本。
 
-- message: `string` 要解析的文本（开头不要包含指令名和前缀）
-- meta: [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 元信息对象
+- **message:** `string` 要解析的文本（开头不要包含指令名和前缀）
+- **meta:** [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 元信息对象
 - 返回值: [`ActionConfig`](../guide/command-system.md#actionconfig-对象) 解析结果

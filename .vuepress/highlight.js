@@ -1,4 +1,5 @@
 const { getHighlighter } = require('shiki')
+const { escapeHtml } = require('markdown-it/lib/common/utils')
 
 let highlighter
 
@@ -16,7 +17,7 @@ module.exports = (options, ctx) => ({
 
     config.options.highlight((code, lang) => {
       if (!lang) {
-        return `<pre><code>${code}</code></pre>`
+        return `<pre><code>${escapeHtml(code)}</code></pre>`
       }
       return `${highlighter.codeToHtml(code, lang)}`
     })
@@ -24,7 +25,6 @@ module.exports = (options, ctx) => ({
     config.plugin('code-container').use((md) => {
       const fence = md.renderer.rules.fence
       md.renderer.rules.fence = (...args) => {
-        const [tokens, idx] = args
         const rawCode = fence(...args)
         return `<CodeContainer>${rawCode}</CodeContainer>`
       }

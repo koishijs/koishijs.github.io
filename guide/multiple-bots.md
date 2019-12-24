@@ -32,11 +32,12 @@ module.exports = [{
   // 而对于 WebSocket，通常只需要 server 一个属性
   // 这是因为获取事件和发送请求都通过同一个链接完成
   type: 'ws',
-  server: 'http://localhost:6700',
+  server: 'ws://localhost:6700',
   selfId: 20000,
 }, {
-  type: 'ws',
-  server: 'http://localhost:6701',
+  // 如果配置了 server 字段并且以协议开头
+  // Koishi 也可以根据协议判断出 type，因此可以省略
+  server: 'ws://localhost:6701',
   selfId: 30000,
   plugins: [
     // 只对第三个机器人生效
@@ -84,10 +85,10 @@ startAll()
 
 首先让我们简单回顾一下之前提到过的一些概念，以及它们的有效范围：
 
-- Receiver: 与 Context 绑定
-- Sender: 与 App 绑定
-- Server: 全局自动分配
-- Database: 全局自动分配
+- **Receiver:** 与 Context 绑定
+- **Sender:** 与 App 绑定
+- **Server:** 全局自动分配
+- **Database:** 全局自动分配
 
 在之前的介绍中，我们只讨论了一个应用的情况，因此看起来 Sender, Server 和 Database 都是与 App 绑定的，但其实不然。当同时有多个应用实例存在时，我们可以通过服用连接的方式来提高性能。而这对于不同类型的服务器和数据库也是有所区别的。对于 HTTP 服务器，我们可以用同一个服务器接收来自多个 CoolQ 实例的上报事件（但对于 WebSocket 客户端并不行）；对于 MySQL 这类基于网络的数据库，我们可以通过复用请求池的方式大幅提高性能；对于 leveldb 这类本地数据库，我们可以通过保持唯一实例的方式确保数据被统一管理，不会发生冲突。因此，只要传入了相同的配置，Koishi 就会用一个 Server 和 Database 绑定多个应用实例。
 
@@ -107,3 +108,7 @@ const selfIds = await setSelfIds()
 ```
 
 不过这个函数的调用总归是需要时间（虽然很短）。因此如果你在编写机器人时确实有在启动短时间内使用 QQ 号的需求，或者需要对每个 QQ 号使用不同的配置，还是推荐手动配置 `selfId`。
+
+::: tip 提示
+上面所说的 `self_id` 字段是 CQHTTP 3.4 引入的新字段，因此上面所说的特性对低于 CQHTTP 3.4 的版本是不起作用的。因此，如果你在一个这样的版本中在同一个端口配置了多个不含 `selfId` 的机器人，CQHTTP 会在启动时报错；如果在每个端口都只有不超过 1 个这样的机器人，那么 CQHTTP 会自动通过 [`getLoginInfo()`](../api/sender.md#sender-getlogininfo) 方法获取 `selfId`，并自动附加在每个事件元信息对象上。这也是 Koishi 为确保兼容性所做的一点努力。
+:::

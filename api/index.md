@@ -10,7 +10,7 @@ sidebarDepth: 2
 
 机器人实例的构造函数。
 
-- options: `AppOptions` 构造选项
+- **options:** `AppOptions` 构造选项
 - 返回值: [`App`](./app.md)
 
 ```ts
@@ -26,6 +26,7 @@ interface AppOptions {
   selfId?: number
   database?: DatabaseConfig
   similarityCoefficient?: number
+  quickOperationTimeout?: number
 }
 ```
 
@@ -51,7 +52,7 @@ interface AppOptions {
 
 添加启动钩子。
 
-- callback: `() => any` 当全部机器人启动完毕后会调用此函数
+- **callback:** `() => any` 当全部机器人启动完毕后会调用此函数
 - 返回值: `void`
 
 ## stopAll()
@@ -64,7 +65,7 @@ interface AppOptions {
 
 添加停止钩子。
 
-- callback: `() => any` 当全部机器人停止运行后会调用此函数
+- **callback:** `() => any` 当全部机器人停止运行后会调用此函数
 - 返回值: `void`
 
 ## Database Related
@@ -87,15 +88,15 @@ interface AppOptions {
 
 扩展用户字段。
 
-- getter: `(id: number, authority: number) => object` 新字段的初始化函数，返回值应该是一个由要扩展的字段和它们的默认值构成的键值对
+- **getter:** `(id: number, authority: number) => object` 新字段的初始化函数，返回值应该是一个由要扩展的字段和它们的默认值构成的键值对
 - 返回值: `void`
 
 ### createUser(id, authority)
 
 创建一个新用户数据对象。
 
-- id: `number` 用户 ID
-- authority: `number` 权限等级
+- **id:** `number` 用户 ID
+- **authority:** `number` 权限等级
 - 返回值: `UserData`
 
 ### GroupFlag
@@ -114,32 +115,32 @@ interface AppOptions {
 
 扩展群字段。
 
-- getter: `(id: number, assignee: number) => object` 新字段的初始化函数，返回值应该是一个由要扩展的字段和它们的默认值构成的键值对
+- **getter:** `(id: number, assignee: number) => object` 新字段的初始化函数，返回值应该是一个由要扩展的字段和它们的默认值构成的键值对
 - 返回值: `void`
 
 ### createGroup(id, assignee)
 
 创建一个新群数据对象。
 
-- id: `number` 用户 ID
-- assignee: `number` 代理者的 ID
+- **id:** `number` 用户 ID
+- **assignee:** `number` 代理者的 ID
 - 返回值: `GroupData`
 
 ### registerDatabase(name, subdatabase)
 
 注册一种新数据库。
 
-- name: `string` 数据库名
-- subdatabase: `new (config) => object` 新的数据库类，参见 [定义新的数据库](../guide/using-database.md#定义新的数据库)
+- **name:** `string` 数据库名
+- **subdatabase:** `new (config) => object` 新的数据库类，参见 [定义新的数据库](../guide/using-database.md#定义新的数据库)
 - 返回值: `void`
 
 ### injectMethods(name, methods, config?)
 
 向某个数据库注入一批方法。
 
-- name: `string` 表名
-- methods: `Record<string, Function>` 要注入的方法
-- config: `any` 对应表的配置
+- **name:** `string` 表名
+- **methods:** `Record<string, Function>` 要注入的方法
+- **config:** `any` 对应表的配置
 - 返回值: `void`
 
 ## Runtime Utilities
@@ -152,32 +153,25 @@ interface AppOptions {
 
 - 返回值: `Promise<number[]>` 所有机器人的 QQ 号
 
-### getContextId(meta)
-
-获得上下文 ID，可用于 [`sender.sendContextMsg()`](./sender.md#sender-sendcontextmsg)。
-
-- meta: `Meta` 元信息对象
-- 返回值: `string` 上下文 ID
-
 ### getTargetId(target)
 
 获得目标用户 QQ 号。传入一个字符串，可能是 QQ 号本身或是 @ 群内成员。
 
-- target: `string` 要解析的字符串
+- **target:** `string` 要解析的字符串
 - 返回值: `number` 目标 QQ 号
 
 ### getSenderName(meta)
 
 获得发言者称呼。当用户在数据库中已经设置了称呼，则使用设置的称呼；否则依次使用用户在群中的群名片和昵称。
 
-- meta: `Meta` 元信息对象
+- **meta:** `Meta` 元信息对象
 - 返回值: `string` 用户称呼
 
 ### showSuggestions(options)
 
 尝试显示候选输入。
 
-- options: `SuggestOptions` 配置对象
+- **options:** `SuggestOptions` 配置对象
 - 返回值: `Promise<void>`
 
 ```ts
@@ -198,8 +192,8 @@ interface SuggestOptions {
 
 更新活动数据。
 
-- activity: `Activity` 活动数据对象
-- groupId: `number` 所在的群号
+- **activity:** `Activity` 活动数据对象
+- **groupId:** `number` 所在的群号
 - 返回值: `void`
 
 ```ts

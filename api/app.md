@@ -67,11 +67,13 @@ sidebarDepth: 2
 
 - 返回值: `Promise<void>`
 
-## app.emitWarning(error)
+## app.emitEvent(meta, event, ...payloads)
 
-生成一个运行时警告。如果使用了 Koishi 的命令行工具将会被显示在控制台。
+在元信息相关联的上下文触发一个事件。
 
-- **error:** `Error` 一个错误
+- **meta:** `Meta` 元信息
+- **event:** `string` 事件名
+- **payloads:** `any[]` 事件参数
 - 返回值: `void`
 
 ## app.parseCommandLine(message, meta)

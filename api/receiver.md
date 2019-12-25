@@ -46,7 +46,7 @@ request 事件发生于机器人收到请求时，会在相应的上下文触发
 
 ## notice 系列事件
 
-notice 系列事件发生于机器人收到提醒时，会在相应的上下文触发。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `notice`。
+notice 系列事件发生于机器人收到提醒时，会在相应的上下文触发。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `'notice'`。
 
 ### 事件：friend_add
 
@@ -87,7 +87,7 @@ notice 系列事件发生于机器人收到提醒时，会在相应的上下文�
 
 ## meta_event 系列事件
 
-meta_event 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 App 实例触发**。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `meta_event`。
+meta_event 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 App 实例触发**。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `'meta_event'`。
 
 ### 事件：heartbeat
 
@@ -104,22 +104,43 @@ meta_event 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 A
 
 以下事件与 CQHTTP 无关，是 Koishi 内部的事件。
 
-### 事件：send
+### 事件：before-connect
 
-成功发送信息时会在对应的上下文触发。调用时会传入一个“伪 Meta 对象”，拥有与 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象) 类似的结构，但是 `postType` 字段为 `send`。
-
-### 事件：error
-
-在做了（
-
-### 事件：warning
-
-产生运行时警告时在 App 实例触发。调用时传入一个 [Error](https://nodejs.org/api/errors.html#errors_class_error) 对象。
-
-### 事件：connect
-
-成功连接到服务器时在 App 实例触发。
+开始连接到服务器时在 App 实例触发。
 
 ### 事件：connected
 
-connect 事件的别名。
+成功连接到服务器时在 App 实例触发。
+
+### 事件：connect
+
+connected 事件的别名。
+
+### 事件：ready
+
+成功连接到服务器且已经获得 QQ 号时触发。这其中包含三种情况：
+
+- 如果已经配置了 `selfId` 字段，那么此事件在 `connected` 事件前触发。
+- 如果在运行时显示调用了 `getSelfIds()` 方法，则完成 QQ 号获取后触发。
+- 其他情况下，当收到含有 `selfId` 字段的元信息时，在元信息触发其他事件之前触发。
+
+无论是哪一种情况，当发生此事件时都可以确保 App 实例已经正常运行且可以通过 `app.selfId` 获得机器人的 QQ 号。
+
+### 事件：error
+
+运行时产生错误时在 App 实例触发。调用时传入一个 [Error](https://nodejs.org/api/errors.html#errors_class_error) 对象。拥有下面的子事件：
+
+- error/command: 指令调用出错
+- error/middleware: 中间件调用出错
+
+### 事件：before-send
+
+准备发送信息时会在对应的上下文触发。调用时会传入一个伪 Meta 对象，拥有与 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象) 类似的结构，但是 `postType` 字段为 `send`。
+
+### 事件：send
+
+成功发送信息时会在对应的上下文触发。调用时会传入一个伪 Meta 对象，比 `before-send` 事件传入的对象多出一个 `messageId` 属性。
+
+::: tip 提示
+注意只有非异步 Sender API 成功调用会触发此事件，而异步调用和快速回复都只会触发 `before-send` 事件，因此你在实际使用中可能更需要上一个事件。
+:::

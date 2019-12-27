@@ -92,21 +92,6 @@ module.exports = {
 }
 ```
 
-## 插件：authorizeUser
-
-authorizeUser 插件用于设置特定玩家的权限：
-
-```js
-module.exports = {
-  plugins: ['common', {
-    authorizeUser: {
-      // 设置玩家权限
-      123456789: 3,
-    }
-  }],
-}
-```
-
 ## 插件：authorize
 
 authorize 插件用于设置特定玩家的权限，以及特定群中默认的玩家的权限：
@@ -124,11 +109,7 @@ module.exports = {
       // 默认行为：全群玩家权限为 1 级
       444555666: {},
       // 分别设置每类成员
-      777888999: {
-        member: 1,
-        admin: 2,
-        owner: 3,
-      },
+      777888999: { member: 1, admin: 2, owner: 3 },
     },
   }],
 }

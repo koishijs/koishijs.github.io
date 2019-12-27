@@ -574,7 +574,7 @@ export interface VersionInfo {
 - 返回值: `Promise<void>`
 
 ::: warning 警告
-由于强行退出可能导致 酷Q 数据库损坏而影响功能，此接口除非必要请尽量避免使用。
+由于强行退出可能导致 CoolQ 数据库损坏而影响功能，此接口除非必要请尽量避免使用。
 :::
 
 ## sender.setRestartPlugin(delay?) <Badge text="CQHTTP 3.2"/>

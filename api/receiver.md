@@ -48,46 +48,46 @@ request 事件发生于机器人收到请求时，会在相应的上下文触发
 
 notice 系列事件发生于机器人收到提醒时，会在相应的上下文触发。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `'notice'`。
 
-### 事件：friend_add
+### 事件：friend-add
 
 新增好友事件，会在好友上下文触发。
 
-### 事件：group_increase
+### 事件：group-increase
 
 群成员增加事件，会在群上下文触发。拥有下面的子事件：
 
-- group_increase/approve: 通过申请加群
-- group_increase/invite: 通过邀请加群
+- group-increase/approve: 通过申请加群
+- group-increase/invite: 通过邀请加群
 
-### 事件：group_decrease
+### 事件：group-decrease
 
 群成员减少事件，会在群上下文触发。拥有下面的子事件：
 
-- group_decrease/leave: 主动退群
-- group_decrease/kick: 非登录号被踢出群
-- group_decrease/kick_me: 登录号被踢出群
+- group-decrease/leave: 主动退群
+- group-decrease/kick: 非登录号被踢出群
+- group-decrease/kick-me: 登录号被踢出群
 
-### 事件：group_upload
+### 事件：group-upload
 
 群文件上传事件，会在群上下文触发。
 
-### 事件：group_admin
+### 事件：group-admin
 
 群管理员变动事件，会在群上下文触发。拥有下面的子事件：
 
-- group_admin/set: 设置管理员
-- group_admin/unset: 取消管理员
+- group-admin/set: 设置管理员
+- group-admin/unset: 取消管理员
 
-### 事件：group_ban
+### 事件：group-ban
 
 群禁言变动事件，会在群上下文触发。拥有下面的子事件：
 
-- group_admin/ban: 禁言
-- group_admin/lift_ban: 解除禁言
+- group-admin/ban: 禁言
+- group-admin/lift-ban: 解除禁言
 
-## meta_event 系列事件
+## metaEvent 系列事件
 
-meta_event 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 App 实例触发**。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `'meta_event'`。
+metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 App 实例触发**。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `'meta_event'`。
 
 ### 事件：heartbeat
 
@@ -140,6 +140,18 @@ meta_event 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 A
 ::: tip 提示
 注意只有非异步 Sender API 成功调用会触发此事件，而异步调用和快速回复都只会触发 `before-send` 事件，因此你在实际使用中可能更需要上一个事件。
 :::
+
+### 事件：before-command
+
+调用指令前会在对应的上下文触发。此时指令的可用性还未经检测，因此可能出现参数错误、权限不足、超过使用次数等情况。调用时传入一个 [ActionConfig 对象](../guide/command-system.md#actionconfig-对象)。
+
+### 事件：command
+
+执行指令的 `action` 回调函数前会在对应的上下文触发。调用时传入一个 [ActionConfig 对象](../guide/command-system.md#actionconfig-对象)。
+
+### 事件：after-command
+
+成功调用指令后会在对应的上下文触发。如果调用过程出错或者在指令内部触发 `next` 则不会触发。调用时传入一个 [ActionConfig 对象](../guide/command-system.md#actionconfig-对象)。
 
 ### 事件：before-disconnect
 

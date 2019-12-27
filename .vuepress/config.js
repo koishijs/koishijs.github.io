@@ -69,15 +69,24 @@ module.exports = {
           '/guide/multiple-bots',
         ],
       }],
-      '/plugins/': [
-        '/plugins/common',
-        '/plugins/teach',
-        '/plugins/tools',
-        '/plugins/games',
-        '/plugins/monitor',
-        '/plugins/schedule',
-        '/plugins/webhook',
-      ],
+      '/plugins/': [{
+        title: '核心插件',
+        collapsable: false,
+        children: [
+          '/plugins/common',
+          '/plugins/teach',
+          '/plugins/schedule',
+        ]
+      }, {
+        title: '其他官方插件',
+        collapsable: false,
+        children: [
+          '/plugins/tools',
+          '/plugins/monitor',
+          '/plugins/webhook',
+          '/plugins/image-search',
+        ]
+      }],
     },
   },
 }

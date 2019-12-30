@@ -66,6 +66,7 @@ module.exports = {
           '/guide/plugin-and-context',
           '/guide/command-system',
           '/guide/using-database',
+          '/guide/authorization',
           '/guide/multiple-bots',
         ],
       }],

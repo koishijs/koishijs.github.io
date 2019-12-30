@@ -69,7 +69,7 @@ sidebarDepth: 2
 
 ## app.emitEvent(meta, event, ...payloads)
 
-在元信息相关联的上下文触发一个事件。
+在元信息相关联的上下文触发一个事件。如果你只希望该事件在 `App` 本身触发，应该直接使用 `app.receiver.emit()` 方法。
 
 - **meta:** `Meta` 元信息
 - **event:** `string` 事件名
@@ -82,4 +82,4 @@ sidebarDepth: 2
 
 - **message:** `string` 要解析的文本（开头不要包含指令名和前缀）
 - **meta:** [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 元信息对象
-- 返回值: [`ActionConfig`](../guide/command-system.md#actionconfig-对象) 解析结果
+- 返回值: [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 解析结果

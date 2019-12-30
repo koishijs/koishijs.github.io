@@ -129,6 +129,24 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 - error/command: 指令调用出错
 - error/middleware: 中间件调用出错
 
+### 事件：before-group
+
+当 Koishi 试图从数据库获取用户信息前触发。调用时会传入一个 `Set<GroupField>` 对象和一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。如果当前没有正在解析的指令，则该对象只会有一个 `meta` 属性。你可以在回调函数中修改传入的字段集合，增加的字段将可以被之后的中间件获取到。
+
+如果没有配置数据库，则该事件不会触发。
+
+### 事件：before-user
+
+当 Koishi 试图从数据库获取用户信息前触发。调用时会传入一个 `Set<UserField>` 对象和一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。如果当前没有正在解析的指令，则该对象只会有一个 `meta` 属性。你可以在回调函数中修改传入的字段集合，增加的字段将可以被之后的中间件获取到。
+
+如果没有配置数据库，则该事件不会触发。
+
+### 事件：attach
+
+当 Koishi 完成数据获取后触发。调用时会传入一个 Meta 对象，将会拥有 `$user` 和 `$group` 两个属性。你可以在回调函数中对这两个属性做同步的修改（注意：只能是同步的修改）。这些修改会在后续过程中自动更新到数据库。
+
+如果没有配置数据库，则该事件不会触发。
+
 ### 事件：before-send
 
 准备发送信息时会在对应的上下文触发。调用时会传入一个伪 Meta 对象，拥有与 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象) 类似的结构，但是 `postType` 字段为 `send`。
@@ -143,15 +161,15 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 
 ### 事件：before-command
 
-调用指令前会在对应的上下文触发。此时指令的可用性还未经检测，因此可能出现参数错误、权限不足、超过使用次数等情况。调用时传入一个 [ActionConfig 对象](../guide/command-system.md#actionconfig-对象)。
+调用指令前会在对应的上下文触发。此时指令的可用性还未经检测，因此可能出现参数错误、权限不足、超过使用次数等情况。调用时传入一个 [`ParsedCommandLine` 对象](../guide/command-system.md#parsedcommandline-对象)。
 
 ### 事件：command
 
-执行指令的 `action` 回调函数前会在对应的上下文触发。调用时传入一个 [ActionConfig 对象](../guide/command-system.md#actionconfig-对象)。
+执行指令的 `action` 回调函数前会在对应的上下文触发。调用时传入一个 [`ParsedCommandLine` 对象](../guide/command-system.md#parsedcommandline-对象)。
 
 ### 事件：after-command
 
-成功调用指令后会在对应的上下文触发。如果调用过程出错或者在指令内部触发 `next` 则不会触发。调用时传入一个 [ActionConfig 对象](../guide/command-system.md#actionconfig-对象)。
+成功调用指令后会在对应的上下文触发。如果调用过程出错或者在指令内部触发 `next` 则不会触发。调用时传入一个 [`ParsedCommandLine` 对象](../guide/command-system.md#parsedcommandline-对象)。
 
 ### 事件：before-disconnect
 

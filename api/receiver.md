@@ -131,7 +131,7 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 
 ### 事件：before-group
 
-当 Koishi 试图从数据库获取用户信息前触发。调用时会传入一个 `Set<GroupField>` 对象和一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。如果当前没有正在解析的指令，则该对象只会有一个 `meta` 属性。你可以在回调函数中修改传入的字段集合，增加的字段将可以被之后的中间件获取到。
+当 Koishi 试图从数据库获取群信息前触发。调用时会传入一个 `Set<GroupField>` 对象和一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。如果当前没有正在解析的指令，则该对象只会有一个 `meta` 属性。你可以在回调函数中修改传入的字段集合，增加的字段将可以被之后的中间件获取到。
 
 如果没有配置数据库，则该事件不会触发。
 

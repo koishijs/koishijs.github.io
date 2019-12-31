@@ -51,7 +51,7 @@ sidebarDepth: 2
 - **callback:** `() => any` 当全部机器人停止运行后会调用此函数
 - 返回值: `void`
 
-## Database Related
+## 数据库相关
 
 这里包含了一些数据库相关的全局方法。
 
@@ -118,7 +118,7 @@ sidebarDepth: 2
 - **config:** `any` 对应表的配置
 - 返回值: `void`
 
-## Runtime Utilities
+## 运行时工具
 
 这里包含了一些运行时的工具。
 
@@ -135,14 +135,14 @@ sidebarDepth: 2
 - **target:** `string` 要解析的字符串
 - 返回值: `number` 目标 QQ 号
 
-### getSenderName(meta) <Badge text="experimental" type="warn"/>
+### getSenderName(meta) <Badge text="beta" type="warn"/>
 
 获得发言者称呼。当用户在数据库中已经设置了称呼，则使用设置的称呼；否则依次使用用户在群中的群名片和昵称。
 
 - **meta:** `Meta` 元信息对象
 - 返回值: `string` 用户称呼
 
-### showSuggestions(options) <Badge text="experimental" type="warn"/>
+### showSuggestions(options) <Badge text="beta" type="warn"/>
 
 尝试显示候选输入。
 

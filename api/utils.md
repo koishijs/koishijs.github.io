@@ -26,7 +26,7 @@ sidebarDepth: 2
 - **value:** `any` 要判断的值
 - 返回值: `boolean` 是否为整数
 
-## Observer API
+## 观察者对象
 
 ### observe(target, update?, label?)
 
@@ -54,7 +54,7 @@ sidebarDepth: 2
 
 - 返回值: `R`
 
-## CQCode Manipulation
+## CQCode 操作
 
 ### CQCode.escape(source, insideCQ?)
 
@@ -86,7 +86,7 @@ sidebarDepth: 2
 - **source:** `string` CQ 码
 - 返回值: `{ type: string, data: object }` CQ 码的类型和参数
 
-## String Manipulation
+## 字符串操作
 
 ### simplify(source)
 
@@ -130,7 +130,7 @@ sidebarDepth: 2
 - **source:** `any` 要转换的内容
 - 返回值: `any` 转换结果
 
-## Date Manipulation
+## 日期操作
 
 ### getDateNumber(date?)
 
@@ -146,7 +146,7 @@ sidebarDepth: 2
 - **value:** `number` UNIX 时间开始后的天数
 - 返回值: `Date` 日期对象
 
-## Set Manipulation
+## 集合操作
 
 ### contain(array1, array2)
 
@@ -180,7 +180,7 @@ sidebarDepth: 2
 - **array2:** `readonly any[]` 数组 2
 - 返回值: `any[]` 两个数组的并集
 
-## Random Manipulation
+## 随机数操作
 
 ### randomBool(probability)
 

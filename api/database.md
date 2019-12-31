@@ -6,7 +6,11 @@ sidebarDepth: 2
 
 一个数据库对象代理了 Koishi 上下文绑定的应用实例有关的所有数据库访问。同时它具有注入特性，任何插件都可以自己定义数据库上的方法。本章主要介绍数据库的官方接口。
 
-## db.getUser(userId, defaultAuthority?, fields?)
+## 内置方法
+
+下面的内置方法并不由 Koishi 自身实现，而是由每个数据库分别实现的。Koishi 只是提供了一套标准。
+
+### db.getUser(userId, defaultAuthority?, fields?)
 
 向数据库请求用户数据。其中的后两个参数可以写任意一个，都可以识别。如果对应的用户不存在，且默认权限非负，则立即生成一个用户对象返回；如果默认权限为正数，则将生成的用户对象写入数据库。
 
@@ -19,7 +23,7 @@ sidebarDepth: 2
 尽管这里我们提供了 `fields` 参数用于对特定的数据库进行优化，但是如果你是数据库开发者，也完全可以忽略这个参数。只需要保证返回的数据满足用户数据格式，且包含在 `fields` 中的字段都存在即可。
 :::
 
-## db.observeUser(userId, defaultAuthority?, fields?)
+### db.observeUser(userId, defaultAuthority?, fields?)
 
 上一个方法的监视器版本。
 
@@ -28,7 +32,7 @@ sidebarDepth: 2
 - **fields:** `UserField[]` 请求的字段，默认为全部字段
 - 返回值: `Promise<Partial<User>>` 用户数据
 
-## db.getUsers(ids?, fields?)
+### db.getUsers(ids?, fields?)
 
 向数据库请求多位用户数据。如果数据不存在，则不会在返回的列表中。
 
@@ -40,7 +44,7 @@ sidebarDepth: 2
 这里的两个参数可以写任意一个，都可以识别。虽然这两个参数都是数组类型，但是可以利用 `ids` 中的元素一定是数字而 `fields` 中的元素一定是字符串进行判断。
 :::
 
-## db.setUser(id, data)
+### db.setUser(id, data)
 
 向数据库写入用户数据。
 
@@ -48,14 +52,14 @@ sidebarDepth: 2
 - **data:** `Partial<UserData>` 要修改的数据
 - 返回值: `Promise<any>`
 
-## db.getUserCount()
+### db.getUserCount()
 
 向数据库请求用户总数。
 
 - 返回值: `Promise<number>`
 
 
-## db.getGroup(groupId, assignee?, fields?)
+### db.getGroup(groupId, assignee?, fields?)
 
 向数据库请求群数据。其中的后两个参数可以写任意一个，都可以识别。如果对应的群不存在，则立即生成一个群对象返回；且如果默认代理者为正数，则将生成的群对象写回数据库。
 
@@ -64,7 +68,7 @@ sidebarDepth: 2
 - **fields:** `GroupField[]` 请求的字段，默认为全部字段
 - 返回值: `Promise<Partial<GroupData>>` 群数据
 
-## db.observeGroup(groupId, assignee?, fields?)
+### db.observeGroup(groupId, assignee?, fields?)
 
 上一个方法的监视器版本。
 
@@ -73,7 +77,7 @@ sidebarDepth: 2
 - **fields:** `GroupField[]` 请求的字段，默认为全部字段
 - 返回值: `Promise<Partial<Group>>` 群数据
 
-## db.getAllGroups(fields?, assignees?)
+### db.getAllGroups(fields?, assignees?)
 
 向数据库请求被特定机器人管理的所有群数据。这里的两个参数可以写任意一个，都可以识别。
 
@@ -85,7 +89,7 @@ sidebarDepth: 2
 请注意这个方法和上面的 `db.getUsers` 方法的区别。除了名字不同以外，这个方法的 `fields` 是第一个参数，且 `assignees` 代表的是机器人 ID 列表；而上面的 `db.getUsers()` 方法的第一个参数是 `ids`，且代表的是用户 ID 列表。
 :::
 
-## db.setGroup(id, data)
+### db.setGroup(id, data)
 
 向数据库写入群数据。
 
@@ -93,8 +97,89 @@ sidebarDepth: 2
 - **data:** `Partial<GroupData>` 要修改的数据
 - 返回值: `Promise<any>`
 
-## db.getGroupCount()
+### db.getGroupCount()
 
 向数据库请求群总数。
 
 - 返回值: `Promise<number>`
+
+## Level
+
+下面展示了 `koishi-database-level` 提供的方法。
+
+### db.level.create(table, data)
+
+使用自增 ID 创建一个新的数据行。
+
+- **table:** `string` 表名
+- **data:** `any` 数据行
+- 返回值: `Promise<any>` 带 ID 的数据行
+
+### db.level.remove(table, id)
+
+删除一个数据行。
+
+- **table:** `string` 表名
+- **id:** `string | number` 索引
+- 返回值: `Promise<any>`
+
+### db.level.update(table, id, data)
+
+更新一个数据行。
+
+- **table:** `string` 表名
+- **id:** `string | number` 索引
+- **data:** `any` 数据行
+- 返回值: `Promise<any>`
+
+### db.level.count(table)
+
+获取表中的行数。
+
+- **table:** `string` 表名
+- 返回值: `Promise<number>` 行数
+
+## MySQL
+
+下面展示了 `koishi-database-mysql` 提供的方法。
+
+### db.mysql.joinKeys(keys?)
+
+连接字段成字符串。
+
+- **keys:** `string[]` 要连接的字段
+- 返回值: `string` 连接后的结果
+
+### db.mysql.query(sql, values?)
+
+发送 SQL 请求。
+
+- **sql:** `string` SQL 字符串
+- **value:** `any` 要插入的值
+- 返回值: `Promise<any>` 请求结果
+
+### db.mysql.select(table, fields?, conditional?, values?)
+
+搜索表中的数据。
+
+- **table:** `string` 表名
+- **fields:** `string[]` 字段列表
+- **conditional:** `string` SQL 条件语句
+- **values:** `any` 要插入的值
+- 返回值: `Promise<any>`
+
+### db.mysql.update(table, id, data)
+
+更新表中的某行。
+
+- **table:** `string` 表名
+- **id:** `number` 行号
+- **data:** `any` 要更新的数据
+- 返回值: `Promise<any>`
+
+### db.mysql.count(table)
+
+计算表中的行数。
+
+- **table:** `string` 表名
+- 返回值: `Promise<number>` 表中的行数

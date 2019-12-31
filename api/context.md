@@ -63,29 +63,35 @@ sidebarDepth: 2
 
 当前上下文中安装一个插件。
 
-- **plugin:** [`Plugin<T, U>`](#plugin) 要安装的插件
+- **plugin:** `Plugin<T, U>` 要安装的插件
 - **options:** `U` 要传入插件的参数，如果为 `false` 则插件不会被安装
 - 返回值: `this`
+
+```ts
+type PluginFunction <T extends Context, U> = (ctx: T, options: U) => void
+type PluginObject <T extends Context, U> = { apply: PluginFunction<T, U> }
+type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
+```
 
 ## ctx.middleware(middleware)
 
 当前上下文中注册一个中间件。
 
-- **middleware:** [`Middleware`](#middleware) 要注册的中间件
+- **middleware:** [`Middleware`](../guide/receive-and-send.md#中间件) 要注册的中间件
 - 返回值: `this`
 
-## ctx.premiddleware(middleware)
+## ctx.prependMiddleware(middleware)
 
 当前上下文中注册一个前置中间件。
 
-- **middleware:** [`Middleware`](#middleware) 要注册的前置中间件
+- **middleware:** [`Middleware`](../guide/receive-and-send.md#中间件) 要注册的前置中间件
 - 返回值: `this`
 
 ## ctx.removeMiddleware(middleware)
 
 移除当前上下文中一个已注册的中间件。
 
-- **middleware:** [`Middleware`](#middleware) 要移除的中间件
+- **middleware:** [`Middleware`](../guide/receive-and-send.md#中间件) 要移除的中间件
 - 返回值: `boolean` 是否存在该中间件
 
 ## ctx.command(rawName, description?, config?)
@@ -121,18 +127,3 @@ sidebarDepth: 2
 返回当前上下文所在的 App 实例，可用于链式调用。
 
 - 返回值: [`App`](./app.md) 当前上下文所在的 App 实例
-
-## Plugin
-
-```ts
-type PluginFunction <T extends Context, U> = (ctx: T, options: U) => void
-type PluginObject <T extends Context, U> = { apply: PluginFunction<T, U> }
-type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
-```
-
-## Middleware
-
-```ts
-type NextFunction = (next?: NextFunction) => void | Promise<void>
-type Middleware = (meta: Meta, next: NextFunction) => void | Promise<void>
-```

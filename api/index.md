@@ -10,25 +10,8 @@ sidebarDepth: 2
 
 机器人实例的构造函数。
 
-- **options:** `AppOptions` 构造选项
+- **options:** `AppOptions` 参见 [配置列表](../guide/config-file.md#配置列表)
 - 返回值: [`App`](./app.md)
-
-```ts
-type ServerType = 'http' | 'ws'
-
-interface AppOptions {
-  type?: ServerType
-  server?: string
-  port?: number
-  name?: string
-  token?: string
-  secret?: string
-  selfId?: number
-  database?: DatabaseConfig
-  similarityCoefficient?: number
-  quickOperationTimeout?: number
-}
-```
 
 ## appList
 
@@ -74,11 +57,7 @@ interface AppOptions {
 
 ### UserFlag
 
-所有用户 flag 构成的枚举类型。
-
-### userFlags
-
-所有用户 flag 构成的列表。
+所有用户状态标签构成的枚举类型。参见 [状态标签](../guide/authorization.md#状态标签)。
 
 ### userFields
 
@@ -101,11 +80,7 @@ interface AppOptions {
 
 ### GroupFlag
 
-所有群 flag 构成的枚举类型。
-
-### groupFlags
-
-所有群 flag 构成的列表。
+所有群状态标签构成的枚举类型。参见 [状态标签](../guide/authorization.md#状态标签)。
 
 ### groupFields
 
@@ -160,42 +135,24 @@ interface AppOptions {
 - **target:** `string` 要解析的字符串
 - 返回值: `number` 目标 QQ 号
 
-### getSenderName(meta)
+### getSenderName(meta) <Badge text="experimental" type="warn"/>
 
 获得发言者称呼。当用户在数据库中已经设置了称呼，则使用设置的称呼；否则依次使用用户在群中的群名片和昵称。
 
 - **meta:** `Meta` 元信息对象
 - 返回值: `string` 用户称呼
 
-### showSuggestions(options)
+### showSuggestions(options) <Badge text="experimental" type="warn"/>
 
 尝试显示候选输入。
 
-- **options:** `SuggestOptions` 配置对象
+- **options.target:** `string` 源字符串
+- **options.items:** `string` 目标字符串列表
+- **options.meta:** [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 元信息对象
+- **options.next:** [`NextFunction`](../guide/receive-and-send.md#中间件) 回调函数
+- **options.prefix:** `string` 显示在候选输入前的文本
+- **options.suffix:** `string` 当只有一个选项时，显示在候选输入后的文本
+- **options.coefficient:** `number` 用于模糊匹配的相似系数
+- **options.command:** `Command | ((suggestion: string) => Command)` 相关指令
+- **options.execute:** `(suggestion: string, meta: MessageMeta, next: NextFunction) => void` 确认后执行的操作
 - 返回值: `Promise<void>`
-
-```ts
-interface SuggestOptions {
-  target: string
-  items: string[]
-  meta: MessageMeta
-  next: NextFunction
-  prefix: string
-  suffix: string
-  coefficient: number
-  command: Command | ((suggestion: string) => Command)
-  execute: (suggestion: string, meta: MessageMeta, next: NextFunction) => any
-}
-```
-
-### updateActivity(activity, groupId)
-
-更新活动数据。
-
-- **activity:** `Activity` 活动数据对象
-- **groupId:** `number` 所在的群号
-- 返回值: `void`
-
-```ts
-type Activity = Record<number, Record<number, number>>
-```

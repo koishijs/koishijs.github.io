@@ -77,8 +77,8 @@ sidebarDepth: 2
 注册或修改子指令。子指令会继承当期指令的上下文。
 
 - **rawName:** `string` 指令名以及可能的参数
-- description?: `string` 指令的描述
-- config?: [`CommandConfig`](./command.md#commandconfig) 指令的配置
+- **description:** `string` 指令的描述
+- **config:** [`CommandConfig`](./command.md#commandconfig) 指令的配置
 - 返回值：[`Command`](./command.md) 注册或修改的指令
 
 ## cmd.parse(message)

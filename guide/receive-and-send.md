@@ -79,6 +79,13 @@ Koishi 还提供了一套快捷操作 API。它们会根据事件的类型绑定
 
 中间件是对信息事件处理流程的再封装。你注册的所有中间件将会由一个事件监听器进行统一管理，数据流向下游，控制权流回上游——这可以有效确保了任意信息都只被处理一次。被认定为无需继续处理的信息不回进入下游的中间件——这让我们能够轻易地实现权限管理。与此同时，Koishi 的中间件也支持异步调用，这使得你可以在中间件函数中实现任何逻辑。事实上，相比更加底层地调用 receiver，**使用中间件处理信息才是 Koishi 更加推荐的做法**。
 
+中间件的本质是下面的函数。看起来挺简单的，不是吗？我们将在下面详细介绍它的运作方式。
+
+```ts
+type NextFunction = (next?: NextFunction) => any
+type Middleware = (meta: Meta, next: NextFunction) => any
+```
+
 ### 注册和取消中间件
 
 使用 `app.middleware` 注册中间件。这个方法接受一个回调函数，其第一个参数为一个 Meta 对象，第二个参数是 `next` 函数，只有调用了它才会进入接下来的流程。如果自始至终都没有调用 `next` 函数的话，之后的中间件都将不会被执行。
@@ -150,7 +157,7 @@ app.receiver.on('message', (meta) => {
 let times = 0 // 复读次数
 let message = '' // 当前信息
 
-app.premiddleware((meta, next) => {
+app.prependMiddleware((meta, next) => {
   if (meta.message === message) {
     times += 1
     if (times === 3) return meta.$send(message)
@@ -185,7 +192,7 @@ app.middleware((meta, next) => {
 let times = 0 // 复读次数
 let message = '' // 当前信息
 
-app.premiddleware((meta, next) => {
+app.prependMiddleware((meta, next) => {
   if (meta.message === message) {
     times += 1
     if (times === 3) return next(() => meta.$send(message))
@@ -197,7 +204,7 @@ app.premiddleware((meta, next) => {
 })
 ```
 
-搭配使用上面几种中间件，你的机器人便拥有了无限可能。在 `koishi-plugin-common` 库中，就有着一个官方实现的复读功能，它远比上面的示例所显示的更加强大。如果想深入了解中间件机制，可以去研究一下这个功能的 [源代码](https://github.com/koishijs/koishi-plugin-common/blob/master/src/repeater.ts)。
+搭配使用上面几种中间件，你的机器人便拥有了无限可能。在 `koishi-plugin-common` 库中，就有着一个官方实现的复读功能，它远比上面的示例所显示的更加强大。如果想深入了解中间件机制，可以去研究一下这个功能的 [源代码](https://github.com/koishijs/koishi/blob/master/packages/plugin-common/src/repeater.ts)。
 
 ## 深入 Meta 对象
 

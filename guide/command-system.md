@@ -216,30 +216,36 @@ echo <message...>
 
 ## 指令的调用
 
-本节介绍有关指令调用的一些 API。
+本节介绍有关指令调用的一些特性。
 
 ### 指令前缀
 
-**指令前缀**是 Koishi 用于判断一条信息是否为指令的正则表达式。这个正则表达式在不同环境下可以是不同的。默认情况下，以下信息都可以触发指令调用（假设 `app.options.name` 被设置为了 `Koishi` 且机器人的群名片也是 `Koishi`）：
+**指令前缀**是 Koishi 用于判断一条信息是否为指令的机制。这个机制在不同环境下可以是不同的。假设 `app.options.nickname` 被设置为了 `Koishi`，则以下信息都可以触发指令调用：
 
 ```sh
 # 私聊状态下
 Koishi echo hello
 Koishi, echo hello
 echo hello
-.echo hello
 
 # 群聊状态下
 Koishi echo hello
 Koishi, echo hello
 @Koishi echo hello
-.echo hello
+echo hello
 ```
 
-但你也可以通过修改 `AppOptions` 的这几个属性来改变这种行为：
+你也可以通过修改 [`AppOptions`](./config-file.md#配置列表) 的这几个属性来改变这种行为：
 
-- **name:** `string` 默认为空。如果为空的话，上述几条以 `Koishi` 开头的信息就不会触发指令了
-- **commandPrefix:** `string` 默认为 `.`。设置为其他字符可以修改上述几条以 `.` 开头的触发行为
+- **nickname:** `string | string[]` 默认为空。如果为空的话，上述几条以 `Koishi` 开头的信息就不会触发指令了。你也可以同时设置多个昵称。
+- **commandPrefix:** `string | string[]` 默认为空。设置为 `.` 可以禁止在群中调用 `echo` 但允许调用 `.echo`。你也可以同时设置多个前缀。
+
+::: tip nickname 和 commandPrefix 的区别
+1. nickname 后需要跟逗号和 / 或空白字符，再后面才是指令名；commandPrefix 后面必须紧跟指令名。
+2. nickname 的默认值为 `[]`，因此覆盖这个值不会对原本可用的调用产生任何影响；commandPrefix 的默认值为 `''`，如果覆盖了则会导致非私聊环境下无法直接写指令名进行调用（也就是在非私聊环境下调用指令必须加 nickname 和 commandPrefix 前缀）。
+
+如果想要保留直接写指令名的调用效果，可以设置 commandPrefix 为 `['.', '']`，这样一来不写前缀和写 `.` 做前缀都是可以的。但是也要注意由于是按照从前往后的顺序依次匹配，因此 `''` 必须写在最后一个。
+:::
 
 ### 指令别名
 
@@ -393,4 +399,4 @@ ctx.command('foo.bar/abc.xyz')
 - **rest:** `string` 额外参数的内容
 - **meta:** `Meta` 当前正在处理的元信息
 - **command:** `Command` 当前匹配到的指令实例
-- **next:** [`NextFunction`](../api/context.md#middleware) 当前指令解析函数所处的中间件的 `next` 回调函数
+- **next:** [`NextFunction`](./receive-and-send.md#中间件) 当前指令解析函数所处的中间件的 `next` 回调函数

@@ -83,17 +83,16 @@ ctx.command('my-command')
   .option('-a, --alpha')          // 定义一个选项
   .option('-b, --beta [beta]')    // 定义一个带参数的可选选项
   .option('-c, --gamma <gamma>')  // 定义一个带参数的必选选项
-  .action(({ meta, options }) => console.log(options))
+  .action(({ meta, options }) => meta.$send(JSON.stringify(options)))
 ```
 
-现在向你的机器人输入 `my-command -adb beta --gamma=123 --foo-bar baz`，你能在控制台看到这样的输出：
+::: user-message
+my-command -adb beta --gamma=123 --foo-bar baz
+:::
 
-```
-{ a: true, alpha: true,
-  b: 'beta', beta: 'beta',
-  c: 123, gamma: 123,
-  d: true, fooBar: 'baz' }
-```
+::: bot-message
+{ "a": true, "alpha": true, "b": "beta", "beta": "beta", "c": 123, "gamma": 123, "d": true, "fooBar": "baz" }
+:::
 
 从上面的例子中我们不难看出 Koishi 指令系统的许多方便的特性：
 
@@ -113,11 +112,16 @@ ctx.command('my-command')
 ```js
 ctx.command('my-command')
   .option('-A, --no-alpha-beta')
-  .action(({ meta, options }) => console.log(options))
-
-// 输入：my-command -A
-// 输出：{ A: true, alphaBeta: false }
+  .action(({ meta, options }) => meta.$send(JSON.stringify(options)))
 ```
+
+::: user-message
+my-command -A
+:::
+
+::: bot-message
+{ "A": true, "alphaBeta": false }
+:::
 
 但是如果此时已经注册了不带 `--no-` 前缀的选项，Koishi 就不会这样处理：
 
@@ -125,11 +129,16 @@ ctx.command('my-command')
 ctx.command('my-command')
   .option('-a, --alpha-beta')
   .option('-A, --no-alpha-beta')
-  .action(({ meta, options }) => console.log(options))
-
-// 输入：my-command -A
-// 输出：{ A: true, noAlphaBeta: true }
+  .action(({ meta, options }) => meta.$send(JSON.stringify(options)))
 ```
+
+::: user-message
+my-command -A
+:::
+
+::: bot-message
+{ "A": true, "noAlphaBeta": true }
+:::
 
 这种特性是许多指令系统做不到的。
 

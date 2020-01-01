@@ -31,10 +31,13 @@ koishi run
 
 现在可以对你的机器人说话了：
 
-```text
-echo hello world
-> hello world
-```
+::: user-message
+echo 你好
+:::
+
+::: bot-message
+你好
+:::
 
 ::: tip 提示
 Koishi 要求您的 Node.js 的版本不小于 10，CQHTTP 的版本不小于 3.0。如果使用 WebSocket，Koishi 要求 CQHTTP 版本不小于 4.6。

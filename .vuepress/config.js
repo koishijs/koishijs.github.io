@@ -15,6 +15,18 @@ module.exports = {
   ],
   plugins: [
     [require('./highlight')],
+    ['container', {
+      type: 'user-message',
+      defaultTitle: '',
+      before: '<ChatMessage right>',
+      after: '</ChatMessage>'
+    }],
+    ['container', {
+      type: 'bot-message',
+      defaultTitle: '',
+      before: '<ChatMessage>',
+      after: '</ChatMessage>'
+    }],
     ['@vuepress/back-to-top'],
     ['@vuepress/medium-zoom'],
   ],

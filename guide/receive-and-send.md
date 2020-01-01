@@ -56,11 +56,13 @@ CQHTTP 提出了**异步调用**的概念，当 CQHTTP 服务器受到异步调�
 
 ```js
 // 普通版本
-const messageId = await app.sender.sendPrivateMsgAsync(123456789, 'Hello world')
+const messageId = await app.sender.sendPrivateMsg(123456789, 'Hello world')
 
 // 异步版本，无法获得调用结果
 await app.sender.sendPrivateMsgAsync(123456789, 'Hello world')
 ```
+
+![async-method](/async-method.png)
 
 ::: tip 提示
 1. 虽然异步调用方法的名字以 Async 结尾，但是其他方法也是**异步函数**，它们都会返回一个 `Promise` 对象。取这样的名字只是为了与 CQHTTP 保持一致。

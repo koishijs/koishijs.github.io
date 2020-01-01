@@ -15,6 +15,8 @@ module.exports = {
   ],
   plugins: [
     [require('./highlight')],
+    ['@vuepress/back-to-top'],
+    ['@vuepress/medium-zoom'],
   ],
   markdown: {
     slugify (str) {
@@ -28,7 +30,7 @@ module.exports = {
         .replace(/^\-+|\-+$/g, '')
         .replace(/^(\d)/, '_$1')
         .toLowerCase()
-    }
+    },
   },
   themeConfig: {
     logo: '/koishi.png',
@@ -89,5 +91,10 @@ module.exports = {
         ]
       }],
     },
+    lastUpdated: '上次更新',
+    docsRepo: 'koishijs/koishijs.github.io',
+    docsBranch: 'docs',
+    editLinks: true,
+    editLinkText: '帮助我们改善此页面',
   },
 }

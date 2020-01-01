@@ -62,7 +62,7 @@ const messageId = await app.sender.sendPrivateMsg(123456789, 'Hello world')
 await app.sender.sendPrivateMsgAsync(123456789, 'Hello world')
 ```
 
-![async-method](/async-method.png)
+![async-method](/async-method.svg)
 
 ::: tip 提示
 1. 虽然异步调用方法的名字以 Async 结尾，但是其他方法也是**异步函数**，它们都会返回一个 `Promise` 对象。取这样的名字只是为了与 CQHTTP 保持一致。

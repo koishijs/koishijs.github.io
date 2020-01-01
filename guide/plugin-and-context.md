@@ -212,3 +212,5 @@ module.exports = {
 ### 运行阶段
 
 当连接成功后，所有 API 都将可以正常调用。在这个阶段中，如果出现错误，将会触发 `error` 事件（部分情况也可能导致 `unhandledRejection`，这取决于插件的写法，例如如果在同步函数内调用异步方法出错就是无法捕捉的）。
+
+![app-lifecycle](/app-lifecycle.svg)

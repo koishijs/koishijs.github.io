@@ -1,7 +1,7 @@
 <template>
   <div class="chat-message" :class="{ right }">
     <img class="avatar" :src="right ? '/user.svg' : '/bot.svg'"/>
-    <div class="message-box"><slot/></div>
+    <div class="message-box"><slot>&nbsp;</slot></div>
   </div>
 </template>
 

@@ -270,12 +270,21 @@ app.command('echo').alias('say')
 
 在日常的使用中，我们也难免会遇到打错的情况，这时 Koishi 还会自动根据相近的指令名进行纠错提醒：
 
-```
->> ecko hello
-<< 没有此命令。你要找的是不是“echo”？发送空行以调用推测的指令。
->> 
-<< hello
-```
+::: user-message
+ecko hello
+:::
+
+::: bot-message
+没有此命令。你要找的是不是“echo”？发送空行以调用推测的指令。
+:::
+
+::: user-message
+
+:::
+
+::: bot-message
+hello
+:::
 
 是不是很方便呢？
 

@@ -4,7 +4,11 @@ sidebarDepth: 2
 
 # 其他工具 (Utils)
 
-包含了许多被 Koishi 使用的工具函数，它们由 `koishi-utils` 包提供。
+包含了被 Koishi 使用的工具函数，它们由 `koishi-utils` 包提供。
+
+::: tip 注意
+本页显示的版本号都表示对应的 koishi-utils 版本号（而不是对应的 koishi 版本号）。
+:::
 
 ## noop()
 
@@ -56,6 +60,15 @@ sidebarDepth: 2
 
 ## CQCode 操作
 
+CQCode 结构如下：
+
+```ts
+interface CQCode {
+  type: string
+  data: Record<string, string | number>
+}
+```
+
 ### CQCode.escape(source, insideCQ?)
 
 转义一段文本到 CQ 码格式。
@@ -79,12 +92,30 @@ sidebarDepth: 2
 - **data:** `object` CQ 码参数
 - 返回值: `string` 生成的 CQ 码
 
+::: tip 注意
+类型为 text 的 CQ 码将直接被转化为 `data.text` 输出。
+:::
+
+### CQCode.stringifyAll(codes) <Badge text="1.0.2+"/>
+
+将多个 CQCode 对象转化成文本并连接。
+
+- **codes:** `CQCode[]` CQ 码数组
+- 返回值: `string` 生成的文本
+
 ### CQCode.parse(source)
 
 将一个 CQ 码文本解析成对象。
 
 - **source:** `string` CQ 码
-- 返回值: `{ type: string, data: object }` CQ 码的类型和参数
+- 返回值: `CQCode` CQ 码的类型和参数
+
+### CQCode.parseAll(source) <Badge text="1.0.2+"/>
+
+解析一段文本内的全部 CQ 码。其中的纯文本将会解析成 text 类型。
+
+- **source:** `string` 源文本
+- 返回值: `CQCode[]` CQ 码数组
 
 ## 字符串操作
 

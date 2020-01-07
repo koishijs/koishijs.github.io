@@ -83,3 +83,12 @@ sidebarDepth: 2
 - **message:** `string` 要解析的文本（开头不要包含指令名和前缀）
 - **meta:** [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 元信息对象
 - 返回值: [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 解析结果
+
+## app.executeCommandLine(message, meta, next?) <Badge text="1.1.0+"/>
+
+执行一段指令调用文本。
+
+- **message:** `string` 要执行的文本（开头不要包含指令名和前缀）
+- **meta:** [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 元信息对象
+- **next:** [`NextFunction`](../guide/receive-and-send.md#中间件) 所处的中间件的 `next` 回调函数
+- 返回值: `any` 执行结果

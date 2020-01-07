@@ -1,6 +1,6 @@
 const { remove: removeDiacritics } = require('diacritics')
 
-module.exports = {
+module.exports = context => ({
   title: 'Koishi',
   head: [
     ['link', { rel: 'icon', href: `/koishi.png` }],
@@ -54,16 +54,26 @@ module.exports = {
       { text: 'GitHub', link: 'https://github.com/koishijs/koishi' },
     ],
     sidebar: {
-      '/api': [
-        '/api/',
-        '/api/context',
-        '/api/app',
-        '/api/receiver',
-        '/api/sender',
-        '/api/command',
-        '/api/database',
-        '/api/utils',
-      ],
+      '/api': [{
+        title: '核心 API',
+        collapsable: false,
+        children: [
+          '/api/',
+          '/api/context',
+          '/api/app',
+          '/api/receiver',
+          '/api/sender',
+          '/api/command',
+          '/api/database',
+        ],
+      }, {
+        title: '其他官方包',
+        collapsable: false,
+        children: [
+          '/api/utils',
+          '/api/test-utils',
+        ],
+      }],
       '/guide/': [{
         title: '指南',
         collapsable: false,
@@ -82,6 +92,7 @@ module.exports = {
           '/guide/using-database',
           '/guide/authorization',
           '/guide/multiple-bots',
+          '/guide/unit-tests',
         ],
       }],
       '/plugins/': [{
@@ -91,7 +102,7 @@ module.exports = {
           '/plugins/common',
           '/plugins/teach',
           '/plugins/schedule',
-        ]
+        ],
       }, {
         title: '其他官方插件',
         collapsable: false,
@@ -100,7 +111,7 @@ module.exports = {
           '/plugins/monitor',
           '/plugins/webhook',
           '/plugins/image-search',
-        ]
+        ],
       }],
     },
     lastUpdated: '上次更新',
@@ -109,4 +120,6 @@ module.exports = {
     editLinks: true,
     editLinkText: '帮助我们改善此页面',
   },
-}
+
+  evergreen: () => !context.isProd,
+})

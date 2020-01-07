@@ -93,7 +93,7 @@ sidebarDepth: 2
 执行本指令。
 
 - **config:** [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 执行配置
-- **next:** `NextFunction` 所处的中间件的 `next` 回调函数
+- **next:** [`NextFunction`](../guide/receive-and-send.md#中间件) 所处的中间件的 `next` 回调函数
 - 返回值: `any` 执行函数的返回结果
 
 ## cmd.end()

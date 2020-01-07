@@ -83,6 +83,15 @@ module.exports = {
           '/guide/authorization',
           '/guide/multiple-bots',
         ],
+      }, {
+        title: '扩展',
+        collapsable: false,
+        children: [
+          '/guide/extensions/message',
+          '/guide/extensions/help',
+          '/guide/extensions/request-handler',
+          '/guide/extensions/schedule',
+        ],
       }],
       '/plugins/': [{
         title: '核心插件',

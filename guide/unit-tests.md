@@ -77,15 +77,16 @@ test('example 1', () => {
 
 ## 模拟数据库 <Badge text="1.1.0+"/>
 
-koishi-test-utils 不仅能够模拟会话，还能够模拟数据库。它自带了一种 memory 数据库，你可以像这样使用它：
+koishi-test-utils 不仅能够模拟会话，还能够模拟数据库。它自带了一种内存数据库，你可以像这样使用它：
 
 ```js
-const { registerDatabase } = require('koishi-core')
-const { MemoryDatabase } = require('koishi-test-utils')
+const { App } = require('koishi-core')
+const { registerMemoryDatabase } = require('koishi-test-utils')
 
-// 注册 memory 数据库
-registerDatabase('memory', MemoryDatabase)
+// 注册内存数据库
+registerMemoryDatabase()
 
+// 使用内存数据库
 const app = new App({
   database: { memory: {} },
 })
@@ -93,10 +94,12 @@ const app = new App({
 
 ## 测试数据库
 
-你可以使用 `testDatabase()` 方法测试你编写的数据库。下面是一个简单的例子，它测试了我们刚刚介绍的 memory 数据库：
+你可以使用 `testDatabase()` 方法测试你编写的数据库。下面是一个简单的例子，它测试了我们刚刚介绍的内存数据库：
 
 ```js
-const { testDatabase } = require('koishi-test-utils')
+const { testDatabase, registerMemoryDatabase } = require('koishi-test-utils')
+
+registerMemoryDatabase()
 
 // 传入两个参数
 // 第一个参数是 App 的构造选项

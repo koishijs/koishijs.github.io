@@ -10,21 +10,6 @@ sidebarDepth: 2
 本页显示的版本号都表示对应的 koishi-test-utils 版本号（而不是对应的 koishi 版本号）。
 :::
 
-## MemoryDatabase <Badge text="1.1.0+"/>
-
-一个将数据存在内存中的数据库。你应该这样使用它：
-
-```js
-const { registerDatabase } = require('koishi-core')
-const { MemoryDatabase } = require('koishi-test-utils')
-
-registerDatabase('memory', MemoryDatabase)
-
-const app = new App({
-  database: { memory: {} },
-})
-```
-
 ## testDatabase(options, hooks)
 
 测试全部内置数据库方法。
@@ -43,6 +28,13 @@ export interface TestDatabaseOptions {
   afterEachGroup?: TestHook
 }
 ```
+
+## registerMemoryDatabase(name?: string) <Badge text="1.1.0+"/>
+
+注册内存数据库。参见 [模拟数据库](../guide/unit-tests.md#模拟数据库)。
+
+- **name:** `string` 要注册的数据库的名字，默认为 `memory`
+- 返回值: `void`
 
 ## 会话 (Session) <Badge text="1.1.0+"/>
 

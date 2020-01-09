@@ -48,46 +48,149 @@ module.exports = {
 }
 ```
 
-## 模拟会话 <Badge text="1.1.0+"/>
+## 模拟事件上报
 
-Koishi 本身不需要会话的概念，因为 Meta 对象本身就具有 [快捷操作](./receive-and-send.md#快捷操作) 功能。但是在单元测试中，我们经常需要让一个用户多次向机器人发送信息，这时一个会话系统就变得非常有用了。
+当你不希望真正用服务器却希望测试 App 对某个事件上报的响应时，你可以使用 MockedApp 来模拟一次事件上报：
 
 ```js
-const { App } = require('koishi-core')
-const { Session } = require('koishi-test-utils')
+const { MockedApp } = require('koishi-test-utils')
 
-// 创建一个无服务端的 App 实例
-const app = new App({ selfId: 514 })
-const session = new Session(app, 'user', 123)
+// 这里的 MockedApp 是 App 的一个子类，因此你仍然可以像过去那样编写代码
+const app = new MockedApp()
 
-test('example 1', () => {
-  // 将 foo 发送给机器人将会获得 bar 的回复
-  await session.shouldHaveResponse('foo', 'bar')
+// 这是一个简单的中间件例子，下面将测试这个中间件
+app.middleware(({ message, $send }, next) => {
+  if (message === '天王盖地虎') return $send('宝塔镇河妖')
+  return next()
+})
 
-  // 将 foo 发送给机器人将会获得某些回复
-  await session.shouldHaveResponse('foo')
+test('example', async () => {
+  // 尝试接收一个事件
+  // meta 是这个事件的元信息对象
+  // 你不需要写那些以 $ 开头的属性，那些是 Koishi 自动生成的
+  await app.receive({
+    postType: 'message',
+    messageType: 'private',
+    subType: 'friend',
+    userId: 123,
+    message: '天王盖地虎',
+  })
 
-  // 将 foo 发送给机器人将不会获得任何回复
-  await session.shouldHaveNoResponse('foo')
+  // 判断 app 应该最终发送了这个请求
+  // 这里的请求名相当于 sender 中对应的接口名，不用写 async
+  // 请求参数与 sender 相一致
+  app.shouldHaveLastRequest('send_private_msg', {
+    userId: 123,
+    message: '宝塔镇河妖',
+  })
 
-  // 将 foo 发送给机器人后将会获得与快照一致的回复
-  await session.shouldMatchSnapshot('foo')
+  // 再次尝试接收一个事件
+  await app.receive({
+    postType: 'message',
+    messageType: 'private',
+    subType: 'friend',
+    userId: 123,
+    message: '宫廷玉液酒',
+  })
+
+  // 判断 app 应该最终没有发送任何请求
+  app.shouldHaveNoRequests()
 })
 ```
 
-## 模拟数据库 <Badge text="1.1.0+"/>
+## 模拟会话
+
+Koishi 本身不需要会话的概念，因为 Meta 对象本身就具有 [快捷操作](./receive-and-send.md#快捷操作) 功能。但是在单元测试中，我们可能经常需要让一个用户多次向机器人发送信息，这时一个会话系统就变得非常有用了。
+
+```js
+const { MockedApp } = require('koishi-test-utils')
+
+// 创建一个无服务端的 App 实例
+const app = new MockedApp()
+
+// 创建一个 QQ 号为 123 的私聊会话
+const session = app.createSession('user', 123)
+
+// 还是刚刚那个例子
+app.middleware(({ message, $send }, next) => {
+  if (message === '天王盖地虎') return $send('宝塔镇河妖')
+  return next()
+})
+
+test('example', () => {
+  // 将 foo 发送给机器人将会获得 bar 的回复
+  await session.shouldHaveResponse('天王盖地虎', '宝塔镇河妖')
+
+  // 将 foo 发送给机器人将会获得某些回复
+  await session.shouldHaveResponse('天王盖地虎')
+
+  // 将 foo 发送给机器人后将会获得与快照一致的回复
+  await session.shouldMatchSnapshot('天王盖地虎')
+
+  // 将 foo 发送给机器人将不会获得任何回复
+  await session.shouldHaveNoResponse('宫廷玉液酒')
+})
+```
+
+## 模拟服务器
+
+如果你想使用真正的 HTTP / WebSocket 服务器来测试，Koishi 也提供了相应的办法：
+
+```js
+const { createHttpServer } = require('koishi-test-utils')
+
+test('example', async () => {
+  // 创建一个真正的 CQHTTP 服务端
+  const server = await createHttpServer(token)
+
+  // 创建一个与之关联的 App
+  const app = server.createBoundApp()
+
+  // 运行 Koishi 应用
+  await app.start()
+
+  // 服务端向 Koishi 上报事件
+  server.post(meta)
+
+  // 设置客户端请求的结果
+  server.setResponse(method, data)
+
+  // 判断上一次请求的内容
+  server.shouldHaveLastRequest(method, params)
+
+  // 关闭服务端和所有关联的 App
+  await server.close()
+})
+```
+
+## 模拟数据库
 
 koishi-test-utils 不仅能够模拟会话，还能够模拟数据库。它自带了一种内存数据库，你可以像这样使用它：
 
 ```js
-const { App } = require('koishi-core')
-const { registerMemoryDatabase } = require('koishi-test-utils')
+const { App, registerDatabase } = require('koishi-core')
+const { MemoryDatabase } = require('koishi-test-utils')
 
 // 注册内存数据库
-registerMemoryDatabase()
+registerDatabase('memory', MemoryDatabase)
 
 // 使用内存数据库
 const app = new App({
+  database: { memory: {} },
+})
+```
+
+当然你也可以和上面的 MockedApp 结合起来使用：
+
+```js
+const { registerDatabase } = require('koishi-core')
+const { MockedApp, MemoryDatabase } = require('koishi-test-utils')
+
+// 注册内存数据库
+registerDatabase('memory', MemoryDatabase)
+
+// 使用内存数据库
+const app = new MockedApp({
   database: { memory: {} },
 })
 ```

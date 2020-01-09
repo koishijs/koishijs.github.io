@@ -30,8 +30,4 @@ module.exports = (options, ctx) => ({
       }
     })
   },
-
-  plugins: ['@vuepress/register-components', {
-    componentDir: 'components',
-  }],
 })

@@ -15,6 +15,7 @@ module.exports = context => ({
   ],
   plugins: [
     [require('./highlight')],
+    [require('./enhancedLinks')],
     ['container', {
       type: 'user-message',
       defaultTitle: '',
@@ -29,6 +30,9 @@ module.exports = context => ({
     }],
     ['@vuepress/back-to-top'],
     ['@vuepress/medium-zoom'],
+    ['@vuepress/register-components', {
+      componentDir: 'components',
+    }],
   ],
   markdown: {
     slugify (str) {
@@ -81,6 +85,7 @@ module.exports = context => ({
           '/guide/about-koishi',
           '/guide/getting-started',
           '/guide/config-file',
+          '/guide/faq',
         ],
       }, {
         title: '深入',
@@ -93,6 +98,7 @@ module.exports = context => ({
           '/guide/authorization',
           '/guide/multiple-bots',
           '/guide/unit-tests',
+          '/guide/changelog',
         ],
       }],
       '/plugins/': [{

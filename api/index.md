@@ -6,7 +6,7 @@ sidebarDepth: 2
 
 本章节收录了由包 koishi-core 导出的主要 API。
 
-## new App(options)
+## new App(options?)
 
 机器人实例的构造函数。
 

@@ -2,15 +2,23 @@
 
 import parentLayout from '@parent-theme/layouts/Layout.vue'
 
+function adjustSidebarItems (items) {
+  items.forEach(item => {
+    if (item.children) {
+      adjustSidebarItems(item.children)
+    } else if (item.headers) {
+      item.headers.forEach(header => {
+        header.title = header.title.replace(/(?<=\S)\(.+/, '()')
+      })
+    }
+  })
+}
+
 const getSidebarItems = parentLayout.computed.sidebarItems
 parentLayout.computed.sidebarItems = function () {
   const items = getSidebarItems.call(this)
-  items.forEach(item => {
-    if (!item.headers) return
-    item.headers.forEach(header => {
-      header.title = header.title.replace(/\(.+/, '()')
-    })
-  })
+  adjustSidebarItems(items)
+  console.log(items)
   return items
 }
 

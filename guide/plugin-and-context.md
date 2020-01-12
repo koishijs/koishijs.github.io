@@ -197,6 +197,38 @@ module.exports = {
 
 调用 `koishi run`，你就可以看到这个插件在正常运行了。
 
+### 嵌套插件
+
+Koishi 的插件也是可以嵌套的。你可以将你编写的插件解耦成多个独立的子插件，再用一个父插件作为入口，就像这样：
+
+```js
+// koishi-plugin-foo/index.js
+
+// 在 a.js, b.js 中编写两个不同的插件
+const pluginA = require('./a')
+const pluginB = require('./b')
+
+// 将这两个插件输出
+module.exports.pluginA = pluginA
+module.exports.pluginB = pluginB
+
+// 在 apply 函数中安装 a, b 两个插件
+module.exports.apply = (ctx) => {
+  ctx.plugin(pluginA)
+  ctx.plugin(pluginB)
+}
+```
+
+这样别人就可以这样使用你的插件了：
+
+```js
+// 如果希望同时使用你的插件的全部功能
+ctx.plugin(require('koishi-plugin-foo'))
+
+// 如果只希望启用一部分功能
+ctx.plugin(require('koishi-plugin-foo').pluginA)
+```
+
 ## 生命周期
 
 在本章的最后，我们简单介绍一下 Koishi 的生命周期，以便更好的理解插件中能做的事情。

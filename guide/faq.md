@@ -72,6 +72,8 @@ app.receiver.on('connect', () => app.sender.sendPrivateMsg(1234567, '你的机�
 
 不是。App 的构造函数不支持 `plugin` 选项，而配置文件支持。App 的构造函数的 `database` 选项不会自动从依赖中注册数据库，而配置文件会。具体的区别请参见 [**使用插件**](./plugin-and-context.md#使用插件) 和 [**安装数据库**](./using-database.md#安装数据库) 两章。
 
+除此以外，还有一些 CLI 特有的功能，比如输出日志<!--TODO: 自动更新-->等，其相关的配置项也是只支持写入配置文件的。
+
 ## 关于通信方式
 
 ### HTTP 和 WebSocket 有什么区别？应该如何选择？

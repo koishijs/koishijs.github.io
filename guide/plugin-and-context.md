@@ -10,42 +10,26 @@ sidebarDepth: 2
 
 首先让我们回顾一下你已经了解到的插件使用方法：
 
-```js
+```js koishi.config.js
 module.exports = {
   plugins: [
-    // 安装插件 foo
-    ['foo', options],
+    './foo',            // 安装本地插件 foo
+    'bar',              // 安装插件 bar
+    ['baz', options],   // 安装带配置的插件 baz
   ],
 }
 ```
 
-实际上，Koishi 的命令行工具会将这段代码转化成下面的代码：
+对应着下面的代码：
 
 ```js
-app.plugin(require('koishi-plugin-foo'), options)
+app
+  .plugin(require('./foo'))
+  .plugin(require('koishi-plugin-bar'))
+  .plugin(require('koishi-plugin-baz'), options)
 ```
 
-因此，反过来，你也可以通过显式地调用 `app.plugin` 函数来安装一个插件。而对于另一种插件的写法：
-
-```js
-module.exports = {
-  plugins: {
-    // 在群 123456789 中安装插件 bar
-    'group+123456789': [
-      ['bar', options],
-    ],
-  },
-}
-```
-
-Koishi 的命令行工具会将这段代码转化成下面的代码：
-
-```js
-const ctx = app.group(123456789)
-ctx.plugin(require('koishi-plugin-bar'), options)
-```
-
-这又是如何实现的呢？这就牵扯到另一个重要概念，也就是上下文。
+那么，如果我希望其中的一部分插件只对部分群生效，这又应该如何实现呢？这就牵扯到另一个重要概念，也就是上下文。
 
 ## 上下文 (context)
 
@@ -58,13 +42,13 @@ app.users // 由全部好友构成的上下文
 app.groups // 由全部群构成的上下文
 app.discusses // 由全部讨论组构成的上下文
 
-app.user(123456789) // 由好友 123456789 构成的上下文
-app.group(123456789) // 由群 123456789 构成的上下文
-app.discuss(123456789) // 由讨论组 123456789 构成的上下文
+app.user(123) // 由好友 123 构成的上下文
+app.group(123) // 由群 123 构成的上下文
+app.discuss(123) // 由讨论组 123 构成的上下文
 
-app.users.except(123456789) // 由除了 123456789 以外的所有好友构成的上下文
-app.groups.except(123456789) // 由除了 123456789 以外的所有群构成的上下文
-app.discusses.except(123456789) // 由除了 123456789 以外的所有讨论组构成的上下文
+app.users.except(123) // 由除了 123 以外的所有好友构成的上下文
+app.groups.except(123) // 由除了 123 以外的所有群构成的上下文
+app.discusses.except(123) // 由除了 123 以外的所有讨论组构成的上下文
 ```
 
 利用上下文，你可以非常方便地对每个环境进行分别配置：
@@ -73,11 +57,11 @@ app.discusses.except(123456789) // 由除了 123456789 以外的所有讨论组�
 // 在所有环境注册中间件
 app.middleware(callback)
 
-// 当有人申请加群 123456789 时触发 listener
-app.group(123456789).receiver.on('request/add', listener)
+// 当有人申请加群 123 时触发 listener
+app.group(123).receiver.on('request/add', listener)
 
-// 安装插件对除了 987654321 以外的所有讨论组生效
-app.discusses.except(987654321).plugin(require('koishi-plugin-tools'))
+// 安装插件对除了 987 以外的所有讨论组生效
+app.discusses.except(987).plugin(require('koishi-plugin-tools'))
 ```
 
 是不是非常方便呢？
@@ -108,9 +92,11 @@ context1.contain(context2)
 
 这些方法会返回一个新的上下文，在其上使用监听器、中间件、指令或是插件就好像同时在多个上下文中使用一样。
 
-你也可以在配置文件中使用上下文组合，不过这就牵扯到一种字符串语法。用分号分隔不同类型的上下文，每个类型后面可以通过“+”或者“-”表示包含和排除，再之后是用逗号隔开的 ID 列表。就像这样：
+### 在配置文件中声明上下文 <Badge text="beta" type="warn"/>
 
-```js
+你也可以在配置文件中声明插件所在的上下文，不过这就牵扯到一种字符串语法。用分号分隔不同类型的上下文，每个类型后面可以通过“+”或者“-”表示包含和排除，再之后是用逗号隔开的 ID 列表。就像这样：
+
+```js koishi.config.js
 module.exports = {
   plugins: {
     // 在群 123, 456 上下文，除 789 以外的用户上下文和全部讨论组上下文中安装插件
@@ -130,18 +116,6 @@ app
   .plus(app.discusses)
   .plugin('koishi-plugin-bar', options)
 ```
-
-### 实现原理
-
-看到这里，你可能会有些好奇：当你创建了一个上下文时，发生了什么？Koishi 是如何实现让某些功能只对特定上下文生效的？本节就来简单解释一下这两个问题。
-
-首先，对于每个接收到的元信息对象，系统都会生成一个特殊的属性 `meta.$path`。这个属性是一个字符串，标识着信息的类型和来源。例如，一个在群 123456789 上触发的取消管理员事件将被标注为 `/group/123456789/group_admin/unset`。
-
-同时，你每创建一个上下文，系统也会生成一个私有属性 `ctx._scope`，同样标识着该上下文能够控制的范围。当接收到信息时，只需将 `meta.$path` 与 `ctx._scope` 进行比对，即可判断出该信息是否应该发送给 `ctx.receiver` 了。这就成功解决了接收器的问题。
-
-而对于中间件和指令，Koishi 则采用了另一种做法。与接收器不同的是，中间件和指令在 Koishi 中是被统一管理的。因此，每注册一个中间件和指令，系统都会记录相应中间件或指令被注册时所在的上下文。而在需要触发回调函数前，系统也会检查上下文是否满足触发要求。
-
-最后，由于插件内部的逻辑无非是接收器、中间件和指令的调用，因此只要后者都能实现上下文绑定，那么插件的上下文绑定也就顺理成章地完成了。
 
 ## 开发插件
 
@@ -168,8 +142,7 @@ ctx.plugin({
 
 除此以外，插件如果使用对象式，那么除了 `apply` 以外，你还可以提供一个 `name` 属性。如果提供了这个属性，命令行工具会将这个名字输出到控制台中。例如，下面给出了一个插件的例子，它实现了检测说话带空格的功能：
 
-```js
-// detect-space.js
+```js detect-space.js
 module.exports.name = 'detect-space'
 
 module.exports.apply = (ctx) => {
@@ -185,8 +158,7 @@ module.exports.apply = (ctx) => {
 
 把它放到你的机器人文件夹，接着向你的 `koishi.config.js` 添加一行：
 
-```js
-// koishi.config.js
+```js koishi.config.js
 module.exports = {
   plugins: [
     // 这里是其他插件
@@ -201,9 +173,7 @@ module.exports = {
 
 Koishi 的插件也是可以嵌套的。你可以将你编写的插件解耦成多个独立的子插件，再用一个父插件作为入口，就像这样：
 
-```js
-// koishi-plugin-foo/index.js
-
+```js koishi-plugin-foo/index.js
 // 在 a.js, b.js 中编写两个不同的插件
 const pluginA = require('./a')
 const pluginB = require('./b')
@@ -228,6 +198,8 @@ ctx.plugin(require('koishi-plugin-foo'))
 // 如果只希望启用一部分功能
 ctx.plugin(require('koishi-plugin-foo').pluginA)
 ```
+
+Koishi 的官方插件 koishi-plugin-common 也使用了这种写法。
 
 ## 生命周期
 

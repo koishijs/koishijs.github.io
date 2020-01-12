@@ -14,8 +14,8 @@ module.exports = context => ({
     // ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
   ],
   plugins: [
-    [require('./highlight')],
-    [require('./enhancedLinks')],
+    [require('./markdown/highlight')],
+    [require('./markdown/link')],
     ['container', {
       type: 'user-message',
       defaultTitle: '',

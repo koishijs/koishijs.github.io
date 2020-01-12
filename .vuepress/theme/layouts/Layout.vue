@@ -18,7 +18,6 @@ const getSidebarItems = parentLayout.computed.sidebarItems
 parentLayout.computed.sidebarItems = function () {
   const items = getSidebarItems.call(this)
   adjustSidebarItems(items)
-  console.log(items)
   return items
 }
 

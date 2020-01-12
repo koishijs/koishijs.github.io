@@ -1,5 +1,6 @@
 ---
 sidebarDepth: 2
+noOutboundLinks: true
 ---
 
 # 介绍
@@ -59,23 +60,9 @@ Koishi 在开发时借助了下面的工具：
 
 读到这里，可能有些人会产生这样的疑问：为什么不使用其他的 CoolQ SDK 呢？因此，本节将对 Koishi 和其他基于 Node.js 的机器人实现进行一些简单的对比。
 
-### [cqhttp](https://github.com/richardchien/cqhttp-node-sdk)
-
-cqhttp-node-sdk 是 CoolQ HTTP API 的作者提供的封装。虽然这个插件是官方提供的，但是更类似一个底层的请求库，同时也有相当长的更新间隔。
-
-### [cq-websocket](https://github.com/momocow/node-cq-websocket)
-
-node-cq-websocket 是一个非常优秀的 SDK，内置了优雅的事件系统，也为 Koishi 提供了重要的灵感。但是它并没有类型标注，同时也没有对数据库和中间件的原生支持和自动重启等特性。如果你希望的是更体系化的支持，我们推荐你使用 Koishi。
-
-### [lemon-bot](https://github.com/XHMM/lemon-bot)
-
-lemon-bot 虽然还处于早期开发中，但是它的强大已经从指令和会话系统充分地体现出来了。与 Koishi 类似，lemon 在开发中也使用了 TypeScript, Eslint 和 Jest。但由于其语法依赖于 decorator，可能具有更高的上手门槛。
-
-### 对比
-
-| 特性 | koishi<br>1.0.0 | cqhttp<br>1.1.1 | cq-websocket<br>2.0.2 | lemon-bot<br>0.5.1 | @ionjs/core<br>0.6.5 |
+| 特性 | [koishi<br>1.3.0](https://www.npmjs.com/package/koishi/v/1.3.0) | [cqhttp<br>1.2.0](https://www.npmjs.com/package/cqhttp/v/1.2.0) | [cq-websocket<br>2.0.2](https://www.npmjs.com/package/cq-websocket/v/2.0.2) | [lemon-bot<br>0.6.0](https://www.npmjs.com/package/lemon-bot/v/0.6.0) | [@ionjs/core<br>0.6.5](https://www.npmjs.com/package/@ionjs/core/v/0.6.5) |
 |:--:|:--:|:--:|:--:|:--:|:--:|
-| 依赖数量 | [17](http://npm.anvaka.com/#/view/2d/koishi/1.0.0) | [63](http://npm.anvaka.com/#/view/2d/cqhttp/1.1.1) | [37](http://npm.anvaka.com/#/view/2d/cq-websocket/2.0.2) | [55](http://npm.anvaka.com/#/view/2d/lemon-bot/0.5.1) | [73](http://npm.anvaka.com/#/view/2d/%2540ionjs%252Fcore/0.6.5) |
+| 依赖数量 | [22](http://npm.anvaka.com/#/view/2d/koishi/1.3.0) / [10](http://npm.anvaka.com/#/view/2d/koishi-core/1.3.0) | [62](http://npm.anvaka.com/#/view/2d/cqhttp/1.1.1) | [37](http://npm.anvaka.com/#/view/2d/cq-websocket/2.0.2) | [65](http://npm.anvaka.com/#/view/2d/lemon-bot/0.6.0) | [73](http://npm.anvaka.com/#/view/2d/%2540ionjs%252Fcore/0.6.5) |
 | HTTP | ✔️ | ✔️ | ❌ | ✔️ | ✔️ |
 | WebSocket | ✔️ | ❌ | ✔️ | ❌ | ❌ |
 | 反向 WebSocket | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -84,4 +71,5 @@ lemon-bot 虽然还处于早期开发中，但是它的强大已经从指令和�
 | 中间件 | ✔️ | ❌ | ❌ | ❌ | ✔️ |
 | 命令行 | ✔️ | ❌ | ❌ | ❌ | ❌ |
 | 指令 | ✔️ | ❌ | ❌ | ✔️ | ❌ |
-| 会话 | ❌ | ❌ | ❌ | ✔️ | ✔️ |
+
+注：依赖数量如果表示为 X/Y，则 X 表示命令行工具依赖数量， Y 表示核心库依赖数量。

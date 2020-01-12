@@ -4,7 +4,7 @@ const { escapeHtml } = require('markdown-it/lib/common/utils')
 let highlighter
 
 module.exports = (options, ctx) => ({
-  name: 'highlight',
+  name: 'enhanced-highlight',
 
   async ready () {
     highlighter = await getHighlighter({
@@ -25,8 +25,16 @@ module.exports = (options, ctx) => ({
     config.plugin('code-container').use((md) => {
       const fence = md.renderer.rules.fence
       md.renderer.rules.fence = (...args) => {
+        const [tokens, idx] = args
+        const token = tokens[idx]
+        if (!token.title) {
+          const rawInfo = token.info || ''
+          const [langName, title = ''] = rawInfo.split(/\s+/)
+          token.info = langName
+          token.title = title.trim()
+        }
         const rawCode = fence(...args)
-        return `<CodeContainer>${rawCode}</CodeContainer>`
+        return `<CodeContainer title=${JSON.stringify(token.title)}>${rawCode}</CodeContainer>`
       }
     })
   },

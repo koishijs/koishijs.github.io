@@ -9,6 +9,26 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
+## 1.3.0
+
+### Features
+
+- **core:** 支持了 `ctx.logger()` 方法和 `logger` 事件 ([5e5e93e](https://github.com/koishijs/koishi/commit/5e5e93e0f8ed112ddbdf14f2ec1205c466b3ab03), [1e0848e](https://github.com/koishijs/koishi/commit/1e0848e05d4f136dee6689d03657c7bbde4660c6), [fa5c46e](https://github.com/koishijs/koishi/commit/fa5c46e13ed5f179aca0624e20e3894359c4be2b))
+- **cli:** 支持通过 logLevel, logFilter 等控制输出等级 ([befca0f](https://github.com/koishijs/koishi/commit/befca0fd39bde6fddb2319d13fa2f3f320335810))
+- **cli:** 处理 `unhandledRejection` 事件并输出 ([8f6d6fa](https://github.com/koishijs/koishi/commit/8f6d6fababd9ee4534eff17853182f2b8a80d6d8))
+- **cli:** 支持 yaml/yml 作为配置文件类型 ([27645a4](https://github.com/koishijs/koishi/commit/27645a4803af77257f544bbd709c62f2dc2cd11d))
+- **plugin-common:** repeater 插件的部分选项支持 `message` 参数 ([e67b817](https://github.com/koishijs/koishi/commit/e67b81749b731574f2fdbfd36bb3a150165d8c9b))
+- **plugin-schedule:** 正式发布 koishi-plugin-schedule 1.0.0 版本，并作为 koishi 的内置插件 ([27645a4](https://github.com/koishijs/koishi/commit/27645a4803af77257f544bbd709c62f2dc2cd11d))
+
+### Bug Fixes
+
+- **plugin-common:** 修复了 authorize 插件无法使用的问题 ([5a777a9](https://github.com/koishijs/koishi/commit/5a777a964b6fb2906ca85e1c833d0fd277d71578))
+- **database-mysql:** 修复了 `db.getGroup()` 报错的问题 ([#16](https://github.com/koishijs/koishi/pull/16)) ([3ce0c70](https://github.com/koishijs/koishi/commit/3ce0c70b771e74fc93dd41cc0ec08a0952a42174))
+
+### Dependencies
+
+- **core:** cac 版本从 6.5.3 更新至 6.5.4 ([ed9d61b](https://github.com/koishijs/koishi/commit/ed9d61bd77eef52c85c9b2037a282b67fb8c2151))
+
 ## 1.2.0
 
 ### Features

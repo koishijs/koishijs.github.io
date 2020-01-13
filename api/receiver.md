@@ -178,3 +178,15 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 ### 事件：disconnect
 
 成功关闭服务器时在 App 实例触发。
+
+### 事件：logger <Badge text="1.3.0+"/>
+
+当调用 Logger 方法时在 App 实例触发。拥有下面的子事件，分别在对应的方法被调用时触发：
+
+- logger/success
+- logger/error
+- logger/info
+- logger/warn
+- logger/debug
+
+调用时传入的第一个参数是字符串，表示产生输出的来源；第二个参数也是字符串，表示输出的内容。logger 事件本身还会产生第三个字符串参数表示输出的类型，如 `info` 等等。

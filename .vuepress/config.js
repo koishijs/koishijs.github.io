@@ -58,76 +58,89 @@ module.exports = context => ({
       { text: 'GitHub', link: 'https://github.com/koishijs/koishi' },
     ],
     sidebar: {
-      '/api': [{
-        title: '核心 API',
-        collapsable: false,
-        children: [
-          '/api/',
-          '/api/context',
-          '/api/app',
-          '/api/receiver',
-          '/api/sender',
-          '/api/command',
-          '/api/database',
-        ],
-      }, {
-        title: '其他官方包',
-        collapsable: false,
-        children: [
-          '/api/utils',
-          '/api/test-utils',
-        ],
-      }],
-      '/guide/': [{
-        title: '指南',
-        collapsable: false,
-        children: [
-          '/guide/about-koishi',
-          '/guide/getting-started',
-          '/guide/config-file',
-          '/guide/faq',
-        ],
-      }, {
-        title: '深入',
-        collapsable: false,
-        children: [
-          '/guide/receive-and-send',
-          '/guide/plugin-and-context',
-          '/guide/command-system',
-          '/guide/using-database',
-          '/guide/authorization',
-          '/guide/multiple-bots',
-          '/guide/unit-tests',
-          '/guide/changelog',
-        ],
-      }, {
-        title: '扩展',
-        collapsable: false,
-        children: [
-          '/guide/extensions/message',
-          '/guide/extensions/help',
-          '/guide/extensions/request-handler',
-          '/guide/extensions/schedule',
-        ],
-      }],
-      '/plugins/': [{
-        title: '核心插件',
-        collapsable: false,
-        children: [
-          '/plugins/common',
-          '/plugins/teach',
-          '/plugins/schedule',
-        ],
-      }, {
-        title: '其他官方插件',
-        collapsable: false,
-        children: [
-          '/plugins/tools',
-          '/plugins/monitor',
-          '/plugins/webhook',
-          '/plugins/image-search',
-        ],
-      }],
+      '/api': [
+        ['/api/', 'API 总览'],
+        {
+          title: '核心 API',
+          collapsable: false,
+          children: [
+            '/api/global',
+            '/api/context',
+            '/api/app',
+            '/api/receiver',
+            '/api/sender',
+            '/api/command',
+            '/api/database',
+          ],
+        },
+        {
+          title: '其他官方包',
+          collapsable: false,
+          children: [
+            '/api/utils',
+            '/api/test-utils',
+          ],
+        },
+        {
+          title: '更新日志',
+          collapsable: false,
+          children: [
+            ['/api/changelog/koishi', 'koishi'],
+            ['/api/changelog/test-utils', 'koishi-test-utils'],
+          ],
+        },
+      ],
+      '/guide/': [
+        {
+          title: '指南',
+          collapsable: false,
+          children: [
+            '/guide/about-koishi',
+            '/guide/getting-started',
+            '/guide/config-file',
+            '/guide/faq',
+          ],
+        }, {
+          title: '深入',
+          collapsable: false,
+          children: [
+            '/guide/receive-and-send',
+            '/guide/plugin-and-context',
+            '/guide/command-system',
+            '/guide/using-database',
+            '/guide/authorization',
+            '/guide/multiple-bots',
+            '/guide/logger',
+            '/guide/unit-tests',
+          ],
+        },
+      ],
+      '/plugins/': [
+        ['/plugins/', '官方插件总览'],
+        {
+          title: '核心插件',
+          collapsable: false,
+          children: [
+            '/plugins/help',
+            '/plugins/message',
+            '/plugins/request-handler',
+            '/plugins/information',
+            '/plugins/schedule',
+            '/plugins/teach',
+            '/plugins/common',
+          ],
+        },
+        {
+          title: '其他官方插件',
+          collapsable: false,
+          children: [
+            // '/plugins/tools',
+            // '/plugins/monitor',
+            // '/plugins/webhook',
+            '/plugins/image-search',
+          ],
+        },
+      ],
     },
     lastUpdated: '上次更新',
     docsRepo: 'koishijs/koishijs.github.io',

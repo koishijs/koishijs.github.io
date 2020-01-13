@@ -2,7 +2,11 @@
 sidebarDepth: 2
 ---
 
-# koishi-plugin-common
+# 其他功能
+
+::: warning 提示
+本章介绍的功能由 koishi-plugin-common 插件提供。**部分功能可能会在未来的版本更新中被移除。**
+:::
 
 koishi-plugin-common 包含了一些基本插件，它们在你使用 `koishi` 库时是默认安装的。尽管如此，你仍然可以在 `koishi.config.js` 中显式地配置或禁用其中的一些功能：
 
@@ -21,64 +25,6 @@ module.exports = {
 ```
 
 下面将介绍每个插件的功能。
-
-## 插件：repeater
-
-repeater 插件会自动监测聊天记录，并根据你的配置做出反应。可能的反应包括复读、打断复读、检测重复复读、检测打断复读。你还可以配置每个行为触发的条件和对应的输出文本。repeater 的完整配置如下：
-
-```ts
-type SessionSwitch = boolean | ((repeated: boolean, times: number) => boolean)
-type SessionText = string | ((userId: number, message: string) => string)
-
-interface RepeaterOptions {
-  repeat: SessionSwitch
-  interrupt: SessionSwitch
-  repeatCheck: SessionSwitch
-  interruptCheck: SessionSwitch
-  interruptText: SessionText
-  repeatCheckText: SessionText
-  interruptCheckText: SessionText
-}
-```
-
-例如，如果你想让你的 Bot 在一条信息已经复读过 5 次以上，且自己也已经复读过后，对任何打断复读的人以 50% 的概率出警，你可以这样配置：
-
-```js
-module.exports = {
-  plugins: ['common', {
-    repeater: {
-      repeatCheck: (repeated, times) => repeated && times >= 5 && Math.random() > 0.5,
-      repeatCheckText: (userId) => `[CQ:at,qq=${userId}] 在？为什么打断复读？`,
-    },
-  }],
-}
-```
-
-::: tip 提示
-这个插件的默认行为已经包含了复读、检测重复复读和检测打断复读，但是不包含打断复读。如果希望修改这种行为，你需要手动覆盖这其中的部分配置。
-:::
-
-## 插件：respondent
-
-respondent 插件允许设置一套内置问答，就像这样：
-
-```js
-module.exports = {
-  plugins: ['common', {
-    respondent: [{
-      match: 'awsl',
-      reply: '爱我苏联',
-    }, {
-      match: /^(.+)一时爽$/,
-      reply: (_, str) => `一直${str}一直爽`,
-    }],
-  }],
-}
-```
-
-其中 `match` 可以是一个字符串或正则表达式，用来表示要匹配的内容；`reply` 可以是一个字符串或传入字符串的函数，用来表示输出的结果。`respondent` 数组会按照从上到下的顺序进行匹配。
-
-如果想要加入更高级和用户可定义的问答系统，可以参见 [koishi-plugin-teach](./teach.md)。
 
 ## 插件：welcome
 
@@ -139,49 +85,6 @@ module.exports = {
       } else if (user.authority <= 1) {
         return ctx.sender.setGroupAddRequest(meta.flag, 'invite', false)
       }
-    },
-  }],
-}
-```
-
-## 指令：help
-
-help 指令用于输出全部或特定指令的使用方法。你可以这样调用它：
-
-```sh
-help                      # 打印一级指令列表
-help -s                   # 打印快捷方式列表
-help command-name         # 显示指令的使用方法，同时会打印该指令下一级指令列表
-```
-
-## 指令：echo
-
-echo 指令用于发送一段文本。你可以这样调用它：
-
-```sh
-echo foo bar              # 向你发送 foo bar
-echo -u 123 foo bar       # 向用户 123 私聊发送 foo bar
-echo -g 456,789 foo bar   # 向群 456 和 789 同时发送 foo bar
-```
-
-## 指令：broadcast
-
-broadcast 指令用于向所有 Bot 所在的群发送一段文本。你可以这样调用它：
-
-```sh
-broadcast foo bar baz     # 向所有群发送 foo bar baz
-```
-
-这看起来只是 echo 的一个简写版本，但实际上这两个指令有下面的差别：
-
-- 对于多个 App 实例同时运行的情况，echo 只会让收到调用的 Bot 发送信息，broadcast 会同时控制所有 Bot 发送信息
-- echo 的发送信息是几乎同时的，而 broadcast 会让每个要发送信息的 Bot 按照一定的时间间隔发送，这个时间间隔可以显式地设置：
-
-```js
-module.exports = {
-  plugins: ['common', {
-    broadcast: {
-      broadcastInterval: 1000, // 默认值为 1s
     },
   }],
 }

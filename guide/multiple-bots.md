@@ -18,7 +18,7 @@ sidebarDepth: 2
 
 你可以通过导出一个数组的形式来使用多机器人：
 
-```js
+```js koishi.config.js
 // 数组的每一个元素对应一个机器人的配置
 module.exports = [{
   // 对于 HTTP，通常需要配置 port 和 server 两个属性

@@ -122,6 +122,13 @@ type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
 - **rest:** `string` 剩余参数，参见 [剩余参数](../guide/command-system.md#剩余参数)
 - 返回值: `Promise<void>`
 
+## ctx.logger(scope?) <Badge text="1.3.0+"/>
+
+根据 scope 生成一个 [Logger 对象](../guide/logger.md#使用-logger)。
+
+- **scope:** `string` 要指定的类型，默认为 `''`
+- 返回值: [`Logger`](../guide/logger.md#使用-logger)
+
 ## ctx.end()
 
 返回当前上下文所在的 App 实例，可用于链式调用。

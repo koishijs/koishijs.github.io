@@ -5,9 +5,11 @@ noOutboundLinks: true
 # replace: \(([0-9a-f]{7})([0-9a-f]{33})\) -> ([$1](https://github.com/koishijs/koishi/commit/$1$2))
 ---
 
-# 更新日志
+# Koishi 更新日志
 
-## Koishi 1.2.0
+本页面包括 koishi 及其依赖的更新日志。
+
+## 1.2.0
 
 ### Features
 
@@ -27,7 +29,7 @@ noOutboundLinks: true
 
 - **core:** axios 版本从 0.19.0 更新至 0.19.1 ([01bebe0](https://github.com/koishijs/koishi/commit/01bebe0a234601b85197c1cd1200bf6c2e441863))
 
-## Koishi 1.1.1
+## 1.1.1
 
 ### Features
 
@@ -38,7 +40,7 @@ noOutboundLinks: true
 
 - **core:** 在 `cmd.execute()` 中等待错误提示的发送 ([3783f42](https://github.com/koishijs/koishi/commit/3783f42bc9df8afb0d83dc187cd756b89eb5ef0a))
 
-## Koishi 1.1.0
+## 1.1.0
 
 ### Features
 
@@ -57,7 +59,7 @@ noOutboundLinks: true
 - **core:** ws 版本从 7.2.0 更新至 7.2.1 ([25a6359](https://github.com/koishijs/koishi/commit/25a635954802be9caf0b48a4a440908503e42ca5))
 - **database-level:** 将 @types/leveldown, @types/levelup 加入依赖 ([3e53e9e](https://github.com/koishijs/koishi/commit/3e53e9ef037002500fbaa16708579f1cafc7bb16))
 
-## Koishi 1.0.1
+## 1.0.1
 
 ### Bug Fixes
 

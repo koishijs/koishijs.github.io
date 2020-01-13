@@ -54,12 +54,37 @@ module.exports = context => ({
       { text: '主页', link: '/' },
       { text: '指南', link: '/guide/getting-started.html' },
       { text: 'API', link: '/api/' },
-      { text: '官方插件', link: '/plugins/common.html' },
+      { text: '官方插件', link: '/plugins/' },
       { text: 'GitHub', link: 'https://github.com/koishijs/koishi' },
     ],
     sidebar: {
+      '/guide/': [
+        {
+          title: '指南',
+          collapsable: false,
+          children: [
+            '/guide/about-koishi',
+            '/guide/getting-started',
+            '/guide/config-file',
+            '/guide/faq',
+          ],
+        }, {
+          title: '深入',
+          collapsable: false,
+          children: [
+            '/guide/receive-and-send',
+            '/guide/plugin-and-context',
+            '/guide/command-system',
+            '/guide/using-database',
+            '/guide/authorization',
+            '/guide/multiple-bots',
+            '/guide/logger',
+            '/guide/unit-tests',
+          ],
+        },
+      ],
       '/api': [
-        ['/api/', 'API 总览'],
+        ['/api/', '总览'],
         {
           title: '核心 API',
           collapsable: false,
@@ -90,33 +115,8 @@ module.exports = context => ({
           ],
         },
       ],
-      '/guide/': [
-        {
-          title: '指南',
-          collapsable: false,
-          children: [
-            '/guide/about-koishi',
-            '/guide/getting-started',
-            '/guide/config-file',
-            '/guide/faq',
-          ],
-        }, {
-          title: '深入',
-          collapsable: false,
-          children: [
-            '/guide/receive-and-send',
-            '/guide/plugin-and-context',
-            '/guide/command-system',
-            '/guide/using-database',
-            '/guide/authorization',
-            '/guide/multiple-bots',
-            '/guide/logger',
-            '/guide/unit-tests',
-          ],
-        },
-      ],
       '/plugins/': [
-        ['/plugins/', '官方插件总览'],
+        ['/plugins/', '总览'],
         {
           title: '核心插件',
           collapsable: false,

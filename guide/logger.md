@@ -99,7 +99,7 @@ const debug = require('debug')
 
 const app = new App()
 
-app.receiver.on('logger', (message, scope) => {
+app.receiver.on('logger', (scope, message) => {
   debug(scope)(message)
 })
 ```

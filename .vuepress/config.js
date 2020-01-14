@@ -66,6 +66,7 @@ module.exports = context => ({
             '/guide/about-koishi',
             '/guide/getting-started',
             '/guide/config-file',
+            '/guide/cli',
             '/guide/faq',
           ],
         }, {

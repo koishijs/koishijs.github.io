@@ -45,7 +45,7 @@ request 事件发生于机器人收到请求时，会在相应的上下文触发
 - request/group/invite: 群邀请
 
 ::: tip 注意
-如果与 [Sender API](./sender.md) 进行比对，你会发现这里有一个小坑：request/friend 事件对应着 `sender.setFriendAddRequest()`，而两种 request/group 事件都对应着 `sender.setGroupAddRequest()`，也就是说 Sender API 中的 add 与这里的 subType 是没有关系的！
+如果与 [Sender API](./sender.md) 进行比对，你会发现这里有一个小坑：request/friend 事件对应着 `sender.setFriendAddRequest()`，而两种 request/group 事件都对应着 `sender.setGroupAddRequest()`，并没有 `sender.setGroupInviteRequest()` 这个方法，也就是说 Sender API 中的 add 与这里的 subType 是没有关系的！
 :::
 
 ## notice 系列事件

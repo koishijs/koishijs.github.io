@@ -84,4 +84,8 @@ CQHTTP 的 HTTP 服务器默认监听 5700 端口，WebSocket 服务器默认监
 
 ## logLevel <Badge text="CLI"/><Badge text="1.3.0+"/>
 
+默认的输出等级。默认值为 `2`。参见 [**设置输出等级**](./logger.md#设置输出等级) 一节。
+
 ## logFilter <Badge text="CLI"/><Badge text="1.3.0+"/>
+
+用于在某些范围覆盖默认的输出等级。参见 [**过滤输出**](./logger.md#过滤输出) 一节。

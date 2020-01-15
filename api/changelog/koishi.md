@@ -11,13 +11,13 @@ noOutboundLinks: true
 
 ## [1.3.1](https://github.com/koishijs/koishi/releases/tag/1.3.1)
 
-## Features
+### Features
 
 - **cli:** 支持向子进程传入 execArgv ([3bb9f5a](https://github.com/koishijs/koishi/commit/3bb9f5afa1b89c2718d24ea5ddace2f50dc9b193))
 - **plugin-common:** 支持 requestHandler 传入字符串 ([936c871](https://github.com/koishijs/koishi/commit/936c871919f2ffbe2d421da2c92ae3c10139e87e))
 - **plugin-common:** 优化了 admin 指令的调用，增加了一些操作方式 ([0cc58cf](https://github.com/koishijs/koishi/commit/0cc58cffa6ed750124963f65b8c1cfaf82da752f))
 
-## Bug Fixes
+### Bug Fixes
 
 - **cli:** 修复了错误的输出等级设置 ([ab967c4](https://github.com/koishijs/koishi/commit/ab967c4c465e957106ea1b3c1a4f5f8faf8c70d4), [38cc1e1](https://github.com/koishijs/koishi/commit/38cc1e14d681239746dd84f72e4868241521203b))
 - **core:** 修复了同时使用长参数和 oneArg 选项时的错误行为 ([71a0174](https://github.com/koishijs/koishi/commit/71a0174835170304883dbfb146b17edc38fcd78b), [1932845](https://github.com/koishijs/koishi/commit/1932845ff3962bce16e2454fb40ff64b6c0b9725))

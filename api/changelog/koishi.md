@@ -9,7 +9,22 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
-## 1.3.0
+## [1.3.1](https://github.com/koishijs/koishi/releases/tag/1.3.1)
+
+## Features
+
+- **cli:** 支持向子进程传入 execArgv ([3bb9f5a](https://github.com/koishijs/koishi/commit/3bb9f5afa1b89c2718d24ea5ddace2f50dc9b193))
+- **plugin-common:** 支持 requestHandler 传入字符串 ([936c871](https://github.com/koishijs/koishi/commit/936c871919f2ffbe2d421da2c92ae3c10139e87e))
+- **plugin-common:** 优化了 admin 指令的调用，增加了一些操作方式 ([0cc58cf](https://github.com/koishijs/koishi/commit/0cc58cffa6ed750124963f65b8c1cfaf82da752f))
+
+## Bug Fixes
+
+- **cli:** 修复了错误的输出等级设置 ([ab967c4](https://github.com/koishijs/koishi/commit/ab967c4c465e957106ea1b3c1a4f5f8faf8c70d4), [38cc1e1](https://github.com/koishijs/koishi/commit/38cc1e14d681239746dd84f72e4868241521203b))
+- **core:** 修复了同时使用长参数和 oneArg 选项时的错误行为 ([71a0174](https://github.com/koishijs/koishi/commit/71a0174835170304883dbfb146b17edc38fcd78b), [1932845](https://github.com/koishijs/koishi/commit/1932845ff3962bce16e2454fb40ff64b6c0b9725))
+- **database-sqlite:** 修复了 sqlite 注入类型错误 ([f592c6c](https://github.com/koishijs/koishi/commit/f592c6cca9143f87e4e311262cd01ea5b0825a3e))
+- **plugin-common:** 为 help 执行添加了 userFields ([c7650cb](https://github.com/koishijs/koishi/commit/c7650cbc4df2772ce609b33bc8f9a1025efb4cef))
+
+## [1.3.0](https://github.com/koishijs/koishi/releases/tag/1.3.0)
 
 ### Features
 
@@ -29,7 +44,7 @@ noOutboundLinks: true
 
 - **core:** cac 版本从 6.5.3 更新至 6.5.4 ([ed9d61b](https://github.com/koishijs/koishi/commit/ed9d61bd77eef52c85c9b2037a282b67fb8c2151))
 
-## 1.2.0
+## [1.2.0](https://github.com/koishijs/koishi/releases/tag/1.2.0)
 
 ### Features
 
@@ -49,7 +64,7 @@ noOutboundLinks: true
 
 - **core:** axios 版本从 0.19.0 更新至 0.19.1 ([01bebe0](https://github.com/koishijs/koishi/commit/01bebe0a234601b85197c1cd1200bf6c2e441863))
 
-## 1.1.1
+## [1.1.1](https://github.com/koishijs/koishi/releases/tag/1.1.1)
 
 ### Features
 
@@ -60,7 +75,7 @@ noOutboundLinks: true
 
 - **core:** 在 `cmd.execute()` 中等待错误提示的发送 ([3783f42](https://github.com/koishijs/koishi/commit/3783f42bc9df8afb0d83dc187cd756b89eb5ef0a))
 
-## 1.1.0
+## [1.1.0](https://github.com/koishijs/koishi/releases/tag/1.1.0)
 
 ### Features
 
@@ -79,10 +94,9 @@ noOutboundLinks: true
 - **core:** ws 版本从 7.2.0 更新至 7.2.1 ([25a6359](https://github.com/koishijs/koishi/commit/25a635954802be9caf0b48a4a440908503e42ca5))
 - **database-level:** 将 @types/leveldown, @types/levelup 加入依赖 ([3e53e9e](https://github.com/koishijs/koishi/commit/3e53e9ef037002500fbaa16708579f1cafc7bb16))
 
-## 1.0.1
+## [1.0.1](https://github.com/koishijs/koishi/releases/tag/1.0.1)
 
 ### Bug Fixes
 
 - **cli:** koishi init 指令被 SIGINT 打断输入时自动取消文件写入 ([1c59df5](https://github.com/koishijs/koishi/commit/1c59df5bdd9db1b5b67e4ee376826793f34747ab))
 - **utils:** observe 传入的 update 函数应该覆盖过去的版本 ([7f9756c](https://github.com/koishijs/koishi/commit/7f9756cf0996440c743464dd359cffc91ae6442e), [126cb03](https://github.com/koishijs/koishi/commit/126cb03cc0576cac8e4916437fbe5fd524d265de))
-

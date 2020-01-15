@@ -9,7 +9,12 @@ noOutboundLinks: true
 
 本页面包括 koishi-test-utils 的更新日志。
 
-## 1.1.1 (koishi 1.3.0)
+## 1.2.0 (koishi 1.3.0)
+
+### Features
+
+- mockedApp 内置 logger 将输出到 debug ([0365842](https://github.com/koishijs/koishi/commit/036584297359bf63a4e7b0458502bb89f3c2533f))
+- 新增 `mockedApp.receiveMessage()` 等方法 ([3fc34bd](https://github.com/koishijs/koishi/commit/3fc34bdb4b486d19f18419f7621957b5648cb47a))
 
 ### Bug Fixes
 

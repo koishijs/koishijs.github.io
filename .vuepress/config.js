@@ -111,7 +111,7 @@ module.exports = context => ({
           title: '更新日志',
           collapsable: false,
           children: [
-            ['/api/changelog/koishi', 'koishi'],
+            ['/api/changelog/koishi', 'koishi 及其依赖'],
             ['/api/changelog/test-utils', 'koishi-test-utils'],
           ],
         },
@@ -128,6 +128,7 @@ module.exports = context => ({
             '/plugins/information',
             '/plugins/schedule',
             '/plugins/teach',
+            '/plugins/recorder',
             '/plugins/common',
           ],
         },

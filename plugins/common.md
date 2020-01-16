@@ -26,18 +26,6 @@ module.exports = {
 
 下面将介绍每个插件的功能。
 
-## 插件：welcome
-
-welcome 插件用于欢迎群中的新人。欢迎信息默认是“欢迎新大佬 @XXX！”。你也可以手动设置欢迎信息的内容：
-
-```js
-module.exports = {
-  plugins: ['common', {
-    welcome: ({ userId }) => `欢迎新大佬 [CQ:at,qq=${userId}]！群地位-1`,
-  }],
-}
-```
-
 ## 插件：authorize
 
 authorize 插件用于设置特定玩家的权限，以及特定群中默认的玩家的权限：
@@ -66,29 +54,6 @@ module.exports = {
 ::: warning 注意
 由于 CoolQ 的机制问题，机器人刚加某个群时可能无法获取成员列表，从而导致插件无法运行。遇到这种情况一般等待 1-2 天即可恢复正常。
 :::
-
-## 插件：requestHandler
-
-requestHandler 插件用于处理好友和群申请。默认情况下 Koishi 会通过所有 1 级以上用户的好友申请，忽略所有群申请。你可以手动设置忽略和通过的函数：
-
-```js
-module.exports = {
-  plugins: ['common', {
-    // requestHandler 的配置被拆分成了这三个
-    handleFriend: true, // 通过所有好友申请
-    handleGroupAdd: undefined, // 忽略所有加群申请（当然这没必要写出来）
-    async handleGroupInvite (meta) {
-      // 拒绝所有来自 1 级以下，通过所有来自 3 级或以上权限用户的加群邀请，其他不处理
-      const user = await ctx.database.getUser(meta.userId, 0, ['authority'])
-      if (user.authority >= 3) {
-        return true
-      } else if (user.authority <= 1) {
-        return ctx.sender.setGroupAddRequest(meta.flag, 'invite', false)
-      }
-    },
-  }],
-}
-```
 
 ## 指令：contextify
 

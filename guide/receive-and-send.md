@@ -54,7 +54,7 @@ const groupInfo = await app.sender.getGroupInfo(987654321)
 
 CQHTTP 提出了**异步调用**的概念，当 CQHTTP 服务器受到异步调用请求时，如果调用正确，将直接返回 200。这样做的好处是，如果某些操作有较长的耗时（例如发送含有大量图片的信息或清空数据目录等）或你不关心调用结果，使用异步调用可以有效防止阻塞。下面说明了异步调用和普通调用的关系：
 
-![async-method](/async-method.svg)
+![async-method](/async-method.png)
 
 但是另一方面，你也无法得知异步调用是否成功被执行。与此同时，没有副作用的异步调用也毫无意义（因为这些调用本身就是为了获取某些信息，但是异步调用是无法获取调用结果的）。因此，Koishi 为除此以外的所有异步调用都提供了 API，它们的调用接口与非异步的版本除了在方法后面加了一个 `Async` 外没有任何区别：
 
@@ -79,7 +79,7 @@ Koishi 还提供了一套快捷操作 API。它们会根据事件的类型绑定
 
 下面这张图比较了使用 HTTP 时，快捷操作与默认机制的区别：
 
-![quick-operation](/quick-operation.svg)
+![quick-operation](/quick-operation.png)
 
 ## 中间件 (middleware)
 

@@ -221,4 +221,4 @@ Koishi 的官方插件 koishi-plugin-common 也使用了这种写法。
 
 下图大体展示了一个 App 实例的生命周期。你不需要立马弄明白所有的东西，不过随着你的不断学习和使用，它的参考价值会越来越高。
 
-![app-lifecycle](/app-lifecycle.svg)
+![app-lifecycle](/app-lifecycle.png)

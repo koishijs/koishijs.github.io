@@ -94,7 +94,7 @@ startAll()
 
 下图展示了一个复用 `HttpServer` 实例的例子：
 
-![shared-server](/shared-server.svg)
+![shared-server](/shared-server.png)
 
 ### QQ 号自动获取
 

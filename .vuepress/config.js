@@ -129,6 +129,7 @@ module.exports = context => ({
             '/plugins/schedule',
             '/plugins/teach',
             '/plugins/recorder',
+            '/plugins/nlp',
             '/plugins/common',
           ],
         },

@@ -9,6 +9,10 @@ noOutboundLinks: true
 
 本页面包括 koishi-test-utils 的更新日志。
 
+## 1.2.2 (koishi 1.4.0)
+
+## 1.2.1 (koishi 1.3.1)
+
 ## 1.2.0 (koishi 1.3.0)
 
 ### Features

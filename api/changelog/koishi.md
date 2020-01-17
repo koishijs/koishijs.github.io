@@ -5,9 +5,25 @@ noOutboundLinks: true
 # replace: \(([0-9a-f]{7})([0-9a-f]{33})\) -> ([$1](https://github.com/koishijs/koishi/commit/$1$2))
 ---
 
-# Koishi 更新日志
+# koishi 更新日志
 
 本页面包括 koishi 及其依赖的更新日志。
+
+## [1.4.0](https://github.com/koishijs/koishi/releases/tag/1.4.0)
+
+### Features
+
+- **cli:** 支持 ts 作为配置文件后缀名 ([f551d44](https://github.com/koishijs/koishi/commit/f551d44e59351c60d12255b641407aa201505c8d))
+- **cli:** koishi init 命令将自动创建文件所在的目录 ([644c6b3](https://github.com/koishijs/koishi/commit/644c6b36274a8fdc3c3b76c0e92bb266ca0302e3))
+- **cli:** 内置插件将直接被 koishi 导出 ([e9c3b9c](https://github.com/koishijs/koishi/commit/e9c3b9cb68d2b2db48cf7cc399f041baf162ef94))
+- **core:** 新增 `app.status` 属性表示应用状态 ([75c64b3](https://github.com/koishijs/koishi/commit/75c64b3db2b8527dce0d5a19be6c84aa6f620e27))
+- **core:** send 事件的元信息对象将带有 `userId` 属性 ([edee314](https://github.com/koishijs/koishi/commit/edee314c6e13ba8488e21c4912b8b02625f8a41d))
+- 移除已经废弃的 `user.name` 属性和 `rank`, `callme`, `likeme` 指令 ([9674079](https://github.com/koishijs/koishi/commit/96740791da106eec7c828e941368134ee00413fd), [87be3c1](https://github.com/koishijs/koishi/commit/87be3c1d5219c22f2390b214419bcf0a8e71d5ab), [20ebbae](https://github.com/koishijs/koishi/commit/20ebbae66e975f73c5e00edc8eb538df62cc5286), [ce4feb1](https://github.com/koishijs/koishi/commit/ce4feb16f9aa692da62bc4f6c102815db9d74a37), [9293540](https://github.com/koishijs/koishi/commit/9293540991161d466d5b5090d6f6d4d6cda6662b))
+
+### Bug Fixes
+
+- **cli:** 修复了 `PluginConfig` 的类型 ([b3501a6](https://github.com/koishijs/koishi/commit/b3501a607ea4d450be388896b2c6e40c5fa2350b))
+- **core:** `getTargetId` 函数将检测输入的类型 ([00ab2ce](https://github.com/koishijs/koishi/commit/00ab2cec270d4fa439c50a5672c1dd2f5344e443))
 
 ## [1.3.1](https://github.com/koishijs/koishi/releases/tag/1.3.1)
 

@@ -12,7 +12,31 @@ koishi-plugin-image-search 封装了一系列搜图相关的指令，目前支�
 - [konachan](http://konachan.net/)
 - [nhentai](https://nhentai.net/)
 
-参考了 [Tsuk1ko](https://github.com/Tsuk1ko/CQ-picfinder-robot) 的机器人实现。
+参考了 [Tsuk1ko](https://github.com/Tsuk1ko/CQ-picfinder-robot) 的机器人实现。下面是一个简单的示例：
+
+<chat-panel>
+<chat-message nickname="Alice" color="#cc0066">
+<p>搜图</p>
+<p><img src="/image-search/68670776_p0_master1200.jpg" width="240"/></p>
+</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>(95.4%) 地上 / ぢせ</p>
+<p><img src="/image-search/68670776_p0_master1200.jpg" width="240"/></p>
+<p>Link: <a href="https://pixiv.net/i/68670776" target="_blank" rel="noopener noreferrer">https://pixiv.net/i/68670776</a></p>
+<p>Author: <a href="https://pixiv.net/u/4790" target="_blank" rel="noopener noreferrer">https://pixiv.net/u/4790</a></p>
+</chat-message>
+<chat-message nickname="Bob" color="#00994d">搜图</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">请发送图片。</chat-message>
+<chat-message nickname="Bob" color="#00994d" class="no-padding">
+<img src="/image-search/73212619_p0_master1200.jpg" width="240" style="border-radius: 0.5rem"/>
+</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>(93.18%) 書斎 / ぢせ</p>
+<p><img src="/image-search/73212619_p0_master1200.jpg" width="240"/></p>
+<p>Link: <a href="https://pixiv.net/i/73212619" target="_blank" rel="noopener noreferrer">https://pixiv.net/i/73212619</a></p>
+<p>Author: <a href="https://pixiv.net/u/4790" target="_blank" rel="noopener noreferrer">https://pixiv.net/u/4790</a></p>
+</chat-message>
+</chat-panel>
 
 ## 指令：image-search
 

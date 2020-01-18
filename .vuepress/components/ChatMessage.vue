@@ -54,6 +54,12 @@ export default {
   border-radius 0.5rem
   background-color white
 
+  img
+    vertical-align middle
+
+  p > img
+    margin 0.2rem 0
+
   .chat-message:not(.no-padding) &
     padding 0.6rem 0.8rem
 
@@ -72,5 +78,6 @@ export default {
 
   p
     margin 0
+    line-height 1.6
 
 </style>

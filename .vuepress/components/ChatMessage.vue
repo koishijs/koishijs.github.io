@@ -54,6 +54,9 @@ export default {
   border-radius 0.5rem
   background-color white
 
+  > img
+    border-radius 0.5rem
+
   img
     vertical-align middle
 

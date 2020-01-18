@@ -15,17 +15,17 @@ koishi-plugin-chess 提供了下棋功能。目前支持的规则有：
 <chat-panel>
 <chat-message nickname="Alice" color="#cc0066">黑白棋</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png" class="no-padding">
-<img src="/chess/othello-1.svg" width="240" style="border-radius: 0.5rem; vertical-align: bottom"/>
+<img src="/chess/othello-1.svg" width="240"/>
 </chat-message>
 <chat-message nickname="Bob" color="#00994d">落子 E6</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">Bob 加入了游戏并落子于 E6，下一手轮到 <strong>@Alice</strong>。</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png" class="no-padding">
-<img src="/chess/othello-2.svg" width="240" style="border-radius: 0.5rem; vertical-align: bottom"/>
+<img src="/chess/othello-2.svg" width="240"/>
 </chat-message>
 <chat-message nickname="Alice" color="#cc0066">落子 F6</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">Alice 落子于 E6，下一手轮到 <strong>@Bob</strong>。</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png" class="no-padding">
-<img src="/chess/othello-3.svg" width="240" style="border-radius: 0.5rem; vertical-align: bottom"/>
+<img src="/chess/othello-3.svg" width="240"/>
 </chat-message>
 </chat-panel>
 

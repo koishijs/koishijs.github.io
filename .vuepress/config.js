@@ -16,14 +16,10 @@ module.exports = context => ({
   plugins: [
     [require('./markdown/highlight')],
     [require('./markdown/link')],
-    ['container', {
-      type: 'message',
-      defaultTitle: '',
-      before: '<ChatMessage>',
-      after: '</ChatMessage>'
+    ['medium-zoom', {
+      selector: '.theme-default-content :not(a) > img:not(.no-zooming)',
     }],
     ['@vuepress/back-to-top'],
-    ['@vuepress/medium-zoom'],
     ['@vuepress/register-components', {
       componentDir: 'components',
     }],

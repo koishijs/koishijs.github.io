@@ -55,10 +55,15 @@ module.exports = {
 最后运行程序：
 
 ```sh
-koishi run
+koishi start
 ```
 
-机器人就已经可以运行了。
+现在可以对你的机器人说话了：
+
+<chat-panel>
+<chat-message nickname="Alice" color="#cc0066">echo 你好</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">你好</chat-message>
+</chat-panel>
 
 ## 调用 Koishi
 

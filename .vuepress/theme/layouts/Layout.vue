@@ -8,7 +8,7 @@ function adjustSidebarItems (items) {
       adjustSidebarItems(item.children)
     } else if (item.headers) {
       item.headers.forEach(header => {
-        header.title = header.title.replace(/(?<=\S)\(.+/, '()')
+        header.title = header.title.replace(/(\S)\(.+/, '$1()')
       })
     }
   })

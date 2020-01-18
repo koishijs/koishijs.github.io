@@ -86,13 +86,10 @@ ctx.command('my-command')
   .action(({ meta, options }) => meta.$send(JSON.stringify(options)))
 ```
 
-::: user-message
-my-command -adb beta --gamma=123 --foo-bar baz
-:::
-
-::: bot-message
-{ "a": true, "alpha": true, "b": "beta", "beta": "beta", "c": 123, "gamma": 123, "d": true, "fooBar": "baz" }
-:::
+<chat-panel>
+<chat-message nickname="Alice" color="#cc0066">my-command -adb beta --gamma=123 --foo-bar baz</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">{ "a": true, "alpha": true, "b": "beta", "beta": "beta", "c": 123, "gamma": 123, "d": true, "fooBar": "baz" }</chat-message>
+</chat-panel>
 
 从上面的例子中我们不难看出 Koishi 指令系统的许多方便的特性：
 
@@ -115,13 +112,10 @@ ctx.command('my-command')
   .action(({ meta, options }) => meta.$send(JSON.stringify(options)))
 ```
 
-::: user-message
-my-command -A
-:::
-
-::: bot-message
-{ "A": true, "alphaBeta": false }
-:::
+<chat-panel>
+<chat-message nickname="Alice" color="#cc0066">my-command -A</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">{ "A": true, "alphaBeta": false }</chat-message>
+</chat-panel>
 
 但是如果此时已经注册了不带 `--no-` 前缀的选项，Koishi 就不会这样处理：
 
@@ -132,13 +126,10 @@ ctx.command('my-command')
   .action(({ meta, options }) => meta.$send(JSON.stringify(options)))
 ```
 
-::: user-message
-my-command -A
-:::
-
-::: bot-message
-{ "A": true, "noAlphaBeta": true }
-:::
+<chat-panel>
+<chat-message nickname="Alice" color="#cc0066">my-command -A</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">{ "A": true, "noAlphaBeta": true }</chat-message>
+</chat-panel>
 
 这种特性是许多指令系统做不到的。
 
@@ -229,21 +220,12 @@ app.command('echo').alias('say')
 
 在日常的使用中，我们也难免会遇到打错的情况，这时 Koishi 还会自动根据相近的指令名进行纠错提醒：
 
-::: user-message
-ecko hello
-:::
-
-::: bot-message
-没有此命令。你要找的是不是“echo”？发送空行以调用推测的指令。
-:::
-
-::: user-message
-
-:::
-
-::: bot-message
-hello
-:::
+<chat-panel>
+<chat-message nickname="Alice" color="#cc0066">ecko hello</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">没有此命令。你要找的是不是“echo”？发送空行以调用推测的指令。</chat-message>
+<chat-message nickname="Alice" color="#cc0066"></chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">hello</chat-message>
+</chat-panel>
 
 是不是很方便呢？
 

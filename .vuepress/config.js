@@ -17,13 +17,7 @@ module.exports = context => ({
     [require('./markdown/highlight')],
     [require('./markdown/link')],
     ['container', {
-      type: 'user-message',
-      defaultTitle: '',
-      before: '<ChatMessage right>',
-      after: '</ChatMessage>'
-    }],
-    ['container', {
-      type: 'bot-message',
+      type: 'message',
       defaultTitle: '',
       before: '<ChatMessage>',
       after: '</ChatMessage>'
@@ -137,10 +131,10 @@ module.exports = context => ({
           title: '其他官方插件',
           collapsable: false,
           children: [
-            // '/plugins/tools',
+            ['/plugins/chess', 'plugin-chess'],
+            ['/plugins/image-search', 'plugin-image-search'],
             // '/plugins/monitor',
             // '/plugins/webhook',
-            '/plugins/image-search',
           ],
         },
       ],

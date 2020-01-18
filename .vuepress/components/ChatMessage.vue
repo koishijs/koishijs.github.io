@@ -1,7 +1,11 @@
 <template>
-  <div class="chat-message" :class="{ right }">
-    <img class="avatar" :src="right ? '/user.svg' : '/bot.svg'"/>
-    <div class="message-box"><slot>&nbsp;</slot></div>
+  <div class="chat-message">
+    <img v-if="avatar" class="avatar" :src="avatar"/>
+    <div v-else class="avatar" :style="{ backgroundColor: color }">{{ nickname[0] }}</div>
+    <div class="nickname">{{ nickname }}</div>
+    <div class="message-box">
+      <slot>&nbsp</slot>
+    </div>
   </div>
 </template>
 
@@ -9,7 +13,9 @@
 
 export default {
   props: {
-    right: Boolean,
+    nickname: String,
+    color: String,
+    avatar: String,
   },
 }
 
@@ -17,13 +23,9 @@ export default {
 
 <style lang="stylus" scoped>
 
-$shadowSize = 1px
-
 .chat-message
   position relative
-  margin 1rem 4.4rem 1rem 0
-  &.right
-    margin 1rem 0 1rem 4.4rem
+  margin 1rem 0
 
 .avatar
   width 3rem
@@ -33,37 +35,40 @@ $shadowSize = 1px
   transform translateY(-1px)
   user-select none
   pointer-events none
+  text-align center
+  line-height 3rem
+  font-size 1.6rem
+  color white
+  font-family "Comic Sans MS"
 
-  .chat-message.right &
-    right 0
+.nickname
+  position relative
+  margin 0 0 0.5rem 4.4rem
+  font-weight bold
 
 .message-box
   position relative
   margin-left 4.4rem
   width fit-content
   line-height 1.6
-  padding 0.6rem 0.8rem
   border-radius 0.5rem
-  box-shadow 0 0 $shadowSize $shadowSize transparentify(black, 0.2)
+  background-color white
 
-  &::before
-    content ""
+  .chat-message:not(.no-padding) &
+    padding 0.6rem 0.8rem
+
+  &::after
+    content ''
     position absolute
-    width 0.8rem
-    height 0.8rem
-    left -0.4rem
-    top 1rem
-    transform rotate(45deg)
-    background white
-    box-shadow (- $shadowSize) $shadowSize $shadowSize 0 transparentify(black, 0.2)
-
-  .chat-message.right &
-    margin-left auto
-    margin-right 4.4rem
-    &::before
-      left unset
-      right -0.4rem
-      box-shadow $shadowSize (- $shadowSize) $shadowSize 0 transparentify(black, 0.2)
+    right 100%
+    top 0px
+    width 12px
+    height 12px
+    border 0 solid transparent
+    border-bottom-width 8px
+    border-bottom-color currentColor
+    border-radius 0 0 0 32px
+    color white
 
   p
     margin 0

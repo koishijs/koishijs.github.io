@@ -6,16 +6,19 @@
   "author": "Shigma <1700011071@pku.edu.cn>",
   "license": "MIT",
   "scripts": {
+    "prepare": "ts-node .build",
     "dev": "vuepress dev .",
     "build": "vuepress build ."
   },
   "devDependencies": {
+    "@types/node": "^13.1.8",
     "@vuepress/plugin-back-to-top": "^1.2.0",
     "@vuepress/plugin-medium-zoom": "^1.2.0",
-    "vuepress": "^1.2.0"
-  },
-  "dependencies": {
     "highlight.js": "^9.16.2",
-    "shiki": "^0.1.6"
+    "koishi-plugin-chess": "^1.0.0-alpha.0",
+    "shiki": "^0.1.6",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5",
+    "vuepress": "^1.2.0"
   }
 }

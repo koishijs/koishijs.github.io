@@ -8,7 +8,7 @@
   "scripts": {
     "prepare": "ts-node .build",
     "dev": "vuepress dev .",
-    "build": "vuepress build ."
+    "build": "yarn prepare & vuepress build ."
   },
   "devDependencies": {
     "@types/node": "^13.1.8",

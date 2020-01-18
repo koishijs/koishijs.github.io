@@ -4221,10 +4221,10 @@ koishi-image-utils@^0.1.0:
   dependencies:
     sharp "^0.24.0"
 
-koishi-plugin-chess@^1.0.0-alpha.0:
-  version "1.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/koishi-plugin-chess/-/koishi-plugin-chess-1.0.0-alpha.0.tgz#4adaca1546ea30e1d432b8ead3dbc7f1733e0d73"
-  integrity sha512-JwLiwdzEzfOmQTtEYwmlKCSVUFrVObdfyiyHwu1aJs+LjuCNNNmkcfLx3Y/jy6ZTvbFqkZac4pIRipQCqRD/QQ==
+koishi-plugin-chess@^1.0.0-alpha.1:
+  version "1.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/koishi-plugin-chess/-/koishi-plugin-chess-1.0.0-alpha.1.tgz#5f0084ea75b93d125bd0e9787ac6b991ada083f7"
+  integrity sha512-xhkIZAJICNXujM0QBdVV01JlfS73jC2kfsyuU5Bi8A+N7g8UMiNp/QElVOf2gKkW8y4EG1HVmfjmVt3XC1mCRw==
   dependencies:
     koishi-core "^1.4.0"
     koishi-image-utils "^0.1.0"

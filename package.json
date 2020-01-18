@@ -6,9 +6,9 @@
   "author": "Shigma <1700011071@pku.edu.cn>",
   "license": "MIT",
   "scripts": {
-    "prepare": "ts-node .build",
+    "tsbuild": "ts-node .build",
     "dev": "vuepress dev .",
-    "build": "yarn prepare & vuepress build ."
+    "build": "yarn tsbuild & vuepress build ."
   },
   "devDependencies": {
     "@types/node": "^13.1.8",

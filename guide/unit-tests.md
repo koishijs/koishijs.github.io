@@ -150,7 +150,7 @@ test('example', async () => {
   await app.start()
 
   // 服务端向 Koishi 上报事件
-  server.post(meta)
+  await server.post(meta)
 
   // 设置客户端请求的结果
   server.setResponse(method, data)
@@ -165,14 +165,11 @@ test('example', async () => {
 
 ## 模拟数据库
 
-koishi-test-utils 不仅能够模拟会话，还能够模拟数据库。它自带了一种内存数据库，你可以像这样使用它：
+koishi-database-memory 是 Koishi 的一个数据库实现，只不过它将所有数据都留在内存中，方便调试：
 
 ```js
-const { App, registerDatabase } = require('koishi-core')
-const { MemoryDatabase } = require('koishi-test-utils')
-
-// 注册内存数据库
-registerDatabase('memory', MemoryDatabase)
+const { App } = require('koishi-core')
+require('koishi-database-memory')
 
 // 使用内存数据库
 const app = new App({
@@ -183,11 +180,8 @@ const app = new App({
 当然你也可以和上面的 MockedApp 结合起来使用：
 
 ```js
-const { registerDatabase } = require('koishi-core')
-const { MockedApp, MemoryDatabase } = require('koishi-test-utils')
-
-// 注册内存数据库
-registerDatabase('memory', MemoryDatabase)
+const { MockedApp } = require('koishi-test-utils')
+require('koishi-database-memory')
 
 // 使用内存数据库
 const app = new MockedApp({
@@ -200,12 +194,13 @@ const app = new MockedApp({
 你可以使用 `testDatabase()` 方法测试你编写的数据库。下面是一个简单的例子，它测试了我们刚刚介绍的内存数据库：
 
 ```js
-const { testDatabase, registerMemoryDatabase } = require('koishi-test-utils')
+const { testDatabase } = require('koishi-test-utils')
+require('koishi-database-memory')
 
-registerMemoryDatabase()
+testDatabase({ memory: {} })
 
 // 传入两个参数
-// 第一个参数是 App 的构造选项
+// 第一个参数是 App 的构造选项中的 database 参数
 // 第二个参数是每个测试阶段要执行的钩子函数，这些函数将用于手动清理数据库
 testDatabase({ memory: {} }, {
   beforeEachUser: app => app.database.memory.store.user = [],

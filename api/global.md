@@ -10,7 +10,7 @@ sidebarDepth: 2
 
 机器人实例的构造函数。
 
-- **options:** `AppOptions` 参见 [配置列表](../guide/config-file.md#配置列表)
+- **options:** `AppOptions` 参见 [配置列表](../guide/config-file.md)
 - 返回值: [`App`](./app.md)
 
 ## appList

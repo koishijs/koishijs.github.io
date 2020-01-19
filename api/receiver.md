@@ -153,7 +153,7 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 
 ### 事件：before-send
 
-准备发送信息时会在对应的上下文触发。调用时会传入一个伪 Meta 对象，拥有与 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象) 类似的结构，但是 `postType` 字段为 `send`。
+准备发送信息时会在对应的上下文触发。调用时会传入一个伪 Meta 对象，拥有与 [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 对象类似的结构，但是 `postType` 字段为 `send`。
 
 ### 事件：send
 
@@ -165,15 +165,19 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 
 ### 事件：before-command
 
-调用指令前会在对应的上下文触发。此时指令的可用性还未经检测，因此可能出现参数错误、权限不足、超过使用次数等情况。调用时传入一个 [`ParsedCommandLine` 对象](../guide/command-system.md#parsedcommandline-对象)。
+调用指令前会在对应的上下文触发。此时指令的可用性还未经检测，因此可能出现参数错误、权限不足、超过使用次数等情况。调用时传入一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。
 
 ### 事件：command
 
-执行指令的 `action` 回调函数前会在对应的上下文触发。调用时传入一个 [`ParsedCommandLine` 对象](../guide/command-system.md#parsedcommandline-对象)。
+执行指令的 `action` 回调函数前会在对应的上下文触发。调用时传入一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。
 
 ### 事件：after-command
 
-成功调用指令后会在对应的上下文触发。如果调用过程出错或者在指令内部触发 `next` 则不会触发。调用时传入一个 [`ParsedCommandLine` 对象](../guide/command-system.md#parsedcommandline-对象)。
+成功调用指令后会在对应的上下文触发。如果调用过程出错或者在指令内部触发 `next` 则不会触发。调用时传入一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。
+
+### 事件：after-middleware
+
+在执行完全部中间件后会在对应的上下文触发。调用时传入一个 [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 对象。
 
 ### 事件：before-disconnect
 

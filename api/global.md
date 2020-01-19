@@ -118,6 +118,26 @@ sidebarDepth: 2
 - **config:** `any` 对应表的配置
 - 返回值: `void`
 
+## Command 静态方法
+
+这里包含了 [Command](./command.md) 类的静态方法。
+
+### Command.attachUserFields(fields, argv)
+
+按照 argv 中的 command 属性向 fields 添加所需的用户字段。它是一个内置的 before-user 监听器。
+
+- **fields:** `Set<UserField>` 用户字段集合
+- **argv:** [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 只需确保其中存在 command 属性即可
+- 返回值: `void`
+
+### Command.attachGroupFields(fields, argv)
+
+按照 argv 中的 command 属性向 fields 添加所需的群字段。它是一个内置的 before-group 监听器。
+
+- **fields:** `Set<GroupField>` 群字段集合
+- **argv:** [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 只需确保其中存在 command 属性即可
+- 返回值: `void`
+
 ## 运行时工具
 
 这里包含了一些运行时的工具。
@@ -134,13 +154,6 @@ sidebarDepth: 2
 
 - **target:** `string` 要解析的字符串
 - 返回值: `number` 目标 QQ 号
-
-### getSenderName(meta) <Badge text="beta" type="warn"/>
-
-获得发言者称呼。当用户在数据库中已经设置了称呼，则使用设置的称呼；否则依次使用用户在群中的群名片和昵称。
-
-- **meta:** `Meta` 元信息对象
-- 返回值: `string` 用户称呼
 
 ### showSuggestions(options) <Badge text="beta" type="warn"/>
 

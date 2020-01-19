@@ -40,7 +40,7 @@ sidebarDepth: 2
 
 为指令添加执行函数。
 
-- **action:** `(config: ParsedCommandLine, ...args: string[]) => any` 执行函数。这个函数的第一个参数是 [`ParsedCommandLine` 对象](../guide/command-system.md#parsedcommandline-对象)，之后的每个参数都是字符串，表示从指令调用中解析出来的参数
+- **action:** `(config: ParsedCommandLine, ...args: string[]) => any` 执行函数。这个函数的第一个参数是 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象，之后的每个参数都是字符串，表示从指令调用中解析出来的参数
 - 返回值: `this`
 
 ## cmd.userFields(fields)

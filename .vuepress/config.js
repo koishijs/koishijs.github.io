@@ -68,6 +68,7 @@ module.exports = context => ({
             '/guide/command-system',
             '/guide/using-database',
             '/guide/authorization',
+            '/guide/lifecycle',
             '/guide/multiple-bots',
             '/guide/logger',
             '/guide/unit-tests',

@@ -24,6 +24,10 @@ koishi-core 中提供的 API，包括以下几个子页面：
 
 - [koishi-utils](./utils.md)
 - [koishi-test-utils](./test-utils.md)
+- [koishi-database-level](./database/level.md)
+- [koishi-database-memory](./database/memory.md)
+- [koishi-database-mysql](./database/mysql.md)
+- [koishi-database-sqlite](./database/sqlite.md)
 
 ## 更新日志
 

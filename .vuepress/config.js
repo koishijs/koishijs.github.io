@@ -96,6 +96,10 @@ module.exports = context => ({
           children: [
             '/api/utils',
             '/api/test-utils',
+            '/api/database/level',
+            '/api/database/memory',
+            '/api/database/mysql',
+            '/api/database/sqlite',
           ],
         },
         {

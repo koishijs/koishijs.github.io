@@ -4,10 +4,6 @@ sidebarDepth: 2
 
 # 处理请求
 
-::: tip 提示
-本章介绍的功能由 koishi-plugin-common 插件提供。
-:::
-
 ## 处理好友申请、加群邀请和申请
 
 当使用了 koishi-plugin-common 并配置了数据库时，默认情况下 Koishi 会通过所有 1 级以上用户的好友申请，忽略所有群申请。你可以手动设置忽略和通过的函数：

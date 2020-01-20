@@ -4,10 +4,6 @@ sidebarDepth: 2
 
 # 用户信息管理
 
-::: tip 提示
-本章介绍的功能由 koishi-plugin-common 插件提供。
-:::
-
 ## 查看用户信息
 
 info 指令可以用于查看用户的信息：

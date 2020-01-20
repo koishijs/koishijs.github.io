@@ -4,10 +4,6 @@ sidebarDepth: 2
 
 # 消息的响应
 
-::: tip 提示
-本章介绍的功能由 koishi-plugin-common 插件提供。
-:::
-
 ## 配置内置问答
 
 respondent 插件允许设置一套内置问答，就像这样：

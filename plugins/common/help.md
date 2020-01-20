@@ -5,7 +5,7 @@ sidebarDepth: 2
 # 编写和查看帮助
 
 ::: tip 提示
-本章介绍的功能由 koishi-plugin-common 插件提供。阅读本章前，你最好先对 Koishi 的 [**指令系统**](../../guide/command-system.md) 有一个系统的认识。
+阅读本章前，你最好先对 Koishi 的 [**指令系统**](../../guide/command-system.md) 有一个系统的认识。
 :::
 
 ## 查看帮助

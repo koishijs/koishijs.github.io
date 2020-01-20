@@ -4,10 +4,6 @@ sidebarDepth: 2
 
 # 消息的发送
 
-::: tip 提示
-本章介绍的功能由 koishi-plugin-common 插件提供。
-:::
-
 ## 发送消息到特定的上下文
 
 你可以使用 echo 指令发送消息到特定的上下文：

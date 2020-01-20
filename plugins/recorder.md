@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# 存储聊天记录 <Badge text="beta" type="warn"/>
+# 存储聊天记录 (recorder) <Badge text="beta" type="warn"/>
 
 ::: tip 提示
 本章介绍的功能由 koishi-plugin-recorder 插件提供。

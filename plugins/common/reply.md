@@ -2,49 +2,11 @@
 sidebarDepth: 2
 ---
 
-# 消息处理和响应
+# 消息的响应
 
 ::: tip 提示
 本章介绍的功能由 koishi-plugin-common 插件提供。
 :::
-
-## 发送消息到特定的上下文
-
-你可以使用 echo 指令发送消息到特定的上下文：
-
-```sh
-echo [-u ids] [-g ids] [-d ids] <text>
-echo foo bar              # 向你发送 foo bar
-echo -u 123 foo bar       # 向用户 123 私聊发送 foo bar
-echo -g 456,789 foo bar   # 向群 456 和 789 同时发送 foo bar
-```
-
-::: tip 提示
-echo 指令的消息是一个 [长参数](../command-system.md#长参数)，因此你应该把所有的选项写到消息前面，否则会被认为是消息的一部分。
-:::
-
-## 向所有群广播消息
-
-broadcast 指令用于向所有 Bot 所在的群发送一段文本。你可以这样调用它：
-
-```sh
-broadcast foo bar baz     # 向所有群发送 foo bar baz
-```
-
-这看起来只是 echo 的一个简写版本，但实际上这两个指令有下面的差别：
-
-- 对于多个 App 实例同时运行的情况，echo 只会让收到调用的 Bot 发送信息，broadcast 会同时控制所有 Bot 发送信息
-- echo 的发送信息是几乎同时的，而 broadcast 会让每个要发送信息的 Bot 按照一定的时间间隔发送，这个时间间隔可以显式地设置：
-
-```js koishi.config.js
-module.exports = {
-  plugins: ['common', {
-    broadcast: {
-      broadcastInterval: 1000, // 默认值为 1s
-    },
-  }],
-}
-```
 
 ## 配置内置问答
 
@@ -52,7 +14,7 @@ respondent 插件允许设置一套内置问答，就像这样：
 
 ```js koishi.config.js
 module.exports = {
-  plugins: ['common', {
+  plugins: [['common', {
     respondent: [{
       match: 'awsl',
       reply: '爱我苏联',
@@ -63,7 +25,7 @@ module.exports = {
       match: /^(.+)一时爽$/,
       reply: (_, str) => `一直${str}一直爽`,
     }],
-  }],
+  }]],
 }
 ```
 
@@ -78,7 +40,7 @@ module.exports = {
 
 其中 `match` 可以是一个字符串或正则表达式，用来表示要匹配的内容；`reply` 可以是一个字符串或传入字符串的函数，用来表示输出的结果。`respondent` 数组会按照从上到下的顺序进行匹配。
 
-如果想要加入更高级和用户可定义的问答系统，可以参见 [koishi-plugin-teach](./teach.md)。
+如果想要加入更高级和用户可定义的问答系统，可以参见 [koishi-plugin-teach](../teach.md)。
 
 ## 配置复读机
 
@@ -90,11 +52,11 @@ module.exports = {
 
 ```js koishi.config.js
 module.exports = {
-  plugins: ['common', {
+  plugins: [['common', {
     repeater: {
       repeat: (repeated, times) => times === 3,
     },
-  }],
+  }]],
 }
 ```
 
@@ -112,12 +74,12 @@ module.exports = {
 
 ```js koishi.config.js
 module.exports = {
-  plugins: ['common', {
+  plugins: [['common', {
     repeater: {
       // 因为不知道具体是哪次复读的，所以可以用 !repeated 确保只复读一次
       repeat: (repeated, times) => !repeated && times >= 4 && Math.random() < 0.5,
     },
-  }],
+  }]],
 }
 ```
 
@@ -127,13 +89,13 @@ module.exports = {
 
 ```js koishi.config.js
 module.exports = {
-  plugins: ['common', {
+  plugins: [['common', {
     repeater: {
       // 传入的第三个参数是最后收到的发言内容
       interrupt: (_, times, message) => times >= 2 && message === '这机器人又开始复读了',
       interruptText: '打断复读！',
     },
-  }],
+  }]],
 }
 ```
 
@@ -149,7 +111,7 @@ module.exports = {
 
 ```js koishi.config.js
 module.exports = {
-  plugins: ['common', {
+  plugins: [['common', {
     repeater: {
       // 检测重复复读
       repeatCheck: true,
@@ -159,7 +121,7 @@ module.exports = {
       interruptCheck: (repeated, times) => repeated && times >= 3 && Math.random() > 0.5,
       interruptCheckText: (userId) => `[CQ:at,qq=${userId}] 在？为什么打断复读？`,
     },
-  }],
+  }]],
 }
 ```
 
@@ -198,7 +160,7 @@ interface RepeaterOptions {
 其中，四个 `SessionSwitch` 都会根据返回值是否为 truthy 做出相应的回应；三个 `SessionText` 会根据返回的字符串进行输出。对于其他人的复读行为，各个回应的优先级为 repeatCheck > interrupt > repeat。而默认的行为如下图：
 
 ```js
-const defaultOptions = {
+const defaultOptions: RepeaterOptions = {
   repeat: false,
   interrupt: false,
   interruptText: '打断复读！',

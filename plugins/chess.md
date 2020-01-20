@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# koishi-plugin-chess
+# 下棋 (chess)
 
 koishi-plugin-chess 提供了下棋功能。目前支持的规则有：
 

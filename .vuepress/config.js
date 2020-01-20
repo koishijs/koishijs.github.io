@@ -114,26 +114,34 @@ module.exports = context => ({
       '/plugins/': [
         ['/plugins/', '总览'],
         {
-          title: '核心插件',
+          title: '常用功能 (common)',
           collapsable: false,
           children: [
-            '/plugins/help',
-            '/plugins/message',
-            '/plugins/request-handler',
-            '/plugins/information',
+            '/plugins/common/overview',
+            '/plugins/common/help',
+            '/plugins/common/message',
+            '/plugins/common/reply',
+            '/plugins/common/handler',
+            '/plugins/common/information',
+            '/plugins/common/process',
+          ],
+        },
+        {
+          title: '其他核心插件',
+          collapsable: false,
+          children: [
             '/plugins/schedule',
             '/plugins/teach',
             '/plugins/recorder',
             '/plugins/nlp',
-            '/plugins/common',
           ],
         },
         {
           title: '其他官方插件',
           collapsable: false,
           children: [
-            ['/plugins/chess', 'plugin-chess'],
-            ['/plugins/image-search', 'plugin-image-search'],
+            '/plugins/chess',
+            '/plugins/image-search',
             // '/plugins/monitor',
             // '/plugins/webhook',
           ],

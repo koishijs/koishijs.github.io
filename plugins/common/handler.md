@@ -14,7 +14,7 @@ sidebarDepth: 2
 
 ```js koishi.config.js
 module.exports = {
-  plugins: ['common', {
+  plugins: [['common', {
     handleFriend: true, // 通过所有好友申请
     handleGroupAdd: undefined, // 忽略所有加群申请（当然这没必要写出来）
     async handleGroupInvite (meta) {
@@ -23,10 +23,10 @@ module.exports = {
       if (user.authority >= 3) {
         return true
       } else if (user.authority <= 1) {
-        return ctx.sender.setGroupAddRequest(meta.flag, 'invite', false)
+        return false
       }
     },
-  }],
+  }]],
 }
 ```
 
@@ -46,10 +46,10 @@ welcome 选项可以用于欢迎群中的新成员。欢迎信息默认是“欢
 
 ```js
 module.exports = {
-  plugins: ['common', {
+  plugins: [['common', {
     // 传入一个 Meta 对象
     // 返回值应该是 string | Promise<string>
-    welcome: ({ userId }) => `欢迎新大佬 [CQ:at,qq=${userId}]！群地位-1`,
-  }],
+    welcomeMessage: ({ userId }) => `欢迎新大佬 [CQ:at,qq=${userId}]！群地位-1`,
+  }]],
 }
 ```

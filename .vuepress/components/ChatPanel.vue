@@ -31,6 +31,7 @@ export default {
   position relative
   background-color #f3f6f9
   border-radius 6px
+  margin 1rem 0
 
   .controls
     display initial

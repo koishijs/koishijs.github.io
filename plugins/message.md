@@ -57,12 +57,24 @@ module.exports = {
       match: 'awsl',
       reply: '爱我苏联',
     }, {
+      match: /^\s*(\S +){2,}\S\s*$/,
+      reply: '空格警察，出动！',
+    }, {
       match: /^(.+)一时爽$/,
       reply: (_, str) => `一直${str}一直爽`,
     }],
   }],
 }
 ```
+
+<chat-panel>
+<chat-message nickname="Alice" color="#cc0066">awsl</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">爱我苏联</chat-message>
+<chat-message nickname="Bob" color="#00994d">久 等 了</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">空格警察，出动！</chat-message>
+<chat-message nickname="Carol" color="#1e90ff">挖坑一时爽</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">一直挖坑一直爽</chat-message>
+</chat-panel>
 
 其中 `match` 可以是一个字符串或正则表达式，用来表示要匹配的内容；`reply` 可以是一个字符串或传入字符串的函数，用来表示输出的结果。`respondent` 数组会按照从上到下的顺序进行匹配。
 
@@ -74,17 +86,25 @@ module.exports = {
 
 ### 控制复读时机和概率
 
-首先让我们看一个最简单的例子。如果我们希望让机器人在复读进行到第四次时参与复读，且此后不再参与，我们可以这样配置：
+首先让我们看一个最简单的例子。如果我们希望让机器人在复读进行到第 3 次时参与复读，且此后不再参与，我们可以这样配置：
 
 ```js koishi.config.js
 module.exports = {
   plugins: ['common', {
     repeater: {
-      repeat: (repeated, times) => times === 4,
+      repeat: (repeated, times) => times === 3,
     },
   }],
 }
 ```
+
+<chat-panel>
+<chat-message nickname="Alice" color="#cc0066">foo</chat-message>
+<chat-message nickname="Bob" color="#00994d">foo</chat-message>
+<chat-message nickname="Carol" color="#1e90ff">foo</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">foo</chat-message>
+<chat-message nickname="Dave" color="#f4a460">foo</chat-message>
+</chat-panel>
 
 我们可以看到，上面显示的 `repeat` 参数是一个函数，传入的第一个参数表示是否已经复读过，第二个参数表示全员已经复读过的次数（包括自己）。这个函数的返回值如果是 truthy，那么机器人就会触发一次复读。
 
@@ -94,6 +114,7 @@ module.exports = {
 module.exports = {
   plugins: ['common', {
     repeater: {
+      // 因为不知道具体是哪次复读的，所以可以用 !repeated 确保只复读一次
       repeat: (repeated, times) => !repeated && times >= 4 && Math.random() < 0.5,
     },
   }],
@@ -116,6 +137,12 @@ module.exports = {
 }
 ```
 
+<chat-panel>
+<chat-message nickname="Alice" color="#cc0066">这机器人又开始复读了</chat-message>
+<chat-message nickname="Bob" color="#00994d">这机器人又开始复读了</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">打断复读！</chat-message>
+</chat-panel>
+
 ### 检测重复复读和打断复读
 
 除此以外，我们还可以让 Koishi 对他人重复复读和打断复读的行为作出回应。例如，如果你想让你的机器人在一条信息已经复读过 5 次以上，且自己也已经复读过后，对任何打断复读的人以 50% 的概率出警，同时对所有将同一句话复读 2 次的用户也作出警告。你可以这样配置：
@@ -129,12 +156,27 @@ module.exports = {
       repeatCheckText: '不许重复复读！',
 
       // 检测打断复读
-      interruptCheck: (repeated, times) => repeated && times >= 5 && Math.random() > 0.5,
+      interruptCheck: (repeated, times) => repeated && times >= 3 && Math.random() > 0.5,
       interruptCheckText: (userId) => `[CQ:at,qq=${userId}] 在？为什么打断复读？`,
     },
   }],
 }
 ```
+
+<chat-panel>
+<chat-message nickname="Alice" color="#cc0066">foo</chat-message>
+<chat-message nickname="Bob" color="#00994d">foo</chat-message>
+<chat-message nickname="Alice" color="#cc0066">foo</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">不许重复复读！</chat-message>
+</chat-panel>
+
+<chat-panel>
+<chat-message nickname="Alice" color="#cc0066">bar</chat-message>
+<chat-message nickname="Bob" color="#00994d">bar</chat-message>
+<chat-message nickname="Carol" color="#1e90ff">bar</chat-message>
+<chat-message nickname="Dave" color="#f4a460">打断复读</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png"><strong>@Dave</strong> 在？为什么打断复读？</chat-message>
+</chat-panel>
 
 ### 完整的配置项参考
 
@@ -157,7 +199,7 @@ interface RepeaterOptions {
 
 ```js
 const defaultOptions = {
-  repeat: (repeated, times) => times === 4,
+  repeat: false,
   interrupt: false,
   interruptText: '打断复读！',
   repeatCheck: false,

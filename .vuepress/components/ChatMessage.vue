@@ -118,7 +118,7 @@ export default {
   p > img
     margin 0.2rem 0
 
-  &::after
+  &::before
     content ''
     position absolute
     right 100%

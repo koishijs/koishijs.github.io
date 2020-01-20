@@ -9,6 +9,35 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
+## [1.5.0](https://github.com/koishijs/koishi/releases/tag/1.5.0)
+
+### Features
+
+- **core:** 新增 after-middleware 事件 ([bb67894](https://github.com/koishijs/koishi/commit/bb678943188392705eddad03525eed993d147604))
+- **core:** 内置运行时警告改为使用 `logger().warn()` 输出 ([d33781c](https://github.com/koishijs/koishi/commit/d33781c29166da397d051c6813c1573dc91a934c))
+- **cli:** 优化了输出的提示 ([59052bb](https://github.com/koishijs/koishi/commit/59052bb0a6e7225cde00120cd6b240f53bb6233f))
+- **cli:** 优化了错误处理函数 ([34ebc6e](https://github.com/koishijs/koishi/commit/34ebc6ee84c909eaa6a5e636eaa442d7af88ff64))
+- **cli:** 支持在配置文件中使用对象/函数式的插件 ([37e4bdd](https://github.com/koishijs/koishi/commit/37e4bdda24eec669758f301ef3d72e9ff69fa503))
+
+### Dependencies
+
+- **cli:** cac 版本从 6.5.4 更新至 6.5.5 ([dfd279c](https://github.com/koishijs/koishi/commit/dfd279ceb95c2da1fe44e6fa7fb73bac36085417))
+
+### Common Plugin 2.0.0
+
+#### Breaking Changes
+
+- 重构了传入的选项列表 ([c5c4283](https://github.com/koishijs/koishi/commit/c5c4283b14e7fbbb057655373972428d6d84fe67))
+- 移除了 repeater 和 request-handler 插件的默认行为 ([117b12e](https://github.com/koishijs/koishi/commit/117b12efe3a9087a5cf1ca88d10cd4f2cc681f48))
+
+#### Features
+
+- 新增了 exec 指令 ([bf36c71](https://github.com/koishijs/koishi/commit/bf36c713cb7178d10a5c45db4963debfceeadd4f))
+- authorize 指令优化与修复 ([e67243d](https://github.com/koishijs/koishi/commit/e67243deb309232c26d1e6feec05a680df31f5dc), [45f83ee](https://github.com/koishijs/koishi/commit/45f83ee069be04f71610080996ce79b8b4a54b4d))
+- contextify 指令优化与修复 ([7769a50](https://github.com/koishijs/koishi/commit/7769a5097b4b2003866010a8bdae6b74a27a90bf))
+- echo 指令优化与修复 ([fd2973f](https://github.com/koishijs/koishi/commit/fd2973fc0d98097823bf16e50668e468c2428901))
+- info 指令优化与修复 ([e84d700](https://github.com/koishijs/koishi/commit/e84d7005282319e3bd930ee8f807895923a218f8))
+
 ## [1.4.0](https://github.com/koishijs/koishi/releases/tag/1.4.0)
 
 ### Features

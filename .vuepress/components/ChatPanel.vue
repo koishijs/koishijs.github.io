@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-panel">
+  <div class="chat-panel" :class="{ mini }">
     <div class="controls">
       <svg xmlns="http://www.w3.org/2000/svg" width="52" height="12" viewBox="0 0 52 12">
         <circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle>
@@ -16,6 +16,7 @@
 
 export default {
   props: {
+    mini: Boolean,
     title: {
       type: String,
       default: '聊天记录',
@@ -49,5 +50,11 @@ export default {
 
   .content
     padding 2rem 1.2rem 0.2rem
+
+  &.mini
+    .controls
+      display none
+    .content
+      padding 0.2rem 1.2rem
 
 </style>

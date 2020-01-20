@@ -114,7 +114,7 @@ module.exports = context => ({
       '/plugins/': [
         ['/plugins/', '总览'],
         {
-          title: '常用功能 (common)',
+          title: '常用功能',
           collapsable: false,
           children: [
             '/plugins/common/overview',
@@ -140,10 +140,10 @@ module.exports = context => ({
           title: '其他官方插件',
           collapsable: false,
           children: [
-            '/plugins/chess',
-            '/plugins/image-search',
+            '/plugins/other/chess',
+            '/plugins/other/github-webhook',
+            '/plugins/other/image-search',
             // '/plugins/monitor',
-            // '/plugins/webhook',
           ],
         },
       ],

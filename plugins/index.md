@@ -29,6 +29,7 @@ Koishi 官方提供了许多插件，它们被分散在了多个仓库中：
 | [plugin-github-webhook](https://github.com/koishijs/plugin-github-webhook) | [![npm](https://img.shields.io/npm/v/koishi-plugin-github-webhook?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-github-webhook) | 接入 [GitHub Webhook](https://developer.github.com/webhooks/) |
 | [plugin-image-search](https://github.com/koishijs/plugin-image-search) | [![npm](https://img.shields.io/npm/v/koishi-plugin-image-search?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-image-search) | 搜图 |
 | plugin-monitor |  | 直播监控推送 |
+| plugin-status |  | 状态监控和数据统计 |
 | plugin-turing |  | 接入图灵机器人 |
 
 ## 其他小插件
@@ -37,7 +38,6 @@ Koishi 官方提供了许多插件，它们被分散在了多个仓库中：
 
 | 名称 | 版本 | 功能 |
 |:--|:--|:--|
-| [plugin-exec](https://github.com/koishijs/plugins/tree/master/plugin-exec) | [![npm](https://img.shields.io/npm/v/koishi-plugin-exec?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-exec) | 运行命令行 |
 | [plugin-latex](https://github.com/koishijs/plugins/tree/master/plugin-latex) | [![npm](https://img.shields.io/npm/v/koishi-plugin-latex?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-latex) | 渲染 LaTeX |
 | [plugin-magi](https://github.com/koishijs/plugins/tree/master/plugin-magi) | [![npm](https://img.shields.io/npm/v/koishi-plugin-magi?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-magi) | 调用 [Magi](https://magi.com/) |
 | [plugin-maya](https://github.com/koishijs/plugins/tree/master/plugin-maya) | [![npm](https://img.shields.io/npm/v/koishi-plugin-maya?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-maya) | 计算玛雅日历 |

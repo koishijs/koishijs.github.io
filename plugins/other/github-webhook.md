@@ -27,7 +27,7 @@ module.exports = {
 
 ## 示例
 
-这一节展示了目前本插件支持的事件。全部取自真正触发的事件。
+这一节展示了目前本插件支持的事件。全部取自真正触发在 koishijs/koishi 仓库的事件。
 
 ### Push
 
@@ -36,7 +36,7 @@ module.exports = {
 <chat-panel mini>
 <chat-message nickname="Koishi" avatar="/koishi.png">
 <p>[GitHub] Push (<em>koishijs/koishi</em>)</p>
-<p>Ref: <em>master</em></p>
+<p>Ref: <em>refs/heads/develop</em></p>
 <p>User: <em>Shigma</em></p>
 <p>Compare: <em>https://github.com/koishijs/koishi/compare/976c6e8f09a4...3ae7e7044d06</em></p>
 <p><em>chore: adjust</em></p>
@@ -53,6 +53,15 @@ module.exports = {
 </chat-panel>
 
 #### Commit Comment
+
+<chat-panel mini>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>[GitHub] Commit Comment (<em>koishijs/koishi</em>)</p>
+<p>User: <em>Shigma</em></p>
+<p>URL: <em>https://github.com/koishijs/koishi/commit/bff469eabe14d42683a4f7c3ccb659daec5e1c00#commitcomment-36878220</em></p>
+<p><em>This will introduce a failure in test.</em></p>
+</chat-message>
+</chat-panel>
 
 ### Issue
 
@@ -83,8 +92,46 @@ module.exports = {
 
 #### Pull Request Open
 
+<chat-panel mini>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>[GitHub] Pull Request Opened (<em>koishijs/koishi#364852707</em>)</p>
+<p><em>koishijs:develop <- koishijs:experimental</em></p>
+<p>User: <em>simon300000</em></p>
+<p>URL: <em>https://github.com/koishijs/koishi/pull/20</em></p>
+<p><em>Das ist wichtig!</em></p>
+</chat-message>
+</chat-panel>
+
 #### Pull Request Comment
+
+<chat-panel mini>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>[GitHub] Pull Request Comment (<em>koishijs/koishi#20</em>)</p>
+<p>User: <em>Kouchya</em></p>
+<p>URL: <em>https://github.com/koishijs/koishi/pull/20#issuecomment-576291300</em></p>
+<p><em>C'est important!</em></p>
+</chat-message>
+</chat-panel>
 
 #### Pull Request Review
 
+<chat-panel mini>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>[GitHub] Pull Request Review (<em>koishijs/koishi#364852707</em>)</p>
+<p><em>User: Kouchya</em></p>
+<p><em>URL: https://github.com/koishijs/koishi/pull/20#pullrequestreview-345349537</em></p>
+<p><em>LGTM</em></p>
+</chat-message>
+</chat-panel>
+
 #### Pull Request Review Comment
+
+<chat-panel mini>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>[GitHub] Pull Request Review (<em>koishijs/koishi#364852707</em>)</p>
+<p>Path: <em>packages/test-utils/src/mocks.ts</em></p>
+<p>User: <em>Shigma</em></p>
+<p>URL: <em>https://github.com/koishijs/koishi/pull/20#discussion_r368570320</em></p>
+<p><em>Naming is so hard......</em></p>
+</chat-message>
+</chat-panel>

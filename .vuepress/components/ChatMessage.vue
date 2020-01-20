@@ -105,6 +105,7 @@ export default {
   line-height 1.6
   border-radius 0.5rem
   background-color white
+  word-break break-all
 
   .chat-message:not(.no-padding) &
     padding 0.6rem 0.8rem

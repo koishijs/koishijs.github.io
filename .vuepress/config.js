@@ -141,8 +141,9 @@ module.exports = context => ({
           collapsable: false,
           children: [
             '/plugins/other/chess',
-            '/plugins/other/github-webhook',
             '/plugins/other/image-search',
+            '/plugins/other/status',
+            '/plugins/other/github-webhook',
             // '/plugins/monitor',
           ],
         },

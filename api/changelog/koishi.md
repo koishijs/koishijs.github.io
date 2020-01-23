@@ -9,6 +9,28 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
+## [1.6.0](https://github.com/koishijs/koishi/releases/tag/1.6.0)
+
+### Features
+
+- **core:** 新增 `ctx.onceMiddleware()` ([7a1dd94](https://github.com/koishijs/koishi/commit/7a1dd9426bee8fc3440a7226aa93199482063dc4))
+- **core:** 新增 `getUsage()` 和 `updateUsage()` 方法 ([1527159](https://github.com/koishijs/koishi/commit/15271593097cf80b9b94de5f9968f2124b7637a8))
+- **core:** `meta.$stripped` 更改为 `meta.$parsed` ([c3b0b50](https://github.com/koishijs/koishi/commit/c3b0b5094a6776050fcabf4f0d51b7231225f6de))
+- **core:** 新增 `sender.sendMsg()` 和 `sender.sendMsgAsync()` 方法 ([1c3cfee](https://github.com/koishijs/koishi/commit/1c3cfeee3d3231d4904fadbc0d27da30a3d8f1d7))
+- **cli:** optimize ecosystem module resolution ([ed505b1](https://github.com/koishijs/koishi/commit/ed505b1c9413121f26dfb42a692706124a3e71c4))
+- **test-utils:** 新增一些基于 `app.receive()` 的方法 ([a0fd831](https://github.com/koishijs/koishi/commit/a0fd83101cc601049ec15dfc2ced826110fb1909))
+- **test-utils:** 新增实验性的 Random Mock API ([533f4de](https://github.com/koishijs/koishi/commit/533f4defc2ddcfb3064ca9a5b4af88eb42a1ac7c))
+
+### Bug Fixes
+
+- **core:** `app.users` 等特殊上下文现在将按需生成了 ([3ae7e70](https://github.com/koishijs/koishi/commit/3ae7e7044d06daa2ea76e24af15358c5764b9887))
+- **core:** 异步发送消息现在会触发 before-send 事件了 ([1c3cfee](https://github.com/koishijs/koishi/commit/1c3cfeee3d3231d4904fadbc0d27da30a3d8f1d7))
+
+### Dependencies
+
+- **test-utils**: axios 版本从 0.19.1 更新到 0.19.2 ([6889e5d](https://github.com/koishijs/koishi/commit/6889e5ded06996b5e3e0cebbeaf0a8200937c5a7))
+- **database-mysql**: mysql 版本从 2.17.1 更新到 2.18.0 ([6889e5d](https://github.com/koishijs/koishi/commit/6889e5ded06996b5e3e0cebbeaf0a8200937c5a7))
+
 ## [1.5.0](https://github.com/koishijs/koishi/releases/tag/1.5.0)
 
 ### Features

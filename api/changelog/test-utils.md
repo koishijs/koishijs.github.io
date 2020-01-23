@@ -9,6 +9,17 @@ noOutboundLinks: true
 
 本页面包括 koishi-test-utils 的更新日志。
 
+## 2.1.0 (Koishi 1.6.0)
+
+### Features
+
+- **test-utils:** 新增一些基于 `app.receive()` 的方法 ([a0fd831](https://github.com/koishijs/koishi/commit/a0fd83101cc601049ec15dfc2ced826110fb1909))
+- **test-utils:** 新增实验性的 Random Mock API ([533f4de](https://github.com/koishijs/koishi/commit/533f4defc2ddcfb3064ca9a5b4af88eb42a1ac7c))
+
+### Dependencies
+
+- **core**, **test-utils**: axios 版本从 0.19.1 更新到 0.19.2 ([6889e5d](https://github.com/koishijs/koishi/commit/6889e5ded06996b5e3e0cebbeaf0a8200937c5a7))
+
 ## 2.0.0 (koishi 1.5.0)
 
 ### Breaking Changes

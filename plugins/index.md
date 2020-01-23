@@ -47,3 +47,4 @@ Koishi 官方提供了许多插件，它们被分散在了多个仓库中：
 | [plugin-roll](https://github.com/koishijs/plugins/tree/master/plugin-roll) | [![npm](https://img.shields.io/npm/v/koishi-plugin-roll?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-roll) | 掷骰子 |
 | [plugin-vm](https://github.com/koishijs/plugins/tree/master/plugin-vm) | [![npm](https://img.shields.io/npm/v/koishi-plugin-vm?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-vm) | 执行 JavaScript |
 | [plugin-wolfram-alpha](https://github.com/koishijs/plugins/tree/master/plugin-wolfram-alpha) | [![npm](https://img.shields.io/npm/v/koishi-plugin-wolfram-alpha?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-wolfram-alpha) | 调用 [WolframAlpha](https://www.wolframalpha.com/) |
+| [plugin-youdao](https://github.com/koishijs/plugins/tree/master/plugin-youdao) | [![npm](https://img.shields.io/npm/v/koishi-plugin-youdao?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-youdao) | 使用有道翻译 |

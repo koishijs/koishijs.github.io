@@ -38,9 +38,9 @@ ctx.command('weather <location>', '查天气')
   // 传入的第一个参数是要匹配的关键字
   // 第二个参数是一个函数，当匹配到关键字时会执行
   .intend('天气', (meta) => {
-    // 插件会在 meta 对象中添加一个 $tags 属性
+    // 插件会在 meta.$parsed 对象中添加一个 tags 属性
     // 这里的 ns 表示词性为地名
-    const tag = meta.$tags.find(({ tag }) => tag === 'ns')
+    const tag = meta.$parsed.tags.find(({ tag }) => tag === 'ns')
     // 返回一个置信度为 0.9 的结果
     // 执行时的第一个参数取匹配到的词
     if (tag) return { confidence: 0.9, args: [tag.word] }
@@ -66,9 +66,9 @@ ctx.command('weather <location>', '查天气')
 
 如果回调函数没有任何返回，或者返回了一个过低的置信度，则插件不会触发对应的指令。而在上面的例子中，如果 `tag` 存在，则返回了一个置信度为 0.9 的对象，否则不返回，这也表示只有当 `tag` 成功找到后插件才可能会调用查天气的指令。
 
-### meta.$tags
+### meta.$parsed.tags
 
-同上面所说的 `cmd.intend()` 类似，`meta.$tags` 也是插件添加的属性。它表达了输入的句子的分词和词性信息。例如，当输入的句子是“今天南京的天气如何”时，`meta.$tags` 将会有下面的内容：
+同上面所说的 `cmd.intend()` 类似，`meta.$parsed.tags` 也是插件添加的属性。它表达了输入的句子的分词和词性信息。例如，当输入的句子是“今天南京的天气如何”时，`meta.$parsed.tags` 将会有下面的内容：
 
 ```js
 [ { word: '今天', tag: 't' },     // t (time) 时间词
@@ -78,7 +78,7 @@ ctx.command('weather <location>', '查天气')
   { word: '如何', tag: 'r' } ]    // r (pronoun) 代词
 ```
 
-这样一来，剩下的代码也就可以理解了：`meta.$tags.find(({ tag }) => tag === 'ns')` 的作用正是找出句子中的第一个地名并作为调用的参数。
+这样一来，剩下的代码也就可以理解了：`meta.$parsed.tags.find(({ tag }) => tag === 'ns')` 的作用正是找出句子中的第一个地名并作为调用的参数。
 
 ## 配置项
 

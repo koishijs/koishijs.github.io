@@ -294,6 +294,11 @@ app.prependMiddleware((meta, next) => {
     - **$ban:** `(duration?: number) => Promise<void>` 将发言用户禁言
     - **$kick:** `() => Promise<void>` 将发言用户踢出该群
     - **$delete:** `() => Promise<void>` 撤回当前信息
+  - **$parsed:** 一个对象，包含了对消息内容初步解析的结果。拥有下列属性：
+    - **atMe:** `boolean` 是否在消息头部 at 机器人
+    - **nickname:** `string` 消息头部匹配到的 `nickname`，如果没有则为空串
+    - **prefix:** `string` 消息头部匹配到的 `commandPrefix`，如果没有则为空串
+    - **message:** `string` 除去以上三项外的消息内容，会进行 trim 并自动转成简体汉字
 - request 事件相关属性：
   - **$approve:** `(remark?: string) => Promise<void>` 同意申请，且如果是好友申请可以设置备注名
   - **$reject:** `(reason?: string) => Promise<void>` 拒绝申请，且如果是群申请可以设置拒绝理由

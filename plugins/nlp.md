@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# 自然语言处理 (NLP) <Badge text="beta" type="warn"/>
+# 自然语言处理 (NLP)
 
 ::: tip 提示
 本章介绍的功能由 koishi-plugin-nlp 插件提供。

@@ -9,6 +9,25 @@ noOutboundLinks: true
 
 本页面包括 koishi-test-utils 的更新日志。
 
+## 3.0.0 (Koishi 1.7.0)
+
+### Breaking Changes
+
+- 调整了部分 Session API 的语法 ([8799a2d](https://github.com/koishijs/koishi/commit/8799a2dac2ce61b76b10fdfe245ea2f05c9947a8), [cf175f7](https://github.com/koishijs/koishi/commit/cf175f7b5863a192772d06ae0baccd251018fbe6))
+- 调整了 `app.receiveGroupRequest()` 的语法 ([16fd63e](https://github.com/koishijs/koishi/commit/16fd63e95a82c9cd3f088c4376d0aa24043db21d))
+
+### Features
+
+- 新增了 Mocked Utilities API
+
+### Bug Fixes
+
+- 使用 `''` 作为默认快照名，修复了与 jest 25 的兼容性的问题 ([154a409](https://github.com/koishijs/koishi/commit/154a409f08e83af971822a51fd6403495e27c21f))
+
+### Dependencies
+
+- jest 版本从 24.9.0 更新到 25.1.0 ([dd2fbe3](https://github.com/koishijs/koishi/commit/dd2fbe3784303184d9cb4698f24d2be92275f447))
+
 ## 2.1.0 (Koishi 1.6.0)
 
 ### Features
@@ -18,7 +37,7 @@ noOutboundLinks: true
 
 ### Dependencies
 
-- **core**, **test-utils**: axios 版本从 0.19.1 更新到 0.19.2 ([6889e5d](https://github.com/koishijs/koishi/commit/6889e5ded06996b5e3e0cebbeaf0a8200937c5a7))
+- axios 版本从 0.19.1 更新到 0.19.2 ([6889e5d](https://github.com/koishijs/koishi/commit/6889e5ded06996b5e3e0cebbeaf0a8200937c5a7))
 
 ## 2.0.0 (koishi 1.5.0)
 
@@ -29,8 +48,8 @@ noOutboundLinks: true
 
 ### Features
 
-- MockedServer API ([2c5ab8f](https://github.com/koishijs/koishi/commit/2c5ab8fb864ca247bfa8cb37fd79e32f5d24b6fa))
-- MemoryDatabase API ([2c94ac6](https://github.com/koishijs/koishi/commit/2c94ac6f827929c95b79bfcd8e085e1636b62732))
+- 新增了 MockedServer API ([2c5ab8f](https://github.com/koishijs/koishi/commit/2c5ab8fb864ca247bfa8cb37fd79e32f5d24b6fa))
+- 新增了 MemoryDatabase API ([2c94ac6](https://github.com/koishijs/koishi/commit/2c94ac6f827929c95b79bfcd8e085e1636b62732))
 
 ### Bug Fixes
 

@@ -9,6 +9,25 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
+## [1.7.0](https://github.com/koishijs/koishi/releases/tag/1.7.0)
+
+### Features
+
+- **cli:** 输出日志时会显示 scope ([a245fa3](https://github.com/koishijs/koishi/commit/a245fa325b80a8925c06c751bc37cf715289e814))
+- **core:** before-user, before-group, attach 三个事件将在对应的上下文触发 ([658944a](https://github.com/koishijs/koishi/commit/658944a5fcce5fcabae0731b4c62a97401b4ab3e))
+- **plugin-common:** `registerUserInfo()` 支持传入第三个参数 ([7119a58](https://github.com/koishijs/koishi/commit/7119a584e1d3ef81b6e3dabc07c3ca45343dee95))
+- **plugin-common:** 新增 `contextify --member` 选项 ([7eb6d20](https://github.com/koishijs/koishi/commit/7eb6d206b0e216f2198fd582e18fa917fb6244ed))
+- **plugin-nlp:** 使用 `meta.$parsed.message` 取代 `meta.message` ([5d4d7fe](https://github.com/koishijs/koishi/commit/5d4d7fe0c6a0c20c81114f215ce2fa44730f59b9))
+- **plugin-nlp:** `cmd.intend()` 将返回 `this` 以便链式调用 ([8036e02](https://github.com/koishijs/koishi/commit/8036e02c93098242119ee0d7c5fbfeac499957f2))
+
+### Bug Fixes
+
+- **core:** 快捷调用的 message 将自动去除头部空格 ([abb7498](https://github.com/koishijs/koishi/commit/abb749850f3d883105dec45f127ab8008948cc04), [f72ba21](https://github.com/koishijs/koishi/commit/f72ba21de418a7b71efc92821eb4aecbd42b066b))
+
+### Dependencies
+
+- **database-mysql**: mysql 版本从 2.18.0 更新到 2.18.1 ([dd2fbe3](https://github.com/koishijs/koishi/commit/dd2fbe3784303184d9cb4698f24d2be92275f447))
+
 ## [1.6.0](https://github.com/koishijs/koishi/releases/tag/1.6.0)
 
 ### Features
@@ -18,8 +37,6 @@ noOutboundLinks: true
 - **core:** `meta.$stripped` 更改为 `meta.$parsed` ([c3b0b50](https://github.com/koishijs/koishi/commit/c3b0b5094a6776050fcabf4f0d51b7231225f6de))
 - **core:** 新增 `sender.sendMsg()` 和 `sender.sendMsgAsync()` 方法 ([1c3cfee](https://github.com/koishijs/koishi/commit/1c3cfeee3d3231d4904fadbc0d27da30a3d8f1d7))
 - **cli:** optimize ecosystem module resolution ([ed505b1](https://github.com/koishijs/koishi/commit/ed505b1c9413121f26dfb42a692706124a3e71c4))
-- **test-utils:** 新增一些基于 `app.receive()` 的方法 ([a0fd831](https://github.com/koishijs/koishi/commit/a0fd83101cc601049ec15dfc2ced826110fb1909))
-- **test-utils:** 新增实验性的 Random Mock API ([533f4de](https://github.com/koishijs/koishi/commit/533f4defc2ddcfb3064ca9a5b4af88eb42a1ac7c))
 
 ### Bug Fixes
 
@@ -28,7 +45,7 @@ noOutboundLinks: true
 
 ### Dependencies
 
-- **test-utils**: axios 版本从 0.19.1 更新到 0.19.2 ([6889e5d](https://github.com/koishijs/koishi/commit/6889e5ded06996b5e3e0cebbeaf0a8200937c5a7))
+- **core**: axios 版本从 0.19.1 更新到 0.19.2 ([6889e5d](https://github.com/koishijs/koishi/commit/6889e5ded06996b5e3e0cebbeaf0a8200937c5a7))
 - **database-mysql**: mysql 版本从 2.17.1 更新到 2.18.0 ([6889e5d](https://github.com/koishijs/koishi/commit/6889e5ded06996b5e3e0cebbeaf0a8200937c5a7))
 
 ## [1.5.0](https://github.com/koishijs/koishi/releases/tag/1.5.0)

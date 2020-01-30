@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# 接入 Github Webhook <Badge text="beta" type="warn"/>
+# 接入 GitHub Webhook <Badge text="beta" type="warn"/>
 
 koishi-plugin-github-webhook 支持接收 [GitHub Webhook](https://developer.github.com/webhooks/) 并转发到 QQ。
 

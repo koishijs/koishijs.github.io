@@ -144,6 +144,7 @@ module.exports = context => ({
             '/plugins/other/image-search',
             '/plugins/other/status',
             '/plugins/other/github-webhook',
+            '/plugins/other/gitlab-webhook',
             // '/plugins/monitor',
           ],
         },

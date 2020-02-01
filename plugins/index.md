@@ -27,6 +27,7 @@ Koishi 官方提供了许多插件，它们被分散在了多个仓库中：
 |:--|:--|:--|
 | [plugin-chess](https://github.com/koishijs/plugin-chess) | [![npm](https://img.shields.io/npm/v/koishi-plugin-chess?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-chess) | 下棋 |
 | [plugin-github-webhook](https://github.com/koishijs/plugin-github-webhook) | [![npm](https://img.shields.io/npm/v/koishi-plugin-github-webhook?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-github-webhook) | 接入 [GitHub Webhook](https://developer.github.com/webhooks/) |
+| [plugin-gitlab-webhook](https://github.com/koishijs/plugin-gitlab-webhook) | [![npm](https://img.shields.io/npm/v/koishi-plugin-gitlab-webhook?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-gitlab-webhook) | 接入 [GitLab Webhook](https://gitlab.com/help/user/project/integrations/webhooks) |
 | [plugin-image-search](https://github.com/koishijs/plugin-image-search) | [![npm](https://img.shields.io/npm/v/koishi-plugin-image-search?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-image-search) | 搜图 |
 | [plugin-status](https://github.com/koishijs/plugin-status) | [![npm](https://img.shields.io/npm/v/koishi-plugin-status?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-status) | 状态监控 |
 | plugin-monitor |  | 直播监控推送 |

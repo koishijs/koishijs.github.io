@@ -9,6 +9,8 @@ noOutboundLinks: true
 
 本页面包括 koishi-test-utils 的更新日志。
 
+## 3.0.1 (koishi 1.8.0)
+
 ## 3.0.0 (Koishi 1.7.0)
 
 ### Breaking Changes

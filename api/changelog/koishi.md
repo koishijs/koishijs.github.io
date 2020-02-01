@@ -9,6 +9,31 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
+## [1.8.0](https://github.com/koishijs/koishi/releases/tag/1.8.0)
+
+### Features
+
+- **core:** 指令默认情况下将隐藏 -h, --help 选项 ([a84621d](https://github.com/koishijs/koishi/commit/a84621d61d9cbb8bb1d4322f0662c5eea91866cb))
+- **core:** 优化了类型标注 ([2446723](https://github.com/koishijs/koishi/commit/24467231ae7313f680dc90aa6c2df02f7d938bd4))
+- **core:** 优化了调用记录检查 ([5f8d8e1](https://github.com/koishijs/koishi/commit/5f8d8e12338d488d26cb06ff8de599878d85353f))
+- **core:** 默认情况下将使用 debug 处理 logger 输出 ([ea8c3d1](https://github.com/koishijs/koishi/commit/ea8c3d120ba99f47b092a78cc743dec7ff6bcfa6))
+- **cli:** 优化了启动时的报错提示 ([b510600](https://github.com/koishijs/koishi/commit/b51060089d75fdbce3686babdf255527f2a25b0b))
+- **plugin-common:** 增加了 authorize 插件的 logger 提示 ([2f36aca](https://github.com/koishijs/koishi/commit/2f36aca21467a4ec5042fa532e90d7d2c2250928), [fb7dbe6](https://github.com/koishijs/koishi/commit/fb7dbe6553271713bc1c3dba7bd7ae5a5212e9fb))
+
+### Bug Fixes
+
+- **core:** 修复了 CommandConfig.disable 选项的无效行为 ([1cffdab](https://github.com/koishijs/koishi/commit/1cffdab6929edb4cb190e854442a2bf9cc83b34a))
+- **core:** 修复了 disable 指令仍可以通过错误纠正机制被调用的问题 ([95cf878](https://github.com/koishijs/koishi/commit/95cf8787adeda7ba91b09e93da361178666274d4))
+- **core:** 修复了无法处理 heartbeat 事件的问题 ([36a4602](https://github.com/koishijs/koishi/commit/36a460236acf114d760a05fbc9c2102718b17a86))
+- **cli:** 修复了错误的路径解析 ([06d59b8](https://github.com/koishijs/koishi/commit/06d59b83a49b4d299a0422139102c23e64dca80e))
+- **plugin-common:** 选项的显示将不考虑隐藏选项 ([6b1530a](https://github.com/koishijs/koishi/commit/6b1530a58594b1fd5b95da8f2c319e7eb0e75782))
+- **plugin-common:** 修复了 authorization 的错误行为 ([76663bc](https://github.com/koishijs/koishi/commit/76663bcd82c1472cf4a4c3353c4614550eeb7be4))
+
+### Dependencies
+
+- **cli:** cac 版本从 6.5.5 更新至 6.5.6
+- 所有官方数据库支持都将 koishi-core 改为 peerDependency
+
 ## [1.7.0](https://github.com/koishijs/koishi/releases/tag/1.7.0)
 
 ### Features

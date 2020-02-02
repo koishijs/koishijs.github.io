@@ -22,7 +22,7 @@ CQ 码，是指在 CoolQ 的消息中，以 `[CQ:` 开头、`]` 结尾的，可�
 sender.sendGroupMsg(123, '[CQ:at,qq=456]')
 ```
 
-如果这个时候传入第三个参数 `true`，则相当于直接发送一串 `[CQ:at,qq=456]`，在大部分情况下这都不是你期望的结果。因此，**在任何时候我们都不建议你设置这个参数**。如果你真的需要避免 CQ 码转义，你可以使用 `CQCode.escape()` 函数：
+如果这个时候传入第三个参数 `true`，则相当于直接发送一串 `[CQ:at,qq=456]`，在大部分情况下这都不是你期望的结果。因此，**在大部分情况下我们都不建议你设置这个参数**。如果你真的需要避免 CQ 码转义，你可以使用 `CQCode.escape()` 函数：
 
 ```js
 const { CQCode } = require('koishi-utils')
@@ -40,6 +40,9 @@ retcode 是一个整数，大于 0 表示是 CQHTTP 发出的错误，小于 0 �
 
 | retcode | 推测意义 |
 |:-:|:--|
+| -1 | 账号已下线 |
+| -2 | |
+| -3 | 尝试发送不支持的 CQ 码 |
 | -11 | 无法下载图片导致发送失败 |
 | -34 | 被禁言导致发送失败 |
 
@@ -81,3 +84,5 @@ app.receiver.on('connect', () => app.sender.sendPrivateMsg(1234567, '你的机�
 目前 Koishi 已经完全实现了 CQHTTP 提供的 HTTP 和 WebSocket 通信方式，因此它们之间**不存在任何功能上的差别**。
 
 但是，HTTP 需要 Koishi 和 CQHTTP 所处于同一台机器，或所处的机器都拥有公网 IP；而 WebSocket 只需要 Koishi 和 CQHTTP 所处于同一台机器，或运行 CQHTTP 的机器拥有公网 IP。因此如果你在服务端运行 CoolQ，同时在个人电脑上调试你的 Koishi 应用，你应当选择使用 WebSocket 模式。
+
+从性能上说，WebSocket 占用的资源会更少（因为不需要每次都建立连接），但是响应速度可能不如 HTTP；另一方面，当一个 Koishi 应用同时管理着多个机器人时，HTTP 能通过快捷调用和服务器复用的方式来提高性能，但是 WebSocket 并没有这些机制。

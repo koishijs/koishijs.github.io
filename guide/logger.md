@@ -95,12 +95,10 @@ Koishi 内部使用 [debug](https://github.com/visionmedia/debug) 处理 logger 
 
 ```sh
 # 对于 linux 和 macOS
-DEBUG=koishi:*
-koishi start
+DEBUG=koishi:*; koishi start
 
 # 对于 Windows
-$env:DEBUG=koishi:*
-koishi start
+$env:DEBUG=koishi:*; koishi start
 
 # 使用 cross-env
 cross-env DEBUG=koishi:* koishi start

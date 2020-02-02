@@ -65,16 +65,8 @@ app.middleware(({ message, $send }, next) => {
 })
 
 test('example', async () => {
-  // 尝试接收一个事件
-  // meta 是这个事件的元信息对象
-  // 你不需要写那些以 $ 开头的属性，那些是 Koishi 自动生成的
-  await app.receive({
-    postType: 'message',
-    messageType: 'private',
-    subType: 'friend',
-    userId: 123,
-    message: '天王盖地虎',
-  })
+  // 尝试接收一个 message 事件
+  await app.receiveMessage('user', '天王盖地虎', 123)
 
   // 判断 app 应该最终发送了这个请求
   // 这里的请求名相当于 sender 中对应的接口名，不用写 async
@@ -84,14 +76,8 @@ test('example', async () => {
     message: '宝塔镇河妖',
   })
 
-  // 再次尝试接收一个事件
-  await app.receive({
-    postType: 'message',
-    messageType: 'private',
-    subType: 'friend',
-    userId: 123,
-    message: '宫廷玉液酒',
-  })
+  // 再次尝试接收一个 message 事件
+  await app.receiveMessage('user', '宫廷玉液酒', 123)
 
   // 判断 app 应该最终没有发送任何请求
   app.shouldHaveNoRequests()
@@ -161,6 +147,38 @@ test('example', async () => {
   // 关闭服务端和所有关联的 App
   await server.close()
 })
+```
+
+## 模拟工具函数
+
+如果我们编写的插件中含有延时或者随机效果，测试工作会变得困难不少——因为我们希望所有测试的行为都能在短时间内符合预期地完成。这个时候，koishi-test-utils 也提供了一种解决方式。
+
+```js
+// 这里的 utils 相当于 koishi-utils 的一个副本
+// 在此基础上额外提供了测试时进行控制的方法
+const { utils } = require('koishi-test-utils')
+
+// 此后插件中的 randomPick() 调用将永远返回数组的第一个元素
+utils.randomPick.mockIndex(0)
+
+// 此后插件中的 randomInt() 调用将永远返回 3
+utils.randomInt.mockReturnValue(3)
+
+// 此后插件中的 sleep() 调用将不等待直接返回 Promise.resolve()
+utils.sleep.mockResolvedValue()
+```
+
+这些函数也有对应的 once 版本，它们将只生效一次：
+
+```js
+// 下一次插件中的 randomPick() 调用将返回数组的第一个元素
+utils.randomPick.mockIndexOnce(0)
+
+// 下一次插件中的 randomInt() 调用将返回 3
+utils.randomInt.mockReturnValueOnce(3)
+
+// 下一次插件中的 sleep() 调用将不等待直接返回 Promise.resolve()
+utils.sleep.mockResolvedValueOnce()
 ```
 
 ## 模拟数据库

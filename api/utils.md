@@ -256,3 +256,19 @@ interface CQCode {
 
 - **array:** `T[]` 数组
 - 返回值: `T` 挑出的元素
+
+### randomMultiPick(array, count) <Badge text="beta" type="warn"/>
+
+从数组中随机挑出一些元素，不改变原数组。
+
+- **array:** `readonly T[]` 数组
+- **count:** `number` 元素个数
+- 返回值: `T[]` 挑出的元素列表
+
+### randomWeightedPick(weights, value?) <Badge text="beta" type="warn"/>
+
+按照权重随机挑出一个元素。
+
+- **weights:** `Record<T, number>` 权重表
+- **value:** `number` 一个 0 到 1 之间的随机数，默认为 `Math.random()`
+- 返回值: `T` 挑出的元素

@@ -169,3 +169,30 @@ sidebarDepth: 2
 - **options.command:** `Command | ((suggestion: string) => Command)` 相关指令
 - **options.execute:** `(suggestion: string, meta: MessageMeta, next: NextFunction) => void` 确认后执行的操作
 - 返回值: `Promise<void>`
+
+### getUsage(name, user) <Badge text="beta" type="warn"/> <Badge text="1.6.0+" type="warn"/>
+
+获得用户的使用数据（如果不存在则会创建）。
+
+- **name:** `string` 标识符（如果是指令的话就是指令名）
+- **user:** `UserData` 用户数据
+- 返回值: `Usage`
+
+```ts
+export interface Usage {
+  // 最后一次调用的时间戳
+  last?: number
+  // 当日已经调用的次数
+  count?: number
+}
+```
+
+### updateUsage(name, user, maxUsage?, minInterval?) <Badge text="beta" type="warn"/> <Badge text="1.6.0+" type="warn"/>
+
+更新用户的使用数据（如果不存在则会创建）。
+
+- **name:** `string` 标识符（如果是指令的话就是指令名）
+- **user:** `UserData` 用户数据
+- **maxUsage:** `number` 每天最大调用次数，默认为 `Infinity`
+- **minInterval:** `number` 调用最小时间间隔，默认为 `0`
+- 返回值: `string` 如果无法调用则返回错误信息，如果可以调用则没有返回值

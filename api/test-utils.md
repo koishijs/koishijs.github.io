@@ -61,6 +61,13 @@ sidebarDepth: 2
 
 - 返回值: `void`
 
+### mocked.shouldMatchSnapshot(name?) <Badge text="3.0.0+"/>
+
+断言发送的请求与快照相符。
+
+- **name:** `string` 快照名
+- 返回值: `void`
+
 ### mocked.clearRequests()
 
 清空请求列表。
@@ -93,27 +100,9 @@ MockedApp 会截获从 Sender API 发出的所有请求，因而实现了 Mocked
 
 ### app.receive(meta) <Badge text="2.0.0+"/>
 
-模拟一次事件上报。**注意：这个函数在 1.x 版本也存在，但是接口与 2.0 不同。**
+模拟一次事件上报。
 
 - **meta:** `Meta` 事件元信息对象
-- 返回值: `void`
-
-### app.receiveFriendRequest(userId, flag?) <Badge text="2.0.0+"/>
-
-模拟一次 request/friend 事件上报。
-
-- **userId:** `number` 用户 QQ 号
-- **flag:** `string` 请求 flag，默认为 `flag`
-- 返回值: `void`
-
-### app.receiveGroupRequest(userId, type, groupId?, flag?) <Badge text="2.0.0+"/>
-
-模拟一次 request/group 事件上报。
-
-- **userId:** `number` 用户 QQ 号
-- **type:** `'add' | 'invite'` 事件的子类型
-- **groupId:** `number` 群号
-- **flag:** `string` 请求 flag，默认为 `flag`
 - 返回值: `void`
 
 ### app.receiveMessage(type, message, userId, ctxId?) <Badge text="2.0.0+"/>
@@ -127,6 +116,80 @@ MockedApp 会截获从 Sender API 发出的所有请求，因而实现了 Mocked
 - 返回值: `Promise<void>`
 
 此外，你也可以直接向这个方法传入一个等价的 Meta 对象，效果相同。
+
+### app.receiveFriendRequest(userId, flag?) <Badge text="2.0.0+"/>
+
+模拟一次 request/friend 事件上报。
+
+- **userId:** `number` 用户 QQ 号
+- **flag:** `string` 请求 flag，默认为 `flag`
+- 返回值: `void`
+
+### app.receiveGroupRequest(type, userId, groupId?, flag?) <Badge text="3.0.0+"/>
+
+模拟一次 request/group 事件上报。
+
+- **userId:** `number` 用户 QQ 号
+- **type:** `'add' | 'invite'` 事件的子类型
+- **groupId:** `number` 群号
+- **flag:** `string` 请求 flag，默认为 `flag`
+- 返回值: `void`
+
+### app.receiveGroupUpload(file, userId, groupId?) <Badge text="3.0.0+"/>
+
+模拟一次 group-upload 事件上报。
+
+- **groupId:** `number` 群号
+- **userId:** `number` 上传者 QQ 号
+- **groupId:** `number` 群号
+- 返回值: `void`
+
+### app.receiveGroupAdmin(subType, userId, groupId?) <Badge text="3.0.0+"/>
+
+模拟一次 group-admin 事件上报。
+
+- **subType:** `'set' | 'unset'` 事件的子类型
+- **userId:** `number` 目标 QQ 号
+- **groupId:** `number` 群号
+- 返回值: `void`
+
+### app.receiveGroupIncrease(subType, userId, groupId?, operatorId?) <Badge text="3.0.0+"/>
+
+模拟一次 group-increase 事件上报。
+
+- **subType:** `'approve' | 'invite'` 事件的子类型
+- **userId:** `number` 目标 QQ 号
+- **groupId:** `number` 群号
+- **operatorId:** `number` 操作者 QQ 号
+- 返回值: `void`
+
+### app.receiveGroupDecrease(subType, userId, groupId?, operatorId?) <Badge text="3.0.0+"/>
+
+模拟一次 group-decrease 事件上报。
+
+- **subType:** `'leave' | 'kick' | 'kick_me'` 事件的子类型
+- **userId:** `number` 目标 QQ 号
+- **groupId:** `number` 群号
+- **operatorId:** `number` 操作者 QQ 号
+- 返回值: `void`
+
+### app.receiveGroupBan(subType, duration, userId, groupId?, operatorId?) <Badge text="3.0.0+"/>
+
+模拟一次 group-ban 事件上报。
+
+- **subType:** `'ban' | 'lift_ban'` 事件的子类型
+- **duration:** `number` 禁言时长
+- **userId:** `number` 目标 QQ 号
+- **groupId:** `number` 群号
+- **operatorId:** `number` 操作者 QQ 号
+- 返回值: `void`
+
+### app.receiveFriendAdd(userId) <Badge text="3.0.0+"/>
+
+模拟一次 friend-add 事件上报。
+
+- **userId:** `number` 目标 QQ 号
+- 返回值: `void`
 
 ### app.createSession(ctxType, userId, ctxId?)
 
@@ -159,34 +222,12 @@ MockedApp 会截获从 Sender API 发出的所有请求，因而实现了 Mocked
 在这两种情况下，你仍然可以使用上面所述的 MockedServer API 来解决你的问题。
 :::
 
-### session.send(message)
+### session.send(message) <Badge text="3.0.0+"/>
 
 模拟发送一条消息。
 
 - **message:** `string` 要发送的信息
-- 返回值: `Promise<ResponsePayload>` 收到的第一个响应，如果没有则为 `null`
-
-```ts
-export interface ResponsePayload {
-  delete?: boolean
-  ban?: boolean
-  banDuration?: number
-  kick?: boolean
-  reply?: string
-  autoEscape?: boolean
-  atSender?: boolean
-  approve?: boolean
-  remark?: string
-  reason?: string
-}
-```
-
-### session.getReply(message)
-
-模拟发送一条消息，获取其回复。
-
-- **message:** `string` 要发送的信息
-- 返回值: `Promise<string>` 收到的第一个回复，如果没有则为 `undefined`
+- 返回值: `Promise<string[]>` 收到的回复列表
 
 ### session.shouldHaveReply(message, reply?)
 
@@ -203,7 +244,7 @@ export interface ResponsePayload {
 - **message:** `string` 要发送给机器人的信息
 - 返回值: `Promise<void>`
 
-### session.shouldHaveNoResponse(message)
+### session.shouldHaveNoReply(message) <Badge text="3.0.0+"/>
 
 断言某条信息不应存在任何回复。
 
@@ -263,3 +304,51 @@ export interface ResponsePayload {
 关闭服务端和所有关联的 App 实例。
 
 - 返回值: `Promise<void>`
+
+## koishi-utils <Badge text="3.0.0+"/>
+
+koishi-test-utils 导出了一个 `utils` 对象作为 koishi-utils 的副本，同时增加了手动控制其中部分函数返回值的机制。所有的 random 函数和 sleep 函数都将是 mockFn 实例，你可以在 [**这里**](https://jestjs.io/docs/zh-Hans/mock-function-api) 看到它们的详细文档。
+
+除此以外，koishi-test-utils 还扩展了以下几个方法：
+
+### utils.randomPick.mockIndex(index)
+
+控制此后 randomPick 函数返回的数组元素。
+
+- **index:** `number`  元素下标
+- 返回值: `this` randomPick 函数本身
+
+### utils.randomPick.mockIndexOnce(index)
+
+控制下一次 randomPick 函数返回的数组元素。
+
+- **index:** `number`  元素下标
+- 返回值: `this` randomPick 函数本身
+
+### utils.randomSplice.mockIndex(index)
+
+控制此后 randomSplice 函数返回的数组元素。
+
+- **index:** `number`  元素下标
+- 返回值: `this` randomSplice 函数本身
+
+### utils.randomSplice.mockIndexOnce(index)
+
+控制下一次 randomSplice 函数返回的数组元素。
+
+- **index:** `number`  元素下标
+- 返回值: `this` randomSplice 函数本身
+
+### utils.randomMultiPick.mockIndices(...indices)
+
+控制此后 randomMultiPick 函数返回的数组元素。
+
+- **indices:** `number`  元素下标列表
+- 返回值: `this` randomMultiPick 函数本身
+
+### utils.randomMultiPick.mockIndicesOnce(...indices)
+
+控制下一次 randomMultiPick 函数返回的数组元素。
+
+- **indices:** `number`  元素下标列表
+- 返回值: `this` randomMultiPick 函数本身

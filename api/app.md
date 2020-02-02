@@ -69,12 +69,16 @@ sidebarDepth: 2
 
 ## app.emitEvent(meta, event, ...payloads)
 
-在元信息相关联的上下文触发一个事件。如果你只希望该事件在 `App` 本身触发，应该直接使用 `app.receiver.emit()` 方法。
+在元信息相关联的上下文触发一个事件。
 
 - **meta:** `Meta` 元信息
 - **event:** `string` 事件名
 - **payloads:** `any[]` 事件参数
 - 返回值: `void`
+
+::: tip 提示
+如果你只希望该事件在 `App` 本身触发，应该直接使用 `app.receiver.emit()` 方法。
+:::
 
 ## app.parseCommandLine(message, meta)
 

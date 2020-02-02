@@ -107,7 +107,7 @@ type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
 
 在当前上下文中获取一个指令。如果提供了 `meta`，将会检测指令是否可以匹配 `meta.$path`；否则将使用 `this.path` 进行匹配。
 
-- **name:** `string` 指令名（这里的前缀和参数会被忽略）
+- **name:** `string` 指令名
 - **meta:** [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 元信息对象
 - 返回值：[`Command`](./command.md) 匹配的指令
 
@@ -115,7 +115,7 @@ type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
 
 在当前上下文中执行一个指令。
 
-- **name:** `string` 指令名（这里的前缀和参数会被忽略）
+- **name:** `string` 指令名
 - **meta:** [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 元信息对象
 - **args:** `string[]` 参数列表
 - **options:** `Record<string, any>` 选项列表

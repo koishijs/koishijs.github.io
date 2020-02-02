@@ -89,19 +89,21 @@ module.exports = {
 
 当同时设置了 `logLevel` 和 `logFilter` 时，后者在 foo 插件的范围会覆盖前者，再用覆盖后的值与命令行取最小值，得到的就是 foo 插件的最终输出等级。
 
-### logger 事件
+### 使用 debug
 
-Koishi 不会处理由 logger 产生的信息，但是会将这些信息变成事件在 App 进行触发。例如，调用 `logger.info()` 的效果相当于同时触发 `logger` 和 `logger/info` 事件。因此，你可以通过监听 logger 事件来自行处理输出。下面的例子展示了如何使用 [debug](https://github.com/visionmedia/debug) 进行输出控制：
+Koishi 内部使用 [debug](https://github.com/visionmedia/debug) 处理 logger 产生的信息。你可以通过设置环境变量的方式来输出 debug 信息：
 
-```js
-const { App } = require('koishi')
-const debug = require('debug')
+```sh
+# 对于 linux 和 macOS
+DEBUG=koishi:*
+koishi start
 
-const app = new App()
+# 对于 Windows
+$env:DEBUG=koishi:*
+koishi start
 
-app.receiver.on('logger', (scope, message) => {
-  debug(scope)(message)
-})
+# 使用 cross-env
+cross-env DEBUG=koishi:* koishi start
 ```
 
 ### 内置的输出

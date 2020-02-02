@@ -297,7 +297,7 @@ app.prependMiddleware((meta, next) => {
   - **$parsed:** 一个对象，包含了对消息内容初步解析的结果。拥有下列属性：
     - **atMe:** `boolean` 是否在消息头部 at 机器人
     - **nickname:** `string` 消息头部匹配到的 `nickname`，如果没有则为空串
-    - **prefix:** `string` 消息头部匹配到的 `commandPrefix`，如果没有则为空串
+    - **prefix:** `string` 消息头部匹配到的 `commandPrefix`，如果没有则为 `null`
     - **message:** `string` 除去以上三项外的消息内容，会进行 trim 并自动转成简体汉字
 - request 事件相关属性：
   - **$approve:** `(remark?: string) => Promise<void>` 同意申请，且如果是好友申请可以设置备注名

@@ -60,10 +60,10 @@ koishi start
 
 现在可以对你的机器人说话了：
 
-<chat-panel>
+<panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">echo 你好</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">你好</chat-message>
-</chat-panel>
+</panel-view>
 
 ## 调用 Koishi
 

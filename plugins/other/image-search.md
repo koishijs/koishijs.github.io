@@ -14,7 +14,7 @@ koishi-plugin-image-search 封装了一系列搜图相关的指令，目前支�
 
 参考了 [Tsuk1ko](https://github.com/Tsuk1ko/CQ-picfinder-robot) 的机器人实现。下面是一个简单的示例：
 
-<chat-panel>
+<panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">
 <p>搜图</p>
 <p><img src="/image-search/68670776_p0_master1200.jpg" width="240"/></p>
@@ -36,7 +36,7 @@ koishi-plugin-image-search 封装了一系列搜图相关的指令，目前支�
 <p>Link: <a href="https://pixiv.net/i/73212619" target="_blank" rel="noopener noreferrer">https://pixiv.net/i/73212619</a></p>
 <p>Author: <a href="https://pixiv.net/u/4790" target="_blank" rel="noopener noreferrer">https://pixiv.net/u/4790</a></p>
 </chat-message>
-</chat-panel>
+</panel-view>
 
 ## 指令：image-search
 

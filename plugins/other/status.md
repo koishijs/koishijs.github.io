@@ -6,7 +6,7 @@ sidebarDepth: 2
 
 koishi-plugin-status 可以用于查看机器人的运行状态。下面是一个实例（以四季酱为例）：
 
-<chat-panel>
+<panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">四季酱，你的状态</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">
 <p>5 名四季酱正在为 20 个群和 2409 名用户提供服务。</p>
@@ -24,6 +24,6 @@ koishi-plugin-status 可以用于查看机器人的运行状态。下面是一�
 <p>CPU 使用率：1% / 2%</p>
 <p>内存使用率：34% / 91%</p>
 </chat-message>
-</chat-panel>
+</panel-view>
 
 ## 配置

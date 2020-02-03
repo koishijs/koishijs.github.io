@@ -8,6 +8,16 @@ Koishi 提供了名为 `koishi` 的命令行工具，相信你已经在之前的
 
 ## koishi init
 
+<Terminal :content="[
+  { text: 'cd ~/mybot', type: 'input' },
+  { text: 'koishi init', type: 'input' },
+  { text: 'Connection Type', hint: '- Use arrow-keys. Return to submit.', type: 'select' },
+  { text: 'Koishi Port', hint: '8080', type: 'question' },
+  { text: 'HTTP Server', hint: 'http://localhost:5700', type: 'question' },
+  { text: 'success created config file: /mybot/koishi.config.js' }
+]">
+</Terminal>
+
 koishi init 指令用于生成一个 koishi 配置文件，通常是 koishi.config.js。相信看过前几章的你已经对这个文件的结构足够熟悉了。这个指令的完整语法如下：
 
 ```

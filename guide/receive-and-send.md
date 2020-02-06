@@ -44,7 +44,7 @@ await app.sender.sendPrivateMsg(123456789, 'Hello world')
 const groupInfo = await app.sender.getGroupInfo(987654321)
 ```
 
-如果你熟悉 CQHTTP API 的话，这对你一定不陌生。没错，这套接口和 CQHTTP 提供的接口是一一对应的。除此以外，由于 Koishi 全部使用 TypeScript 编写，我们还提供了完整的类型定义，让你在编写代码时再也不无需查看 CQHTTP 文档。你可以在 [发送器](../api/sender.md) 一章中看到完整的 Sender API。
+如果你熟悉 CQHTTP API 的话，这对你一定不陌生。没错，这套接口和 CQHTTP 提供的接口是一一对应的。除此以外，由于 Koishi 全部使用 TypeScript 编写，我们还提供了完整的类型定义，让你在编写代码时再也无需查看 CQHTTP 文档。你可以在 [发送器](../api/sender.md) 一章中看到完整的 Sender API。
 
 ::: tip 提示
 尽管 Koishi 总体支持 CQHTTP 3.0，但是部分接口需要更高的 CQHTTP 版本才能进行调用。因此，我们建议你永远使用最新的 CQHTTP 版本。

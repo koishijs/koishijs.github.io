@@ -12,7 +12,7 @@ koishi-plugin-chess 提供了下棋功能。目前支持的规则有：
 
 下面是一个简单的示例：
 
-<chat-panel>
+<panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">黑白棋</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png" class="no-padding">
 <img src="/chess/othello-1.svg" width="240"/>
@@ -27,7 +27,7 @@ koishi-plugin-chess 提供了下棋功能。目前支持的规则有：
 <chat-message nickname="Koishi" avatar="/koishi.png" class="no-padding">
 <img src="/chess/othello-3.svg" width="240"/>
 </chat-message>
-</chat-panel>
+</panel-view>
 
 ## 基本功能
 

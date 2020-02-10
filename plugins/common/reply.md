@@ -25,14 +25,14 @@ module.exports = {
 }
 ```
 
-<chat-panel>
+<panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">awsl</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">爱我苏联</chat-message>
 <chat-message nickname="Bob" color="#00994d">久 等 了</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">空格警察，出动！</chat-message>
 <chat-message nickname="Carol" color="#1e90ff">挖坑一时爽</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">一直挖坑一直爽</chat-message>
-</chat-panel>
+</panel-view>
 
 其中 `match` 可以是一个字符串或正则表达式，用来表示要匹配的内容；`reply` 可以是一个字符串或传入字符串的函数，用来表示输出的结果。`respondent` 数组会按照从上到下的顺序进行匹配。
 
@@ -56,13 +56,13 @@ module.exports = {
 }
 ```
 
-<chat-panel>
+<panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">foo</chat-message>
 <chat-message nickname="Bob" color="#00994d">foo</chat-message>
 <chat-message nickname="Carol" color="#1e90ff">foo</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">foo</chat-message>
 <chat-message nickname="Dave" color="#f4a460">foo</chat-message>
-</chat-panel>
+</panel-view>
 
 我们可以看到，上面显示的 `repeat` 参数是一个函数，传入的第一个参数表示是否已经复读过，第二个参数表示全员已经复读过的次数（包括自己）。这个函数的返回值如果是 truthy，那么机器人就会触发一次复读。
 
@@ -95,11 +95,11 @@ module.exports = {
 }
 ```
 
-<chat-panel>
+<panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">这机器人又开始复读了</chat-message>
 <chat-message nickname="Bob" color="#00994d">这机器人又开始复读了</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">打断复读！</chat-message>
-</chat-panel>
+</panel-view>
 
 ### 检测重复复读和打断复读
 
@@ -121,20 +121,20 @@ module.exports = {
 }
 ```
 
-<chat-panel>
+<panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">foo</chat-message>
 <chat-message nickname="Bob" color="#00994d">foo</chat-message>
 <chat-message nickname="Alice" color="#cc0066">foo</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">不许重复复读！</chat-message>
-</chat-panel>
+</panel-view>
 
-<chat-panel>
+<panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">bar</chat-message>
 <chat-message nickname="Bob" color="#00994d">bar</chat-message>
 <chat-message nickname="Carol" color="#1e90ff">bar</chat-message>
 <chat-message nickname="Dave" color="#f4a460">打断复读</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png"><strong>@Dave</strong> 在？为什么打断复读？</chat-message>
-</chat-panel>
+</panel-view>
 
 ### 完整的配置项参考
 

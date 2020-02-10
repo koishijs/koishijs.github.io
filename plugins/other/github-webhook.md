@@ -33,7 +33,7 @@ module.exports = {
 
 #### Normal Push
 
-<chat-panel mini>
+<panel-view mini>
 <chat-message nickname="Koishi" avatar="/koishi.png">
 <p>[GitHub] Push (<em>koishijs/koishi</em>)</p>
 <p>Ref: <em>refs/heads/develop</em></p>
@@ -42,32 +42,32 @@ module.exports = {
 <p><em>chore: adjust</em></p>
 <p><em>fix(core): create major context at demand</em></p>
 </chat-message>
-</chat-panel>
+</panel-view>
 
 #### Release Tag
 
-<chat-panel mini>
+<panel-view mini>
 <chat-message nickname="Koishi" avatar="/koishi.png">
 <p>[GitHub] <em>koishijs/koishi</em> published tag <em>1.5.0</em></p>
 </chat-message>
-</chat-panel>
+</panel-view>
 
 #### Commit Comment
 
-<chat-panel mini>
+<panel-view mini>
 <chat-message nickname="Koishi" avatar="/koishi.png">
 <p>[GitHub] Commit Comment (<em>koishijs/koishi</em>)</p>
 <p>User: <em>Shigma</em></p>
 <p>URL: <em>https://github.com/koishijs/koishi/commit/bff469eabe14d42683a4f7c3ccb659daec5e1c00#commitcomment-36878220</em></p>
 <p><em>This will introduce a failure in test.</em></p>
 </chat-message>
-</chat-panel>
+</panel-view>
 
 ### Issue
 
 #### Issue Open
 
-<chat-panel mini>
+<panel-view mini>
 <chat-message nickname="Koishi" avatar="/koishi.png">
 <p>[GitHub] Issue Opened (<em>koishijs/koishi#19</em>)</p>
 <p>Title: <em>Wie kann man um das Koishi zu installieren?</em></p>
@@ -75,24 +75,24 @@ module.exports = {
 <p>URL: <em>https://github.com/koishijs/koishi/issues/19</em></p>
 <p><em>Ich verstecke Englisch und Chinesisch nicht! Gab es Personen, die mir helfen kann?</em></p>
 </chat-message>
-</chat-panel>
+</panel-view>
 
 #### Issue Comment
 
-<chat-panel mini>
+<panel-view mini>
 <chat-message nickname="Koishi" avatar="/koishi.png">
 <p>[GitHub] Issue Comment (<em>koishijs/koishi#19</em>)</p>
 <p>User: <em>simon300000</em></p>
 <p>URL: <em>https://github.com/koishijs/koishi/issues/19#issuecomment-576277946</em></p>
 <p><em>Mich würde auch interessieren, was ist „CoolQ“?</em></p>
 </chat-message>
-</chat-panel>
+</panel-view>
 
 ### Pull Request
 
 #### Pull Request Open
 
-<chat-panel mini>
+<panel-view mini>
 <chat-message nickname="Koishi" avatar="/koishi.png">
 <p>[GitHub] Pull Request Opened (<em>koishijs/koishi#364852707</em>)</p>
 <p><em>koishijs:develop <- koishijs:experimental</em></p>
@@ -100,33 +100,33 @@ module.exports = {
 <p>URL: <em>https://github.com/koishijs/koishi/pull/20</em></p>
 <p><em>Das ist wichtig!</em></p>
 </chat-message>
-</chat-panel>
+</panel-view>
 
 #### Pull Request Comment
 
-<chat-panel mini>
+<panel-view mini>
 <chat-message nickname="Koishi" avatar="/koishi.png">
 <p>[GitHub] Pull Request Comment (<em>koishijs/koishi#20</em>)</p>
 <p>User: <em>Kouchya</em></p>
 <p>URL: <em>https://github.com/koishijs/koishi/pull/20#issuecomment-576291300</em></p>
 <p><em>C'est important!</em></p>
 </chat-message>
-</chat-panel>
+</panel-view>
 
 #### Pull Request Review
 
-<chat-panel mini>
+<panel-view mini>
 <chat-message nickname="Koishi" avatar="/koishi.png">
 <p>[GitHub] Pull Request Review (<em>koishijs/koishi#364852707</em>)</p>
 <p><em>User: Kouchya</em></p>
 <p><em>URL: https://github.com/koishijs/koishi/pull/20#pullrequestreview-345349537</em></p>
 <p><em>LGTM</em></p>
 </chat-message>
-</chat-panel>
+</panel-view>
 
 #### Pull Request Review Comment
 
-<chat-panel mini>
+<panel-view mini>
 <chat-message nickname="Koishi" avatar="/koishi.png">
 <p>[GitHub] Pull Request Review (<em>koishijs/koishi#364852707</em>)</p>
 <p>Path: <em>packages/test-utils/src/mocks.ts</em></p>
@@ -134,4 +134,4 @@ module.exports = {
 <p>URL: <em>https://github.com/koishijs/koishi/pull/20#discussion_r368570320</em></p>
 <p><em>Naming is so hard......</em></p>
 </chat-message>
-</chat-panel>
+</panel-view>

@@ -34,7 +34,7 @@ module.exports = (options, ctx) => ({
           token.title = title.trim()
         }
         const rawCode = fence(...args)
-        return `<CodeContainer title=${JSON.stringify(token.title)}>${rawCode}</CodeContainer>`
+        return `<panel-view class="code" title=${JSON.stringify(token.title)}>${rawCode}</panel-view>`
       }
     })
   },

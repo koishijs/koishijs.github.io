@@ -16,26 +16,11 @@ async function type(line, item, text, typeDelay) {
 
 export default {
   props: {
-    content: {
-      type: Array,
-      required: true,
-    },
-    startDelay: {
-      type: Number,
-      default: 600,
-    },
-    endDelay: {
-      type: Number,
-      default: 1000,
-    },
-    typeDelay: {
-      type: Number,
-      default: 100,
-    },
-    lineDelay: {
-      type: Number,
-      default: 100,
-    },
+    content: { type: Array, required: true },
+    startDelay: { type: Number, default: 600 },
+    endDelay: { type: Number, default: 1000 },
+    typeDelay: { type: Number, default: 100 },
+    lineDelay: { type: Number, default: 100 },
   },
 
   data () {
@@ -134,13 +119,10 @@ export default {
     return createElement('panel-view', {
       class: 'terminal',
       style: {
-        height: (this.lines.length * 1.36 + 3.4) * 16 + 'px',
+        height: (this.lines.length * 1.6 * 0.85 + 3.4) * 16 + 'px',
       },
       props: {
         title: 'terminal',
-        bgColor: '#282c34',
-        fgColor: '#eeeeee',
-        paddingV: 0.8,
       },
     }, this.lines.map(({ type, active, content, shown, message }, index) => {
       const children = content.map(child => typeof child === 'string'
@@ -156,7 +138,15 @@ export default {
 
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
+
+.terminal.panel-view
+  color #eeeeee
+  background-color #282c34
+  overflow auto
+
+  .content
+    padding 2.4rem 1.2rem 1rem !important
 
 .terminal .line
   line-height 1.6

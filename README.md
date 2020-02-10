@@ -15,7 +15,7 @@ features:
 footer: MIT Licensed | Copyright © 2019-present Shigma
 ---
 
-```sh
+```sh shell
 # 进入文件夹
 cd my-bot
 

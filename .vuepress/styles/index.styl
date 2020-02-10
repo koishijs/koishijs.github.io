@@ -1,14 +1,31 @@
 #app
   .navbar .logo
-    height: 2rem
-    min-width: 2rem
-    margin-right: 0.8rem
-    vertical-align: top
+    height 2rem
+    min-width 2rem
+    margin-right 0.8rem
+    vertical-align top
 
   p code
     padding 0.2rem 0.35rem
     margin 0 2px
-    border-radius: 2px
+    border-radius 2px
+
+.code.panel-view
+  color #eeeeee
+  background-color rgb(39, 40, 34)
+
+  .content
+    padding 1rem 1.2rem !important
+
+  &:not(.mini) .content
+    padding-top 2.4rem !important
+
+  pre
+    padding 0 !important
+    margin 0 0
+    border-radius 0
+    background-color inherit
+    overflow visible
 
 .medium-zoom-image--opened
   border-radius 0 !important
@@ -27,10 +44,10 @@
   ::-webkit-scrollbar
     width 3px
 
-pre::-webkit-scrollbar-track-piece
+.panel-view::-webkit-scrollbar-track-piece
   border-radius 6px
   background-color inherit
 
-pre::-webkit-scrollbar-thumb
+.panel-view::-webkit-scrollbar-thumb
   border-radius 6px
   background-color #eaecef80

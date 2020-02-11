@@ -9,6 +9,17 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
+## [1.8.1](https://github.com/koishijs/koishi/releases/tag/1.8.1)
+
+### Features
+
+- **core:** 完善了实验性的 Usage API ([797bde2](https://github.com/koishijs/koishi/commit/797bde2ccd69c3ad7c4012e990e50d92814c2c7b))
+- **utils:** `getDateNumber` 支持传入数字了 ([57657c0](https://github.com/koishijs/koishi/commit/57657c0860b1016fae4531fb8fb08bb8cd297eb1))
+
+### Bug Fixes
+
+- **core:** 修复了 `usage._date` 不会响应式更新的问题 ([f32a7e8](https://github.com/koishijs/koishi/commit/f32a7e8d4a1378cbf93b6bf96acc6643b085d835))
+
 ## [1.8.0](https://github.com/koishijs/koishi/releases/tag/1.8.0)
 
 ### Features

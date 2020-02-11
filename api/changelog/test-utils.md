@@ -9,7 +9,13 @@ noOutboundLinks: true
 
 本页面包括 koishi-test-utils 的更新日志。
 
-## 3.0.1 (koishi 1.8.0)
+## 3.1.0 (Koishi 1.8.1)
+
+### Features
+
+- 新增了 Mocked Date Functions ([99c4870](https://github.com/koishijs/koishi/commit/99c48704df0076ebe0ea90d371c4bb006a4b3934))
+
+## 3.0.1 (Koishi 1.8.0)
 
 ## 3.0.0 (Koishi 1.7.0)
 

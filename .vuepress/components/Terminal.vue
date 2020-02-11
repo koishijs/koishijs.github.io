@@ -119,7 +119,7 @@ export default {
     return createElement('panel-view', {
       class: 'terminal',
       style: {
-        height: (this.lines.length * 1.6 * 0.85 + 3.4) * 16 + 'px',
+        height: (this.lines.length * 1.4 + 3.4) * 16 + 'px',
       },
       props: {
         title: 'terminal',
@@ -147,9 +147,10 @@ export default {
 
   .content
     padding 2.4rem 1.2rem 1rem !important
+    text-shadow $textShadow
 
 .terminal .line
-  line-height 1.6
+  line-height 1.4rem
   font-size 0.85em
   white-space pre
   font-family source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace

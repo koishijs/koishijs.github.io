@@ -1,5 +1,5 @@
 <template>
-  <div class="panel-view" :class="{ mini: !title }">
+  <div class="panel-view" :class="{ mini: !controls && !title }">
     <div class="controls">
       <div class="circle" :style="{ left: '17px', backgroundColor: '#FF5F56' }"/>
       <div class="circle" :style="{ left: '39px', backgroundColor: '#FFBD2E' }"/>
@@ -14,6 +14,7 @@
 
 export default {
   props: {
+    controls: Boolean,
     title: String,
   },
 }

@@ -45,6 +45,15 @@ koishi init [file] [-f]
 
 ## koishi start
 
+<Terminal :content="[
+  { text: 'koishi start', type: 'input' },
+  { content: [{ text: 'info', class: 'info' }, ' apply plugin ', { text: 'common', class: 'info' }] },
+  { content: [{ text: 'info', class: 'info' }, ' Koishi/1.8.1 CoolQ/Pro CQHTTP/4.12.3'] },
+  { content: [{ text: 'info', class: 'info' }, ' server listening at ', { text: '8080', class: 'info' }] },
+  { content: [{ text: 'info', class: 'info' }, ' connected to ', { text: 'http://localhost:5700', class: 'info' }] },
+  { content: [{ text: 'success', class: 'success' }, ' bot started successfully in 141 ms.'] },
+]"></Terminal>
+
 koishi start（或 koishi run）指令用于运行一个配置文件。它的完整语法为：
 
 ```

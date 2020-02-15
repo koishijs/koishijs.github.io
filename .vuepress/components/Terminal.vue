@@ -25,13 +25,14 @@ export default {
 
   data () {
     return {
-      lines: this.content.map(line => ({
-        content: [],
-        ...line,
-        shown: false,
-        active: false,
-      })),
+      lines: this.getLines(),
     }
+  },
+
+  watch: {
+    content () {
+      this.lines = this.getLines()
+    },
   },
 
   async mounted () {
@@ -41,6 +42,15 @@ export default {
   },
 
   methods: {
+    getLines () {
+      return this.content.map(line => ({
+        content: [],
+        ...line,
+        shown: false,
+        active: false,
+      }))
+    },
+
     async start() {
       await sleep(this.startDelay)
       this.lines.forEach(line => line.shown = false)
@@ -64,7 +74,7 @@ export default {
             line.content.push({ tag: 'br' }, { text: '    ' + choice, class: '' })
           }
           let index = 4
-          line.content[index].class = 'prefix'
+          line.content[index].class = 'accent'
           line.content[index].text = '>' + line.content[index].text.slice(1)
           for (const action of line.actions) {
             await sleep(typeDelay)
@@ -75,7 +85,7 @@ export default {
             } else if (action === '2') {
               index -= 2
             }
-            line.content[index].class = 'prefix'
+            line.content[index].class = 'accent'
             line.content[index].text = '>' + line.content[index].text.slice(1)
           }
           await sleep(lineDelay)
@@ -122,7 +132,7 @@ export default {
         height: (this.lines.length * 1.4 + 3.4) * 16 + 'px',
       },
       props: {
-        title: 'terminal',
+        controls: true,
       },
     }, this.lines.map(({ type, active, content, shown, message }, index) => {
       const children = content.map(child => typeof child === 'string'
@@ -142,7 +152,7 @@ export default {
 
 .terminal.panel-view
   color #eeeeee
-  background-color #282c34
+  background-color #032f62
   overflow auto
 
   .content
@@ -167,10 +177,17 @@ export default {
     color #7f7f7f
 
   .input
-    color #ffd700
+    color #ffff00
 
   .prefix
     color #3fbfff
+
+  .info
+    color #3fbfff
+
+  .accent
+    color #3fbfff
+    font-weight bold
 
   .message
     color #ffffff

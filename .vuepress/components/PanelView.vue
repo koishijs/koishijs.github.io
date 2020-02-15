@@ -1,9 +1,9 @@
 <template>
   <div class="panel-view" :class="{ mini: !controls && !title }">
     <div class="controls">
-      <div class="circle" :style="{ left: '17px', backgroundColor: '#FF5F56' }"/>
-      <div class="circle" :style="{ left: '39px', backgroundColor: '#FFBD2E' }"/>
-      <div class="circle" :style="{ left: '61px', backgroundColor: '#27C93F' }"/>
+      <div class="circle red"/>
+      <div class="circle yellow"/>
+      <div class="circle green"/>
       <div class="title">{{ title }}</div>
     </div>
     <div class="content"><slot/></div>
@@ -23,6 +23,9 @@ export default {
 
 <style lang="stylus">
 
+$circleRadius = 7px
+$circleSpacing = 22px
+
 .panel-view
   position relative
   border-radius 6px
@@ -35,14 +38,24 @@ export default {
     position absolute
     top 0.8rem
     width 100%
+
     .circle
       position absolute
-      top 1px
-      width 14px
-      height 14px
-      border-radius 7px
-      // box-shadow inset 0 0 1px #000c
-    > .title
+      top 8px - $circleRadius
+      width 2 * $circleRadius
+      height 2 * $circleRadius
+      border-radius $circleRadius
+      &.red
+        left 17px
+        background-color #ff5f56
+      &.yellow
+        left 17px + $circleSpacing
+        background-color #ffbd2e
+      &.green
+        left 17px + 2 * $circleSpacing
+        background-color #27c93f
+
+    .title
       text-align center
       width 100%
       font-size 0.9rem

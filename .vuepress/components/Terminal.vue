@@ -174,7 +174,7 @@ export default {
     animation blink 1s infinite
 
   .hint
-    color #7f7f7f
+    color #9f9f9f
 
   .input
     color #ffff00

@@ -28,9 +28,9 @@ Koishi 提供了名为 `koishi` 的命令行工具，相信你已经在之前的
 
 koishi init 指令用于生成一个 koishi 配置文件，通常是 koishi.config.js。相信看过前几章的你已经对这个文件的结构足够熟悉了。这个指令的完整语法如下：
 
-```
-koishi init [file] [-f]
-```
+<Terminal :content="[
+  { content: [{ text: 'koishi', class: 'input' }, ' init [file] [-f]'] },
+]" static></Terminal>
 
 其中的 `file` 参数可以用于指定输出的文件位置（覆盖默认值 koishi.config.js）。如果要输出的位置已经有文件，则 Koishi 会提示你使用 `-f, --forced` 选项，这个选项将告诉 Koishi 覆盖已经存在的文件。
 
@@ -56,9 +56,9 @@ koishi init [file] [-f]
 
 koishi start（或 koishi run）指令用于运行一个配置文件。它的完整语法为：
 
-```
-koishi start [file] [--log-level <level>|--debug|--slient]
-```
+<Terminal :content="[
+  { content: [{ text: 'koishi', class: 'input' }, ' start [file] [--log-level &lt;level&gt;|--debug|--slient]'] },
+]" static></Terminal>
 
 其中 `file` 参数表示要执行的文件位置。文件尾的后缀名可以省略，Koishi 会自动寻找可用的文件作为配置文件（各种文件格式的最低所需版本与上面所述的相同）。
 
@@ -72,14 +72,14 @@ koishi start [file] [--log-level <level>|--debug|--slient]
 
 Koishi 支持直接调用 TypeScript 编写的插件。首先安装 ts-node：
 
-```sh
-npm i ts-node -D # 或者全局安装 -g
-```
+<Terminal :content="[
+  { content: [{ text: 'npm', class: 'input' }, ' i ts-node -D ', { text: '# 或者全局安装 -g', class: 'hint' }] },
+]" static></Terminal>
 
 接着在你的命令行之后加上一段额外的参数：
 
-```sh
-koishi start -- -r ts-node/register
-```
+<Terminal :content="[
+  { content: [{ text: 'koishi', class: 'input' }, ' start -- -r ts-node/register'] },
+]" static></Terminal>
 
 这样你就可以直接使用 koishi.config.ts，或在 koishi.config.js 中引用 ts 文件作为插件了。

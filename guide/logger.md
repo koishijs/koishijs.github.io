@@ -93,16 +93,16 @@ module.exports = {
 
 Koishi 内部使用 [debug](https://github.com/visionmedia/debug) 处理 logger 产生的信息。你可以通过设置环境变量的方式来输出 debug 信息：
 
-```sh
-# 对于 linux 和 macOS
-DEBUG=koishi:*; koishi start
-
-# 对于 Windows
-$env:DEBUG=koishi:*; koishi start
-
-# 使用 cross-env
-cross-env DEBUG=koishi:* koishi start
-```
+<Terminal :content="[
+  { content: [{ text: '# 对于 linux 和 macOS', class: 'hint' }] },
+  { content: ['DEBUG=koishi:*; ', { text: 'koishi', class: 'input' }, ' start'] },
+  { content: [] },
+  { content: [{ text: '# 对于 Windows', class: 'hint' }] },
+  { content: ['$env:DEBUG=koishi:*; ', { text: 'koishi', class: 'input' }, ' start'] },
+  { content: [] },
+  { content: [{ text: '# 使用 cross-env', class: 'hint' }] },
+  { content: [{ text: 'cross-env', class: 'input' }, ' DEBUG=koishi:*; ', { text: 'koishi', class: 'input' }, ' start'] },
+]" static></Terminal>
 
 ### 内置的输出
 

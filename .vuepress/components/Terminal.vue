@@ -16,6 +16,8 @@ async function type(line, item, text, typeDelay) {
 
 export default {
   props: {
+    title: String,
+    static: Boolean,
     content: { type: Array, required: true },
     startDelay: { type: Number, default: 600 },
     endDelay: { type: Number, default: 1000 },
@@ -32,10 +34,16 @@ export default {
   watch: {
     content () {
       this.lines = this.getLines()
+      if (this.static) {
+        return this.startStatic()
+      }
     },
   },
 
   async mounted () {
+    if (this.static) {
+      return this.startStatic()
+    }
     while (1) {
       await this.start()
     }
@@ -49,6 +57,10 @@ export default {
         shown: false,
         active: false,
       }))
+    },
+
+    startStatic () {
+      this.lines.forEach(line => line.shown = true)
     },
 
     async start() {
@@ -126,13 +138,15 @@ export default {
   },
 
   render (createElement) {
+    const mini = !this.title && this.static
     return createElement('panel-view', {
       class: 'terminal',
       style: {
-        height: (this.lines.length * 1.4 + 3.4) * 16 + 'px',
+        height: (this.lines.length * 1.4 + (mini ? 2 : 3.4)) * 16 + 'px',
       },
       props: {
-        controls: true,
+        title: this.title,
+        controls: !mini,
       },
     }, this.lines.map(({ type, active, content, shown, message }, index) => {
       const children = content.map(child => typeof child === 'string'
@@ -159,11 +173,17 @@ export default {
     padding 2.4rem 1.2rem 1rem !important
     text-shadow $textShadow
 
+  &.mini .content
+    padding-top 1rem !important
+
 .terminal .line
   line-height 1.4rem
   font-size 0.85em
   white-space pre
   font-family source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace
+
+  &::after
+    content ' '
 
   &:not(.shown)
     display none
@@ -172,6 +192,12 @@ export default {
     content '▋'
     font-family monospace
     animation blink 1s infinite
+
+  .variable
+    color #ffa500
+
+  .string
+    color #3fbfff
 
   .hint
     color #9f9f9f

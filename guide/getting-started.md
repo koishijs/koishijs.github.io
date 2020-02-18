@@ -26,22 +26,22 @@ CoolQ Air 和 CoolQ Pro 是两个不同的版本，它们都能配合 Koishi 运
 
 创建并进入一个机器人目录：
 
-```sh
-cd my-bot
-```
+<Terminal :content="[
+  { content: [{ text: 'cd', class: 'input' }, ' my-bot'] },
+]" static></Terminal>
 
 安装 Koishi：
 
-```sh
-npm i koishi -g
-# 或者 yarn add koishi -g
-```
+<Terminal :content="[
+  { content: [{ text: 'npm', class: 'input' }, ' i koishi -g'] },
+  { content: [{ text: '# 或者 yarn add koishi -g', class: 'hint' }] },
+]" static></Terminal>
 
 利用 `koishi init` 指令迅速创建一个 `koishi.config.js` 文件：
 
-```sh
-koishi init
-```
+<Terminal :content="[
+  { content: [{ text: 'koishi', class: 'input' }, ' init'] },
+]" static></Terminal>
 
 ```js koishi.config.js
 module.exports = {
@@ -54,9 +54,9 @@ module.exports = {
 
 最后运行程序：
 
-```sh
-koishi start
-```
+<Terminal :content="[
+  { content: [{ text: 'koishi', class: 'input' }, ' start'] },
+]" static></Terminal>
 
 现在可以对你的机器人说话了：
 
@@ -71,17 +71,17 @@ koishi start
 
 首先初始化你的机器人目录：
 
-```sh
-npm init -y
-# 或者 yarn init -y
-```
+<Terminal :content="[
+  { content: [{ text: 'npm', class: 'input' }, ' init'] },
+  { content: [{ text: '# 或者 yarn init', class: 'hint' }] },
+]" static></Terminal>
 
 安装 Koishi：
 
-```sh
-npm i koishi -D
-# 或者 yarn add koishi -D
-```
+<Terminal :content="[
+  { content: [{ text: 'npm', class: 'input' }, ' i koishi -D'] },
+  { content: [{ text: '# 或者 yarn add koishi -D', class: 'hint' }] },
+]" static></Terminal>
 
 新建 `index.js`，并写下这段代码：
 
@@ -100,9 +100,9 @@ app.start()
 
 最后运行这个文件：
 
-```sh
-node .
-```
+<Terminal :content="[
+  { content: [{ text: 'node', class: 'input' }, ' .'] },
+]" static></Terminal>
 
 这样也能运行你的机器人。尽管这显得稍微麻烦一点，并且相比调用 CLI 会缺少一些特性，但是你的机器人也因此获得了更高的自由度。在下一章我们会简单对比这两种方法。
 

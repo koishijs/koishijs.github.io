@@ -15,19 +15,19 @@ features:
 footer: MIT Licensed | Copyright © 2019-present Shigma
 ---
 
-```sh shell
-# 进入文件夹
-cd my-bot
-
-# 安装 Koishi
-npm i koishi -g
-
-# 初始化配置文件
-koishi init
-
-# 运行你的 Bot
-koishi run
-```
+<Terminal :content="[
+  { content: [{ text: '# 进入文件夹', class: 'hint' }] },
+  { content: [{ text: 'cd', class: 'input' }, ' my-bot'] },
+  { content: [] },
+  { content: [{ text: '# 安装 Koishi', class: 'hint' }] },
+  { content: [{ text: 'npm', class: 'input' }, ' i koishi -g'] },
+  { content: [] },
+  { content: [{ text: '# 初始化配置文件', class: 'hint' }] },
+  { content: [{ text: 'koishi', class: 'input' }, ' init'] },
+  { content: [] },
+  { content: [{ text: '# 运行你的 Bot', class: 'hint' }] },
+  { content: [{ text: 'koishi', class: 'input' }, ' start'] },
+]" static title="命令行"></Terminal>
 
 现在可以对你的机器人说话了：
 

@@ -9,6 +9,20 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
+## [1.9.0](https://github.com/koishijs/koishi/releases/tag/1.9.0)
+
+### Features
+
+- **core:** 优化了类型标注 ([f135818](https://github.com/koishijs/koishi/commit/f1358183a1eb81b02e779ada4ea146fb014845a0), [9318bfa](https://github.com/koishijs/koishi/commit/9318bfa0e8d8001e1d30c9f7ae9032c8ad9c7877), [9821cf7](https://github.com/koishijs/koishi/commit/9821cf739b7f28a1f7af38cd7eec7f078f5555d1))
+- **core:** 支持了 CQHTTP 4.14 ([169089e](https://github.com/koishijs/koishi/commit/169089ec0f9b06c0d169f1fe6cd56a625b3f68fa))
+- **core:** 重构了 debug logger ([068135e](https://github.com/koishijs/koishi/commit/068135e8ada1705bbca59990465079de0d490070))
+- **plugin-common:** contextify 指令支持 at 其他成员了 ([1576873](https://github.com/koishijs/koishi/commit/15768737c4cb8c2c4493382af601eb31081e58e7))
+- **plugin-common:** 支持了函数类型的 `commandConfig.usage` ([85cb06b](https://github.com/koishijs/koishi/commit/85cb06bbe4b79f6e118e3875adffe51f708912fb))
+
+### Dependencies
+
+- **cli:** prompts 版本从 2.3.0 更新到 2.3.1 ([03868f1](https://github.com/koishijs/koishi/commit/03868f14a9f99ed35de978d07598c60de0dbe5c8))
+
 ## [1.8.1](https://github.com/koishijs/koishi/releases/tag/1.8.1)
 
 ### Features

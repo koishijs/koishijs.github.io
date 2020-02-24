@@ -103,6 +103,7 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 
 - lifecycle/enable: CQHTTP 插件启用
 - lifecycle/disable: CQHTTP 插件停用
+- lifecycle/connect: 成功建立 WebSocket 连接
 
 ## Koishi 内部事件
 

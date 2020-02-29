@@ -9,6 +9,21 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
+## [1.10.0](https://github.com/koishijs/koishi/releases/tag/1.10.0)
+
+### Features
+
+- **core:** 新增了 `meta.$argv` 属性 ([bbcdab2](https://github.com/koishijs/koishi/commit/bbcdab2cb9ca7039b637d7e648c36c7f890d8c74))
+- **core:** 新增了 attach-user 和 attach-group 事件 ([8285c64](https://github.com/koishijs/koishi/commit/8285c646208915aab3d0d616fe05f6459831ad88))
+- **core:** send 元信息将附带 time 字段 ([ef8a284](https://github.com/koishijs/koishi/commit/ef8a284498d33ba819569c0c41ff085e58cb9a92))
+- **cli:** 优化了类型标注 ([17a6ee9](https://github.com/koishijs/koishi/commit/17a6ee9d441ff94701ff594dcd2943c787dbda13))
+- **plugin-common:** 优化了子指令的帮助显示 ([09d9c75](https://github.com/koishijs/koishi/commit/09d9c75d4f769759165d839f225847c0b0e23e37))
+- **plugin-common:** broadcast 指令支持 -o 参数 ([baf7f1f](https://github.com/koishijs/koishi/commit/baf7f1f662e6d3684e8c38bd30dc652a0baf0600))
+
+### Bug Fixes
+
+- **utils:** 修复了 `CQCode.parse` 无法处理带回车的文本的问题 ([6013f95](https://github.com/koishijs/koishi/commit/6013f9555c57f59e970668fa851177b5443d62eb), [4dffcf5](https://github.com/koishijs/koishi/commit/4dffcf57954d7163f51e6aa4e29aae32485cdeba))
+
 ## [1.9.0](https://github.com/koishijs/koishi/releases/tag/1.9.0)
 
 ### Features

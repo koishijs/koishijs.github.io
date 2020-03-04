@@ -34,7 +34,7 @@ CoolQ Air 和 CoolQ Pro 是两个不同的版本，它们都能配合 Koishi 运
 
 <Terminal :content="[
   { content: [{ text: 'npm', class: 'input' }, ' i koishi -g'] },
-  { content: [{ text: '# 或者 yarn add koishi -g', class: 'hint' }] },
+  { content: [{ text: '# 或者 yarn global add koishi', class: 'hint' }] },
 ]" static></Terminal>
 
 利用 `koishi init` 指令迅速创建一个 `koishi.config.js` 文件：

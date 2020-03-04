@@ -9,6 +9,14 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
+## [1.10.1](https://github.com/koishijs/koishi/releases/tag/1.10.1)
+
+### Bug Fixes
+
+- **core:** 修复了同一个 subdatabase 无法注册到多个 DatabaseManager 的问题 (ccfb687b7c69f4bd5ba7b4a758afa0bbfd4277e3)
+- **core:** 指令执行前将确保 `argv.options` 的类型不为 undefined (03dbe46cee5b5ec3dbfa1db35889747feb44823e)
+- **plugin-common:** 修复了 contextify 指令中 `meta.$send` 输出目标错误的问题 (f1eccdcd46ec0f3fab6c95f4b8a81bbc0af943dc)
+
 ## [1.10.0](https://github.com/koishijs/koishi/releases/tag/1.10.0)
 
 ### Features

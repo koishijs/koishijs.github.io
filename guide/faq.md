@@ -44,7 +44,7 @@ retcode 是一个整数，大于 0 表示是 CQHTTP 发出的错误，小于 0 �
 | -2 | |
 | -3 | 尝试发送不支持的 CQ 码 |
 | -11 | 无法下载图片导致发送失败 |
-| -34 | 被禁言导致发送失败 |
+| -34 | 帐号在该群内被禁言 |
 
 如果有错误或想补充，欢迎 [完善此页面](https://github.com/koishijs/koishijs.github.io/edit/docs/guide/faq.md)。
 

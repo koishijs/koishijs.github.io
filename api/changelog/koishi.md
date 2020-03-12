@@ -9,13 +9,31 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
+## 1.11.0
+
+### Features
+
+- **core:** 新增了 `retryTimes` 和 `retryInterval` 配置项，支持 WebSocket 断线重连 ([#27](https://github.com/koishijs/koishi/pull/27)) ([f95f794](https://github.com/koishijs/koishi/commit/f95f794dd5ef9639da85d19518bd332917c06f8e), [c854300](https://github.com/koishijs/koishi/commit/c854300d24cbc15288248ec875a7bb8d63516d6d), [5a3cee4](https://github.com/koishijs/koishi/commit/5a3cee46df2dd4f1674d226065f54dcce31efe17))
+- **core:** SenderError 中加入了 `selfId` 字段 ([77efd54](https://github.com/koishijs/koishi/commit/77efd5495e76a0920b0c33ae10185a050cf428ba))
+- **core:** 新增了 `defaultAuthority` 配置项，用于配置默认权限等级 ([8b76734](https://github.com/koishijs/koishi/commit/8b76734de9263afec7a635c3d090d9c8586bdfaf))
+- **plugin-common:** broadcast 指令默认不对 noEmit 群广播，新增 -f 选项用于对所有群广播 ([24ee7f2](https://github.com/koishijs/koishi/commit/24ee7f222245bd646cfcf41b8066d8ae7b5fc139))
+
+### Bug Fixes
+
+- **plugin-common:** 修复了 welcome 插件可能对自己触发的问题 ([49aee5f](https://github.com/koishijs/koishi/commit/49aee5fd48b9abf9a76bc2cbb412bfa6a4208aa1))
+
+### Dependencies
+
+- **core:** 新增依赖 ms，cac 版本从 6.5.6 更新到 6.5.7，ws 版本从 7.2.1 更新到 7.2.3 ([723e4a2](https://github.com/koishijs/koishi/commit/723e4a2fc954f62da9f7a9f97758cbacedf76328), [e2350d0](https://github.com/koishijs/koishi/commit/e2350d0deeb5b2f0cb46d8f27faba175801a1ccc))
+- **plugin-nlp:** nodejiaba 版本从 2.4.0 更新到 2.4.1 ([e2350d0](https://github.com/koishijs/koishi/commit/e2350d0deeb5b2f0cb46d8f27faba175801a1ccc), [052cddb](https://github.com/koishijs/koishi/commit/052cddb5c285157800a7771062e32384813a183e))
+
 ## [1.10.1](https://github.com/koishijs/koishi/releases/tag/1.10.1)
 
 ### Bug Fixes
 
-- **core:** 修复了同一个 subdatabase 无法注册到多个 DatabaseManager 的问题 (ccfb687b7c69f4bd5ba7b4a758afa0bbfd4277e3)
-- **core:** 指令执行前将确保 `argv.options` 的类型不为 undefined (03dbe46cee5b5ec3dbfa1db35889747feb44823e)
-- **plugin-common:** 修复了 contextify 指令中 `meta.$send` 输出目标错误的问题 (f1eccdcd46ec0f3fab6c95f4b8a81bbc0af943dc)
+- **core:** 修复了同一个 subdatabase 无法注册到多个 DatabaseManager 的问题 ([ccfb687](https://github.com/koishijs/koishi/commit/ccfb687b7c69f4bd5ba7b4a758afa0bbfd4277e3))
+- **core:** 指令执行前将确保 `argv.options` 的类型不为 undefined ([03dbe46](https://github.com/koishijs/koishi/commit/03dbe46cee5b5ec3dbfa1db35889747feb44823e))
+- **plugin-common:** 修复了 contextify 指令中 `meta.$send` 输出目标错误的问题 ([f1eccdc](https://github.com/koishijs/koishi/commit/f1eccdcd46ec0f3fab6c95f4b8a81bbc0af943dc))
 
 ## [1.10.0](https://github.com/koishijs/koishi/releases/tag/1.10.0)
 

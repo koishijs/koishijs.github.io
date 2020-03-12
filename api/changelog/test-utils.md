@@ -9,6 +9,10 @@ noOutboundLinks: true
 
 本页面包括 koishi-test-utils 的更新日志。
 
+## 3.2.0 (Koishi 1.11.0)
+
+- 新增了 `mockedServer.open()` 方法 ([ccda1bc](https://github.com/koishijs/koishi/commit/ccda1bcb04fe951fd63c688050568cea10c0c82f))
+
 ## 3.1.3 (Koishi 1.10.1)
 
 ## 3.1.2 (Koishi 1.10.0)

@@ -9,7 +9,7 @@ noOutboundLinks: true
 
 本页面包括 koishi 及其依赖的更新日志。
 
-## 1.11.0
+## [1.11.0](https://github.com/koishijs/koishi/releases/tag/1.11.0)
 
 ### Features
 

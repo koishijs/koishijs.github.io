@@ -34,7 +34,7 @@ message 事件还拥有以下的子事件：
 - message/discuss: 讨论组私聊信息
 - message/other: 其他私聊信息
 
-所有的 message 事件的回调函数都会传入一个 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象)。
+所有的 message 事件的回调函数都会传入一个 [`Meta` 对象](../guide/message.md#深入-meta-对象)。
 
 ::: tip 注意
 message/group 表示**由非好友的群友发起的私聊信息，并不是群聊信息**，请注意区分。群聊信息与其他信息的区分直接通过上下文而不是子事件实现。message/discuss 同理。
@@ -42,7 +42,7 @@ message/group 表示**由非好友的群友发起的私聊信息，并不是群�
 
 ## 事件：request
 
-request 事件发生于机器人收到请求时，会在相应的上下文触发。所有的 request 事件的回调函数都会传入一个 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象)。这个事件**本身不会触发**，只会通过以下子事件的形式触发：
+request 事件发生于机器人收到请求时，会在相应的上下文触发。所有的 request 事件的回调函数都会传入一个 [`Meta` 对象](../guide/message.md#深入-meta-对象)。这个事件**本身不会触发**，只会通过以下子事件的形式触发：
 
 - request/friend: 好友申请
 - request/group/add: 加群申请
@@ -54,7 +54,7 @@ request 事件发生于机器人收到请求时，会在相应的上下文触发
 
 ## notice 系列事件
 
-notice 系列事件发生于机器人收到提醒时，会在相应的上下文触发。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `'notice'`。
+notice 系列事件发生于机器人收到提醒时，会在相应的上下文触发。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/message.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `'notice'`。
 
 ### 事件：friend-add
 
@@ -95,7 +95,7 @@ notice 系列事件发生于机器人收到提醒时，会在相应的上下文�
 
 ## metaEvent 系列事件
 
-metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 App 实例触发**。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/receive-and-send.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `'meta_event'`。
+metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 App 实例触发**。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/message.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `'meta_event'`。
 
 ### 事件：heartbeat
 
@@ -162,7 +162,7 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 
 ### 事件：before-send
 
-准备发送信息时会在对应的上下文触发。调用时会传入一个伪 Meta 对象，拥有与 [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 对象类似的结构，但是 `postType` 字段为 `send`。
+准备发送信息时会在对应的上下文触发。调用时会传入一个伪 Meta 对象，拥有与 [`Meta`](../guide/message.md#深入-meta-对象) 对象类似的结构，但是 `postType` 字段为 `send`。
 
 ### 事件：send
 
@@ -186,7 +186,7 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 
 ### 事件：after-middleware
 
-在执行完全部中间件后会在对应的上下文触发。调用时传入一个 [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 对象。
+在执行完全部中间件后会在对应的上下文触发。调用时传入一个 [`Meta`](../guide/message.md#深入-meta-对象) 对象。
 
 ### 事件：before-disconnect
 

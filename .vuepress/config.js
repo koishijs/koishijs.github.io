@@ -63,7 +63,7 @@ module.exports = context => ({
           title: '深入',
           collapsable: false,
           children: [
-            '/guide/receive-and-send',
+            '/guide/message',
             '/guide/plugin-and-context',
             '/guide/command-system',
             '/guide/using-database',
@@ -81,13 +81,14 @@ module.exports = context => ({
           title: '核心 API',
           collapsable: false,
           children: [
-            '/api/global',
             '/api/context',
             '/api/app',
-            '/api/receiver',
             '/api/bot',
+            '/api/event',
+            '/api/session',
             '/api/command',
             '/api/database',
+            '/api/global',
           ],
         },
         {

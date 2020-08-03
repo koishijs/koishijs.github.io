@@ -366,4 +366,4 @@ ctx.command('foo.bar/abc.xyz')
 - **rest:** `string` 额外参数的内容
 - **meta:** `Meta` 当前正在处理的元信息
 - **command:** `Command` 当前匹配到的指令实例
-- **next:** [`NextFunction`](./receive-and-send.md#中间件) 当前指令解析函数所处的中间件的 `next` 回调函数
+- **next:** [`NextFunction`](./message.md#中间件) 当前指令解析函数所处的中间件的 `next` 回调函数

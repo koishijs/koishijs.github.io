@@ -84,7 +84,7 @@ CQHTTP 的 HTTP 服务器默认监听 5700 端口，WebSocket 服务器默认监
 
 ## quickOperationTimeout
 
-快捷操作的时间限制，单位为毫秒。如果配置了这个选项且使用了 HTTP 通信方式，则在这段时间内的首次调用 `meta.$send()` 或类似的方法将不产生新的 HTTP 请求。默认值为 `0`。参见 [**快捷操作**](./receive-and-send.md#快捷操作) 一节。
+快捷操作的时间限制，单位为毫秒。如果配置了这个选项且使用了 HTTP 通信方式，则在这段时间内的首次调用 `meta.$send()` 或类似的方法将不产生新的 HTTP 请求。默认值为 `0`。参见 [**快捷操作**](./message.md#快捷操作) 一节。
 
 ## logLevel <Badge text="CLI"/><Badge text="1.3.0+"/>
 

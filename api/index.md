@@ -14,13 +14,14 @@ sidebarDepth: 0
 
 koishi-core 中提供的 API，包括以下几个子页面：
 
-- [全局 API](./global.md)
 - [上下文 (Context)](./context.md)
 - [应用 (App)](./app.md)
 - [机器人 (Bot)](./bot.md)
-- [接收器 (Receiver)](./receiver.md)
+- [事件 (Event)](./event.md)
+- [会话 (Session)](./session.md)
 - [指令 (Command)](./command.md)
 - [数据库 (Database)](./database.md)
+- [全局 API](./global.md)
 
 ## 其他官方包 API
 

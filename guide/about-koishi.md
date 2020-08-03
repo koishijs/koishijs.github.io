@@ -25,9 +25,9 @@ Koishi 高度配置化的 CLI 命令可以让你无需写代码就搭建属于�
 
 Koishi 的 API 包括下面几个部分：
 
-- [Receiver](./receive-and-send.md#接收器)：将收到的信息转化为事件进行分发，且同时支持 HTTP 和 WebSocket
-- [Sender](./receive-and-send.md#发送器)：完美契合 CQHTTP API 的一套异步发送器，同样支持 HTTP 和 WebSocket
-- [Middleware](./receive-and-send.md#中间件)：支持异步操作的中间件系统，可以让你高效地处理每一条信息
+- [Receiver](./message.md#接收器)：将收到的信息转化为事件进行分发，且同时支持 HTTP 和 WebSocket
+- [Sender](./message.md#发送器)：完美契合 CQHTTP API 的一套异步发送器，同样支持 HTTP 和 WebSocket
+- [Middleware](./message.md#中间件)：支持异步操作的中间件系统，可以让你高效地处理每一条信息
 - [Context](./plugin-and-context.md#创建上下文)：用上下文描述了机器人可能的运行环境，让你得以对不同的群进行不同的处理
 - [Plugin](./plugin-and-context.md#使用插件)：将逻辑以插件的形式封装，可以实现更好的模块化和配置化
 - [Command](./command-system.md)：Koishi 的核心功能之一，使用链式调用轻松创建指令，同时提供了大量的实用特性

@@ -90,7 +90,7 @@ test('example', async () => {
 
 ## 模拟会话
 
-Koishi 本身不需要会话的概念，因为 Meta 对象本身就具有 [快捷操作](./receive-and-send.md#快捷操作) 功能。但是在单元测试中，我们可能经常需要让一个用户多次向机器人发送信息，这时一个会话系统就变得非常有用了。
+Koishi 本身不需要会话的概念，因为 Meta 对象本身就具有 [快捷操作](./message.md#快捷操作) 功能。但是在单元测试中，我们可能经常需要让一个用户多次向机器人发送信息，这时一个会话系统就变得非常有用了。
 
 ```js
 const { MockedApp } = require('koishi-test-utils')

@@ -14,15 +14,14 @@ sidebarDepth: 2
 接下来的教程可能会涉及对 Koishi API 的调用。如果你不知道如何用这些 API 运行你的机器人，你可能需要查看 [调用 Koishi](./getting-started.md#调用-koishi) 一节。如果你想获得某个 API 的具体用法，你可以参考 [API 文档](../api/) 。
 :::
 
-## 接收器 (receiver)
+## 接收消息
 
-一个**接收器**是一个 [EventEmitter](https://nodejs.org/api/events.html)，你可以像这样调用它：
+在 Koishi 中接收消息的语法非常简单：
 
 ```js
-app.receiver.on('message', (meta) => {
-  // 如果收到“人有多大胆”
+// 如果收到“人有多大胆”，就回应“地有多大产”
+app.on('message', (meta) => {
   if (meta.message === '人有多大胆') {
-    // 就回应“地有多大产”
     meta.$send('地有多大产')
   }
 })
@@ -30,29 +29,25 @@ app.receiver.on('message', (meta) => {
 
 在这个简单的示例中，这里有两件事你需要了解：
 
-上面的 `meta` 对象被称为**元信息**。元信息具有通用的结构，只要是来自 [CQHTTP 的事件](https://cqhttp.cc/docs/4.12/#/Post)，无论类型都会被解析成这个统一结构。你可以在本节的最后查看 [Meta 对象的详细结构](#深入-meta-对象)。
+上面的 `meta` 对象被称为**元信息**。元信息具有通用的结构，只要是来自 [CQHTTP 的事件](https://cqhttp.cc/docs/4.15/#/Post)，无论类型都会被解析成这个统一结构。你可以在本节的最后查看 [Meta 对象的详细结构](#深入-meta-对象)。
 
 上面的 `message` 字符串被称为**事件名称**。Koishi 的事件名和 `meta.postType` 字段进行对应。同时，根据 postType 的不同，Koishi 会相应地添加二级事件。二级事件和一级事件会被同时触发，因此你只需要根据具体的需求监听其中的一个即可。例如，一个 postType 为 `notice`，noticeType 为 `group_upload` 的事件会同时触发 `notice` 和 `notice/group_upload` 两个监听器。
 
-除去由 CQHTTP 提供的事件外，Koishi 自身也提供了一批事件，你可以在 [接收器](../api/receiver.md) 一章中看到目前支持的所有事件名。
+除去由 CQHTTP 提供的事件外，Koishi 自身也提供了一批事件，你可以在 [**事件**](../api/event.md) 一章中看到目前支持的所有事件名。
 
-## 发送器 (sender)
+## 发送消息
 
-一个**发送器**封装了一套 [CQHTTP API](https://cqhttp.cc/docs/4.12/#/API)。你可以像这样调用它：
+一个 **Bot 实例** 封装了一套 [CQHTTP API](https://cqhttp.cc/docs/4.12/#/API)。你可以像这样调用它：
 
 ```js
 // 向服务器发送消息
-await app.sender.sendPrivateMsg(123456789, 'Hello world')
+await meta.$bot.sendPrivateMsg(123456789, 'Hello world')
 
 // 从服务器获取信息
-const groupInfo = await app.sender.getGroupInfo(987654321)
+const groupInfo = await meta.$bot.getGroupInfo(987654321)
 ```
 
-如果你熟悉 CQHTTP API 的话，这对你一定不陌生。没错，这套接口和 CQHTTP 提供的接口是一一对应的。除此以外，由于 Koishi 全部使用 TypeScript 编写，我们还提供了完整的类型定义，让你在编写代码时再也无需查看 CQHTTP 文档。你可以在 [发送器](../api/sender.md) 一章中看到完整的 Sender API。
-
-::: tip 提示
-尽管 Koishi 总体支持 CQHTTP 3.0，但是部分接口需要更高的 CQHTTP 版本才能进行调用。因此，我们建议你永远使用最新的 CQHTTP 版本。
-:::
+如果你熟悉 CQHTTP API 的话，这对你一定不陌生。没错，这套接口和 CQHTTP 提供的接口是一一对应的。除此以外，由于 Koishi 全部使用 TypeScript 编写，我们还提供了完整的类型定义，让你在编写代码时再也无需查看 CQHTTP 文档。你可以在 [**机器人**](../api/bot.md) 一章中看到完整的 Sender API。
 
 ### 异步调用
 
@@ -71,13 +66,12 @@ await app.sender.sendPrivateMsgAsync(123456789, 'Hello world')
 ```
 
 ::: tip 提示
-1. 虽然异步调用方法的名字以 Async 结尾，但是其他方法也是**异步函数**，它们都会返回一个 `Promise` 对象。取这样的名字只是为了与 CQHTTP 保持一致。
-2. CQHTTP 的异步调用是在 4.0 版本引入的，但 Koishi 会自动检测当前使用的 CQHTTP 版本并做出 polyfill，因此所有函数的异步版本所需的最低 CQHTTP 版本都与非异步版本一致。
+虽然异步调用方法的名字以 Async 结尾，但是其他方法也是**异步函数**，它们都会返回一个 `Promise` 对象。取这样的名字只是为了与 CQHTTP 保持一致。
 :::
 
-### 快捷操作
+### 快捷回复
 
-Koishi 还提供了一套快捷操作 API。它们会根据事件的类型绑定在 Meta 对象上。例如，当收到一个群消息时，对应的 Meta 对象会自动附加一个 `$delete` 方法，调用这个方法可以快速实现对此消息的撤回（需要群主或管理员权限）；又例如，当收到一个好友申请时，对应的 Meta 对象会自动附加一个 `$approve` 方法，调用这个方法可以快速实现通过好友申请，并写上备注名。快捷操作的响应速度会高于普通的 Sender API 调用，但是同上面的异步调用一样，这些操作也是无法获得调用结果的。完整的快捷操作列表参见 [Koishi 添加的属性](#koishi-添加的属性)。
+Meta 对象还提供了一个快捷回复方法 `meta.$send`，调用它可以快速实现对原消息的回复。快捷操作的响应速度会高于普通的 Sender API 调用，但是默认情况下这种操作同上面的异步调用一样，这些操作也是无法获得调用结果的。完整的快捷操作列表参见 [Koishi 添加的属性](#koishi-添加的属性)。
 
 这里也简单介绍一下快捷操作的原理。当正常使用 HTTP 模式时，每个事件上报和 API 调用都使用了不同的连接。那么快捷操作则相当于将 API 调用作为事件上报的响应。当然，这种做法有着很多限制，例如对 WebSocket 无效，同一个事件只能响应一次，以及需要手动处理响应超时的问题。因此，默认情况下这种优化是不开启的。如果手动配置了 `quickOperationTimeout`，则会将这个配置项作为时间限制，在这个时间限制内第一个调用快捷操作的会享受这种优化（事实上大部分操作都只有一个响应，所以这种优化对 HTTP 往往是非常有效的），之后的所有快捷操作调用都会自动转化为异步调用，这样可以保证快捷操作永远都是可用的。
 
@@ -85,9 +79,9 @@ Koishi 还提供了一套快捷操作 API。它们会根据事件的类型绑定
 
 ![quick-operation](/quick-operation.png)
 
-## 中间件 (middleware)
+## 中间件
 
-有了接收器和发送器，似乎你就能完成一切工作了——很多机器人框架也的确是这么想的。但是从 Koishi 的角度，这还远远不够。当载入的功能越来越多后，另一些严重的问题将逐渐浮现出来：如何限制消息能触发的应答次数？如何进行权限管理？如何提高机器人的性能？这些问题的答案将我们引向另一套更高级的系统——这也就是**中间件**的由来。
+有了接收和发送消息的能力，似乎你就能完成一切工作了——很多机器人框架也的确是这么想的。但是从 Koishi 的角度，这还远远不够。当载入的功能越来越多后，另一些严重的问题将逐渐浮现出来：如何限制消息能触发的应答次数？如何进行权限管理？如何提高机器人的性能？这些问题的答案将我们引向另一套更高级的系统——这也就是**中间件**的由来。
 
 中间件是对消息事件处理流程的再封装。你注册的所有中间件将会由一个事件监听器进行统一管理，数据流向下游，控制权流回上游——这可以有效确保了任意消息都只被处理一次。被认定为无需继续处理的消息不会进入下游的中间件——这让我们能够轻易地实现权限管理。与此同时，Koishi 的中间件也支持异步调用，这使得你可以在中间件函数中实现任何逻辑。事实上，相比更加底层地调用接收器，**使用中间件处理消息才是 Koishi 更加推荐的做法**。
 
@@ -108,17 +102,22 @@ type Middleware = (meta: Meta, next: NextFunction) => any
 
 ```js
 app.middleware((meta, next) => {
-  if (meta.message.includes(`[CQ:at,qq=${app.options.selfId}]`)) {
-    // 仅当接收到的消息包含 at 机器人时才继续处理
-    return next()
-  }
+  // 仅当接收到的消息包含 at 机器人时才继续处理
+  if (meta.$parsed.atMe) return next()
 })
 ```
 
-你也可以显式地取消一个中间件：
+这个函数的返回值是一个新的函数，调用这个函数就可以完成取消上述中间件：
 
 ```js
-// callback 是之前传入 app.middleware 的回调函数
+const dispose = app.middleware(callback)
+dispose() // 取消中间件
+```
+
+你也可以直接通过 `app.removeMiddleware` 取消一个中间件：
+
+```js
+// callback 是上面的回调函数
 app.removeMiddleware(callback)
 ```
 

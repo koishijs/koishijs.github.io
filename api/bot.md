@@ -6,7 +6,9 @@ sidebarDepth: 2
 
 Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](https://cqhttp.cc/docs/4.15/#/API)。[go-cqhttp](https://github.com/Mrs4s/go-cqhttp) 进一步扩展了一些接口，这些扩展的功能也被 Koishi 实现了。
 
-此外，对于本页中的 [**异步调用**](../guide/receive-and-send.md#异步调用) API，返回值均为 `Promise<void>`。
+- 标有 <Badge vertical="baseline" text="async"/> 的 API 可以被 [**异步调用**](../guide/message.md#异步调用)，异步调用时的返回值均为 `Promise<void>`
+- 标有 <Badge vertical="baseline" text="CoolQ" type="warn"/> 的 API 只能基于 CoolQ 运行（如 cqhttp）
+- 标有 <Badge vertical="baseline" text="mirai" type="warn"/> 的 API 只能基于 mirai 运行（如 go-cqhttp）
 
 ## 属性
 
@@ -155,7 +157,7 @@ export interface ForwardMessage {
 群组匿名用户禁言。
 
 - **groupId:** `number` 群号
-- **anonymous:** `object | string` 匿名用户的信息或 flag，参见 [Message 型元数据属性](../guide/receive-and-send.md#message-型元数据属性)
+- **anonymous:** `object | string` 匿名用户的信息或 flag，参见 [Message 型元数据属性](../guide/message.md#message-型元数据属性)
 - **duration:** `number` 禁言时长（秒），设为 0 表示解除禁言
 - 返回值: `Promise<void>`
 
@@ -244,7 +246,7 @@ export interface ForwardMessage {
 处理加群请求或邀请。
 
 - **flag:** `string` 加群请求的 flag（需从上报的数据中获得）
-- **subType:** `'add' | 'invite'` 子类型，参见 [Request 型元数据属性](../guide/receive-and-send.md#request-型元数据属性)
+- **subType:** `'add' | 'invite'` 子类型，参见 [Request 型元数据属性](../guide/message.md#request-型元数据属性)
 - **approve:** `boolean` 是否同意请求，默认为 `true`
 - **reason:** `string` 拒绝理由（仅当拒绝时有效）
 - 返回值: `Promise<void>`

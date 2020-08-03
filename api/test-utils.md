@@ -218,7 +218,7 @@ MockedApp 会截获从 Sender API 发出的所有请求，因而实现了 Mocked
 :::
 
 ::: tip 注意
-会话的另一个限制是它的实现基于 Meta 方法和 [快捷操作](../guide/receive-and-send.md#快捷操作) 技术。因此它无法用于测试下列两种行为：
+会话的另一个限制是它的实现基于 Meta 方法和 [快捷操作](../guide/message.md#快捷操作) 技术。因此它无法用于测试下列两种行为：
 
 - 通过直接调用 Sender API 而非 Meta 方法的行为
 - 对单一信息可能存在多条回复的行为

@@ -12,8 +12,6 @@ sidebarDepth: 2
 
 ## app.selfId
 
-当前 App 绑定的 QQ 号，是 `app.options.selfId` 的简写形式。
-
 ## app.server
 
 当前 App 绑定的 Server 对象。可以通过手动调用 `app.server.stop()` 停止服务器的运行。
@@ -21,10 +19,6 @@ sidebarDepth: 2
 ## app.options
 
 当前 App 创建时传入的配置。参见 [配置文件](../guide/config-file.md)。
-
-## app.version
-
-当前 App 的版本信息。参见 [`VersionInfo`](./sender.md#sender-getsersioninfo)。
 
 ## app.users
 

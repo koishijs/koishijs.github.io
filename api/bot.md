@@ -4,20 +4,41 @@ sidebarDepth: 2
 
 # 机器人 (Bot)
 
-::: danger 注意
-这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
-:::
-
 Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](https://cqhttp.cc/docs/4.15/#/API)。[go-cqhttp](https://github.com/Mrs4s/go-cqhttp) 进一步扩展了一些接口，这些扩展的功能也被 Koishi 实现了。
 
-::: warning 有关异步 API
-对于存在 [**异步版本**](../guide/receive-and-send.md#异步调用) 的 API，返回值均为 `Promise<void>`。
-:::
+此外，对于本页中的 [**异步调用**](../guide/receive-and-send.md#异步调用) API，返回值均为 `Promise<void>`。
+
+## 属性
+
+### 构造选项
+
+每个 Bot 都会继承你构造 App 时传入的选项，因此下列选项是天生就有的：
+
+- bot.selfId
+- bot.server
+- bot.token
+
+### bot.app
+
+当前 Bot 所在的 App 实例。
+
+### bot.version
+
+当前 Bot 对应的版本信息。参见 [`VersionInfo`](#bot-getversioninfo)。
 
 ## 消息相关
 
-### bot.sendPrivateMsg(userId, message, autoEscape?)
-### bot.sendPrivateMsgAsync(userId, message, autoEscape?)
+### bot.sendMsg(type, ctxId, message, autoEscape?) <Badge text="async"/>
+
+发送消息。
+
+- **type:** `'private' | 'group' | 'discuss'` 消息类型
+- **userId:** `number` QQ 号 / 群号 / 讨论组号
+- **message:** `string` 要发送的内容
+- **autoEsacpe:** `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
+- 返回值: `Promise<number>` 新信息的 messageId
+
+### bot.sendPrivateMsg(userId, message, autoEscape?) <Badge text="async"/>
 
 发送私聊消息。
 
@@ -26,8 +47,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **autoEsacpe:** `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
 - 返回值: `Promise<number>` 新信息的 messageId
 
-### bot.sendGroupMsg(groupId, message, autoEscape?)
-### bot.sendGroupMsgAsync(groupId, message, autoEscape?)
+### bot.sendGroupMsg(groupId, message, autoEscape?) <Badge text="async"/>
 
 发送群消息。
 
@@ -36,16 +56,35 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **autoEsacpe:** `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
 - 返回值: `Promise<number>` 新信息的 messageId
 
-### bot.deleteMsg(messageId)
-### bot.deleteMsgAsync(messageId)
+### bot.sendGroupForwardMsg(groupId, nodes) <Badge text="async"/> <Badge text="mirai" type="warn"/>
+
+发送群批量转发消息。
+
+- **groupId:** `number` 群号
+- **nodes:** `CQNode[]` 消息节点列表
+- 返回值: `Promise<void>`
+
+```ts
+interface CQNode {
+  type: 'node'
+  data: {
+    id: number
+  } | {
+    name: string
+    uin: number
+    content: string
+  }
+}
+```
+
+### bot.deleteMsg(messageId) <Badge text="async"/>
 
 撤回信息。
 
 - **messageId:** `number` 消息 ID
 - 返回值: `Promise<void>`
 
-### bot.sendLike(userId, times?)
-### bot.sendLikeAsync(userId, times?)
+### bot.sendLike(userId, times?) <Badge text="async"/> <Badge text="CoolQ" type="warn"/>
 
 给好友点赞。
 
@@ -54,23 +93,46 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - 返回值: `Promise<void>`
 
 ::: warning 注意
-本接口仅能**在搭载 CoolQ 的账号上对好友**使用。
+本接口仅限**对好友**使用。
 :::
 
-### bot.sendGroupNotice(groupId, title, content)
-### bot.sendGroupNoticeAsync(groupId, title, content)
+### bot.getGroupMsg(messageId) <Badge text="mirai" type="warn"/>
 
-发布群公告。
+发送群批量转发消息。
 
-- **groupId:** `number` 群号
-- **title:** `string` 标题
-- **content:** `string` 内容
-- 返回值: `Promise<void>`
+- **messageId:** `number` 消息编号
+- 返回值: `Promise<GroupMessage>`
 
-## 操作群和讨论组
+```ts
+export interface GroupMessage {
+  messageId: number
+  realId: number
+  sender: AccountInfo
+  time: number
+  content: string
+}
+```
 
-### bot.setGroupKick(groupId, userId, rejectAddRequest?)
-### bot.setGroupKickAsync(groupId, userId, rejectAddRequest?)
+### bot.getForwardMsg(messageId) <Badge text="mirai" type="warn"/>
+
+发送群批量转发消息。
+
+- **messageId:** `number` 消息编号
+- 返回值: `Promise<ForwardMessage>`
+
+```ts
+export interface ForwardMessage {
+  messages: {
+    sender: AccountInfo
+    time: number
+    content: string
+  }[]
+}
+```
+
+## 群相关
+
+### bot.setGroupKick(groupId, userId, rejectAddRequest?) <Badge text="async"/>
 
 踢出群聊或拒绝加群。
 
@@ -79,8 +141,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **rejectAddRequest:** `boolean` 拒绝此人的加群请求
 - 返回值: `Promise<void>`
 
-### bot.setGroupBan(groupId, userId, duration?)
-### bot.setGroupBanAsync(groupId, userId, duration?)
+### bot.setGroupBan(groupId, userId, duration?) <Badge text="async"/>
 
 群组单人禁言。
 
@@ -89,8 +150,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **duration:** `number` 禁言时长（秒），设为 0 表示解除禁言
 - 返回值: `Promise<void>`
 
-### bot.setGroupAnonymousBan(groupId, anonymous, duration?)
-### bot.setGroupAnonymousBanAsync(groupId, anonymous, duration?)
+### bot.setGroupAnonymousBan(groupId, anonymous, duration?) <Badge text="async"/>
 
 群组匿名用户禁言。
 
@@ -99,8 +159,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **duration:** `number` 禁言时长（秒），设为 0 表示解除禁言
 - 返回值: `Promise<void>`
 
-### bot.setGroupWholeBan(groupId, enable?)
-### bot.setGroupWholeBanAsync(groupId, enable?)
+### bot.setGroupWholeBan(groupId, enable?) <Badge text="async"/>
 
 群组全员禁言。
 
@@ -108,8 +167,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **enable:** `boolean` 是否禁言，默认为 `true`
 - 返回值: `Promise<void>`
 
-### bot.setGroupAdmin(groupId, userId, enable?)
-### bot.setGroupAdminAsync(groupId, userId, enable?)
+### bot.setGroupAdmin(groupId, userId, enable?) <Badge text="async"/>
 
 群组设置管理员。
 
@@ -118,8 +176,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **enable:** `boolean` 是否设置为管理员，默认为 `true`
 - 返回值: `Promise<void>`
 
-### bot.setGroupAnonymous(groupId, enable?)
-### bot.setGroupAnonymousAsync(groupId, enable?)
+### bot.setGroupAnonymous(groupId, enable?) <Badge text="async"/>
 
 群组设置匿名。
 
@@ -127,8 +184,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **enable:** `boolean` 是否允许匿名，默认为 `true`
 - 返回值: `Promise<void>`
 
-### bot.setGroupCard(groupId, userId, card?)
-### bot.setGroupCardAsync(groupId, userId, card?)
+### bot.setGroupCard(groupId, userId, card?) <Badge text="async"/>
 
 设置群名片。
 
@@ -137,8 +193,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **card:** `string` 群名片
 - 返回值: `Promise<void>`
 
-### bot.setGroupLeave(groupId, isDismiss?)
-### bot.setGroupLeaveAsync(groupId, isDismiss?)
+### bot.setGroupLeave(groupId, isDismiss?) <Badge text="async"/>
 
 退出群组。
 
@@ -146,8 +201,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **isDismiss:** `boolean` 是否解散群（仅对群主生效）
 - 返回值: `Promise<void>`
 
-### bot.setGroupSpecialTitle(groupId, userId, specialTitle?, duration?)
-### bot.setGroupSpecialTitleAsync(groupId, userId, specialTitle?, duration?)
+### bot.setGroupSpecialTitle(groupId, userId, specialTitle?, duration?) <Badge text="async"/>
 
 设置群组专属头衔。
 
@@ -157,10 +211,26 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **duration:** `number` 有效时长（秒，目前可能没用）
 - 返回值: `Promise<void>`
 
+### bot.sendGroupNotice(groupId, title, content) <Badge text="async"/>
+
+发布群公告。
+
+- **groupId:** `number` 群号
+- **title:** `string` 标题
+- **content:** `string` 内容
+- 返回值: `Promise<void>`
+
+### bot.setGroupName(groupId, name) <Badge text="async"/> <Badge text="mirai" type="warn"/>
+
+修改群名称。
+
+- **groupId:** `number` 群号
+- **name:** `string` 群名称
+- 返回值: `Promise<void>`
+
 ## 处理请求
 
-### bot.setFriendAddRequest(flag, approve?, remark?)
-### bot.setFriendAddRequestAsync(flag, approve?, remark?)
+### bot.setFriendAddRequest(flag, approve?, remark?) <Badge text="async"/>
 
 处理加好友请求。
 
@@ -169,8 +239,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **remark:** `string` 好友备注名（仅当同意时有效）
 - 返回值: `Promise<void>`
 
-### bot.setGroupAddRequest(flag, subType, approve?, reason?)
-### bot.setGroupAddRequestAsync(flag, subType, approve?, reason?)
+### bot.setGroupAddRequest(flag, subType, approve?, reason?) <Badge text="async"/>
 
 处理加群请求或邀请。
 
@@ -180,7 +249,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **reason:** `string` 拒绝理由（仅当拒绝时有效）
 - 返回值: `Promise<void>`
 
-## 获取账号信息
+## 账号信息
 
 ### bot.getLoginInfo()
 
@@ -329,6 +398,8 @@ export interface GroupNoticeInfo {
 }
 ```
 
+## 其他操作
+
 ### bot.getCookies(domain?)
 
 获取 Cookies。
@@ -356,8 +427,6 @@ export interface Credentials {
 }
 ```
 
-## 其他操作
-
 ### bot.getRecord(file, outFormat, fullPath?)
 
 获取语音：并不是真的获取语音，而是转换语音到指定的格式，然后返回 `data/record` 目录下的语音文件名。注意，要使用此接口，需要安装 CoolQ 的 [语音组件](https://cqp.cc/t/21132)。
@@ -365,14 +434,31 @@ export interface Credentials {
 - **file:** `string` 语音文件名
 - **outFormat:** `'mp3' | 'amr' | 'wma' | 'm4a' | 'spx' | 'ogg' | 'wav' | 'flac'`
 - **fullPath:** `boolean` 是否返回文件的绝对路径
-- 返回值: `Promise<string>` 语音文件名
+- 返回值: `Promise<RecordInfo>`
+
+```ts
+export interface RecordInfo {
+  file: string
+}
+```
 
 ### bot.getImage(file)
 
 获取图片：与上面类似，不过返回 `data/image` 目录下的图片路径。
 
 - **file:** `string` 图片文件名
-- 返回值: `Promise<string>` 图片的完整路径
+- 返回值: `Promise<ImageInfo>`
+
+```ts
+export interface ImageInfo {
+  file: string
+
+  // go-cqhttp 特有
+  size: number
+  filename: string
+  url: string
+}
+```
 
 ### bot.canSendImage()
 
@@ -416,6 +502,11 @@ export interface VersionInfo {
   pluginVersion: string
   pluginBuildNumber: number
   pluginBuildConfiguration: 'debug' | 'release'
+
+  // go-cqhttp 特有
+  goCqhttp: boolean
+  runtimeVersion: string
+  runtimeOs: string
 }
 ```
 
@@ -439,16 +530,14 @@ export interface VersionInfo {
 - **delay:** `string` 要延迟的毫秒数，如果默认情况下无法重启，可以尝试设置延迟为 2000 左右
 - 返回值: `Promise<void>`
 
-### bot.cleanDataDir(dataDir)
-### bot.cleanDataDirAsync(dataDir)
+### bot.cleanDataDir(dataDir) <Badge text="async"/>
 
 清理积攒了太多旧文件的数据目录。
 
 - **dataDir:** `'image' | 'record' | 'show' | 'bface'` 要清理的目录名
 - 返回值: `Promise<void>`
 
-### bot.cleanPluginLog()
-### bot.cleanPluginLogAsync()
+### bot.cleanPluginLog() <Badge text="async"/>
 
 清空插件的日志文件。
 

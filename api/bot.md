@@ -2,18 +2,13 @@
 sidebarDepth: 2
 ---
 
-# 发送器 (Sender)
+# 机器人 (Bot)
 
 ::: danger 注意
 这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
 :::
 
-一个发送器封装了一套标准的 [CQHTTP API](https://cqhttp.cc/docs/4.12/#/API)。
-
-::: tip 提示
-1. 尽管 Koishi 总体支持 CQHTTP 3.0，但是部分接口需要更高的 CQHTTP 版本才能进行调用，所需的版本会标在对应 API 的后面。
-2. 用黄色的版本标识标识这是一个实验性 API，可能在未来发生变动。
-:::
+机器人相当于 Koishi v1 的发送器，它封装了一套标准的 [CQHTTP API](https://cqhttp.cc/docs/4.15/#/API)。
 
 ## 消息相关
 

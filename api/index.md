@@ -17,8 +17,8 @@ koishi-core 中提供的 API，包括以下几个子页面：
 - [全局 API](./global.md)
 - [上下文 (Context)](./context.md)
 - [应用 (App)](./app.md)
+- [机器人 (Bot)](./bot.md)
 - [接收器 (Receiver)](./receiver.md)
-- [发送器 (Sender)](./sender.md)
 - [指令 (Command)](./command.md)
 - [数据库 (Database)](./database.md)
 
@@ -28,10 +28,8 @@ koishi-core 中提供的 API，包括以下几个子页面：
 
 - [koishi-utils](./utils.md)
 - [koishi-test-utils](./test-utils.md)
-- [koishi-database-level](./database/level.md)
 - [koishi-database-memory](./database/memory.md)
 - [koishi-database-mysql](./database/mysql.md)
-- [koishi-database-sqlite](./database/sqlite.md)
 
 ## 更新与迁移
 

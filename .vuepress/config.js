@@ -96,18 +96,16 @@ module.exports = context => ({
           children: [
             '/api/utils',
             '/api/test-utils',
-            '/api/database/level',
             '/api/database/memory',
             '/api/database/mysql',
-            '/api/database/sqlite',
           ],
         },
         {
-          title: '更新日志',
+          title: '更新与迁移',
           collapsable: false,
           children: [
-            'v2 更新日志',
-            '从 v1 迁移',
+            '/api/changelog',
+            '/api/migration',
           ],
         },
       ],

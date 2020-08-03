@@ -4,6 +4,10 @@ sidebarDepth: 2
 
 # 全局 API
 
+::: danger 注意
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+:::
+
 本章节收录了由包 koishi-core 导出的主要 API。
 
 ## new App(options?)
@@ -12,44 +16,6 @@ sidebarDepth: 2
 
 - **options:** `AppOptions` 参见 [配置列表](../guide/config-file.md)
 - 返回值: [`App`](./app.md)
-
-## appList
-
-当前所有 [App](./app.md) 实例构成的数组。
-
-## appMap
-
-当前所有 [App](./app.md) 实例构成的键值对，键为对应的 QQ 号。
-
-::: tip 提示
-由于 Koishi 的 QQ 号是一项可选配置，因此当程序未收到任何事件上报，也未主动调用过 [`getSelfIds()`](#getselfids) 时，这个键值对可能并不会包含所有 App 实例的信息。但一旦通过上述两种方式获得了 QQ 号，相应的 App 实例也会立即绑定到这个对象上。
-:::
-
-## startAll()
-
-启动所有机器人。
-
-- 返回值: `Promise<void>`
-
-## onStart(callback)
-
-添加启动钩子。
-
-- **callback:** `() => any` 当全部机器人启动完毕后会调用此函数
-- 返回值: `void`
-
-## stopAll()
-
-停止所有机器人。
-
-- 返回值: `Promise<void>`
-
-## onStop(callback)
-
-添加停止钩子。
-
-- **callback:** `() => any` 当全部机器人停止运行后会调用此函数
-- 返回值: `void`
 
 ## 数据库相关
 
@@ -101,23 +67,6 @@ sidebarDepth: 2
 - **assignee:** `number` 代理者的 ID
 - 返回值: `GroupData`
 
-### registerDatabase(name, subdatabase)
-
-注册一种新数据库。
-
-- **name:** `string` 数据库名
-- **subdatabase:** `new (config) => object` 新的数据库类，参见 [定义新的数据库](../guide/using-database.md#定义新的数据库)
-- 返回值: `void`
-
-### injectMethods(name, methods, config?)
-
-向某个数据库注入一批方法。
-
-- **name:** `string` 表名
-- **methods:** `Record<string, Function>` 要注入的方法
-- **config:** `any` 对应表的配置
-- 返回值: `void`
-
 ## Command 静态方法
 
 这里包含了 [Command](./command.md) 类的静态方法。
@@ -141,12 +90,6 @@ sidebarDepth: 2
 ## 运行时工具
 
 这里包含了一些运行时的工具。
-
-### getSelfIds()
-
-获取所有机器人的 QQ 号。已经获取到的将不再获取。
-
-- 返回值: `Promise<number[]>` 所有机器人的 QQ 号
 
 ### getTargetId(target)
 

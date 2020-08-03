@@ -4,6 +4,10 @@ sidebarDepth: 0
 
 # API 文档
 
+::: danger 注意
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+:::
+
 本栏介绍的内容分为三个主要部分：
 
 ## 核心 API
@@ -29,9 +33,7 @@ koishi-core 中提供的 API，包括以下几个子页面：
 - [koishi-database-mysql](./database/mysql.md)
 - [koishi-database-sqlite](./database/sqlite.md)
 
-## 更新日志
+## 更新与迁移
 
-官方包的更新日志，其中所有 koishi 的依赖都会显示在同一页中：
-
-- [koishi](./changelog/koishi.md)
-- [koishi-test-utils](./changelog/test-utils.md)
+- [v2 更新日志](./changelog.md)
+- [从 v1 迁移](./migration.md)

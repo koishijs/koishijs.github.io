@@ -9,7 +9,7 @@ class ImageState extends State {
   index = 0
 
   constructor (size: number, placement: 'cross' | 'grid', public file: string) {
-    super(size, placement)
+    super(null, null, size, placement)
   }
 
   dump (x?: number, y?: number) {

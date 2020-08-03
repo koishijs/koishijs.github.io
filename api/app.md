@@ -4,6 +4,10 @@ sidebarDepth: 2
 
 # 应用 (App)
 
+::: danger 注意
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+:::
+
 **应用 (App)** 是 [Context](./context.md) 的一个子类，它管理着一个 QQ 号下面的全部信息。除了上面提到的属性和方法以外，App 还提供了下面的属性和方法：
 
 ## app.selfId
@@ -96,3 +100,9 @@ sidebarDepth: 2
 - **meta:** [`Meta`](../guide/receive-and-send.md#深入-meta-对象) 元信息对象
 - **next:** [`NextFunction`](../guide/receive-and-send.md#中间件) 所处的中间件的 `next` 回调函数
 - 返回值: `any` 执行结果
+
+## app.getSelfIds()
+
+获取所有机器人的 QQ 号。已经获取到的将不再获取。无法连接的服务器的账号将不会返回。
+
+- 返回值: `Promise<number[]>` 所有机器人的 QQ 号

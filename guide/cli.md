@@ -4,6 +4,10 @@ sidebarDepth: 2
 
 # 命令行工具
 
+::: danger 注意
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+:::
+
 Koishi 提供了名为 `koishi` 的命令行工具，相信你已经在之前的介绍中看过它的使用方法了。本章就详细介绍 Koishi 与命令行相关的特性。
 
 ## koishi init

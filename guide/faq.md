@@ -4,6 +4,10 @@ sidebarDepth: 2
 
 # 常见问题
 
+::: danger 注意
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+:::
+
 ## 关于消息
 
 ### CQ 码是什么？应该如何使用 CQ 码？

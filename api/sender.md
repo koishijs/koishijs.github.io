@@ -4,6 +4,10 @@ sidebarDepth: 2
 
 # 发送器 (Sender)
 
+::: danger 注意
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+:::
+
 一个发送器封装了一套标准的 [CQHTTP API](https://cqhttp.cc/docs/4.12/#/API)。
 
 ::: tip 提示

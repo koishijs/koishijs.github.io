@@ -5,6 +5,10 @@ noOutboundLinks: true
 
 # 介绍
 
+::: danger 注意
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+:::
+
 Koishi 是一个在 Node.js 环境下运行，基于 CoolQ 和 CQHTTP 的 QQ 机器人框架。
 
 它的名字和图标来源于东方 Project 中的角色古明地恋（Komeiji Koishi）。
@@ -55,22 +59,3 @@ Koishi 在开发时借助了下面的工具：
 - 使用 [GitHub Actions](https://github.com/features/actions) 进行持续集成
 
 这保证了其代码的正确性和可读性。
-
-## 为什么选择 Koishi
-
-读到这里，可能有些人会产生这样的疑问：为什么不使用其他的 CoolQ SDK 呢？因此，本节将对 Koishi 和其他基于 Node.js 的机器人实现进行一些简单的对比。
-
-| 特性 | [koishi<br>1.10.0](https://www.npmjs.com/package/koishi/v/1.10.0) | [cqhttp<br>1.2.0](https://www.npmjs.com/package/cqhttp/v/1.2.0) | [cq-websocket<br>2.0.2](https://www.npmjs.com/package/cq-websocket/v/2.0.2) | [lemon-bot<br>0.6.0](https://www.npmjs.com/package/lemon-bot/v/0.6.0) | [@ionjs/core<br>0.6.5](https://www.npmjs.com/package/@ionjs/core/v/0.6.5) |
-|:--:|:--:|:--:|:--:|:--:|:--:|
-| 依赖数量 | [10](http://npm.anvaka.com/#/view/2d/koishi-core/1.10.0) / [21](http://npm.anvaka.com/#/view/2d/koishi/1.10.0) | [62](http://npm.anvaka.com/#/view/2d/cqhttp/1.1.1) | [37](http://npm.anvaka.com/#/view/2d/cq-websocket/2.0.2) | [65](http://npm.anvaka.com/#/view/2d/lemon-bot/0.6.0) | [73](http://npm.anvaka.com/#/view/2d/%2540ionjs%252Fcore/0.6.5) |
-| 安装体积 (MB) | [0.78](https://packagephobia.now.sh/result?p=koishi-core@1.10.0) / [2.28](https://packagephobia.now.sh/result?p=koishi@1.10.0) | [1.86](https://packagephobia.now.sh/result?p=cqhttp@1.1.1) | [2.82](https://packagephobia.now.sh/result?p=cq-websocket) | [2.56](https://packagephobia.now.sh/result?p=lemon-bot) | [2.32](https://packagephobia.now.sh/result?p=@ionjs/core) |
-| HTTP | ✔️ | ✔️ | ❌ | ✔️ | ✔️ |
-| WebSocket | ✔️ | ❌ | ✔️ | ❌ | ❌ |
-| 反向 WebSocket | ❌ | ❌ | ❌ | ❌ | ❌ |
-| 监听器 | ✔️ | ✔️ | ✔️ | ❌ | ✔️ |
-| 上下文 | ✔️ | ❌ | ❌ | ✔️ | ✔️ |
-| 中间件 | ✔️ | ❌ | ❌ | ❌ | ✔️ |
-| 命令行 | ✔️ | ❌ | ❌ | ❌ | ❌ |
-| 指令 | ✔️ | ❌ | ❌ | ✔️ | ❌ |
-
-注：依赖数量如果表示为 X/Y，则 X 表示核心库依赖数量，Y 表示命令行工具依赖数量。

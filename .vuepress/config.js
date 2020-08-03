@@ -106,8 +106,8 @@ module.exports = context => ({
           title: '更新日志',
           collapsable: false,
           children: [
-            ['/api/changelog/koishi', 'koishi 及其依赖'],
-            ['/api/changelog/test-utils', 'koishi-test-utils'],
+            ['/api/changelog', 'v2 更新日志'],
+            ['/api/从 v1 迁移', '从 v1 迁移'],
           ],
         },
       ],

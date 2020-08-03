@@ -4,6 +4,10 @@ sidebarDepth: 2
 
 # 指令 (Command)
 
+::: danger 注意
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+:::
+
 指令系统是 Koishi 的核心功能之一。通过 `ctx.command()` 方法获得的是指令的实例，它含有下面的方法：
 
 ## cmd.option(rawName, description?, config?)

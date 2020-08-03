@@ -4,6 +4,10 @@ sidebarDepth: 2
 
 # 配置文件
 
+::: danger 注意
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+:::
+
 Koishi CLI 只提供了两个命令：`koishi init` 和 `koishi run`。前者用于初始化一个配置文件，后者用于运行一个配置文件。而这个配置文件的大部分参数又可以直接传入 App 的构造函数中。可见，理解这些配置项是理解 Koishi 工作原理的关键。本章就详细介绍每个配置项的功能和使用方式。
 
 标有 <Badge text="CLI" vertical="baseline"/> 表示只能在配置文件中使用。

@@ -4,54 +4,100 @@ sidebarDepth: 2
 
 # 应用 (App)
 
-::: danger 注意
-这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
-:::
+**应用 (App)** 是 [Context](./context.md) 的一个子类，它是程序的入口，管理着全部机器人的信息。除了 Context 中已有的属性和方法以外，App 还提供了下面的属性和方法：
 
-**应用 (App)** 是 [Context](./context.md) 的一个子类，它管理着一个 QQ 号下面的全部信息。除了上面提到的属性和方法以外，App 还提供了下面的属性和方法：
+## new App(options)
 
-## app.selfId
+创建一个 App 实例。
 
-## app.server
+### options.type
 
-当前 App 绑定的 Server 对象。可以通过手动调用 `app.server.stop()` 停止服务器的运行。
+机器人的通信方式，目前支持 `'http'` 和 `'ws'` 两种。特别地，如果这个配置缺省，Koishi 也会读取你的 `server` 选项，根据你配置的服务器 URL 进行适配。相关 CQHTTP 配置：`use_http`, `use_ws`。
+
+### options.port
+
+服务器监听的端口。相关 CQHTTP 配置：`post_url`。
+
+### options.secret
+
+接收信息时用于验证的字段，应与 CQHTTP 的 `secret` 配置保持一致。
+
+### options.bots
+
+### options(.bots[]).selfId
+
+机器人自己的 QQ 号。这个选项通常是可选的，因为 Koishi 在大部分情况下可以自动获取机器人的 QQ 号。但我们仍然建议你手动配置这个选项。
+
+### options(.bots[]).server
+
+如果使用了 HTTP，则该配置将作为发送信息的服务端；如果使用了 WebSocket，则该配置将作为监听事件和发送信息的服务端。
+
+相关 CQHTTP 配置：`host`, `port`, `ws_host`, `ws_port`。
+
+### options(.bots[]).token
+
+发送信息时用于验证的字段，应与 CQHTTP 的 `access_token` 配置保持一致。
+
+### options.nickname
+
+机器人的昵称，可以是字符串或字符串数组。将用于指令前缀的匹配。例如，如果配置该选项为 `'恋恋'`，则你可以通过 `恋恋，help` 来进行 help 指令的调用。参见 [**指令前缀**](./command-system.md#指令前缀) 一节。
+
+### options.commandPrefix
+
+指令前缀字符，可以是字符串或字符串数组。将用于指令前缀的匹配。例如，如果配置该选项为 `.`，则你可以通过 `.help` 来进行 help 指令的调用。参见 [**指令前缀**](./command-system.md#指令前缀) 一节。
+
+### options.maxListeners
+
+最大中间件的数量。如果超过这个数量，Koishi 会认定为发生了内存泄漏，将产生一个错误事件，并停止新中间件的安装。默认值为 `64`。
+
+### options.similarityCoefficient
+
+用于模糊匹配的相似系数，应该是一个 0 到 1 之间的数值。数值越高，模糊匹配越严格。设置为 1 可以完全禁用模糊匹配。参见 [**模糊匹配**](./command-system.md#模糊匹配) 一节。
+
+### options.quickOperationTimeout
+
+快捷操作的时间限制，单位为毫秒。如果配置了这个选项且使用了 HTTP 通信方式，则在这段时间内的首次调用 `meta.$send()` 或类似的方法将不产生新的 HTTP 请求。默认值为 `0`。参见 [**快捷操作**](./message.md#快捷操作) 一节。
 
 ## app.options
 
 当前 App 创建时传入的配置。参见 [配置文件](../guide/config-file.md)。
 
-## app.users
+## app.server
 
-由当前 App 内所有用户事件构成的上下文。特别地，你可以使用 `app.users.exclude(...ids)` 创建除去某些用户外所有用户的上下文。
+当前 App 绑定的 Server 对象。
 
-## app.groups
+### server.app
 
-由当前 App 内所有群事件构成的上下文。特别地，你可以使用 `app.groups.exclude(...ids)` 创建除去某些群外所有群的上下文。
+当前 Server 对象所在的 App 实例。
 
-## app.discusses
+### server.bots
 
-由当前 App 内所有讨论组事件构成的上下文。特别地，你可以使用 `app.discusses.exclude(...ids)` 创建除去某些讨论组外所有讨论组的上下文。
+当前 Server 对象所绑定的全部 [Bot](./bot.md) 实例。你可以将其当做一个 Bot 数组，也可以直接使用 QQ 号作为其索引：
 
-## app.user(...userIds)
+```ts
+server.bots[0].selfId                       // 123456789
+server.bots[123456789] === server.bots[0]   // true
+server.bots.length                          // 1
+```
 
-创建对特定用户的上下文。
+### server.router
 
-- **userIds:** `number[]` 用户 ID
-- 返回值: [`Context`](./context.md) 新的上下文
+如果你使用了 http 或 ws-reverse 模式，则这个属性将作为一个 [Koa-Router](https://github.com/koajs/router/blob/master/API.md) 实例。你可以在上面自定义新的路由：
 
-## app.group(...groupIds)
+```ts
+app.server.router.get('/path', (ctx, next) => {
+  // handle request
+})
+```
 
-创建对特定群的上下文。
+## app.status
 
-- **groupIds:** `number[]` 群 ID
-- 返回值: [`Context`](./context.md) 新的上下文
+当前 App 的运行状态。它可能是下列数值中的一个：
 
-## app.discuss(...discussIds)
-
-创建对特定讨论组的上下文。
-
-- **discussIds:** `number[]` 讨论组 ID
-- 返回值: [`Context`](./context.md) 新的上下文
+- Status.closed = 0
+- Status.opening = 1
+- Status.open = 2
+- Status.closing = 3
 
 ## app.start()
 
@@ -64,36 +110,6 @@ sidebarDepth: 2
 停止此应用。
 
 - 返回值: `Promise<void>`
-
-## app.emitEvent(meta, event, ...payloads)
-
-在元信息相关联的上下文触发一个事件。
-
-- **meta:** `Meta` 元信息
-- **event:** `string` 事件名
-- **payloads:** `any[]` 事件参数
-- 返回值: `void`
-
-::: tip 提示
-如果你只希望该事件在 `App` 本身触发，应该直接使用 `app.receiver.emit()` 方法。
-:::
-
-## app.parseCommandLine(message, meta)
-
-解析一段指令调用文本。
-
-- **message:** `string` 要解析的文本（开头不要包含指令名和前缀）
-- **meta:** [`Meta`](../guide/message.md#深入-meta-对象) 元信息对象
-- 返回值: [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 解析结果
-
-## app.executeCommandLine(message, meta, next?) <Badge text="1.1.0+"/>
-
-执行一段指令调用文本。
-
-- **message:** `string` 要执行的文本（开头不要包含指令名和前缀）
-- **meta:** [`Meta`](../guide/message.md#深入-meta-对象) 元信息对象
-- **next:** [`NextFunction`](../guide/message.md#中间件) 所处的中间件的 `next` 回调函数
-- 返回值: `any` 执行结果
 
 ## app.getSelfIds()
 

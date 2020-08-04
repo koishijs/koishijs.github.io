@@ -58,7 +58,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **autoEsacpe:** `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
 - 返回值: `Promise<number>` 新信息的 messageId
 
-### bot.sendGroupForwardMsg(groupId, nodes) <Badge text="async"/> <Badge text="mirai" type="warn"/>
+### bot.sendGroupForwardMsg(groupId, nodes) <Badge text="async"/><Badge text="mirai" type="warn"/>
 
 发送群批量转发消息。
 
@@ -86,7 +86,7 @@ interface CQNode {
 - **messageId:** `number` 消息 ID
 - 返回值: `Promise<void>`
 
-### bot.sendLike(userId, times?) <Badge text="async"/> <Badge text="CoolQ" type="warn"/>
+### bot.sendLike(userId, times?) <Badge text="async"/><Badge text="CoolQ" type="warn"/>
 
 给好友点赞。
 
@@ -222,7 +222,7 @@ export interface ForwardMessage {
 - **content:** `string` 内容
 - 返回值: `Promise<void>`
 
-### bot.setGroupName(groupId, name) <Badge text="async"/> <Badge text="mirai" type="warn"/>
+### bot.setGroupName(groupId, name) <Badge text="async"/><Badge text="mirai" type="warn"/>
 
 修改群名称。
 

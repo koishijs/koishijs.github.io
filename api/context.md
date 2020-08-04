@@ -12,58 +12,97 @@ sidebarDepth: 2
 
 ## ctx.database
 
-当前 App 的数据库对象。参见 [数据库](./database.md)。
+当前应用的 [Database](./database.md) 对象。
 
-## ctx.sender
+## ctx.bots
 
-当前 App 的发送器对象。参见 [发送器](./sender.md)。
+当前应用所绑定的全部 [Bot](./bot.md) 实例。你可以将其当做一个 Bot 数组，也可以直接使用 QQ 号作为其索引：
 
-## ctx.receiver
+```ts
+ctx.bots[0].selfId                    // 123456789
+ctx.bots[123456789] === ctx.bots[0]   // true
+ctx.bots.length                       // 1
+```
 
-当前上下文的接收器对象。参见 [接收器](./receiver.md)。
+## 过滤器
 
-## ctx.plus(context)
+### ctx.user(...ids)
 
 在已有上下文的基础上加上其他上下文。
 
 - **context:** `Context` 要加上的上下文
 - 返回值: `Context` 新的上下文
 
-## ctx.minus(context)
+### ctx.private(...ids)
 
 在已有上下文的基础上除去其他上下文。
 
 - **context:** `Context` 要除去的上下文
 - 返回值: `Context` 新的上下文
 
-## ctx.intersect(context)
+### ctx.group(...ids)
 
 给出当前上下文和其他上下文的交集
 
 - **context:** `Context` 要求交集的上下文
 - 返回值: `Context` 新的上下文
 
-## ctx.inverse()
-
-求出当前上下文的补集。
-
-- 返回值: `Context` 新的上下文
-
-## ctx.match(meta)
+### ctx.match(meta)
 
 测试上下文能否匹配元信息对象。
 
 - **meta:** `Meta` 元信息对象
 - 返回值: `boolean` 匹配结果
 
-## ctx.contain(context)
+### ctx.contain(context)
 
 判断当前上下文是否完全包含了另一个上下文。
 
 - **context:** `Context` 要比较的上下文
 - 返回值: `boolean` 比较结果
 
-## ctx.plugin(plugin, options?)
+## 钩子与中间件
+
+### ctx.emit(meta?, event, ...param)
+
+### ctx.parallel(meta?, event, ...param)
+
+### ctx.bail(meta?, event, ...param)
+
+### ctx.serial(meta?, event, ...param)
+
+### ctx.on(event, listener)
+
+### ctx.once(event, listener)
+
+### ctx.before(event, listener)
+
+### ctx.off(event, listener)
+
+### ctx.middleware(middleware)
+
+当前上下文中注册一个中间件。
+
+- **middleware:** [`Middleware`](../guide/message.md#中间件) 要注册的中间件
+- 返回值: `this`
+
+### ctx.prependMiddleware(middleware)
+
+当前上下文中注册一个前置中间件。
+
+- **middleware:** [`Middleware`](../guide/message.md#中间件) 要注册的前置中间件
+- 返回值: `this`
+
+### ctx.removeMiddleware(middleware)
+
+移除当前上下文中一个已注册的中间件。
+
+- **middleware:** [`Middleware`](../guide/message.md#中间件) 要移除的中间件
+- 返回值: `boolean` 是否存在该中间件
+
+## 指令与插件
+
+### ctx.plugin(plugin, options?)
 
 当前上下文中安装一个插件。
 
@@ -77,28 +116,7 @@ type PluginObject <T extends Context, U> = { apply: PluginFunction<T, U> }
 type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
 ```
 
-## ctx.middleware(middleware)
-
-当前上下文中注册一个中间件。
-
-- **middleware:** [`Middleware`](../guide/message.md#中间件) 要注册的中间件
-- 返回值: `this`
-
-## ctx.prependMiddleware(middleware)
-
-当前上下文中注册一个前置中间件。
-
-- **middleware:** [`Middleware`](../guide/message.md#中间件) 要注册的前置中间件
-- 返回值: `this`
-
-## ctx.removeMiddleware(middleware)
-
-移除当前上下文中一个已注册的中间件。
-
-- **middleware:** [`Middleware`](../guide/message.md#中间件) 要移除的中间件
-- 返回值: `boolean` 是否存在该中间件
-
-## ctx.command(rawName, description?, config?)
+### ctx.command(rawName, description?, config?)
 
 在当前上下文中注册或修改一个指令。
 
@@ -107,34 +125,29 @@ type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
 - config?: [`CommandConfig`](../guide/command-system.md#commandconfig-对象) 指令的配置
 - 返回值：[`Command`](./command.md) 注册或修改的指令
 
-## ctx.getCommand(name, meta?)
+### ctx.parse()
 
-在当前上下文中获取一个指令。如果提供了 `meta`，将会检测指令是否可以匹配 `meta.$path`；否则将使用 `this.path` 进行匹配。
+### ctx.execute(argv)
+### ctx.execute(message, session, next?)
 
-- **name:** `string` 指令名
-- **meta:** [`Meta`](../guide/message.md#深入-meta-对象) 元信息对象
-- 返回值：[`Command`](./command.md) 匹配的指令
-
-## ctx.runCommand(name, meta, args?, options?, rest?)
-
-在当前上下文中执行一个指令。
+执行一个指令。如果传入一个 argv 对象，将作为该指令执行时的 argv；否则需要提供要执行的指令文本，会话对象。
 
 - **name:** `string` 指令名
-- **meta:** [`Meta`](../guide/message.md#深入-meta-对象) 元信息对象
+- **session:** [`Session`](../guide/message.md#深入-meta-对象) 会话对象
 - **args:** `string[]` 参数列表
 - **options:** `Record<string, any>` 选项列表
 - **rest:** `string` 剩余参数，参见 [剩余参数](../guide/command-system.md#剩余参数)
 - 返回值: `Promise<void>`
 
-## ctx.logger(scope?) <Badge text="1.3.0+"/>
+### ctx.logger(scope?) <Badge text="1.3.0+"/>
 
-根据 scope 生成一个 [Logger 对象](../guide/logger.md#使用-logger)。
+根据 namespace 生成一个 [Logger 对象](../guide/logger.md#使用-logger)。
 
 - **scope:** `string` 要指定的类型，默认为 `''`
 - 返回值: [`Logger`](../guide/logger.md#使用-logger)
 
-## ctx.end()
+### ctx.dispose() <Badge text="beta" type="warn"/>
 
-返回当前上下文所在的 App 实例，可用于链式调用。
+移除当前插件中所注册的钩子、中间件和指令。
 
-- 返回值: [`App`](./app.md) 当前上下文所在的 App 实例
+- 返回值: `void`

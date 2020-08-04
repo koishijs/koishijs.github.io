@@ -2,7 +2,34 @@
 
 这个页面将包含全部 v1 中修改或删除的 API。
 
-## 单一 App 实例
+## 钩子函数
+
+Koishi v1 的 `ctx.receiver` 使用了 EventEmitter 来分发事件，而 Koishi v2 则自己实现了一个事件系统。
+
+```ts
+ctx.receiver.on(event, callback)    =>  ctx.on(event, callback)
+ctx.receiver.emit(event, ...args)   =>  ctx.emit(event, ...args)
+ctx.app.emitEvent(...args)          =>  ctx.emit(...args)
+app.options.maxMiddlewares          =>  app.options.maxListeners
+```
+
+除此以外，Koishi v2 还加入了更多与事件有关的 API：
+
+```ts
+ctx.emit()      // 同时触发，返回 void
+ctx.bail()      // 依次触发，返回第一个 truthy 的结果
+ctx.parallel()  // 同时触发，返回一个全部完成的 Promise
+ctx.serial()    // 依次触发，返回第一个 resolve truthy 的结果
+```
+
+## 过滤器
+
+```ts
+app.groups                      =>  app.group()
+ctx.intersect(ctx.app.groups)   =>  ctx.group()
+```
+
+## 单一应用实例
 
 Koishi v2 使用单一的 App 实例管理多个机器人账号。因此，如果你使用多个机器人来进行负载均衡，请留意这方面的 API 变化。
 
@@ -27,17 +54,16 @@ new App({
 
 ### appList, appMap, ctx.sender <Badge type="error" text="移除"/>
 
-现在可以通过 `ctx.bots` 访问当前 App 下的所有机器人，也可以用 `meta.$app` 和 `meta.$bot` 访问当前会话所在的 App 和 Bot 实例了。
+现在可以通过 `ctx.bots` 访问当前 App 下的所有机器人，也可以用 `session.$app` 和 `session.$bot` 访问当前会话所在的 App 和 Bot 实例了。
 
 ```ts
-appMap[selfId]          =>  ctx.app
 appMap[selfId].sender   =>  ctx.bots[selfId]
 appList.forEach(cb)     =>  ctx.bots.forEach(cb)
 ctx.sender.sendMsg()    =>  ctx.bots[selfId].sendMsg()
 
-appMap[selfId]          =>  meta.$app
-appMap[selfId].sender   =>  meta.$bot
-ctx.sender.sendMsg()    =>  meta.$bot.sendMsg()
+appMap[selfId]          =>  session.$app
+appMap[selfId].sender   =>  session.$bot
+ctx.sender.sendMsg()    =>  session.$bot.sendMsg()
 ```
 
 ### startAll(), stopAll(), onStart(), onStop() <Badge type="error" text="移除"/>
@@ -59,6 +85,18 @@ onStop(cb)              =>  ctx.on('disconnect', cb)
 ```ts
 app.selfId              =>  bot.selfId
 getSelfIds()            =>  app.getSelfIds()
+```
+
+## 指令操作
+
+### app.parseCommandLine(), app.executeCommandLine(), ctx.runCommand() <Badge type="error" text="移除"/>
+
+我们设计了更强大和便捷的替代品：
+
+```ts
+ctx.app.parseCommandLine()    =>  ctx.parse()
+ctx.app.executeCommandLine()  =>  ctx.execute()
+ctx.runCommand()              =>  ctx.execute()
 ```
 
 ## 数据库相关

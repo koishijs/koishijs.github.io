@@ -30,7 +30,7 @@ module.exports = context => ({
       const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'“”‘’<>,.?/]+/g
       return removeDiacritics(str)
         .replace(rControl, '')
-        .replace(/\(.+/, '')
+        .replace(/\(.+\)(?=\s|$)/, '')
         .replace(rSpecial, '-')
         .replace(/\-{2,}/g, '-')
         .replace(/^\-+|\-+$/g, '')

@@ -42,13 +42,17 @@ sidebarDepth: 2
 
 机器人的昵称，可以是字符串或字符串数组。将用于指令前缀的匹配。例如，如果配置该选项为 `'恋恋'`，则你可以通过 `恋恋，help` 来进行 help 指令的调用。参见 [**指令前缀**](./command-system.md#指令前缀) 一节。
 
-### options.commandPrefix
+### options.prefix
 
 指令前缀字符，可以是字符串或字符串数组。将用于指令前缀的匹配。例如，如果配置该选项为 `.`，则你可以通过 `.help` 来进行 help 指令的调用。参见 [**指令前缀**](./command-system.md#指令前缀) 一节。
 
 ### options.maxListeners
 
-最大中间件的数量。如果超过这个数量，Koishi 会认定为发生了内存泄漏，将产生一个错误事件，并停止新中间件的安装。默认值为 `64`。
+每种钩子的最大数量。如果超过这个数量，Koishi 会认定为发生了内存泄漏，将产生一个错误事件，并停止新钩子的安装。默认值为 `64`。
+
+### options.queueDelay
+
+### options.promptTimeout
 
 ### options.similarityCoefficient
 

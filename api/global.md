@@ -10,13 +10,6 @@ sidebarDepth: 2
 
 本章节收录了由包 koishi-core 导出的主要 API。
 
-## new App(options?)
-
-机器人实例的构造函数。
-
-- **options:** `AppOptions` 参见 [配置列表](../guide/config-file.md)
-- 返回值: [`App`](./app.md)
-
 ## 数据库相关
 
 这里包含了一些数据库相关的全局方法。
@@ -97,21 +90,6 @@ sidebarDepth: 2
 
 - **target:** `string` 要解析的字符串
 - 返回值: `number` 目标 QQ 号
-
-### showSuggestions(options) <Badge text="beta" type="warn"/>
-
-尝试显示候选输入。
-
-- **options.target:** `string` 源字符串
-- **options.items:** `string` 目标字符串列表
-- **options.meta:** [`Meta`](../guide/message.md#深入-meta-对象) 元信息对象
-- **options.next:** [`NextFunction`](../guide/message.md#中间件) 回调函数
-- **options.prefix:** `string` 显示在候选输入前的文本
-- **options.suffix:** `string` 当只有一个选项时，显示在候选输入后的文本
-- **options.coefficient:** `number` 用于模糊匹配的相似系数
-- **options.command:** `Command | ((suggestion: string) => Command)` 相关指令
-- **options.execute:** `(suggestion: string, meta: MessageMeta, next: NextFunction) => void` 确认后执行的操作
-- 返回值: `Promise<void>`
 
 ### getUsage(name, user) <Badge text="beta" type="warn"/> <Badge text="1.6.0+" type="warn"/>
 

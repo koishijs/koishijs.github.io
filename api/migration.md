@@ -1,3 +1,7 @@
+---
+sidebarDepth: 2
+---
+
 # 从 v1 迁移
 
 这个页面将包含全部 v1 中修改或删除的 API。
@@ -107,4 +111,6 @@ ctx.runCommand()              =>  ctx.execute()
 
 ### injectMethods(name, methods, config?) <Badge type="error" text="移除"/>
 
+## 其他变更
 
+- `CQCode.parseAll()` 将不在封装纯文本，返回 `string | CQCode[]`

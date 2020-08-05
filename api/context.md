@@ -125,20 +125,6 @@ type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
 - config?: [`CommandConfig`](../guide/command-system.md#commandconfig-对象) 指令的配置
 - 返回值：[`Command`](./command.md) 注册或修改的指令
 
-### ctx.parse()
-
-### ctx.execute(argv)
-### ctx.execute(message, session, next?)
-
-执行一个指令。如果传入一个 argv 对象，将作为该指令执行时的 argv；否则需要提供要执行的指令文本，会话对象。
-
-- **name:** `string` 指令名
-- **session:** [`Session`](../guide/message.md#深入-meta-对象) 会话对象
-- **args:** `string[]` 参数列表
-- **options:** `Record<string, any>` 选项列表
-- **rest:** `string` 剩余参数，参见 [剩余参数](../guide/command-system.md#剩余参数)
-- 返回值: `Promise<void>`
-
 ### ctx.logger(scope?) <Badge text="1.3.0+"/>
 
 根据 namespace 生成一个 [Logger 对象](../guide/logger.md#使用-logger)。

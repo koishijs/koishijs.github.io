@@ -10,56 +10,6 @@ sidebarDepth: 2
 
 本章节收录了由包 koishi-core 导出的主要 API。
 
-## 数据库相关
-
-这里包含了一些数据库相关的全局方法。
-
-### UserFlag
-
-所有用户状态标签构成的枚举类型。参见 [状态标签](../guide/authorization.md#状态标签)。
-
-### userFields
-
-所有用户字段构成的列表。
-
-### extendUser(getter)
-
-扩展用户字段。
-
-- **getter:** `(id: number, authority: number) => object` 新字段的初始化函数，返回值应该是一个由要扩展的字段和它们的默认值构成的键值对
-- 返回值: `void`
-
-### createUser(id, authority)
-
-创建一个新用户数据对象。
-
-- **id:** `number` 用户 ID
-- **authority:** `number` 权限等级
-- 返回值: `UserData`
-
-### GroupFlag
-
-所有群状态标签构成的枚举类型。参见 [状态标签](../guide/authorization.md#状态标签)。
-
-### groupFields
-
-所有群字段构成的列表。
-
-### extendGroup(getter)
-
-扩展群字段。
-
-- **getter:** `(id: number, assignee: number) => object` 新字段的初始化函数，返回值应该是一个由要扩展的字段和它们的默认值构成的键值对
-- 返回值: `void`
-
-### createGroup(id, assignee)
-
-创建一个新群数据对象。
-
-- **id:** `number` 用户 ID
-- **assignee:** `number` 代理者的 ID
-- 返回值: `GroupData`
-
 ## Command 静态方法
 
 这里包含了 [Command](./command.md) 类的静态方法。

@@ -12,7 +12,7 @@ sidebarDepth: 2
 
 ## ctx.database
 
-当前应用的 [Database](./database.md) 对象。
+当前应用的 [Database](./database.md#数据库对象) 对象。
 
 ## ctx.bots
 

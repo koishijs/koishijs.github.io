@@ -125,13 +125,6 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 
 成功连接到服务器且已经获得 QQ 号时触发。参见 [ready 事件](../guide/lifecycle.md#ready-事件)。
 
-### 事件：error
-
-运行时产生错误时在 App 实例触发。调用时传入一个 [Error](https://nodejs.org/api/errors.html#errors_class_error) 对象。拥有下面的子事件：
-
-- error/command: 指令调用出错
-- error/middleware: 中间件调用出错
-
 ### 事件：before-group
 
 当 Koishi 试图从数据库获取群信息前触发。调用时会传入一个 `Set<GroupField>` 对象和一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。如果当前没有正在解析的指令，则该对象只会有一个 `meta` 属性。你可以在回调函数中修改传入的字段集合，增加的字段将可以被之后的中间件获取到。
@@ -180,10 +173,6 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 
 执行指令的 `action` 回调函数前会在对应的上下文触发。调用时传入一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。
 
-### 事件：after-command
-
-成功调用指令后会在对应的上下文触发。如果调用过程出错或者在指令内部触发 `next` 则不会触发。调用时传入一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。
-
 ### 事件：after-middleware
 
 在执行完全部中间件后会在对应的上下文触发。调用时传入一个 [`Meta`](../guide/message.md#深入-meta-对象) 对象。
@@ -195,15 +184,3 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 ### 事件：disconnect
 
 成功关闭服务器时在 App 实例触发。
-
-### 事件：logger <Badge text="1.3.0+"/>
-
-当调用 Logger 方法时在 App 实例触发。拥有下面的子事件，分别在对应的方法被调用时触发：
-
-- logger/success
-- logger/error
-- logger/info
-- logger/warn
-- logger/debug
-
-调用时传入的第一个参数是字符串，表示产生输出的来源；第二个参数也是字符串，表示输出的内容。logger 事件本身还会产生第三个字符串参数表示输出的类型，如 `info` 等等。

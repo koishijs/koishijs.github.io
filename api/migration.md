@@ -93,6 +93,22 @@ getSelfIds()            =>  app.getSelfIds()
 
 ## 指令操作
 
+### cmd.option() <Badge type="warn" text="修改"/>
+
+为了对注册的选项进行自动的代码补全，我们修改了 option 方法的行为：
+
+```ts
+// old
+cmd.option('-f, --foo <arg>', 'description', { default: 123 })
+cmd.option('-B, --no-bar', 'description')
+cmd.option('--baz <arg>', 'description', { isString: true })
+
+// new
+cmd.option('foo', '-f <arg> description', { fallback: 123 })
+cmd.option('bar', '-B description', { value: false })
+cmd.option('baz', '<arg> description', { type: 'string' })
+```
+
 ### app.parseCommandLine(), app.executeCommandLine(), ctx.runCommand() <Badge type="error" text="移除"/>
 
 我们设计了更强大和便捷的替代品：

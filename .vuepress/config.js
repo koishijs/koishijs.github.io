@@ -2,6 +2,7 @@ const { remove: removeDiacritics } = require('diacritics')
 
 module.exports = context => ({
   title: 'Koishi',
+
   head: [
     ['link', { rel: 'icon', href: `/koishi.png` }],
     // ['link', { rel: 'manifest', href: '/manifest.json' }],
@@ -13,6 +14,7 @@ module.exports = context => ({
     // ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
     // ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
   ],
+
   plugins: [
     [require('./markdown/highlight')],
     [require('./markdown/link')],
@@ -24,6 +26,7 @@ module.exports = context => ({
       componentDir: 'components',
     }],
   ],
+
   markdown: {
     slugify (str) {
       const rControl = /[\u0000-\u001f]/g
@@ -38,6 +41,7 @@ module.exports = context => ({
         .toLowerCase()
     },
   },
+
   themeConfig: {
     logo: '/koishi.png',
     nav: [
@@ -88,7 +92,6 @@ module.exports = context => ({
             '/api/session',
             '/api/command',
             '/api/database',
-            '/api/global',
           ],
         },
         {

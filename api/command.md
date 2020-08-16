@@ -5,7 +5,7 @@ sidebarDepth: 2
 # 指令 (Command)
 
 ::: danger 注意
-这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
 :::
 
 指令系统是 Koishi 的核心功能之一。通过 `ctx.command()` 方法获得的是指令的实例，它含有下面的方法：
@@ -100,8 +100,22 @@ sidebarDepth: 2
 - **next:** [`NextFunction`](../guide/message.md#中间件) 所处的中间件的 `next` 回调函数
 - 返回值: `any` 执行函数的返回结果
 
-## cmd.end()
+## 静态方法
 
-返回当前指令所在的上下文，可用于链式调用。
+这里包含了 [Command](./command.md) 类的静态方法。
 
-- 返回值: [`Context`](./context.md) 当前指令所在的上下文
+### Command.attachUserFields(fields, argv)
+
+按照 argv 中的 command 属性向 fields 添加所需的用户字段。它是一个内置的 before-user 监听器。
+
+- **fields:** `Set<UserField>` 用户字段集合
+- **argv:** [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 只需确保其中存在 command 属性即可
+- 返回值: `void`
+
+### Command.attachGroupFields(fields, argv)
+
+按照 argv 中的 command 属性向 fields 添加所需的群字段。它是一个内置的 before-group 监听器。
+
+- **fields:** `Set<GroupField>` 群字段集合
+- **argv:** [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 只需确保其中存在 command 属性即可
+- 返回值: `void`

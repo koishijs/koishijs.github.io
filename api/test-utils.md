@@ -5,7 +5,7 @@ sidebarDepth: 2
 # 测试工具 (Test Utils)
 
 ::: danger 注意
-这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
 :::
 
 包含了被 Koishi 使用的测试工具，它们由 `koishi-test-utils` 包提供。

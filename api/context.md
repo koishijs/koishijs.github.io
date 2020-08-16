@@ -5,16 +5,16 @@ sidebarDepth: 2
 # 上下文 (Context)
 
 ::: danger 注意
-这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](https://koishijs.github.io/v1/)。
+这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
 :::
 
 **上下文 (Context)** 是 Koishi 的重要概念。你的每一个插件，中间件，监听器和指令都被绑定在上下文上。
 
-## ctx.database
+## 应用属性
 
-当前应用的 [Database](./database.md#数据库对象) 对象。
+下面的属性为了访问方便而绑定，严格上它们对一个 App 实例下的所有上下文都是相同的。
 
-## ctx.bots
+### ctx.bots
 
 当前应用所绑定的全部 [Bot](./bot.md) 实例。你可以将其当做一个 Bot 数组，也可以直接使用 QQ 号作为其索引：
 
@@ -22,6 +22,20 @@ sidebarDepth: 2
 ctx.bots[0].selfId                    // 123456789
 ctx.bots[123456789] === ctx.bots[0]   // true
 ctx.bots.length                       // 1
+```
+
+### ctx.database
+
+当前应用的 [Database](./database.md#数据库对象) 对象。
+
+### ctx.router
+
+如果你配置了 [port](./app.md#option-port) 选项，则这个属性将作为一个 [Koa-Router](https://github.com/koajs/router/blob/master/API.md) 实例。你可以在上面自定义新的路由：
+
+```ts
+ctx.router.get('/path', (ctx, next) => {
+  // handle request
+})
 ```
 
 ## 过滤器
@@ -121,8 +135,8 @@ type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
 在当前上下文中注册或修改一个指令。
 
 - **rawName:** `string` 指令名以及可能的参数
-- description?: `string` 指令的描述
-- config?: [`CommandConfig`](../guide/command-system.md#commandconfig-对象) 指令的配置
+- **description:** `string` 指令的描述
+- **config:** [`CommandConfig`](../guide/command-system.md#commandconfig-对象) 指令的配置
 - 返回值：[`Command`](./command.md) 注册或修改的指令
 
 ### ctx.logger(scope?) <Badge text="1.3.0+"/>

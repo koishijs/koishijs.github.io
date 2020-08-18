@@ -132,15 +132,16 @@ module.exports = context => ({
           title: '其他核心插件',
           collapsable: false,
           children: [
-            '/plugins/schedule',
             '/plugins/teach',
             '/plugins/eval',
+            '/plugins/puppeteer',
           ],
         },
         {
           title: '其他官方插件',
           collapsable: false,
           children: [
+            '/plugins/schedule',
             '/plugins/other/chess',
             '/plugins/other/image-search',
             '/plugins/other/status',

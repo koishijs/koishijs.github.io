@@ -134,8 +134,7 @@ module.exports = context => ({
           children: [
             '/plugins/schedule',
             '/plugins/teach',
-            '/plugins/recorder',
-            '/plugins/nlp',
+            '/plugins/eval',
           ],
         },
         {

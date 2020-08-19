@@ -21,7 +21,7 @@ koishi-plugin-eval-addons 在前一个插件的基础上，允许用户编写自
 ### prefix
 
 - 类型: `string`
-- 默认值: `>`
+- 默认值: `'>'`
 
 快捷调用的前缀字符。设置为 `null` 可以取消 evaluate 指令的快捷调用。
 

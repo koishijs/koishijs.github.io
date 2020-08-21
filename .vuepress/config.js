@@ -59,7 +59,6 @@ module.exports = context => ({
           children: [
             '/guide/about-koishi',
             '/guide/getting-started',
-            '/guide/config-file',
             '/guide/cli',
             '/guide/faq',
           ],

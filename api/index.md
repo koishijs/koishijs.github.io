@@ -34,4 +34,4 @@ koishi-core 中提供的 API，包括以下几个子页面：
 ## 更新与迁移
 
 - [v2 更新日志](./changelog.md)
-- [从 v1 迁移](./migration.md)
+- [v2 新特性](./new-in-v2.md)

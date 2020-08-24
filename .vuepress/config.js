@@ -108,7 +108,7 @@ module.exports = context => ({
           collapsable: false,
           children: [
             '/api/changelog',
-            '/api/migration',
+            '/api/new-in-v2',
           ],
         },
       ],

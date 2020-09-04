@@ -16,9 +16,9 @@ koishi-plugin-eval 允许用户直接使用机器人执行脚本。它利用了 
 
 koishi-plugin-eval-addons 在前一个插件的基础上，允许用户编写自己的模块并永久保存。插件将自动加载特定目录下的文件，并将其作为机器人的内置功能。用户可以利用此功能存储较为复杂的代码，甚至扩展新的指令。同时，如果上述目录是一个 git 目录，该插件也提供了自动更新等机制。
 
-## 使用沙箱
+## 沙箱 API
 
-evaluate 指令会创建一个沙箱环境。这个沙箱环境支持 es2020 的全部特性，外加 [Buffer](https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html)。除此以外，还支持下面的属性和方法：
+evaluate 指令会创建一个沙箱环境。这个沙箱环境支持 ES2020 的全部特性，外加 [Buffer](https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html)。除此以外，还支持下面的属性和方法：
 
 ### user
 
@@ -48,7 +48,51 @@ evaluate 指令会创建一个沙箱环境。这个沙箱环境支持 es2020 的
 - Random
 - Time
 
-## 扩展功能
+## 主线程 API
+
+### DataTrap
+
+#### trap.define
+
+#### trap.get
+
+#### trap.set
+
+#### trap.fields
+
+#### userTrap
+
+#### groupTrap
+
+#### attachTraps
+
+### MainAPI
+
+### app.worker
+
+## 子线程 API
+
+### config
+
+### response
+
+### mapDirectory
+
+### WorkerAPI
+
+### internal
+
+#### internal.contextify(value)
+
+#### internal.decontextify(value)
+
+#### internal.setGlobal(name, value, writable)
+
+#### internal.connect(outer, inner)
+
+### formatError(error)
+
+### synthetize(identifier, namespace, name) <Badge text="addons"/>
 
 ## 安全性
 
@@ -57,9 +101,9 @@ evaluate 指令会创建一个沙箱环境。这个沙箱环境支持 es2020 的
 koishi-plugin-eval 提供了一套陷阱 API。它会影响 evaluate 指令和扩展指令中的用户数据。你可以通过下面的方式来定义一个陷阱：
 
 ```ts
-import { UserTrap } from 'koishi-plugin-eval'
+import { userTrap } from 'koishi-plugin-eval'
 
-UserTrap.define('foo', {
+userTrap.define('foo', {
   fields: ['bar'],
   get: user => user.bar,
   set: (user, value) => user.bar = value,

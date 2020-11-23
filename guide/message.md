@@ -20,16 +20,16 @@ sidebarDepth: 2
 
 ```js
 // 如果收到“人有多大胆”，就回应“地有多大产”
-app.on('message', (meta) => {
-  if (meta.message === '人有多大胆') {
-    meta.$send('地有多大产')
+app.on('message', (session) => {
+  if (session.message === '人有多大胆') {
+    session.$send('地有多大产')
   }
 })
 ```
 
 在这个简单的示例中，这里有两件事你需要了解：
 
-上面的 `meta` 对象被称为**元信息**。元信息具有通用的结构，只要是来自 [CQHTTP 的事件](https://cqhttp.cc/docs/4.15/#/Post)，无论类型都会被解析成这个统一结构。你可以在本节的最后查看 [Meta 对象的详细结构](#深入-meta-对象)。
+上面的 `session` 对象被称为**会话**。会话具有通用的结构，只要是来自 [CQHTTP 的事件](https://cqhttp.cc/docs/4.15/#/Post)，无论类型都会被解析成这个统一结构。你可以在本节的最后查看 [Meta 对象的详细结构](#深入-meta-对象)。
 
 上面的 `message` 字符串被称为**事件名称**。Koishi 的事件名和 `meta.postType` 字段进行对应。同时，根据 postType 的不同，Koishi 会相应地添加二级事件。二级事件和一级事件会被同时触发，因此你只需要根据具体的需求监听其中的一个即可。例如，一个 postType 为 `notice`，noticeType 为 `group_upload` 的事件会同时触发 `notice` 和 `notice/group_upload` 两个监听器。
 

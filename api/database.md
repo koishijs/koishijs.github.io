@@ -7,7 +7,7 @@ sidebarDepth: 2
 ## 用户字段
 
 | 字段名 | 类型 | 描述 |
-|:=:|:=:|:=:|
+|:-:|:-:|:-:|
 | id | number | 数据库自动生成的 ID |
 | cqhttp | string | QQ 号（由 adapter-cqhttp 提供） |
 | tomon | string | Tomon ID（由 adapter-tomon 提供） |
@@ -19,7 +19,7 @@ sidebarDepth: 2
 ## 群字段
 
 | 字段名 | 类型 | 描述 |
-|:=:|:=:|:=:|
+|:-:|:-:|:-:|
 | id | string | 群标识符 |
 | type | string | 适配器名（如 cqhttp） |
 | flag | number | 状态标签 |

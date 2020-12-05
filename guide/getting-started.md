@@ -5,22 +5,12 @@ sidebarDepth: 2
 # 快速上手
 
 ::: danger 注意
-这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
+这里是**正在施工**的 koishi v3 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
 :::
 
 ## 起步
 
-Koishi 基于 NodeJS，CoolQ 和 CQHTTP，因此你需要先安装它们。
-
-- NodeJS：[https://nodejs.org](https://nodejs.org/)
-- CoolQ：[https://cqp.cc](https://cqp.cc)
-- CQHTTP：[https://cqhttp.cc](https://cqhttp.cc)
-
-进行相应的配置并运行 CoolQ 和 CQHTTP 后，你就可以愉快地使用 Koishi 了。
-
-::: tip 提示
-Koishi v2 要求您的 Node.js 的版本不小于 12，CQHTTP 的版本不小于 4.0。如果使用 WebSocket，Koishi 要求 CQHTTP 版本不小于 4.6。
-:::
+Koishi 需要 [NodeJS](https://nodejs.org/) v12 以上的运行环境，你需要自己安装它。同时，我们还强烈建议您安装 [yarn](https://classic.yarnpkg.com/lang/en/) 作为包管理器。在下面的文档中，我们将默认使用 yarn。
 
 ## 全局安装
 
@@ -30,22 +20,43 @@ Koishi v2 要求您的 Node.js 的版本不小于 12，CQHTTP 的版本不小于
   { content: [{ text: 'cd', class: 'input' }, ' my-bot'] },
 ]" static></Terminal>
 
-安装 Koishi：
+然后输入下面的命令行：
 
 <Terminal :content="[
-  { content: [{ text: 'npm', class: 'input' }, ' i koishi -g'] },
-  { content: [{ text: '# 或者 yarn global add koishi', class: 'hint' }] },
+  { content: [{ text: '# 初始化项目', class: 'hint' }] },
+  { content: [{ text: 'npm', class: 'input' }, ' init'] },
+  {},
+  { content: [{ text: '# 安装 koishi', class: 'hint' }] },
+  { content: [{ text: 'npm', class: 'input' }, ' i koishi -D'] },
+  {},
+  { content: [{ text: '# 生成配置文件，注意这里是 npx 而不是 npm', class: 'hint' }] },
+  { content: [{ text: 'npx', class: 'input' }, ' koishi init'] },
+  {},
+  { content: [{ text: '# 补全依赖', class: 'hint' }] },
+  { content: [{ text: 'npm', class: 'input' }, ' i'] },
 ]" static></Terminal>
 
-利用 `koishi init` 指令迅速创建一个 `koishi.config.js` 文件：
+或者使用我们推荐的 yarn：
 
 <Terminal :content="[
-  { content: [{ text: 'koishi', class: 'input' }, ' init'] },
+  { content: [{ text: '# 初始化项目', class: 'hint' }] },
+  { content: [{ text: 'yarn', class: 'input' }, ' init'] },
+  {},
+  { content: [{ text: '# 安装 koishi', class: 'hint' }] },
+  { content: [{ text: 'yarn', class: 'input' }, ' add koishi -D'] },
+  {},
+  { content: [{ text: '# 生成配置文件', class: 'hint' }] },
+  { content: [{ text: 'yarn', class: 'input' }, ' koishi init'] },
+  {},
+  { content: [{ text: '# 补全依赖', class: 'hint' }] },
+  { content: [{ text: 'yarn', class: 'input' }, ''] },
 ]" static></Terminal>
+
+此时，你会看到在你刚刚创建的目录下多了一些文件，包括 `package.json` 和 `koishi.config.js`。后者应该大概长这样：
 
 ```js koishi.config.js
 module.exports = {
-  type: 'http',
+  type: 'cqhttp:http',
   port: 8080,
   server: 'http://localhost:5700',
   // 其他生成的配置项
@@ -55,7 +66,8 @@ module.exports = {
 最后运行程序：
 
 <Terminal :content="[
-  { content: [{ text: 'koishi', class: 'input' }, ' start'] },
+  { content: [{ text: 'npx', class: 'input' }, ' koishi start'] },
+  { content: [{ text: '# 或者 yarn koishi start', class: 'hint' }] },
 ]" static></Terminal>
 
 现在可以对你的机器人说话了：

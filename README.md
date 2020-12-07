@@ -16,7 +16,7 @@ footer: MIT Licensed | Copyright © 2019-present Shigma
 ---
 
 ::: danger 注意
-这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
+这里是**正在施工**的 koishi v3 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
 :::
 
 <Terminal :content="[
@@ -41,5 +41,5 @@ footer: MIT Licensed | Copyright © 2019-present Shigma
 </panel-view>
 
 ::: tip 提示
-Koishi v2 要求您的 Node.js 的版本不小于 12，CQHTTP 的版本不小于 4.0。如果使用 WebSocket，Koishi 要求 CQHTTP 版本不小于 4.6。
+Koishi v3 要求您的 Node.js 的版本不小于 12，CQHTTP 的版本不小于 4.0。如果使用 WebSocket，Koishi 要求 CQHTTP 版本不小于 4.6。
 :::

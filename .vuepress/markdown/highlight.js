@@ -1,7 +1,10 @@
 const { getHighlighter } = require('shiki')
 const { escapeHtml } = require('markdown-it/lib/common/utils')
+const { resolve } = require('path')
 
 let highlighter
+
+const batchAliases = ['npm', 'yarn']
 
 module.exports = (options, ctx) => ({
   name: 'enhanced-highlight',
@@ -9,6 +12,12 @@ module.exports = (options, ctx) => ({
   async ready () {
     highlighter = await getHighlighter({
       theme: 'monokai',
+      langs: [{
+        id: 'custom-batch',
+        scopeName: 'source.batchfile',
+        path: resolve(__dirname, 'batch.json'),
+        aliases: batchAliases,
+      }],
     })
   },
 
@@ -34,7 +43,8 @@ module.exports = (options, ctx) => ({
           token.title = title.trim()
         }
         const rawCode = fence(...args)
-        return `<panel-view class="code" title=${JSON.stringify(token.title)}>${rawCode}</panel-view>`
+        return batchAliases.includes(token.info) ? `<template #${token.info}>${rawCode}</template>`
+          : `<panel-view class="code" title=${JSON.stringify(token.title)}>${rawCode}</panel-view>`
       }
     })
   },

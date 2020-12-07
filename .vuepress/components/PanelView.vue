@@ -1,12 +1,18 @@
 <template>
-  <div class="panel-view" :class="{ mini: !controls && !title }">
+  <div class="panel-view" :class="{ mini: !controls && !title && tabs.length === 1 }">
     <div class="controls">
       <div class="circle red"/>
       <div class="circle yellow"/>
       <div class="circle green"/>
-      <div class="title">{{ title }}</div>
+      <div class="title">
+        {{ title }}
+        <template v-if="tabs.length > 1">
+          <span class="tab" :class="{ active: tab === name }"
+            v-for="(name, index) in tabs" :key="index" @click="tab = name">{{ name }}</span>
+        </template>
+      </div>
     </div>
-    <div class="content"><slot/></div>
+    <div class="content"><slot :name="tab"/></div>
   </div>
 </template>
 
@@ -16,6 +22,21 @@ export default {
   props: {
     controls: Boolean,
     title: String,
+  },
+
+  data: () => ({
+    tab: 'default',
+  }),
+
+  computed: {
+    tabs() {
+      return Object.keys(this.$slots)
+    },
+  },
+
+  mounted() {
+    console.log(this.tabs)
+    this.tab = this.tabs[0]
   },
 }
 
@@ -60,6 +81,21 @@ $circleSpacing = 22px
       width 100%
       font-size 0.9rem
       line-height 1rem
+
+      .tab
+        color gray
+        cursor pointer
+
+      .tab.active
+        color white
+        cursor default
+        font-weight bold
+
+      .tab + .tab::before
+        cursor default
+        content " | "
+        font-weight normal
+        color gray
 
   .content
     padding 0.2rem 1.2rem

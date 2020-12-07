@@ -10,47 +10,49 @@ sidebarDepth: 2
 
 ## 起步
 
-Koishi 需要 [NodeJS](https://nodejs.org/) v12 以上的运行环境，你需要自己安装它。同时，我们还强烈建议您安装 [yarn](https://classic.yarnpkg.com/lang/en/) 作为包管理器。在下面的文档中，我们将默认使用 yarn。
+Koishi 需要 [NodeJS](https://nodejs.org/) (v12 以上) 运行环境，你需要自己安装它。同时，我们还强烈建议您安装 [yarn](https://classic.yarnpkg.com/lang/en/) 作为包管理器。在下面的文档中，我们将默认使用 yarn。
 
 ## 全局安装
 
 创建并进入一个机器人目录：
 
-<Terminal :content="[
-  { content: [{ text: 'cd', class: 'input' }, ' my-bot'] },
-]" static></Terminal>
+```custom-batch
+cd my-bot
+```
 
 然后输入下面的命令行：
 
-<Terminal :content="[
-  { content: [{ text: '# 初始化项目', class: 'hint' }] },
-  { content: [{ text: 'npm', class: 'input' }, ' init'] },
-  {},
-  { content: [{ text: '# 安装 koishi', class: 'hint' }] },
-  { content: [{ text: 'npm', class: 'input' }, ' i koishi -D'] },
-  {},
-  { content: [{ text: '# 生成配置文件，注意这里是 npx 而不是 npm', class: 'hint' }] },
-  { content: [{ text: 'npx', class: 'input' }, ' koishi init'] },
-  {},
-  { content: [{ text: '# 补全依赖', class: 'hint' }] },
-  { content: [{ text: 'npm', class: 'input' }, ' i'] },
-]" static></Terminal>
+<panel-view class="code" title="Terminal - ">
 
-或者使用我们推荐的 yarn：
+```npm
+# 初始化项目
+npm init
 
-<Terminal :content="[
-  { content: [{ text: '# 初始化项目', class: 'hint' }] },
-  { content: [{ text: 'yarn', class: 'input' }, ' init'] },
-  {},
-  { content: [{ text: '# 安装 koishi', class: 'hint' }] },
-  { content: [{ text: 'yarn', class: 'input' }, ' add koishi -D'] },
-  {},
-  { content: [{ text: '# 生成配置文件', class: 'hint' }] },
-  { content: [{ text: 'yarn', class: 'input' }, ' koishi init'] },
-  {},
-  { content: [{ text: '# 补全依赖', class: 'hint' }] },
-  { content: [{ text: 'yarn', class: 'input' }, ''] },
-]" static></Terminal>
+# 安装 koishi
+npm i koishi -D
+
+# 生成配置文件，注意这里是 npx 而不是 npm
+npx koishi init
+
+# 补全依赖
+npm i
+```
+
+```yarn
+# 初始化项目
+yarn init
+
+# 安装 koishi
+yarn add koishi -D
+
+# 生成配置文件
+yarn koishi init
+
+# 补全依赖
+yarn
+```
+
+</panel-view>
 
 此时，你会看到在你刚刚创建的目录下多了一些文件，包括 `package.json` 和 `koishi.config.js`。后者应该大概长这样：
 

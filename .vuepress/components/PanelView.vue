@@ -7,8 +7,8 @@
       <div class="title">
         {{ title }}
         <template v-if="tabs.length > 1">
-          <span class="tab" :class="{ active: tab === name }"
-            v-for="(name, index) in tabs" :key="index" @click="tab = name">{{ name }}</span>
+          <span :class="['tab', { active: tab === name }]" @click="tab = name"
+            v-for="(name, index) in tabs" :key="index">{{ name }}</span>
         </template>
       </div>
     </div>
@@ -44,8 +44,8 @@ export default {
 
 <style lang="stylus">
 
-$circleRadius = 7px
-$circleSpacing = 22px
+$circleRadius = 6px
+$circleSpacing = 19px
 
 .panel-view
   position relative
@@ -89,12 +89,10 @@ $circleSpacing = 22px
       .tab.active
         color white
         cursor default
-        font-weight bold
 
       .tab + .tab::before
         cursor default
         content " | "
-        font-weight normal
         color gray
 
   .content

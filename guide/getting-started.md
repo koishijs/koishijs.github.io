@@ -22,7 +22,7 @@ cd my-bot
 
 然后输入下面的命令行：
 
-<panel-view class="code" title="Terminal - ">
+<panel-view class="code">
 
 ```npm
 # 初始化项目
@@ -67,10 +67,17 @@ module.exports = {
 
 最后运行程序：
 
-<Terminal :content="[
-  { content: [{ text: 'npx', class: 'input' }, ' koishi start'] },
-  { content: [{ text: '# 或者 yarn koishi start', class: 'hint' }] },
-]" static></Terminal>
+<panel-view class="code">
+
+```npm
+npx koishi start
+```
+
+```yarn
+yarn koishi start
+```
+
+</panel-view>
 
 现在可以对你的机器人说话了：
 

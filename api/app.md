@@ -10,12 +10,6 @@ sidebarDepth: 2
 
 通过 `new App(options)` 创建一个 App 实例。
 
-### options.type
-
-- 类型：`string`
-
-机器人的通信方式，对应你所使用的上游协议，例如 `cqhttp` 或 `atri` 等。
-
 ### options.port
 
 - 类型：`number`
@@ -35,6 +29,12 @@ new App({
   bots: [{ selfId: 123 }],
 })
 ```
+
+### options(.bots[]).type
+
+- 类型：`string`
+
+机器人的通信方式，对应你所使用的上游协议，例如 `cqhttp` 或 `kaiheila` 等。
 
 ### options(.bots[]).selfId
 
@@ -146,15 +146,17 @@ WebSocket 重新尝试连接前的等待时间，单位为毫秒。默认值为 
 
 快捷操作的时间限制，单位为毫秒。如果配置了这个选项且使用了 HTTP 通信方式，则在这段时间内的首次调用 `meta.$send()` 或类似的方法将不产生新的 HTTP 请求。默认值为 `100`。参见 [**快捷操作**](../guide/message.md#快捷操作) 一节。
 
+## Kaiheila 选项
+
 ## CLI 选项
 
 下面的配置项来自 koishi 的命令行工具。
 
 ### options.plugins
 
-- 类型：`[Plugin<T>, T][]`
+- 类型：`Record<string, any> | [string | Plugin, any?][]`
 
-要安装的插件列表。如果传入一个列表，则依次安装列表中的插件；如果传入一个对象，则以对象的键为上下文依次注册对应的值中的插件。参见 [**插件与上下文**](../guide/plugin-and-context.md) 一章。
+要安装的插件列表。如果传入一个列表，则依次安装列表中的插件；如果传入一个对象，则以对象的键为插件名，值为插件的选项进行安装。参见 [**插件与上下文**](../guide/plugin-and-context.md) 一章。
 
 ### options.logLevel
 
@@ -192,9 +194,3 @@ WebSocket 重新尝试连接前的等待时间，单位为毫秒。默认值为 
 停止此应用。
 
 - 返回值: `Promise<void>`
-
-## app.getSelfIds()
-
-获取所有机器人的 QQ 号。已经获取到的将不再获取。无法连接的服务器的账号将不会返回。
-
-- 返回值: `Promise<number[]>` 所有机器人的 QQ 号

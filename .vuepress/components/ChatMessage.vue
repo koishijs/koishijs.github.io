@@ -79,28 +79,33 @@ export default {
     opacity 1
     transform translateX(0)
 
+$avatar-size = 2.8rem
+$msgbox-left = 4.2rem
+
 .avatar
-  width 3rem
-  height 3rem
+  width $avatar-size
+  height $avatar-size
   position absolute
   border-radius 100%
   transform translateY(-1px)
   user-select none
   pointer-events none
   text-align center
-  line-height 3rem
+  line-height $avatar-size
   font-size 1.6rem
   color white
   font-family "Comic Sans MS"
 
 .nickname
+  user-select none
   position relative
-  margin 0 0 0.5rem 4.4rem
+  margin 0 0 0.4rem $msgbox-left
   font-weight bold
+  font-size 0.9rem
 
 .message-box
   position relative
-  margin-left 4.4rem
+  margin-left $msgbox-left
   width fit-content
   line-height 1.6
   border-radius 0.5rem
@@ -108,7 +113,7 @@ export default {
   word-break break-all
 
   .chat-message:not(.no-padding) &
-    padding 0.6rem 0.8rem
+    padding 0.5rem 0.7rem
 
   > img
     border-radius 0.5rem

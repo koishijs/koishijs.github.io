@@ -191,7 +191,7 @@ extendUser(() => ({ foo: 'bar' }))
 
 如果你是 TypeScript 用户，你可能还需要进行定义合并：
 
-```ts
+```js
 import { extendUser } from 'koishi'
 
 declare module 'koishi-core/dist/database' {
@@ -229,7 +229,7 @@ ctx.database.myMethod(...args)
 
 如果你是 TypeScript 用户，你可能还需要进行定义合并：
 
-```ts
+```js
 import { injectMethods } from 'koishi'
 
 // 这里需要手动导入 MysqlDatabase 的类型
@@ -259,7 +259,7 @@ injectMethods('mysql', 'user', {
 
 尽管注入表不需要你在 JavaScript 中进行额外的操作，但是如果你是 TypeScript 使用者，你需要对注入的表进行定义，就像这样：
 
-```ts
+```js
 interface MyTableData {
   myData: SomeType
 }
@@ -316,7 +316,7 @@ registerDatabase('mysql', MysqlDatabase)
 
 对于 TypeScript 的使用者，你可以像这样进行类型合并：
 
-```ts
+```js
 import { createPool, Pool, PoolConfig } from 'mysql'
 import { registerDatabase } from 'koishi'
 

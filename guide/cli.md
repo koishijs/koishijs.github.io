@@ -32,19 +32,18 @@ Koishi 提供了名为 `koishi` 的命令行工具，相信你已经在之前的
 
 koishi init 指令用于生成一个 koishi 配置文件，通常是 koishi.config.js。相信看过前几章的你已经对这个文件的结构足够熟悉了。这个指令的完整语法如下：
 
-<Terminal :content="[
-  { content: [{ text: 'koishi', class: 'input' }, ' init [file] [-f]'] },
-]" static></Terminal>
+```cli
+koishi init [file] [-f]
+```
 
 其中的 `file` 参数可以用于指定输出的文件位置（覆盖默认值 koishi.config.js）。如果要输出的位置已经有文件，则 Koishi 会提示你使用 `-f, --forced` 选项，这个选项将告诉 Koishi 覆盖已经存在的文件。
 
-### 设置生成的文件类型 <Badge text="1.3.0+"/>
+### 设置生成的文件类型
 
 除了 js 格式以外，Koishi 还支持其他几种格式的输出。只需向 `file` 参数传入具有相应后缀名的文件，Koishi 就会生成对应格式的输出。目前支持的类型有：
 
 - js
 - json (1.3.0+)
-- yml, yaml (1.3.0+)
 - ts (1.4.0+)
 
 ## koishi start
@@ -60,9 +59,9 @@ koishi init 指令用于生成一个 koishi 配置文件，通常是 koishi.conf
 
 koishi start（或 koishi run）指令用于运行一个配置文件。它的完整语法为：
 
-<Terminal :content="[
-  { content: [{ text: 'koishi', class: 'input' }, ' start [file] [--log-level &lt;level&gt;|--debug|--slient]'] },
-]" static></Terminal>
+```cli
+koishi start [file] [--debug|--silent|--log-level <level>]
+```
 
 其中 `file` 参数表示要执行的文件位置。文件尾的后缀名可以省略，Koishi 会自动寻找可用的文件作为配置文件（各种文件格式的最低所需版本与上面所述的相同）。
 
@@ -72,18 +71,34 @@ koishi start（或 koishi run）指令用于运行一个配置文件。它的完
 
 <!-- TODO: -->
 
-### 使用 TypeScript <Badge text="1.4.0+"/>
+### 使用 TypeScript
 
-Koishi 支持直接调用 TypeScript 编写的插件。首先安装 ts-node：
+Koishi 支持直接调用 TypeScript 编写的插件。首先安装 typescript 和 ts-node：
 
-<Terminal :content="[
-  { content: [{ text: 'npm', class: 'input' }, ' i ts-node -D ', { text: '# 或者全局安装 -g', class: 'hint' }] },
-]" static></Terminal>
+<panel-view class="code" type="package-manager">
+
+```npm
+npm i typescript ts-node -D
+```
+
+```yarn
+yarn add typescript ts-node -D
+```
+
+</panel-view>
 
 接着在你的命令行之后加上一段额外的参数：
 
-<Terminal :content="[
-  { content: [{ text: 'koishi', class: 'input' }, ' start -- -r ts-node/register'] },
-]" static></Terminal>
+<panel-view class="code" type="package-manager">
+
+```npm
+npx koishi start -- -r ts-node/register
+```
+
+```yarn
+yarn koishi start -- -r ts-node/register
+```
+
+</panel-view>
 
 这样你就可以直接使用 koishi.config.ts，或在 koishi.config.js 中引用 ts 文件作为插件了。

@@ -97,6 +97,7 @@ $circleSpacing = 19px
       .tab
         color gray
         cursor pointer
+        transition .3s ease
 
       .tab.active
         color white

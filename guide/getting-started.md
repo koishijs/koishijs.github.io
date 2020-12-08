@@ -58,10 +58,14 @@ yarn
 
 ```js koishi.config.js
 module.exports = {
+  // 协议类型
   type: 'cqhttp:http',
-  port: 8080,
-  server: 'http://localhost:5700',
-  // 其他生成的配置项
+  // 机器人自己的账号
+  selfId: 123456789,
+  // 插件列表
+  plugins: {
+    common: {},
+  },
 }
 ```
 
@@ -117,17 +121,16 @@ yarn add koishi koishi-adapter-cqhttp koishi-plugin-common -D
 ```js index.js
 const { App } = require('koishi')
 
-// 安装适配器
+// 你需要手动安装适配器
 require('koishi-adapter-cqhttp')
 
 const app = new App({
-  // 这里的配置项与上面的 koishi.config.js 作用相同
-  type: 'http',
-  port: 8080,
-  server: 'http://localhost:5700',
+  // 这部分与上面的配置文件作用基本相同
+  type: 'cqhttp:http',
+  selfId: 123456789,
 })
 
-// 注册插件
+// 注册插件，作用相当于上面配置文件中的 plugins 部分
 app.plugin(require('koishi-plugin-common'))
 
 // 启动应用
@@ -136,11 +139,11 @@ app.start()
 
 最后运行这个文件：
 
-<Terminal :content="[
-  { content: [{ text: 'node', class: 'input' }, ' .'] },
-]" static></Terminal>
+```cli
+node .
+```
 
-这样也能运行你的机器人。尽管这显得稍微麻烦一点，并且相比调用 CLI 会缺少一些特性，但是你的机器人也因此获得了更高的自由度。在下一章我们会简单对比这两种方法。
+这样也能运行你的机器人。尽管这显得稍微麻烦一点，但是你的机器人也因此获得了更高的自由度。在下一章我们会简单对比这两种方法。
 
 ## 添加插件
 

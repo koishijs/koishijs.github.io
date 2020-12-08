@@ -1,5 +1,5 @@
 <template>
-  <div class="panel-view" :class="{ mini: !controls && !title && tabs.length === 1 }">
+  <div class="panel-view" :class="[type, { mini: !controls && !title && tabs.length === 1 }]">
     <div class="controls">
       <div class="circle red"/>
       <div class="circle yellow"/>
@@ -62,6 +62,9 @@ $circleSpacing = 19px
   margin 1rem 0
   overflow-x auto
   background-color #f3f6f9
+
+  &.package-manager
+    background-color #032f62
 
   .controls
     display initial

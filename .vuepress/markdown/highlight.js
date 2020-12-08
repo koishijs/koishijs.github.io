@@ -1,22 +1,27 @@
-const { getHighlighter } = require('shiki')
+const { getHighlighter, loadTheme } = require('shiki')
 const { escapeHtml } = require('markdown-it/lib/common/utils')
 const { resolve } = require('path')
 
-let highlighter
+let highlighter1, highlighter2
 
-const batchAliases = ['npm', 'yarn']
+const cliAliases = ['npm', 'yarn']
+const tomorrow = loadTheme(resolve(__dirname, 'tomorrow.json'))
 
 module.exports = (options, ctx) => ({
   name: 'enhanced-highlight',
 
   async ready () {
-    highlighter = await getHighlighter({
+    highlighter1 = await getHighlighter({
       theme: 'monokai',
+    })
+
+    highlighter2 = await getHighlighter({
+      theme: tomorrow,
       langs: [{
-        id: 'custom-batch',
+        id: 'cli',
         scopeName: 'source.batchfile',
         path: resolve(__dirname, 'batch.json'),
-        aliases: batchAliases,
+        aliases: cliAliases,
       }],
     })
   },
@@ -28,7 +33,8 @@ module.exports = (options, ctx) => ({
       if (!lang) {
         return `<pre><code>${escapeHtml(code)}</code></pre>`
       }
-      return `${highlighter.codeToHtml(code, lang)}`
+      const h = lang === 'cli' || cliAliases.includes(lang) ? highlighter2 : highlighter1
+      return h.codeToHtml(code, lang)
     })
 
     config.plugin('code-container').use((md) => {
@@ -43,8 +49,10 @@ module.exports = (options, ctx) => ({
           token.title = title.trim()
         }
         const rawCode = fence(...args)
-        return batchAliases.includes(token.info) ? `<template #${token.info}>${rawCode}</template>`
-          : `<panel-view class="code" title=${JSON.stringify(token.title)}>${rawCode}</panel-view>`
+        if (cliAliases.includes(token.info)) return `<template #${token.info}>${rawCode}</template>`
+        let style = ''
+        if (token.info === 'cli') style += `; background-color: ${tomorrow.bg}`
+        return `<panel-view class="code" title=${JSON.stringify(token.title)} style="${style.slice(2)}">${rawCode}</panel-view>`
       }
     })
   },

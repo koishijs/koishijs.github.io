@@ -16,7 +16,7 @@ Koishi 需要 [NodeJS](https://nodejs.org/) (v12 以上) 运行环境，你需�
 
 创建并进入一个机器人目录：
 
-```custom-batch
+```cli
 cd my-bot
 ```
 
@@ -90,24 +90,35 @@ yarn koishi start
 
 如果你对 JavaScript 和 Node.js 非常熟悉，你或许也希望在 Node.js 中直接调用 Koishi——没问题，我们也提供了这样一套方案。
 
-首先初始化你的机器人目录：
+首先初始化你的机器人目录并安装 Koishi 和所需的插件（这里以 koishi-adapter-cqhttp 和 koishi-plugin-common 为例）：
 
-<Terminal :content="[
-  { content: [{ text: 'npm', class: 'input' }, ' init'] },
-  { content: [{ text: '# 或者 yarn init', class: 'hint' }] },
-]" static></Terminal>
+<panel-view class="code" type="package-manager">
 
-安装 Koishi：
+```npm
+# 初始化项目
+npm init
 
-<Terminal :content="[
-  { content: [{ text: 'npm', class: 'input' }, ' i koishi -D'] },
-  { content: [{ text: '# 或者 yarn add koishi -D', class: 'hint' }] },
-]" static></Terminal>
+# 安装 koishi 和相关库
+npm i koishi koishi-adapter-cqhttp koishi-plugin-common -D
+```
+
+```yarn
+# 初始化项目
+yarn init
+
+# 安装 koishi 和相关库
+yarn add koishi koishi-adapter-cqhttp koishi-plugin-common -D
+```
+
+</panel-view>
 
 新建 `index.js`，并写下这段代码：
 
 ```js index.js
 const { App } = require('koishi')
+
+// 安装适配器
+require('koishi-adapter-cqhttp')
 
 const app = new App({
   // 这里的配置项与上面的 koishi.config.js 作用相同
@@ -116,6 +127,10 @@ const app = new App({
   server: 'http://localhost:5700',
 })
 
+// 注册插件
+app.plugin(require('koishi-plugin-common'))
+
+// 启动应用
 app.start()
 ```
 

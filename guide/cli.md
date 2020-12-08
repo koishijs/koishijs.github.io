@@ -5,7 +5,7 @@ sidebarDepth: 2
 # 命令行工具
 
 ::: danger 注意
-这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
+这里是**正在施工**的 koishi v3 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
 :::
 
 Koishi 提供了名为 `koishi` 的命令行工具，相信你已经在之前的介绍中看过它的使用方法了。本章就详细介绍 Koishi 与命令行相关的特性。
@@ -13,7 +13,7 @@ Koishi 提供了名为 `koishi` 的命令行工具，相信你已经在之前的
 ## koishi init
 
 <Terminal :content="[
-  { text: 'cd mybot', type: 'input' },
+  { text: 'cd my-bot', type: 'input' },
   { text: 'koishi init', type: 'input' },
   { message: 'Connection Type',
     hint: 'Use arrow-keys. Return to submit.',
@@ -43,8 +43,8 @@ koishi init [file] [-f]
 除了 js 格式以外，Koishi 还支持其他几种格式的输出。只需向 `file` 参数传入具有相应后缀名的文件，Koishi 就会生成对应格式的输出。目前支持的类型有：
 
 - js
-- json (1.3.0+)
-- ts (1.4.0+)
+- json
+- ts
 
 ## koishi start
 
@@ -69,7 +69,15 @@ koishi start [file] [--debug|--silent|--log-level <level>]
 
 ### 自动重启
 
-<!-- TODO: -->
+Koishi 的命令行工具支持自动重启。当运行 Koishi 的进程崩溃时，如果 Koishi 已经启动成功，则监视进程将自动重新启动一个新的进程。
+
+同时，你也可以通过指令手动进行重启：
+
+<panel-view title="聊天记录">
+<chat-message nickname="Alice" color="#cc0066">exit -r</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">正在重启……</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">重启完成。</chat-message>
+</panel-view>
 
 ### 使用 TypeScript
 

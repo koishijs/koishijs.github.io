@@ -8,11 +8,27 @@ sidebarDepth: 2
 这里是**正在施工**的 koishi v3 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
 :::
 
-## 起步
+## 准备工作
 
 Koishi 需要 [NodeJS](https://nodejs.org/) (v12 以上) 运行环境，你需要自己安装它。同时，我们还强烈建议您安装 [yarn](https://classic.yarnpkg.com/lang/en/) 作为包管理器。在下面的文档中，我们将默认使用 yarn。
 
-## 全局安装
+Koishi 支持多个聊天平台，对于不同的平台，你也需要做好相应的准备工作。
+
+### OneBot (QQ)
+
+[OneBot](https://github.com/howmanybots/onebot) 是一套可用于 QQ 聊天机器人的协议，你可以使用下列实现该协议的框架：
+
+- [Mrs4s/go-cqhttp](https://github.com/Mrs4s/go-cqhttp)（荐）
+- [yyuueexxiinngg/cqhttp-mirai](https://github.com/yyuueexxiinngg/cqhttp-mirai)
+- [richardchien/coolq-http-api](https://github.com/richardchien/coolq-http-api)（配合 [iTXTech/mirai-native](https://github.com/iTXTech/mirai-native) 使用）
+
+请注意：尽管 Koishi 使用的协议是 [MIT](https://choosealicense.com/licenses/mit/) 协议，但上面陈述的三种途径的相关框架都使用了基于 [AGPL 3.0](https://choosealicense.com/licenses/agpl-3.0/) 的协议。**因此如果你使用 koishi-adapter-onebot 运行你的机器人，你将可能受到 AGPL 3.0 协议的限制，必须将你的代码开源并保持同协议**。Koishi 及其作者对使用上述框架或违反上述限制的行为所可能造成的一切后果概不负责。
+
+### Kaiheila (开黑啦)
+
+TODO
+
+## 使用命令行工具
 
 创建并进入一个机器人目录：
 
@@ -59,7 +75,7 @@ yarn
 ```js koishi.config.js
 module.exports = {
   // 协议类型
-  type: 'cqhttp:http',
+  type: 'onebot:http',
   // 机器人自己的账号
   selfId: 123456789,
   // 插件列表
@@ -90,11 +106,11 @@ yarn koishi start
 <chat-message nickname="Koishi" avatar="/koishi.png">你好</chat-message>
 </panel-view>
 
-## 调用 Koishi
+## 通过脚本调用 Koishi
 
 如果你对 JavaScript 和 Node.js 非常熟悉，你或许也希望在 Node.js 中直接调用 Koishi——没问题，我们也提供了这样一套方案。
 
-首先初始化你的机器人目录并安装 Koishi 和所需的插件（这里以 koishi-adapter-cqhttp 和 koishi-plugin-common 为例）：
+首先初始化你的机器人目录并安装 Koishi 和所需的插件（这里以 koishi-adapter-onebot 和 koishi-plugin-common 为例）：
 
 <panel-view class="code" type="package-manager">
 
@@ -103,7 +119,7 @@ yarn koishi start
 npm init
 
 # 安装 koishi 和相关库
-npm i koishi koishi-adapter-cqhttp koishi-plugin-common -D
+npm i koishi koishi-adapter-onebot koishi-plugin-common -D
 ```
 
 ```yarn
@@ -111,7 +127,7 @@ npm i koishi koishi-adapter-cqhttp koishi-plugin-common -D
 yarn init
 
 # 安装 koishi 和相关库
-yarn add koishi koishi-adapter-cqhttp koishi-plugin-common -D
+yarn add koishi koishi-adapter-onebot koishi-plugin-common -D
 ```
 
 </panel-view>
@@ -122,11 +138,11 @@ yarn add koishi koishi-adapter-cqhttp koishi-plugin-common -D
 const { App } = require('koishi')
 
 // 你需要手动安装适配器
-require('koishi-adapter-cqhttp')
+require('koishi-adapter-onebot')
 
 const app = new App({
   // 这部分与上面的配置文件作用基本相同
-  type: 'cqhttp:http',
+  type: 'onebot:http',
   selfId: 123456789,
 })
 

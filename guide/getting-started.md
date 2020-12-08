@@ -22,7 +22,7 @@ cd my-bot
 
 然后输入下面的命令行：
 
-<panel-view class="code">
+<panel-view class="code" type="package-manager">
 
 ```npm
 # 初始化项目
@@ -67,7 +67,7 @@ module.exports = {
 
 最后运行程序：
 
-<panel-view class="code">
+<panel-view class="code" type="package-manager">
 
 ```npm
 npx koishi start

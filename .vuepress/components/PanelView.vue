@@ -22,6 +22,10 @@ export default {
   props: {
     controls: Boolean,
     title: String,
+    type: {
+      type: String,
+      required: false,
+    },
   },
 
   data: () => ({
@@ -35,8 +39,13 @@ export default {
   },
 
   mounted() {
-    console.log(this.tabs)
-    this.tab = this.tabs[0]
+    if (!this.type) return
+    this.$watch(() => this.$storage[this.type], (val) => {
+      this.tab = val
+    }, { immediate: true })
+    this.$watch('tab', (val) => {
+      this.$storage[this.type] = this.tab
+    })
   },
 }
 

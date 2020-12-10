@@ -33,7 +33,7 @@ TODO
 创建并进入一个机器人目录：
 
 ```cli
-cd my-bot
+mkdir my-bot && cd my-bot
 ```
 
 然后输入下面的命令行：

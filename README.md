@@ -2,9 +2,9 @@
 home: true
 heroImage: /koishi.png
 heroText: Koishi
-tagline: 不仅仅是一个 QQ 机器人
+tagline: 面向多平台的机器人框架
 actionText: 快速上手 →
-actionLink: /guide/getting-started
+actionLink: /guide/starter
 features:
 - title: 开箱即用
   details: 高度便利的 CLI 和 API 可以让你无需基础在几分钟之内搭建自己的机器人。
@@ -19,19 +19,43 @@ footer: MIT Licensed | Copyright © 2019-present Shigma
 这里是**正在施工**的 koishi v3 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
 :::
 
-<Terminal :content="[
-  { content: [{ text: '# 进入文件夹', class: 'hint' }] },
-  { content: [{ text: 'cd', class: 'input' }, ' my-bot'] },
-  { content: [] },
-  { content: [{ text: '# 安装 Koishi', class: 'hint' }] },
-  { content: [{ text: 'npm', class: 'input' }, ' i koishi -g'] },
-  { content: [] },
-  { content: [{ text: '# 初始化配置文件', class: 'hint' }] },
-  { content: [{ text: 'koishi', class: 'input' }, ' init'] },
-  { content: [] },
-  { content: [{ text: '# 运行你的 Bot', class: 'hint' }] },
-  { content: [{ text: 'koishi', class: 'input' }, ' start'] },
-]" static title="命令行"></Terminal>
+<panel-view class="code" type="package-manager">
+
+```npm
+# 创建并进入文件夹
+mkdir my-bot && cd my-bot
+
+# 安装 Koishi
+npm i koishi -D
+
+# 初始化配置文件
+npx koishi init
+
+# 安装插件
+npm i
+
+# 运行你的 Bot
+npx koishi start
+```
+
+```yarn
+# 创建并进入文件夹
+mkdir my-bot && cd my-bot
+
+# 安装 Koishi
+yarn add koishi -D
+
+# 初始化配置文件
+yarn koishi init
+
+# 安装插件
+yarn
+
+# 运行你的 Bot
+yarn koishi start
+```
+
+</panel-view>
 
 现在可以对你的机器人说话了：
 

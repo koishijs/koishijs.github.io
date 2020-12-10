@@ -1,11 +1,11 @@
 <template>
-  <div class="panel-view" :class="[type, { mini: !controls && !title && tabs.length === 1 }]">
+  <div class="panel-view" :class="[type, { mini: !controls && !titleText }]">
     <div class="controls">
       <div class="circle red"/>
       <div class="circle yellow"/>
       <div class="circle green"/>
       <div class="title">
-        {{ title }}
+        <span class="title-text">{{ titleText }}</span>
         <template v-if="tabs.length > 1">
           <span :class="['tab', { active: tab === name }]" @click="tab = name"
             v-for="(name, index) in tabs" :key="index">{{ name }}</span>
@@ -17,6 +17,10 @@
 </template>
 
 <script>
+
+const titleMap = {
+  'package-manager': '命令行',
+}
 
 export default {
   props: {
@@ -35,6 +39,9 @@ export default {
   computed: {
     tabs() {
       return Object.keys(this.$slots)
+    },
+    titleText() {
+      return titleMap[this.type] || this.title
     },
   },
 
@@ -102,6 +109,10 @@ $circleSpacing = 19px
       .tab.active
         color white
         cursor default
+
+      .title-text + .tab::before
+        color gray
+        content " - "
 
       .tab + .tab::before
         cursor default

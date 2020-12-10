@@ -1,5 +1,5 @@
 ---
-title: 数据库：memory
+title: 数据库：Memory
 sidebarDepth: 2
 ---
 

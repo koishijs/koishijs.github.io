@@ -99,6 +99,8 @@ module.exports = context => ({
           children: [
             '/api/utils',
             '/api/test-utils',
+            '/api/adapter/onebot',
+            '/api/adapter/kaiheila',
             '/api/database/memory',
             '/api/database/mysql',
           ],

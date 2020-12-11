@@ -22,7 +22,7 @@ sidebarDepth: 2
 
 账号相关配置。如果你使用多个账号，这里应该传入一个数组。例如下面的写法是等价的：
 
-```ts
+```js
 new App({ selfId: 123 })
 
 new App({
@@ -34,7 +34,7 @@ new App({
 
 - 类型：`string`
 
-机器人的通信方式，对应你所使用的上游协议，例如 `cqhttp` 或 `kaiheila` 等。
+机器人的通信方式，对应你所使用的上游协议，例如 `onebot` 或 `kaiheila` 等。
 
 ### options(.bots[]).selfId
 
@@ -46,13 +46,13 @@ new App({
 
 - 类型：`string | string[]`
 
-机器人的昵称，可以是字符串或字符串数组。将用于指令前缀的匹配。例如，如果配置该选项为 `'恋恋'`，则你可以通过 `恋恋，help` 来进行 help 指令的调用。参见 [**指令前缀**](../guide/command-system.md#指令前缀) 一节。
+机器人的昵称，可以是字符串或字符串数组。将用于指令前缀的匹配。例如，如果配置该选项为 `'恋恋'`，则你可以通过 `恋恋，help` 来进行 help 指令的调用。参见 [**指令前缀**](../guide/command.md#指令前缀) 一节。
 
 ### options.prefix
 
 - 类型：`string | string[]`
 
-指令前缀字符，可以是字符串或字符串数组。将用于指令前缀的匹配。例如，如果配置该选项为 `.`，则你可以通过 `.help` 来进行 help 指令的调用。参见 [**指令前缀**](../guide/command-system.md#指令前缀) 一节。
+指令前缀字符，可以是字符串或字符串数组。将用于指令前缀的匹配。例如，如果配置该选项为 `.`，则你可以通过 `.help` 来进行 help 指令的调用。参见 [**指令前缀**](../guide/command.md#指令前缀) 一节。
 
 ### options.maxListeners
 
@@ -94,63 +94,11 @@ new App({
 
 - 类型：`number`
 
-用于模糊匹配的相似系数，应该是一个 0 到 1 之间的数值。数值越高，模糊匹配越严格。设置为 1 可以完全禁用模糊匹配。参见 [**模糊匹配**](../guide/command-system.md#模糊匹配) 一节。
+用于模糊匹配的相似系数，应该是一个 0 到 1 之间的数值。数值越高，模糊匹配越严格。设置为 1 可以完全禁用模糊匹配。参见 [**模糊匹配**](../guide/command.md#模糊匹配) 一节。
 
-## CQHTTP 选项
+## 配置文件选项
 
-下面的配置项来自 koishi-adapter-cqhttp。你需要将你的 [`type`](#options-type) 字段配置为 `cqhttp`, `cqhttp:http`, `cqhttp:ws` 或 `cqhttp:ws-reverse` 中的一种。如果缺省或使用了 `cqhttp`，Koishi 会读取你的 `server` 选项，根据你配置的服务器 URL 进行适配。
-
-相关 CQHTTP 配置：`use_http`, `use_ws`。
-
-### options.path
-
-- 类型：`string`
-
-服务器监听的路径。相关 CQHTTP 配置：`post_url`。
-
-### options.secret
-
-- 类型：`string`
-
-接收信息时用于验证的字段，应与 CQHTTP 的 `secret` 配置保持一致。
-
-### options(.bots[]).server
-
-- 类型：`string`
-
-如果使用了 HTTP，则该配置将作为发送信息的服务端；如果使用了 WebSocket，则该配置将作为监听事件和发送信息的服务端。
-
-相关 CQHTTP 配置：`host`, `port`, `ws_host`, `ws_port`。
-
-### options(.bots[]).token
-
-- 类型：`string`
-
-发送信息时用于验证的字段，应与 CQHTTP 的 `access_token` 配置保持一致。
-
-### options.retryTimes
-
-- 类型：`number`
-
-WebSocket 允许重新连接的次数。默认值为 `0`。
-
-### options.retryInterval
-
-- 类型：`number`
-
-WebSocket 重新尝试连接前的等待时间，单位为毫秒。默认值为 `5000`。
-
-### options.quickOperation
-
-- 类型：`number`
-
-快捷操作的时间限制，单位为毫秒。如果配置了这个选项且使用了 HTTP 通信方式，则在这段时间内的首次调用 `meta.$send()` 或类似的方法将不产生新的 HTTP 请求。默认值为 `100`。参见 [**快捷操作**](../guide/message.md#快捷操作) 一节。
-
-## Kaiheila 选项
-
-## CLI 选项
-
-下面的配置项来自 koishi 的命令行工具。
+下面的配置项来自 koishi 的命令行工具，仅可用于 koishi.config.js。
 
 ### options.plugins
 
@@ -170,11 +118,13 @@ WebSocket 重新尝试连接前的等待时间，单位为毫秒。默认值为 
 
 用于在某些范围覆盖默认的输出等级。参见 [**过滤输出**](../guide/logger.md#过滤输出) 一节。
 
-## app.options
+## 实例属性和方法
+
+### app.options
 
 当前 App 创建时传入的配置。
 
-## app.status
+### app.status
 
 当前 App 的运行状态。它可能是下列数值中的一个：
 
@@ -183,13 +133,13 @@ WebSocket 重新尝试连接前的等待时间，单位为毫秒。默认值为 
 - Status.open = 2
 - Status.closing = 3
 
-## app.start()
+### app.start()
 
 启动此应用。
 
 - 返回值: `Promise<void>`
 
-## app.stop()
+### app.stop()
 
 停止此应用。
 

@@ -16,9 +16,9 @@ Koishi 支持多个聊天平台，对于不同的平台，你也需要做好相�
 
 ### OneBot (QQ)
 
-[OneBot](https://github.com/howmanybots/onebot) 是一套可用于 QQ 聊天机器人的协议，你可以使用下列实现该协议的框架：
+[OneBot](https://github.com/howmanybots/onebot) 是一个聊天机器人应用接口标准，目前可用于 QQ 聊天机器人的实现。你可以使用下列实现该协议的框架：
 
-- [Mrs4s/go-cqhttp](https://github.com/Mrs4s/go-cqhttp)（荐）
+- [Mrs4s/go-cqhttp](https://github.com/Mrs4s/go-cqhttp)（推荐）
 - [yyuueexxiinngg/cqhttp-mirai](https://github.com/yyuueexxiinngg/cqhttp-mirai)
 - [richardchien/coolq-http-api](https://github.com/richardchien/coolq-http-api)（配合 [iTXTech/mirai-native](https://github.com/iTXTech/mirai-native) 使用）
 

@@ -5,52 +5,91 @@ sidebarDepth: 2
 
 # koishi-adapter-onebot
 
-Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](https://cqhttp.cc/docs/4.15/#/API)。[go-cqhttp](https://github.com/Mrs4s/go-cqhttp) 进一步扩展了一些接口，这些扩展的功能也被 Koishi 实现了。
+[OneBot](https://github.com/howmanybots/onebot) (旧名 CQHTTP) 是一个聊天机器人应用接口标准，目前可用于 QQ 机器人。要使用 koishi-adapter-onebot，你需要首先下载一个实现该协议的框架：
 
-- 标有 <Badge vertical="baseline" text="async"/> 的 API 可以被 [**异步调用**](../guide/message.md#异步调用)，异步调用时的返回值均为 `Promise<void>`
-- 标有 <Badge vertical="baseline" text="CoolQ" type="warn"/> 的 API 只能基于 CoolQ 运行（如 cqhttp）
-- 标有 <Badge vertical="baseline" text="mirai" type="warn"/> 的 API 只能基于 mirai 运行（如 go-cqhttp）
+- [Mrs4s/go-cqhttp](https://github.com/Mrs4s/go-cqhttp)（推荐）
+- [yyuueexxiinngg/cqhttp-mirai](https://github.com/yyuueexxiinngg/cqhttp-mirai)
+- [richardchien/coolq-http-api](https://github.com/richardchien/coolq-http-api)（配合 [iTXTech/mirai-native](https://github.com/iTXTech/mirai-native) 使用）
 
-## 属性
+上述框架也在 OneBot 的基础上扩展了各自的接口，而这些扩展的功能也被包含在了 koishi-adapter-onebot 中。
 
-### 构造选项
+- 标有 <Badge vertical="baseline" text="go-cqhttp" type="warn"/> 的 API 只能基于 go-cqhttp 运行
 
-每个 Bot 都会继承你构造 App 时传入的选项，因此下列选项是天生就有的：
+## 机制说明
 
-- bot.selfId
-- bot.server
-- bot.token
+### 异步调用
 
-### bot.app
+CQHTTP 提出了**异步调用**的概念，当 CQHTTP 服务器受到异步调用请求时，如果调用正确，将直接返回 200。这样做的好处是，如果某些操作有较长的耗时（例如发送含有大量图片的消息或清空数据目录等）或你不关心调用结果，使用异步调用可以有效防止阻塞。下面说明了异步调用和普通调用的关系：
 
-当前 Bot 所在的 App 实例。
+![async-method](/async-method.png)
 
-### bot.version
+但是另一方面，你也无法得知异步调用是否成功被执行。与此同时，没有副作用的异步调用也毫无意义（因为这些调用本身就是为了获取某些信息，但是异步调用是无法获取调用结果的）。因此，Koishi 为除此以外的所有异步调用都提供了 API，它们的调用接口与非异步的版本除了在方法后面加了一个 `Async` 外没有任何区别：
 
-当前 Bot 对应的版本信息。参见 [`VersionInfo`](#bot-getversioninfo)。
+```js
+// 普通版本
+const messageId = await app.sender.sendPrivateMsg(123456789, 'Hello world')
 
-## 消息相关
+// 异步版本，无法获得调用结果
+await app.sender.sendPrivateMsgAsync(123456789, 'Hello world')
+```
 
-### bot.sendMsg(type, ctxId, message, autoEscape?) <Badge text="async"/>
+::: tip 提示
+虽然异步调用方法的名字以 Async 结尾，但是其他方法也是**异步函数**，它们都会返回一个 `Promise` 对象。取这样的名字只是为了与 CQHTTP 保持一致。
+:::
 
-发送消息。
+## App 构造函数选项
 
-- **type:** `'private' | 'group' | 'discuss'` 消息类型
-- **userId:** `number` QQ 号 / 群号 / 讨论组号
-- **message:** `string` 要发送的内容
-- **autoEsacpe:** `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
-- 返回值: `Promise<number>` 新信息的 messageId
+下面的配置项来自 koishi-adapter-cqhttp。你需要将你的 [`type`](#options-type) 字段配置为 `cqhttp`, `cqhttp:http`, `cqhttp:ws` 或 `cqhttp:ws-reverse` 中的一种。如果缺省或使用了 `cqhttp`，Koishi 会读取你的 `server` 选项，根据你配置的服务器 URL 进行适配。
 
-### bot.sendPrivateMsg(userId, message, autoEscape?) <Badge text="async"/>
+相关 CQHTTP 配置：`use_http`, `use_ws`。
 
-发送私聊消息。
+### options.path
 
-- **userId:** `number` 对方 QQ 号
-- **message:** `string` 要发送的内容
-- **autoEsacpe:** `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
-- 返回值: `Promise<number>` 新信息的 messageId
+- 类型：`string`
 
-### bot.sendGroupMsg(groupId, message, autoEscape?) <Badge text="async"/>
+服务器监听的路径。相关 CQHTTP 配置：`post_url`。
+
+### options.secret
+
+- 类型：`string`
+
+接收信息时用于验证的字段，应与 CQHTTP 的 `secret` 配置保持一致。
+
+### options(.bots[]).server
+
+- 类型：`string`
+
+如果使用了 HTTP，则该配置将作为发送信息的服务端；如果使用了 WebSocket，则该配置将作为监听事件和发送信息的服务端。
+
+相关 CQHTTP 配置：`host`, `port`, `ws_host`, `ws_port`。
+
+### options(.bots[]).token
+
+- 类型：`string`
+
+发送信息时用于验证的字段，应与 CQHTTP 的 `access_token` 配置保持一致。
+
+### options.retryTimes
+
+- 类型：`number`
+
+WebSocket 允许重新连接的次数。默认值为 `0`。
+
+### options.retryInterval
+
+- 类型：`number`
+
+WebSocket 重新尝试连接前的等待时间，单位为毫秒。默认值为 `5000`。
+
+### options.quickOperation
+
+- 类型：`number`
+
+快捷操作的时间限制，单位为毫秒。如果配置了这个选项且使用了 HTTP 通信方式，则在这段时间内的首次调用 `meta.$send()` 或类似的方法将不产生新的 HTTP 请求。默认值为 `100`。参见 [**快捷操作**](../guide/message.md#快捷操作) 一节。
+
+## 发送消息
+
+### bot.sendGroupMsg(groupId, message, autoEscape?)
 
 发送群消息。
 
@@ -59,7 +98,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **autoEsacpe:** `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
 - 返回值: `Promise<number>` 新信息的 messageId
 
-### bot.sendGroupForwardMsg(groupId, nodes) <Badge text="async"/><Badge text="mirai" type="warn"/>
+### bot.sendGroupForwardMsg(groupId, nodes) <Badge text="go-cqhttp" type="warn"/>
 
 发送群批量转发消息。
 
@@ -67,7 +106,7 @@ Bot 相当于 Koishi v1 的 Sender，它封装了一套标准的 [cqhttp API](ht
 - **nodes:** `CQNode[]` 消息节点列表
 - 返回值: `Promise<void>`
 
-```ts
+```js
 interface CQNode {
   type: 'node'
   data: {
@@ -80,14 +119,7 @@ interface CQNode {
 }
 ```
 
-### bot.deleteMsg(messageId) <Badge text="async"/>
-
-撤回信息。
-
-- **messageId:** `number` 消息 ID
-- 返回值: `Promise<void>`
-
-### bot.sendLike(userId, times?) <Badge text="async"/><Badge text="CoolQ" type="warn"/>
+### bot.sendLike(userId, times?)
 
 给好友点赞。
 
@@ -99,14 +131,14 @@ interface CQNode {
 本接口仅限**对好友**使用。
 :::
 
-### bot.getGroupMsg(messageId) <Badge text="mirai" type="warn"/>
+### bot.getGroupMsg(messageId) <Badge text="go-cqhttp" type="warn"/>
 
 发送群批量转发消息。
 
 - **messageId:** `number` 消息编号
 - 返回值: `Promise<GroupMessage>`
 
-```ts
+```js
 export interface GroupMessage {
   messageId: number
   realId: number
@@ -116,14 +148,14 @@ export interface GroupMessage {
 }
 ```
 
-### bot.getForwardMsg(messageId) <Badge text="mirai" type="warn"/>
+### bot.getForwardMsg(messageId) <Badge text="go-cqhttp" type="warn"/>
 
 发送群批量转发消息。
 
 - **messageId:** `number` 消息编号
 - 返回值: `Promise<ForwardMessage>`
 
-```ts
+```js
 export interface ForwardMessage {
   messages: {
     sender: AccountInfo
@@ -135,7 +167,7 @@ export interface ForwardMessage {
 
 ## 群相关
 
-### bot.setGroupKick(groupId, userId, rejectAddRequest?) <Badge text="async"/>
+### bot.setGroupKick(groupId, userId, rejectAddRequest?)
 
 踢出群聊或拒绝加群。
 
@@ -144,7 +176,7 @@ export interface ForwardMessage {
 - **rejectAddRequest:** `boolean` 拒绝此人的加群请求
 - 返回值: `Promise<void>`
 
-### bot.setGroupBan(groupId, userId, duration?) <Badge text="async"/>
+### bot.setGroupBan(groupId, userId, duration?)
 
 群组单人禁言。
 
@@ -153,7 +185,7 @@ export interface ForwardMessage {
 - **duration:** `number` 禁言时长（秒），设为 0 表示解除禁言
 - 返回值: `Promise<void>`
 
-### bot.setGroupAnonymousBan(groupId, anonymous, duration?) <Badge text="async"/>
+### bot.setGroupAnonymousBan(groupId, anonymous, duration?)
 
 群组匿名用户禁言。
 
@@ -162,7 +194,7 @@ export interface ForwardMessage {
 - **duration:** `number` 禁言时长（秒），设为 0 表示解除禁言
 - 返回值: `Promise<void>`
 
-### bot.setGroupWholeBan(groupId, enable?) <Badge text="async"/>
+### bot.setGroupWholeBan(groupId, enable?)
 
 群组全员禁言。
 
@@ -170,7 +202,7 @@ export interface ForwardMessage {
 - **enable:** `boolean` 是否禁言，默认为 `true`
 - 返回值: `Promise<void>`
 
-### bot.setGroupAdmin(groupId, userId, enable?) <Badge text="async"/>
+### bot.setGroupAdmin(groupId, userId, enable?)
 
 群组设置管理员。
 
@@ -179,7 +211,7 @@ export interface ForwardMessage {
 - **enable:** `boolean` 是否设置为管理员，默认为 `true`
 - 返回值: `Promise<void>`
 
-### bot.setGroupAnonymous(groupId, enable?) <Badge text="async"/>
+### bot.setGroupAnonymous(groupId, enable?)
 
 群组设置匿名。
 
@@ -187,7 +219,7 @@ export interface ForwardMessage {
 - **enable:** `boolean` 是否允许匿名，默认为 `true`
 - 返回值: `Promise<void>`
 
-### bot.setGroupCard(groupId, userId, card?) <Badge text="async"/>
+### bot.setGroupCard(groupId, userId, card?)
 
 设置群名片。
 
@@ -196,7 +228,7 @@ export interface ForwardMessage {
 - **card:** `string` 群名片
 - 返回值: `Promise<void>`
 
-### bot.setGroupLeave(groupId, isDismiss?) <Badge text="async"/>
+### bot.setGroupLeave(groupId, isDismiss?)
 
 退出群组。
 
@@ -204,7 +236,7 @@ export interface ForwardMessage {
 - **isDismiss:** `boolean` 是否解散群（仅对群主生效）
 - 返回值: `Promise<void>`
 
-### bot.setGroupSpecialTitle(groupId, userId, specialTitle?, duration?) <Badge text="async"/>
+### bot.setGroupSpecialTitle(groupId, userId, specialTitle?, duration?)
 
 设置群组专属头衔。
 
@@ -214,7 +246,7 @@ export interface ForwardMessage {
 - **duration:** `number` 有效时长（秒，目前可能没用）
 - 返回值: `Promise<void>`
 
-### bot.sendGroupNotice(groupId, title, content) <Badge text="async"/>
+### bot.sendGroupNotice(groupId, title, content)
 
 发布群公告。
 
@@ -223,7 +255,7 @@ export interface ForwardMessage {
 - **content:** `string` 内容
 - 返回值: `Promise<void>`
 
-### bot.setGroupName(groupId, name) <Badge text="async"/><Badge text="mirai" type="warn"/>
+### bot.setGroupName(groupId, name) <Badge text="go-cqhttp" type="warn"/>
 
 修改群名称。
 
@@ -233,7 +265,7 @@ export interface ForwardMessage {
 
 ## 处理请求
 
-### bot.setFriendAddRequest(flag, approve?, remark?) <Badge text="async"/>
+### bot.setFriendAddRequest(flag, approve?, remark?)
 
 处理加好友请求。
 
@@ -242,7 +274,7 @@ export interface ForwardMessage {
 - **remark:** `string` 好友备注名（仅当同意时有效）
 - 返回值: `Promise<void>`
 
-### bot.setGroupAddRequest(flag, subType, approve?, reason?) <Badge text="async"/>
+### bot.setGroupAddRequest(flag, subType, approve?, reason?)
 
 处理加群请求或邀请。
 
@@ -260,7 +292,7 @@ export interface ForwardMessage {
 
 - 返回值: `Promise<AccountInfo>` 登录号信息
 
-```ts
+```js
 export interface AccountInfo {
   userId: number
   nickname: string
@@ -273,7 +305,7 @@ export interface AccountInfo {
 
 - 返回值: `Promise<VipInfo>` 会员信息
 
-```ts
+```js
 export interface VipInfo extends AccountInfo {
   level: number
   levelSpeed: number
@@ -291,7 +323,7 @@ export interface VipInfo extends AccountInfo {
 - **noCache:** `boolean` 是否不使用缓存，默认为 `false`
 - 返回值: `Promise<StrangerInfo>` 陌生人信息
 
-```ts
+```js
 export interface StrangerInfo extends AccountInfo {
   sex: 'male' | 'female' | 'unknown'
   age: number
@@ -304,7 +336,7 @@ export interface StrangerInfo extends AccountInfo {
 
 - 返回值: `Promise<FriendInfo[]>` 好友列表
 
-```ts
+```js
 export interface FriendInfo extends AccountInfo {
   remark: string
 }
@@ -316,7 +348,7 @@ export interface FriendInfo extends AccountInfo {
 
 - 返回值: `Promise<ListedGroupInfo[]>` 群信息列表
 
-```ts
+```js
 export interface ListedGroupInfo {
   groupId: number
   groupName: string
@@ -331,7 +363,7 @@ export interface ListedGroupInfo {
 - **noCache:** `boolean` 是否不使用缓存，默认为 `false`
 - 返回值: `Promise<GroupInfo>` 群信息
 
-```ts
+```js
 export interface GroupInfo extends ListedGroupInfo {
   memberCount: number
   maxMemberCount: number
@@ -347,7 +379,7 @@ export interface GroupInfo extends ListedGroupInfo {
 - **noCache:** `boolean` 是否不使用缓存，默认为 `false`
 - 返回值: `Promise<GroupMemberInfo>` 群成员信息
 
-```ts
+```js
 export interface SenderInfo extends StrangerInfo {
   area?: string
   card?: string
@@ -380,7 +412,7 @@ export interface GroupMemberInfo extends SenderInfo {
 - **groupId:** `number` 目标群号
 - 返回值: `Promise<GroupNoticeInfo[]>` 群公告列表
 
-```ts
+```js
 export interface GroupNoticeInfo {
   cn: number
   fid: string
@@ -423,7 +455,7 @@ export interface GroupNoticeInfo {
 - **domain:** `string` 需要获取 cookies 的域名
 - 返回值: `Promise<Credentials>` 接口凭证
 
-```ts
+```js
 export interface Credentials {
   cookies: string
   csrfToken: number
@@ -439,7 +471,7 @@ export interface Credentials {
 - **fullPath:** `boolean` 是否返回文件的绝对路径
 - 返回值: `Promise<RecordInfo>`
 
-```ts
+```js
 export interface RecordInfo {
   file: string
 }
@@ -452,7 +484,7 @@ export interface RecordInfo {
 - **file:** `string` 图片文件名
 - 返回值: `Promise<ImageInfo>`
 
-```ts
+```js
 export interface ImageInfo {
   file: string
 
@@ -481,7 +513,7 @@ export interface ImageInfo {
 
 - 返回值: `Promise<StatusInfo>` 插件运行状态
 
-```ts
+```js
 export interface StatusInfo {
   appInitialized: boolean
   appEnabled: boolean
@@ -498,7 +530,7 @@ export interface StatusInfo {
 
 - 返回值: `Promise<VersionInfo>` 插件版本信息
 
-```ts
+```js
 export interface VersionInfo {
   coolqDirectory: string
   coolqEdition: 'air' | 'pro'
@@ -533,14 +565,14 @@ export interface VersionInfo {
 - **delay:** `string` 要延迟的毫秒数，如果默认情况下无法重启，可以尝试设置延迟为 2000 左右
 - 返回值: `Promise<void>`
 
-### bot.cleanDataDir(dataDir) <Badge text="async"/>
+### bot.cleanDataDir(dataDir)
 
 清理积攒了太多旧文件的数据目录。
 
 - **dataDir:** `'image' | 'record' | 'show' | 'bface'` 要清理的目录名
 - 返回值: `Promise<void>`
 
-### bot.cleanPluginLog() <Badge text="async"/>
+### bot.cleanPluginLog()
 
 清空插件的日志文件。
 

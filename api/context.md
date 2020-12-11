@@ -4,25 +4,11 @@ sidebarDepth: 2
 
 # 上下文 (Context)
 
-::: danger 注意
-这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
-:::
-
 **上下文 (Context)** 是 Koishi 的重要概念。你的每一个插件，中间件，监听器和指令都被绑定在上下文上。
 
 ## 应用属性
 
 下面的属性为了访问方便而绑定，严格上它们对一个 App 实例下的所有上下文都是相同的。
-
-### ctx.bots
-
-当前应用所绑定的全部 [Bot](./bot.md) 实例。你可以将其当做一个 Bot 数组，也可以直接使用 QQ 号作为其索引：
-
-```ts
-ctx.bots[0].selfId                    // 123456789
-ctx.bots[123456789] === ctx.bots[0]   // true
-ctx.bots.length                       // 1
-```
 
 ### ctx.database
 
@@ -30,12 +16,20 @@ ctx.bots.length                       // 1
 
 ### ctx.router
 
-如果你配置了 [port](./app.md#option-port) 选项，则这个属性将作为一个 [Koa-Router](https://github.com/koajs/router/blob/master/API.md) 实例。你可以在上面自定义新的路由：
+如果你配置了 [port](./app.md#option-port) 选项，则这个属性将作为一个 [KoaRouter](https://github.com/koajs/router/blob/master/API.md) 实例。你可以在上面自定义新的路由：
 
-```ts
+```js
 ctx.router.get('/path', (ctx, next) => {
   // handle request
 })
+```
+
+### ctx.servers
+
+一个键值对，保存了当前应用下的所有 Server 实例。可通过此属性获得特定的 Bot 实例：
+
+```js
+ctx.servers['onebot'].bots['123456789']
 ```
 
 ## 过滤器
@@ -124,7 +118,7 @@ ctx.router.get('/path', (ctx, next) => {
 - **options:** `U` 要传入插件的参数，如果为 `false` 则插件不会被安装
 - 返回值: `this`
 
-```ts
+```js
 type PluginFunction <T extends Context, U> = (ctx: T, options: U) => void
 type PluginObject <T extends Context, U> = { apply: PluginFunction<T, U> }
 type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
@@ -139,7 +133,7 @@ type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
 - **config:** [`CommandConfig`](../guide/command-system.md#commandconfig-对象) 指令的配置
 - 返回值：[`Command`](./command.md) 注册或修改的指令
 
-### ctx.logger(scope?) <Badge text="1.3.0+"/>
+### ctx.logger(scope?)
 
 根据 namespace 生成一个 [Logger 对象](../guide/logger.md#使用-logger)。
 

@@ -4,10 +4,6 @@ sidebarDepth: 2
 
 # 其他工具 (Utils)
 
-::: danger 注意
-这里是**正在施工**的 koishi v2 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
-:::
-
 包含了被 Koishi 使用的工具函数，它们由 `koishi-utils` 包提供。
 
 ::: tip 注意
@@ -62,65 +58,6 @@ sidebarDepth: 2
 
 - 返回值: `R`
 
-## CQCode 操作
-
-CQCode 结构如下：
-
-```ts
-interface CQCode {
-  type: string
-  data: Record<string, string | number>
-}
-```
-
-### CQCode.escape(source, insideCQ?)
-
-转义一段文本到 CQ 码格式。
-
-- **source:** `string` 源文本
-- **insideCQ:** `boolean` 在 CQ 码内部转义（会额外处理逗号）
-- 返回值: `string` 转义过后的文本
-
-### CQCode.unescape(souce)
-
-取消一段文本的 CQ 码转义。
-
-- **source:** `string` 源文本
-- 返回值: `string` 转义前的文本
-
-### CQCode.stringify(type, data)
-
-将一个对象转化成 CQ 码文本。
-
-- **type:** `string` CQ 码类型
-- **data:** `object` CQ 码参数
-- 返回值: `string` 生成的 CQ 码
-
-::: tip 注意
-类型为 text 的 CQ 码将直接被转化为 `data.text` 输出。
-:::
-
-### CQCode.stringifyAll(codes) <Badge text="1.0.2+"/>
-
-将多个 CQCode 对象转化成文本并连接。
-
-- **codes:** `CQCode[]` CQ 码数组
-- 返回值: `string` 生成的文本
-
-### CQCode.parse(source)
-
-将一个 CQ 码文本解析成对象。
-
-- **source:** `string` CQ 码
-- 返回值: `CQCode` CQ 码的类型和参数
-
-### CQCode.parseAll(source) <Badge text="1.0.2+"/>
-
-解析一段文本内的全部 CQ 码。其中的纯文本将会解析成 text 类型。
-
-- **source:** `string` 源文本
-- 返回值: `CQCode[]` CQ 码数组
-
 ## 字符串操作
 
 ### simplify(source)
@@ -165,22 +102,6 @@ interface CQCode {
 - **source:** `any` 要转换的内容
 - 返回值: `any` 转换结果
 
-## 日期操作
-
-### getDateNumber(date?)
-
-获取当前日期（从 UNIX 时间开始时计算）。
-
-- **date:** `Date` 日期对象，默认为 `new Date()`
-- 返回值: `number` UNIX 时间开始后的天数
-
-### fromDateNumber(value)
-
-从 UNIX 时间开始后的天数计算日期对象。
-
-- **value:** `number` UNIX 时间开始后的天数
-- 返回值: `Date` 日期对象
-
 ## 集合操作
 
 ### contain(array1, array2)
@@ -215,23 +136,146 @@ interface CQCode {
 - **array2:** `readonly any[]` 数组 2
 - 返回值: `any[]` 两个数组的并集
 
+## 日期操作
+
+### 静态属性
+
+- Time.millisecond
+- Time.second
+- Time.minute
+- Time.hour
+- Time.day
+- Time.week
+
+### Time.getDateNumber(date?)
+
+获取当前日期（从 UNIX 时间开始时计算）。
+
+- **date:** `Date` 日期对象，默认为 `new Date()`
+- 返回值: `number` UNIX 时间开始后的天数
+
+### Time.fromDateNumber(value)
+
+从 UNIX 时间开始后的天数计算日期对象。
+
+- **value:** `number` UNIX 时间开始后的天数
+- 返回值: `Date` 日期对象
+
+### Time.parseTime(source)
+
+将一个字符串解析成时间长度。
+
+- **source:** `string` 要解析的字符串
+
+### Time.parseDate(source)
+
+将一个字符串解析成 Date 对象。
+
+- **source:** `string` 要解析的字符串
+
+### Time.formatTime(ms)
+
+- **ms:** `number` 毫秒数
+
+### Time.formatTimeShort(ms)
+
+- **ms:** `number` 毫秒数
+
+### Time.formatTimeInterval(time, interval?)
+
+- **time:** `Date` 起始时间
+- **interval:** `number` 时间间隔，单位为毫秒
+- 返回值: `string`
+
+## CQCode 操作
+
+CQCode 结构如下：
+
+```js
+interface CQCode {
+  type: string
+  data: Record<string, string | number>
+}
+```
+
+### CQCode.escape(source, insideCQ?)
+
+转义一段文本到 CQ 码格式。
+
+- **source:** `string` 源文本
+- **insideCQ:** `boolean` 在 CQ 码内部转义（会额外处理逗号）
+- 返回值: `string` 转义过后的文本
+
+### CQCode.unescape(souce)
+
+取消一段文本的 CQ 码转义。
+
+- **source:** `string` 源文本
+- 返回值: `string` 转义前的文本
+
+### CQCode.stringify(type, data)
+
+将一个对象转化成 CQ 码文本。
+
+- **type:** `string` CQ 码类型
+- **data:** `object` CQ 码参数
+- 返回值: `string` 生成的 CQ 码
+
+::: tip 注意
+类型为 text 的 CQ 码将直接被转化为 `data.text` 输出。
+:::
+
+### CQCode.stringifyAll(codes)
+
+将多个 CQCode 对象转化成文本并连接。
+
+- **codes:** `CQCode[]` CQ 码数组
+- 返回值: `string` 生成的文本
+
+### CQCode.parse(source)
+
+将一个 CQ 码文本解析成对象。
+
+- **source:** `string` CQ 码
+- 返回值: `CQCode` CQ 码的类型和参数
+
+### CQCode.parseAll(source)
+
+解析一段文本内的全部 CQ 码。其中的纯文本将会解析成 text 类型。
+
+- **source:** `string` 源文本
+- 返回值: `CQCode[]` CQ 码数组
+
+## 输出日志
+
+### new Logger(name)
+
+### logger.error()
+
+### logger.success()
+
+### logger.warn()
+
+### logger.info()
+
+### logger.debug()
+
 ## 随机数操作
 
-### randomBool(probability)
+### Random.uuid()
+
+生成一个标准的 UUID (v5)。
+
+- 返回值: `string` 生成的 UUID
+
+### Random.bool(probability)
 
 生成一个随机布尔值，有 probability 的概率为 1。
 
 - **probability:** `number` 概率
 - 返回值: `boolean` 随机布尔值
 
-### randomId(length?)
-
-生成一个随机 ID，由数字和大小写字母构成，长度为 length。
-
-- **length:** `number` ID 长度，默认为 16
-- 返回值: `string` 生成的 ID
-
-### randomReal(start?, end)
+### Random.real(start?, end)
 
 生成一个随机实数。
 
@@ -239,7 +283,7 @@ interface CQCode {
 - **end:** `end` 上界
 - 返回值: `number` 一个 [start, end) 之间的随机实数
 
-### randomInt(start?, end)
+### Random.int(start?, end)
 
 生成一个随机实数。
 
@@ -247,21 +291,21 @@ interface CQCode {
 - **end:** `end` 上界
 - 返回值: `number` 一个 [start, end) 之间的随机整数
 
-### randomPick(array)
+### Random.shuffle(array)
+
+随机打乱数组中的元素，返回新的数组。
+
+- **array:** `T[]` 数组
+- 返回值: `T[]` 新的数组
+
+### Random.pick(array)
 
 从数组中随机挑出一个元素，不改变原数组。
 
 - **array:** `readonly T[]` 数组
 - 返回值: `T` 挑出的元素
 
-### randomSplice(array)
-
-从数组中随机删掉一个元素，返回删掉的元素。
-
-- **array:** `T[]` 数组
-- 返回值: `T` 挑出的元素
-
-### randomMultiPick(array, count) <Badge text="beta" type="warn"/>
+### Random.multiPick(array, count)
 
 从数组中随机挑出一些元素，不改变原数组。
 
@@ -269,7 +313,7 @@ interface CQCode {
 - **count:** `number` 元素个数
 - 返回值: `T[]` 挑出的元素列表
 
-### randomWeightedPick(weights, value?) <Badge text="beta" type="warn"/>
+### Random.weightedPick(weights, value?)
 
 按照权重随机挑出一个元素。
 

@@ -153,10 +153,10 @@ Koishi, echo hello
 echo hello
 ```
 
-你也可以通过修改 [`AppOptions`](./config-file.md#配置列表) 的这几个属性来改变这种行为：
+你也可以通过修改下列配置项来改变这种行为：
 
-- **nickname:** `string | string[]` 默认为空。如果为空的话，上述几条以 `Koishi` 开头的信息就不会触发指令了。你也可以同时设置多个昵称。
-- **prefix:** `string | string[]` 默认为空。设置为 `.` 可以禁止在群中调用 `echo` 但允许调用 `.echo`。你也可以同时设置多个前缀。
+- **[nickname](../api/app.md#options-nickname):** `string | string[]` 默认为空。如果为空的话，上述几条以 `Koishi` 开头的信息就不会触发指令了。你也可以同时设置多个昵称。
+- **[prefix](../api/app.md#options-prefix):** `string | string[]` 默认为空。设置为 `.` 可以禁止在群中调用 `echo` 但允许调用 `.echo`。你也可以同时设置多个前缀。
 
 ::: tip nickname 和 prefix 的区别
 1. nickname 后需要跟逗号和 / 或空白字符，再后面才是指令名；prefix 后面必须紧跟指令名。
@@ -186,7 +186,7 @@ app.command('echo').alias('say')
 <chat-message nickname="Koishi" avatar="/koishi.png">hello</chat-message>
 </panel-view>
 
-是不是很方便呢？
+如果想调整模糊匹配的程度，你还可以修改配置项 [similarityCoefficient](../api/app.md#options-similaritycoefficient)。是不是很方便呢？
 
 ### 快捷方式
 

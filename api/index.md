@@ -17,7 +17,7 @@ koishi-core 中提供的 API，包括以下几个子页面：
 - [上下文 (Context)](./context.md)
 - [应用 (App)](./app.md)
 - [机器人 (Bot)](./bot.md)
-- [事件 (Event)](./event.md)
+- [事件 (Events)](./events.md)
 - [会话 (Session)](./session.md)
 - [指令 (Command)](./command.md)
 - [数据库 (Database)](./database.md)
@@ -28,10 +28,12 @@ koishi-core 中提供的 API，包括以下几个子页面：
 
 - [koishi-utils](./utils.md)
 - [koishi-test-utils](./test-utils.md)
-- [koishi-database-memory](./database/memory.md)
+- [koishi-adapter-onebot](./adapter/onebot.md)
+- [koishi-adapter-kaiheila](./adapter/kaiheila.md)
+- [koishi-database-mongo](./database/mongo.md)
 - [koishi-database-mysql](./database/mysql.md)
 
 ## 更新与迁移
 
-- [v2 更新日志](./changelog.md)
-- [v2 新特性](./new-in-v2.md)
+- [v3 更新日志](./changelog.md)
+- [从旧版本迁移](./migration.md)

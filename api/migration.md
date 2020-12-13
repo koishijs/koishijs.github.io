@@ -2,13 +2,13 @@
 sidebarDepth: 2
 ---
 
-# v2 新特性
+# 从低版本迁移
 
-这个页面将介绍 Koishi v2 的新特性。
+这个页面将介绍 Koishi v3 的新特性和对应的迁移方法。
 
 ## 钩子函数
 
-Koishi v1 的 `ctx.receiver` 使用了 EventEmitter 来分发事件，而 Koishi v2 则自己实现了一个事件系统。这样做将带来几点好处：
+Koishi v1 的 `ctx.receiver` 使用了 EventEmitter 来分发事件，而 Koishi v3 则自己实现了一个事件系统。这样做将带来几点好处：
 
 - 使用统一的事件分发机制，无需对每个上下文构造 EventEmitter 实例，具有更高的性能
 - `emit`, `parallel`, `bail`, `serial` 等方法能够妥善处理不同场景下的事件回调

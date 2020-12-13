@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# 其他工具 (Utils)
+# 常用工具 (Utils)
 
 包含了被 Koishi 使用的工具函数，它们由 `koishi-utils` 包提供。
 

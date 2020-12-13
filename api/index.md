@@ -4,10 +4,6 @@ sidebarDepth: 0
 
 # API 文档
 
-::: danger 注意
-这里是**正在施工**的 koishi v3 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
-:::
-
 本栏介绍的内容分为三个主要部分：
 
 ## 核心 API
@@ -26,12 +22,12 @@ koishi-core 中提供的 API，包括以下几个子页面：
 
 由其他官方包提供的 API，包括以下几个包：
 
-- [koishi-utils](./utils.md)
-- [koishi-test-utils](./test-utils.md)
-- [koishi-adapter-onebot](./adapter/onebot.md)
-- [koishi-adapter-kaiheila](./adapter/kaiheila.md)
-- [koishi-database-mongo](./database/mongo.md)
-- [koishi-database-mysql](./database/mysql.md)
+- [常用工具 (Utils)](./utils.md)
+- [测试工具 (Test Utils)](./test-utils.md)
+- [平台：OneBot](./adapter/onebot.md)
+- [平台：Kaiheila](./adapter/kaiheila.md)
+- [数据库：Mongo](./database/mongo.md)
+- [数据库：MySQL](./database/mysql.md)
 
 ## 更新与迁移
 

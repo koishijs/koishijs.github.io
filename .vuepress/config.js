@@ -56,7 +56,7 @@ module.exports = context => ({
         title: '指南',
         collapsable: false,
         children: [
-          '/guide/about-koishi',
+          '/guide/about',
           '/guide/starter',
           '/guide/cli',
           '/guide/faq',
@@ -66,9 +66,9 @@ module.exports = context => ({
         collapsable: false,
         children: [
           '/guide/message',
-          '/guide/plugin-and-context',
+          '/guide/context',
           '/guide/command',
-          '/guide/using-database',
+          '/guide/database',
           '/guide/authorization',
           '/guide/lifecycle',
           '/guide/multiple-bots',

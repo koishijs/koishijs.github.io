@@ -142,4 +142,13 @@ $msgbox-left = 4.2rem
     margin 0
     line-height 1.6
 
+  blockquote
+    font-size 0.9rem
+    margin 0 0 0.2rem
+    background-color #f3f6f9
+    border none
+    border-radius 0.5rem
+    padding 0.2rem 0.6rem
+    color grayscale(10%)
+
 </style>

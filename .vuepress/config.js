@@ -145,7 +145,7 @@ module.exports = context => ({
           '/plugins/other/chess',
           '/plugins/other/image-search',
           '/plugins/other/status',
-          '/plugins/other/github-webhook',
+          '/plugins/other/github',
           '/plugins/other/puppeteer',
           '/plugins/other/schedule',
         ],

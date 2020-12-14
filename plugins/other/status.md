@@ -2,9 +2,11 @@
 sidebarDepth: 2
 ---
 
-# 查看运行状态 (status)
+# 查看运行状态 (Status)
 
-koishi-plugin-status 可以用于查看机器人的运行状态。下面是一个实例（以四季酱为例）：
+koishi-plugin-status 可以用于查看机器人的运行状态。
+
+## 指令：status
 
 <panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">四季酱，你的状态</chat-message>
@@ -26,4 +28,4 @@ koishi-plugin-status 可以用于查看机器人的运行状态。下面是一�
 </chat-message>
 </panel-view>
 
-## 配置
+## 配置项

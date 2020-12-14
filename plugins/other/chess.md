@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# 下棋 (chess)
+# 下棋 (Chess)
 
 koishi-plugin-chess 提供了下棋功能。目前支持的规则有：
 
@@ -29,9 +29,7 @@ koishi-plugin-chess 提供了下棋功能。目前支持的规则有：
 </chat-message>
 </panel-view>
 
-## 基本功能
-
-### 开始和停止棋局
+## 开始和停止棋局
 
 使用 chess 指令开始一个棋局：
 
@@ -51,7 +49,7 @@ chess --rule <rule> [--size <size>]
 
 使用 `chess --stop` 或者 `停止下棋` 可以停止一个正在进行的棋局。
 
-### 落子，悔棋和跳过
+## 落子，悔棋和跳过
 
 当棋局开始时，默认发起人是后手，而第一个响应这个棋局者是先手。输入 `chess position` 或者 `落子 position` 就可以加入这个棋局，此时棋局正式形成，其他人无法继续加入游戏。而参与游戏的两人可以依次使用“落子”指令进行游戏。
 

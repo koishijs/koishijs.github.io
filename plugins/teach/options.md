@@ -85,9 +85,28 @@ sidebarDepth: 2
 
 - 类型: `number | LoopConfig | LoopConfig[]`
 
+控制防循环行为，参见 [**防刷屏机制**](./misc.md#防刷屏机制)。
+
+```js
+export interface LoopConfig {
+  participants: number
+  length: number
+  debounce?: number
+}
+```
+
 ### throttle
 
 - 类型: `ThrottleConfig | ThrottleConfig[]`
+
+控制节流行为，参见 [**防刷屏机制**](./misc.md#防刷屏机制)。
+
+```js
+export interface ThrottleConfig {
+  interval: number
+  responses: number
+}
+```
 
 <!-- ### successorTimeout
 

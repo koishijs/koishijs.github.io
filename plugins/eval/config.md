@@ -100,7 +100,7 @@ evaluate 指令会创建一个沙箱环境。这个沙箱环境支持 ES2020 的
 
 koishi-plugin-eval 提供了一套陷阱 API。它会影响 evaluate 指令和扩展指令中的用户数据。你可以通过下面的方式来定义一个陷阱：
 
-```ts
+```js
 import { userTrap } from 'koishi-plugin-eval'
 
 userTrap.define('foo', {
@@ -118,7 +118,7 @@ userTrap.define('foo', {
 
 如果你担心在 evaluate 中调用部分指令存在风险，你可以手动将这些指令设置为禁止在沙箱中调用：
 
-```ts
+```js
 ctx.command('foo', { noEval: true })
 ```
 

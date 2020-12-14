@@ -131,7 +131,7 @@ sidebarDepth: 2
 <chat-message nickname="Koishi" avatar="/koishi.png">编号为 1001 的问答信息：<br/>问题：foo<br/>回答：bar<br/>修改于：15 秒前</chat-message>
 </panel-view>
 
-## 回退到历史版本
+## 回退近期操作
 
 可以使用 `#id -V` 来回退特定问答近期的教学操作：
 

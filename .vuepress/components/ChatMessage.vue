@@ -4,7 +4,7 @@
     <div v-else class="avatar" :style="{ backgroundColor: color }">{{ nickname[0] }}</div>
     <div class="nickname">{{ nickname }}</div>
     <div class="message-box">
-      <slot>&nbsp</slot>
+      <slot>&nbsp;</slot>
     </div>
   </div>
 </template>
@@ -56,10 +56,11 @@ export default {
         this.$emit('appear')
       }, 100)
     },
+
     handleScroll () {
-      const rect = this.$el.getBoundingClientRect()
-      if (rect.top < innerHeight) this.active = true
-      // this.active = rect.top < innerHeight
+      const rect = this.$el.parentNode.getBoundingClientRect()
+      // if (rect.top < innerHeight) this.active = true
+      this.active = rect.top < innerHeight
     },
   },
 }

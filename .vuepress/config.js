@@ -128,8 +128,9 @@ module.exports = context => ({
           '/plugins/teach/prob',
           '/plugins/teach/regexp',
           '/plugins/teach/context',
+          '/plugins/teach/prev-succ',
           '/plugins/teach/misc',
-          '/plugins/teach/config',
+          '/plugins/teach/options',
         ],
       }, {
         title: '执行脚本 (Eval)',

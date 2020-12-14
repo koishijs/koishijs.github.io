@@ -46,7 +46,7 @@
     "commands": {
       "patterns": [
         {
-          "match": "(?<=^)([\\w-]+)(?=$|\\s)",
+          "match": "(?<=^|&&)\\s*([\\w-]+)(?=$|\\s)",
           "name": "support.function.batchfile"
         },
         {

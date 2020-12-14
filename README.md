@@ -2,7 +2,7 @@
 home: true
 heroImage: /koishi.png
 heroText: Koishi
-tagline: 真正跨平台的机器人框架
+tagline: 一个跨平台的机器人框架
 actionText: 快速上手 →
 actionLink: /guide/starter
 features:
@@ -59,7 +59,3 @@ yarn koishi start
 <chat-message nickname="Alice" color="#cc0066">echo 你好</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">你好</chat-message>
 </panel-view>
-
-::: tip 提示
-Koishi v3 要求您的 Node.js 的版本不小于 12，CQHTTP 的版本不小于 4.0。如果使用 WebSocket，Koishi 要求 CQHTTP 版本不小于 4.6。
-:::

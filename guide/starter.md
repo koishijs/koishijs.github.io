@@ -132,7 +132,7 @@ yarn add koishi koishi-adapter-onebot koishi-plugin-common -D
 
 </panel-view>
 
-新建 `index.js`，并写下这段代码：
+新建入口文件 `index.js`，并写下这段代码：
 
 ```js index.js
 const { App } = require('koishi')
@@ -161,87 +161,64 @@ node .
 
 这样也能运行你的机器人。尽管这显得稍微麻烦一点，但是你的机器人也因此获得了更高的自由度。在下一章我们会简单对比这两种方法。
 
-## 添加插件
+## 编写并调用你的插件
 
-你可以像这样添加一个插件：
+在机器人目录中添加文件 `my-plugin.js`：
 
-```js koishi.config.js
-module.exports = {
-  plugins: [
-    './foo',
-    ['bar'],
-    ['baz', {
-      // 传给 koishi-plugin-baz 的选项
-    }]
-  ],
+```js
+module.exports = (ctx) => {
+  ctx.on('message', (session) => {
+    if (session.content === '天王盖地虎') {
+      session.$send('宝塔镇河妖')
+    }
+  })
 }
 ```
 
-`plugins` 是一个数组，其中的每一项可以是字符串或数组。如果是字符串，Koishi 会直接解析字符串为插件的路径；如果是数组，Koishi 会将数组的第一项解析为插件的路径，第二项将作为插件的选项。其中 `foo` 会被解析为 `koishi-plugin-foo`，`./foo.js`，`./foo/index.js` 等多个路径，会按照先后顺序进行匹配。因此，如果你想要向你的机器人添加这三种路径的插件，你都只需要写 `foo` 即可。当然，你仍然可以显式地书写 `koishi-plugin-foo`，`./foo.js`，`./foo/index.js` 等路径进行配置。
-
-上面的写法使用 API 可以写成：
-
-```js index.js
-app
-  .plugin(require('./foo'))
-  .plugin(require('koishi-plugin-bar'))
-  .plugin(require('koishi-plugin-baz'), options)
-```
-
-你可以在 [**插件与上下文**](./plugin-and-context.md) 一章中了解更多有关插件的细节。
-
-## 添加数据库
-
-你可以像这样添加一个数据库：
+修改你的配置文件或入口文件：
 
 ```js koishi.config.js
 module.exports = {
-  database: {
-    mysql: {
-      host: '[your-host]',
-      port: 3306,
-      user: 'root',
-      password: '[your-password]',
-      database: '[your-database]',
-    },
+  plugins: {
+    'my-plugin': {},
   },
 }
 ```
 
-对应的 API 写法则是直接在 App 的构造参数中加一个 `database` 字段，与上面没有本质区别。
+```js index.js
+app.plugin(require('./my-plugin'))
+```
 
-`database` 是一个键值对，键为数据库的类型，指为数据库的配置信息。Koishi 并不会默认支持一个数据库，但它会对 `database` 的键进行检测，同时加载对应的模块作为数据库支持，模块的解析方式与插件类似。例如，`level` 会被解析为 `koishi-database-level`，`./level.js`，`./level/index.js` 等多个路径，会按照先后顺序进行匹配。
+然后重新运行你的项目：
 
-从这种写法中，我们也不难看出 Koishi 是支持多数据库的。这一点将在 [**使用数据库**](./using-database.md) 一章详细阐释。
+<panel-view title="聊天记录">
+<chat-message nickname="Alice" color="#cc0066">天王盖地虎</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">宝塔镇河妖</chat-message>
+</panel-view>
 
-## 使用多机器人
+## 配置多机器人
 
 你可以像这样使用多个机器人：
 
 ```js koishi.config.js
-module.exports = [{
-  // 第一个机器人的配置
-}, {
-  // 第二个机器人的配置
-}]
-```
-
-如果这两个机器人的配置有较高的重合度，你也可以先设置一个共享配置，再对每个机器人进行覆盖：
-
-```js koishi.config.js
-const shared = {
-  // 共享配置
+module.exports = {
+  port: 7070,
+  cqhttp: {
+    // onebot 服务将在 http://localhost:7070/onebot 进行处理
+    path: '/event',
+    secret: 'my-secret',
+  },
+  kaiheila: {
+    // kaiheila 服务将在 http://localhost:7070/kaiheila 进行处理
+    path: '/kaiheila',
+  },
+  bots: [
+    // 在这里写上不同的机器人配置
+    { type: 'onebot:http', selfId: 123456789, server: 'http://onebot-server' },
+    { type: 'onebot:ws', selfId: 987654321, token: 'my-onebot-token' },
+    { type: 'kaiheila:ws', selfId: 'aAbBcCdD', token: 'my-kaiheila-token' },
+  ],
 }
-
-module.exports = [{
-  ...shared,
-  // 第一个机器人的特有配置
-}, {
-  ...shared,
-  // 第二个机器人的特有配置
-}]
 ```
 
-对应的使用 API 的写法则是分别构造两个 App 实例。
-
-有关多机器人的详细使用方法，可以参见 [**多机器人开发**](./multiple-bots.md) 一章。
+运行程序后，Koishi 将同时登陆三个机器人。有关多机器人的详细使用方法，可以参见 [**多机器人开发**](./multiple-bots.md) 一章。

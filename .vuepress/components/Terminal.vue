@@ -145,7 +145,7 @@ export default {
         height: (this.lines.length * 1.4 + (mini ? 2 : 3.4)) * 16 + 'px',
       },
       props: {
-        title: this.title,
+        title: '命令行',
         controls: !mini,
       },
     }, this.lines.map(({ type, active, content, shown, message }, index) => {

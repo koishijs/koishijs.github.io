@@ -19,7 +19,7 @@ sidebarDepth: 2
 
 ### 异步调用
 
-CQHTTP 提出了**异步调用**的概念，当 CQHTTP 服务器受到异步调用请求时，如果调用正确，将直接返回 200。这样做的好处是，如果某些操作有较长的耗时（例如发送含有大量图片的消息或清空数据目录等）或你不关心调用结果，使用异步调用可以有效防止阻塞。下面说明了异步调用和普通调用的关系：
+OneBot 提出了**异步调用**的概念，当 OneBot 服务器受到异步调用请求时，如果调用正确，将直接返回 200。这样做的好处是，如果某些操作有较长的耗时（例如发送含有大量图片的消息或清空数据目录等）或你不关心调用结果，使用异步调用可以有效防止阻塞。下面说明了异步调用和普通调用的关系：
 
 ![async-method](/async-method.png)
 
@@ -34,26 +34,34 @@ await app.sender.sendPrivateMsgAsync(123456789, 'Hello world')
 ```
 
 ::: tip 提示
-虽然异步调用方法的名字以 Async 结尾，但是其他方法也是**异步函数**，它们都会返回一个 `Promise` 对象。取这样的名字只是为了与 CQHTTP 保持一致。
+虽然异步调用方法的名字以 Async 结尾，但是其他方法也是**异步函数**，它们都会返回一个 `Promise` 对象。取这样的名字只是为了与 OneBot 保持一致。
 :::
+
+### HTTP 和 WebSocket 应该如何选择？
+
+目前 Koishi 已经完全实现了 OneBot 提供的 HTTP 和 WebSocket 通信方式，因此它们之间**不存在任何功能上的差别**。
+
+但是，HTTP 需要 Koishi 和 OneBot 所处于同一台机器，或所处的机器都拥有公网 IP；而 WebSocket 只需要 Koishi 和 OneBot 所处于同一台机器，或运行 OneBot 的机器拥有公网 IP。因此如果你在服务端运行 CoolQ，同时在个人电脑上调试你的 Koishi 应用，你应当选择使用 WebSocket 模式。
+
+从性能上说，WebSocket 占用的资源会更少（因为不需要每次都建立连接），但是响应速度可能不如 HTTP；另一方面，当一个 Koishi 应用同时管理着多个机器人时，HTTP 能通过快捷调用和服务器复用的方式来提高性能，但是 WebSocket 并没有这些机制。
 
 ## App 构造函数选项
 
 下面的配置项来自 koishi-adapter-cqhttp。你需要将你的 [`type`](#options-type) 字段配置为 `cqhttp`, `cqhttp:http`, `cqhttp:ws` 或 `cqhttp:ws-reverse` 中的一种。如果缺省或使用了 `cqhttp`，Koishi 会读取你的 `server` 选项，根据你配置的服务器 URL 进行适配。
 
-相关 CQHTTP 配置：`use_http`, `use_ws`。
+相关 OneBot 配置：`use_http`, `use_ws`。
 
 ### options.path
 
 - 类型：`string`
 
-服务器监听的路径。相关 CQHTTP 配置：`post_url`。
+服务器监听的路径。相关 OneBot 配置：`post_url`。
 
 ### options.secret
 
 - 类型：`string`
 
-接收信息时用于验证的字段，应与 CQHTTP 的 `secret` 配置保持一致。
+接收信息时用于验证的字段，应与 OneBot 的 `secret` 配置保持一致。
 
 ### options(.bots[]).server
 
@@ -61,13 +69,13 @@ await app.sender.sendPrivateMsgAsync(123456789, 'Hello world')
 
 如果使用了 HTTP，则该配置将作为发送信息的服务端；如果使用了 WebSocket，则该配置将作为监听事件和发送信息的服务端。
 
-相关 CQHTTP 配置：`host`, `port`, `ws_host`, `ws_port`。
+相关 OneBot 配置：`host`, `port`, `ws_host`, `ws_port`。
 
 ### options(.bots[]).token
 
 - 类型：`string`
 
-发送信息时用于验证的字段，应与 CQHTTP 的 `access_token` 配置保持一致。
+发送信息时用于验证的字段，应与 OneBot 的 `access_token` 配置保持一致。
 
 ### options.retryTimes
 
@@ -526,7 +534,7 @@ export interface StatusInfo {
 
 ### bot.getVersionInfo()
 
-获取 CoolQ 及 CQHTTP 插件的版本信息。
+获取 OneBot 的版本信息。
 
 - 返回值: `Promise<VersionInfo>` 插件版本信息
 

@@ -12,28 +12,30 @@ sidebarDepth: 2
 
 ## 使用插件 (plugin)
 
-首先让我们回顾一下你已经了解到的插件使用方法：
+你可以像这样添加一个插件：
 
 ```js koishi.config.js
 module.exports = {
   plugins: [
-    './foo',            // 安装本地插件 foo
-    'bar',              // 安装插件 bar
-    ['baz', options],   // 安装带配置的插件 baz
+    './foo',
+    ['bar'],
+    ['baz', {
+      // 传给 koishi-plugin-baz 的选项
+    }]
   ],
 }
 ```
 
-对应着下面的代码：
+`plugins` 是一个数组，其中的每一项可以是字符串或数组。如果是字符串，Koishi 会直接解析字符串为插件的路径；如果是数组，Koishi 会将数组的第一项解析为插件的路径，第二项将作为插件的选项。其中 `foo` 会被解析为 `koishi-plugin-foo`，`./foo.js`，`./foo/index.js` 等多个路径，会按照先后顺序进行匹配。因此，如果你想要向你的机器人添加这三种路径的插件，你都只需要写 `foo` 即可。当然，你仍然可以显式地书写 `koishi-plugin-foo`，`./foo.js`，`./foo/index.js` 等路径进行配置。
 
-```js
+上面的写法使用 API 可以写成：
+
+```js index.js
 app
   .plugin(require('./foo'))
   .plugin(require('koishi-plugin-bar'))
   .plugin(require('koishi-plugin-baz'), options)
 ```
-
-那么，如果我希望其中的一部分插件只对部分群生效，这又应该如何实现呢？这就牵扯到另一个重要概念，也就是上下文。
 
 ## 上下文 (context)
 

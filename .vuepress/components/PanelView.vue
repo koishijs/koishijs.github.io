@@ -121,7 +121,11 @@ $circleSpacing = 19px
 
   .content
     padding 0.2rem 1.2rem
-    width fit-content
+  
+    > p
+      font-size 0.9rem
+      color #909399
+      text-align center
 
   &.mini .controls
     display none

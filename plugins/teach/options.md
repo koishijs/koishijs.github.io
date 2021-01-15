@@ -118,7 +118,7 @@ export interface ThrottleConfig {
 |:--|:-:|
 | /, --page [page] | [**搜索问答**](./basic.md#搜索问答) |
 | \|, --pipe [op...] | [**管道操作**](./basic.md#管道操作) |
-| =>, --redirect-dialogue [ques] | [**问题重定向**](./interp.md#问题重定向) |
+| =>, --redirect [ques] | [**问题重定向**](./interp.md#问题重定向) |
 | -d, --disable | [**上下文机制**](./context.md#基本用法) |
 | -D, --disable-global | [**上下文机制**](./context.md#基本用法) |
 | -e, --enable | [**上下文机制**](./context.md#基本用法) |

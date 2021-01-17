@@ -123,7 +123,7 @@ $circleSpacing = 19px
     padding 0.2rem 1.2rem
   
     > p
-      font-size 0.9rem
+      font-size 0.8rem
       color #909399
       text-align center
 

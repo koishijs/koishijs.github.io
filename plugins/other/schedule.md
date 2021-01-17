@@ -4,11 +4,13 @@ sidebarDepth: 2
 
 # 添加计划任务 (Schedule)
 
-koishi-plugin-schedule 用于设置和触发计划任务。
+koishi-plugin-schedule 用于设置和触发计划任务，需要 mongo 或 mysql 数据库支持。
 
 <panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">.schedule 1m -- echo 233</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">日程已创建，编号为 1。</chat-message>
+<chat-message nickname="Alice" color="#cc0066">.schedule -l</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">1. 今天 10:01：echo 233</chat-message>
 <p>——— 1 分钟后 ———</p>
 <chat-message nickname="Koishi" avatar="/koishi.png">233</chat-message>
 </panel-view>
@@ -40,4 +42,4 @@ koishi-plugin-schedule 用于设置和触发计划任务。
 - 类型: `number`
 - 默认值: `60000`
 
-允许的最短时间间隔。如果传入的 interval 参数小于这个值，将会提示“时间间隔过短”。
+允许的最短时间间隔，单位为毫秒。如果传入的 interval 参数小于这个值，将会提示“时间间隔过短”。

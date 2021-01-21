@@ -13,7 +13,7 @@ sidebarDepth: 2
 ```js
 app.start().then(() => {
   app.servers.onebot.bots.forEach((bot) => {
-    bot.sendPrivateMsg(1234567, '你的机器人上线了')
+    bot.sendPrivateMsg('123456789', '你的机器人上线了')
   })
 })
 ```
@@ -21,7 +21,11 @@ app.start().then(() => {
 此外，你还可以利用 `connect` 事件：
 
 ```js
-app.on('connect', () => app.sender.sendPrivateMsg(1234567, '你的机器人上线了'))
+app.on('connect', () => {
+  app.servers.onebot.bots.forEach((bot) => {
+    bot.sendPrivateMsg('123456789', '你的机器人上线了')
+  })
+})
 
 // 先注册回调函数，再启动应用
 app.start()

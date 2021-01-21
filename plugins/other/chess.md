@@ -4,6 +4,11 @@ sidebarDepth: 2
 
 # 下棋 (Chess)
 
+::: tip
+1. 本插件同时支持以文本和图片两种形式显示棋局。要启用图片功能，你需要安装 [koishi-plugin-puppeteer](./puppeteer.md)。
+2. 本插件在有数据库的情况下会自动保存棋局状态，即使机器人重新启动也能自动恢复。要启用自动保存功能，你需要安装数据库支持。
+:::
+
 koishi-plugin-chess 提供了下棋功能。目前支持的规则有：
 
 - 五子棋
@@ -57,6 +62,4 @@ chess --rule <rule> [--size <size>]
 
 输入 `chess --skip` 或者 `跳过回合` 可以跳过一个回合。
 
-## 扩展规则 <Badge text="todo" type="warn"/>
-
-## 配置 AI <Badge text="todo" type="warn"/>
+输入 `chess --view` 可以查看当前棋局。

@@ -13,24 +13,6 @@
   a.header-anchor
     transition opacity 0.3s ease
 
-.code.panel-view
-  color #eeeeee
-  background-color rgb(39, 40, 34)
-
-  .content
-    padding 1rem 1.2rem !important
-
-  &:not(.mini) .content
-    padding-top 2.4rem !important
-
-  pre
-    padding 0 !important
-    margin 0 0
-    border-radius 0
-    background-color inherit
-    overflow visible
-    text-shadow $textShadow
-
 .medium-zoom-image--opened
   border-radius 0 !important
 
@@ -48,10 +30,66 @@
   ::-webkit-scrollbar
     width 3px
 
-.panel-view::-webkit-scrollbar-track-piece
-  border-radius 6px
-  background-color inherit
+.panel-view
+  &::-webkit-scrollbar-track-piece
+    border-radius 6px
+    background-color inherit
 
-.panel-view::-webkit-scrollbar-thumb
-  border-radius 6px
-  background-color #eaecef80
+  &::-webkit-scrollbar-thumb
+    border-radius 6px
+    background-color #eaecef80
+
+  &.code
+    color #eeeeee
+    background-color rgb(39, 40, 34)
+
+    .content
+      padding 1rem 1.2rem !important
+
+    &:not(.mini) .content
+      padding-top 2.4rem !important
+
+    pre
+      padding 0 !important
+      margin 0 0
+      border-radius 0
+      background-color inherit
+      overflow visible
+      text-shadow $textShadow
+
+.custom-block
+  padding 1px 1.5rem !important
+  margin 2em 0
+  border-left-width 4px !important
+  border-left-style solid
+  background-color #f8f8f8
+  position relative
+
+  .custom-block-title
+    display none
+
+  &::before
+    position absolute
+    top 20px
+    left -12px
+    color #fff
+    width 20px
+    height 20px
+    border-radius 100%
+    text-align center
+    line-height 20px
+    font-weight bold
+    font-family "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif
+    font-size 14px
+
+  &.danger
+    border-left-color #f66
+  &.danger:before
+    content "!"
+    background-color #f66
+  &.tip:before
+    content "i"
+    background-color #42b983
+  &.warning:before
+    content "!"
+    background-color #e7c000

@@ -13,20 +13,26 @@ sidebarDepth: 2
 - 可以在无网络的情况下运行
 - 可以模拟出多用户交互等复杂情况
 - 可以在内存中模拟你想要的数据库
-- 能够有效避免腾讯风控代理的损失
+- 能够有效避免风控带来的损失
 - 便于调试与错误定位
 
-本章将介绍官方库 `koishi-test-utils`。它一个基于 [Jest](https://jestjs.io/zh-Hans/) 的单元测试工具集，你可以用它来快速检验你编写的 Koishi 插件和数据库实现。
+本章将介绍官方库 `koishi-test-utils`。它一个基于 [Mocha](https://mochajs.org/) 和 [Chai](https://www.chaijs.com/) 的单元测试工具集，你可以用它来快速检验你编写的 Koishi 插件和数据库实现。
 
 ## 准备工作
 
-安装最新版本的 Jest 和 koishi-test-utils：
+安装最新版本的 Mocha, Chai 和 koishi-test-utils：
 
-```sh
-npm i jest koishi-test-utils -D
-# 或者
-yarn add jest koishi-test-utils -D
+<panel-view class="code" type="package-manager">
+
+```npm
+npm i mocha chai koishi-test-utils -D
 ```
+
+```yarn
+yarn add mocha chai koishi-test-utils -D
+```
+
+</panel-view>
 
 ::: tip 提示
 你可以在 [这里](../api/test-utils.md) 看到完整的接口列表和所需的最低版本。
@@ -36,19 +42,27 @@ yarn add jest koishi-test-utils -D
 
 如果你使用 TypeScript 进行开发，你可能还需要下面这些依赖（当然你可能已经安装了它们）：
 
-```sh
-npm i typescript @types/node @types/jest ts-jest -D
-# 或者
-yarn add typescript @types/node @types/jest ts-jest -D
+<panel-view class="code" type="package-manager">
+
+```npm
+npm i typescript ts-node @types/node @types/mocha @types/chai -D
 ```
 
-接着编辑你的 `jest.config.js` 文件：
+```yarn
+yarn add typescript ts-node @types/node @types/mocha @types/chai -D
+```
 
-```js
+</panel-view>
+
+接着编辑你的 `.mocharc.js` 文件：
+
+```js .mocharc.js
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  moduleFileExtensions: ['ts', 'js', 'json'],
+  extension: ['ts'],
+  require: [
+    'ts-node/register/transpile-only',
+    'tsconfig-paths/register',
+  ],
 }
 ```
 

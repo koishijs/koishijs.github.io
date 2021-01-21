@@ -14,8 +14,8 @@ sidebarDepth: 2
 
 **输出等级**控制了所有输出到命令行的内容的重要性。在 Koishi 内置的输出系统中，所有信息被分为了 3 种不同的等级：
 
-1. error / success
-2. warning / info
+1. error, success
+2. warning, info
 3. debug
 
 相应地，当设置输出等级为 x 时，Koishi 只会输出重要性小于等于 x 的信息。当输出等级被设置为 0 时，Koishi 将不产生任何输出；而当输出等级被设置为 3 时，Koishi 产生的全部信息都会被显示在屏幕上（当然下面还会介绍过滤器，你可以通过手动设置过滤器减少输出。）
@@ -58,13 +58,13 @@ module.exports = (ctx) => {
 
 上面的这个 Logger 对象有下面的方法，它们的函数签名与 `console.log` 一致：
 
-```ts
+```js
 export interface Logger {
-  warn (format: any, ...param: any): void
-  info (format: any, ...param: any): void
-  debug (format: any, ...param: any): void
-  success (format: any, ...param: any): void
-  error (format: any, ...param: any): void
+  warn(format: any, ...param: any): void
+  info(format: any, ...param: any): void
+  debug(format: any, ...param: any): void
+  success(format: any, ...param: any): void
+  error(format: any, ...param: any): void
 }
 ```
 
@@ -93,26 +93,14 @@ module.exports = {
 
 当同时设置了 `logLevel` 和 `logFilter` 时，后者在 foo 插件的范围会覆盖前者，再用覆盖后的值与命令行取最小值，得到的就是 foo 插件的最终输出等级。
 
-### 使用 debug
-
-Koishi 内部使用 [debug](https://github.com/visionmedia/debug) 处理 logger 产生的信息。你可以通过设置环境变量的方式来输出 debug 信息：
-
-<Terminal :content="[
-  { content: [{ text: '# 对于 linux 和 macOS', class: 'hint' }] },
-  { content: ['DEBUG=koishi:*; ', { text: 'koishi', class: 'input' }, ' start'] },
-  { content: [] },
-  { content: [{ text: '# 对于 Windows', class: 'hint' }] },
-  { content: ['$env:DEBUG=koishi:*; ', { text: 'koishi', class: 'input' }, ' start'] },
-  { content: [] },
-  { content: [{ text: '# 使用 cross-env', class: 'hint' }] },
-  { content: [{ text: 'cross-env', class: 'input' }, ' DEBUG=koishi:*; ', { text: 'koishi', class: 'input' }, ' start'] },
-]" static></Terminal>
-
 ### 内置的输出
 
-koishi-core 自身只会产生两种 logger 输出：
+Koishi 自身会产生下列类型的 logger 输出：
 
-- Koishi 会以 app/server/receiver/sender/command 五种 scope 输出 debug 信息
-- 当 Koishi 内置的 error 事件被触发时，会被自动触发无 scope 的 logger/warning 事件
+- **app:** 生命周期相关 (error, success, info, debug)
+- **bot:** API 请求相关 (warn, debug)
+- **command:** 指令相关 (warn, debug)
+- **server:** 服务器相关 (info, debug)
+- **session:** 会话相关 (warn)
 
-利用上面的方法，你可以借助 koishi-core 的输出对你的机器人进行调试。
+利用上面的方法，你可以借助 koishi 的输出对你的机器人进行调试。

@@ -4,6 +4,14 @@ sidebarDepth: 2
 
 # 接入 GitHub (GitHub)
 
+::: tip
+要启用授权和快速响应相关功能，你需要安装数据库支持。
+:::
+
+::: tip
+要启用屏幕截图相关功能，你需要安装 [koishi-plugin-puppeteer](./puppeteer.md)。
+:::
+
 koishi-plugin-github 封装了一系列 GitHub 相关的功能。
 
 ## 基本用法

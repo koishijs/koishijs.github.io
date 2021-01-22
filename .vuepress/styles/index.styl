@@ -69,6 +69,7 @@
     display none
 
   &::before
+    content "!"
     position absolute
     top 20px
     left -12px
@@ -85,11 +86,8 @@
   &.danger
     border-left-color #f66
   &.danger:before
-    content "!"
     background-color #f66
   &.tip:before
-    content "i"
     background-color #42b983
   &.warning:before
-    content "!"
     background-color #e7c000

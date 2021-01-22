@@ -6,10 +6,10 @@ sidebarDepth: 2
 
 ## 基本用法
 
-你可以使用 `%{}` 的高级语法来在回答中插入指令调用的结果：
+你可以使用 `$()` 的高级语法来在回答中插入指令调用的结果：
 
 <panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># 我的回合，抽卡！ %{lottery}</chat-message>
+<chat-message nickname="Alice" color="#cc0066"># 我的回合，抽卡！ $(lottery)</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1201。</chat-message>
 <chat-message nickname="Alice" color="#cc0066">我的回合，抽卡！</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">恭喜 Alice 获得了国士无双之药（SR）！<br/>月之贤者为了测试这瓶药的效果，曾给某只兔子强行灌了一桶。</chat-message>
@@ -18,7 +18,7 @@ sidebarDepth: 2
 当然你也可以在回答中插入多条指令，它们会逐一完成调用后统一输出：
 
 <panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># 吊死鬼元音开局 &quot;%{hangman}<br/>%{hangman aeiou}&quot;</chat-message>
+<chat-message nickname="Alice" color="#cc0066"># 吊死鬼元音开局 &quot;$(hangman)<br/>$(hangman aeiou)&quot;</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1202。</chat-message>
 <chat-message nickname="Alice" color="#cc0066">吊死鬼元音开局</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">游戏开始，要猜的词为 ???????，剩余 10 次机会。<br/>尝试成功！剩余字母为 ?i?u?e?，已使用的字母为 aeiou，剩余 8 次机会。</chat-message>
@@ -26,8 +26,8 @@ sidebarDepth: 2
 
 ## 问题重定向
 
-::: warning 提示
-问题重定向的次数上限为 3 次，超过这个次数将视为触发失败。
+::: tip
+为了安全性考虑，问题重定向的次数上限为 3 次，超过这个次数将视为触发失败。你可以通过配置 [maxRedirections](./options.md#max-redirections) 修改这个行为。
 :::
 
 Koishi 也支持将问题重定向到其他问题。使用 `# 问题1 => 问题2` 以进行问题的重定向。来看下面的例子：
@@ -41,7 +41,7 @@ Koishi 也支持将问题重定向到其他问题。使用 `# 问题1 => 问题2
 
 由于重定向问答是一个独立的问答，因此它也拥有完全独立的上下文、好感度、概率、后继问题等机制。例如当输入“人可以一天不吃饭”时，将以 0.8 的概率重定向为问题“你可以一天不吃饭”，因此会以 0.6×0.8=0.48 的概率触发回答“但不能一天不背单词”。
 
-实际上，**重定向到问题也是通过指令来实现的**，它的原理很简单。我们加入了一个叫做 dialogue 的指令，功能是在当前上下文尝试触发一次问答。因此 `# 问题1 => 问题2` 会被系统转换为 `# 问题1 "%{dialogue 问题2}"` 来处理。
+实际上，**重定向到问题也是通过指令来实现的**，它的原理很简单。我们加入了一个叫做 dialogue 的指令，功能是在当前上下文尝试触发一次问答。因此 `# 问题1 => 问题2` 会被系统转换为 `# 问题1 "$(dialogue 问题2)"` 来处理。
 
 ## 递归搜索
 
@@ -62,14 +62,14 @@ Koishi 也支持将问题重定向到其他问题。使用 `# 问题1 => 问题2
 <chat-message nickname="Alice" color="#cc0066"># 我能做什么 =&gt; 我可以做什么</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1207。</chat-message>
 <chat-message nickname="Alice" color="#cc0066">## 我能做什么</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问题“我能做什么”的回答如下：<br/>1207. %{dialogue 我可以做什么}<br/>= 1205. 抽卡<br/>= 1206. 钓鱼</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">问题“我能做什么”的回答如下：<br/>1207. $(dialogue 我可以做什么)<br/>= 1205. 抽卡<br/>= 1206. 钓鱼</chat-message>
 </panel-view>
 
 这是因为调用 `##` 进行搜索时程序会自动递归地搜索所有回答的重定向。你也可以使用 `-R` 来让 Koishi 不显示上面的重定向结果：
 
 <panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">## 我能做什么 -R</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问题“我能做什么”的回答如下：<br/>1207. %{dialogue 我可以做什么}</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">问题“我能做什么”的回答如下：<br/>1207. $(dialogue 我可以做什么)</chat-message>
 </panel-view>
 
 ## 处理分条消息
@@ -92,14 +92,8 @@ Koishi 有着各种各样的指令，它们本身在输出上就具有截然不�
 
 在实际的使用中，很少会直接用到 sendNative，因此教学系统完全不会处理 sendNative 发送的信息。但由于大部分功能都是通过 send 发送的，如果不进行妥善处理的话就会发生上面所描述的种种问题。因此，在一个问答被触发的时候，Koishi 会对 send 和 sendQueued 进行代理，通过缓冲来实现更好的输出。
 
-教学问答的输出本身是一个很复杂的过程，但是这里将简化绝大部分细节，只专注于其分条发送的原理。我们已经知道教学问答的 %n 分段转义符可以用于分条发送一段文本，%{} 插值转义符可以用于在回答中插入指令调用。现在我们假定回答已经被切分成若干段，每段都是 **纯文本/分段/插值** 这三种中的一种，且不存在连续两段纯文本。
+教学问答的输出本身是一个很复杂的过程，但是这里将简化绝大部分细节，只专注于其分条发送的原理。我们已经知道教学问答的 $n 分段转义符可以用于分条发送一段文本，$() 插值转义符可以用于在回答中插入指令调用。现在我们假定回答已经被切分成若干段，每段都是 **纯文本/分段/插值** 这三种中的一种，且不存在连续两段纯文本。
 
 对于纯文本，Koishi 会向缓冲尾端添加文本；对于分段转义符，Koishi 会使用 sendQueued 输出并清空缓冲区；对于插值调用，Koishi 会将修饰过的 send 和 sendQueued 传入指令进行执行。其中，修饰过的 send 功能相当于向缓冲尾端添加文本；修饰过的 sendQueued 相当于向缓冲尾端添加文本，之后使用原版的 sendQueued 输出并清空缓冲区。
 
-举个例子，如果 A 指令的相当于 send(1)，B 指令的效果相当于 sendQueued(2)，那么回答 4%{A}5%n6%{B}7 的效果就相当于分三次输出 415，62 和 7。
-
-## 教学者执行问答
-
-请先阅读：[**署名机制**](./misc.md#署名机制)
-
-TODO
+举个例子，如果 A 指令的相当于 send(1)，B 指令的效果相当于 sendQueued(2)，那么回答 4$(A)5$n6$(B)7 的效果就相当于分三次输出 415，62 和 7。

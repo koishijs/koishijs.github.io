@@ -4,8 +4,8 @@ sidebarDepth: 2
 
 # 正则匹配
 
-::: warning 提示
-正则匹配功能的最低使用权限为 3 级。
+::: warning
+正则匹配功能的最低使用权限为 3 级。你可以通过配置 [authority.regExp](./options.md#authority) 修改这个行为。
 :::
 
 ## 基本用法
@@ -42,7 +42,7 @@ sidebarDepth: 2
 - `(patt)`：匹配 patt 并捕获
 
 ::: danger 警告
-MySQL 5.7 使用的正则表达式规范是 POSIX 1003.2，这是一个很落后的版本。因此，如果你使用 MySQL 5.7，下面的语法都是**不被支持**的：
+MySQL 5.7 使用的正则表达式规范是 POSIX 1003.2，这是一个很落后的版本。因此，如果你使用 koishi-plugin-mysql，下面的语法都是**不被支持**的：
 
 - `\d`, `\D`：转义字符集
 - `\b`, `\B`：单词边界

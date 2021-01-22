@@ -4,8 +4,8 @@ sidebarDepth: 2
 
 # 概率机制
 
-::: tip 提示
-本页中默认机器人的昵称为“恋恋”。
+::: tip
+本页中默认机器人的昵称为“四季酱”。
 :::
 
 ## 基本用法
@@ -40,39 +40,39 @@ Koishi 的指令可以通过 @bot 或使用昵称进行调用。同理，教学�
 上面已经介绍过了，昵称本身不属于含有前缀的问题，因此比较特殊。如果它本身作为问题被触发，则该会话的短时间内，即使没有前缀，获得的问题也会取 S, A 两个概率的最大值为最终概率。为什么这样设计呢？因为现实中，许多人会把话拆开说。举下面的例子：
 
 <panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">恋恋，我喜欢你</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">你就是桃饱网大会员？</chat-message>
+<chat-message nickname="Alice" color="#cc0066">四季酱，我喜欢你</chat-message>
+<chat-message nickname="四季酱" avatar="/koishi.png">你就是桃饱网大会员？</chat-message>
 </panel-view>
 
 <panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">恋恋</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">有什么事吗？</chat-message>
+<chat-message nickname="Alice" color="#cc0066">四季酱</chat-message>
+<chat-message nickname="四季酱" avatar="/koishi.png">有什么事吗？</chat-message>
 <chat-message nickname="Alice" color="#cc0066">我喜欢你</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">你就是桃饱网大会员？</chat-message>
+<chat-message nickname="四季酱" avatar="/koishi.png">你就是桃饱网大会员？</chat-message>
 </panel-view>
 
-我们可以看到，虽然单独的“我喜欢你”不能触发“你就是桃饱网大会员”的回应（S=0），但是如果“我喜欢你”紧跟在一句“恋恋”之后，显然这句话是对机器人说的。因此在 Koishi 的教学系统中，称呼问题本身能够激活当前会话的 A 概率。
+我们可以看到，虽然单独的“我喜欢你”不能触发“你就是桃饱网大会员”的回应（S=0），但是如果“我喜欢你”紧跟在一句“四季酱”之后，显然这句话是对机器人说的。因此在 Koishi 的教学系统中，称呼问题本身能够激活当前会话的 A 概率。
 
 ## 重定向到称呼匹配问答
 
 如果要重定向到称呼匹配的问答时，请**在目标问题上也加上前缀**，否则将无法触发下一个问题。例如，下面的例子将**无法工作**：
 
 <panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># 恋恋，自我介绍 大家好，我叫古明地恋！</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1001。</chat-message>
-<chat-message nickname="Alice" color="#cc0066"># 恋恋，你能做什么 =&gt; 自我介绍</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1002。</chat-message>
+<chat-message nickname="Alice" color="#cc0066"># 四季酱，自我介绍 大家好，我叫古明地恋！</chat-message>
+<chat-message nickname="四季酱" avatar="/koishi.png">问答已添加，编号为 1001。</chat-message>
+<chat-message nickname="Alice" color="#cc0066"># 四季酱，你能做什么 =&gt; 自我介绍</chat-message>
+<chat-message nickname="四季酱" avatar="/koishi.png">问答已添加，编号为 1002。</chat-message>
 </panel-view>
 
 反过来，利用这种特性，我们也可以实现一些更加高级的效果。假如我们希望构造一个问答，使得其在正常情况下只能带称呼触发；但是在特定问题触发后可以不带称呼触发（参见 [**前置和后继机制**](./pred-succ.md)）。在正常情况下这是做不到的，因为 Koishi 不会接受问题和回答都相同的两个教学问答。但有了重定向语法之后，只需结合重定向语法和后继机制就可以实现这种需求：
 
 <panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># 恋恋爬 你才爬（指</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1011。</chat-message>
-<chat-message nickname="Alice" color="#cc0066"># 捕捉 捕捉失败，野生的恋恋跑掉了 &gt;# 爬 =&gt; 恋恋爬</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1012。<br/>问答已添加，编号为 1013。</chat-message>
+<chat-message nickname="Alice" color="#cc0066"># 四季酱爬 你才爬（指</chat-message>
+<chat-message nickname="四季酱" avatar="/koishi.png">问答已添加，编号为 1011。</chat-message>
+<chat-message nickname="Alice" color="#cc0066"># 捕捉 捕捉失败，野生的四季酱跑掉了 &gt;# 爬 =&gt; 四季酱爬</chat-message>
+<chat-message nickname="四季酱" avatar="/koishi.png">问答已添加，编号为 1012。<br/>问答已添加，编号为 1013。</chat-message>
 <chat-message nickname="Alice" color="#cc0066">捕捉</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">捕捉失败，野生的恋恋跑掉了</chat-message>
+<chat-message nickname="四季酱" avatar="/koishi.png">捕捉失败，野生的四季酱跑掉了</chat-message>
 <chat-message nickname="Alice" color="#cc0066">爬</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">你才爬（指</chat-message>
+<chat-message nickname="四季酱" avatar="/koishi.png">你才爬（指</chat-message>
 </panel-view>

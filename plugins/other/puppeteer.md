@@ -4,11 +4,11 @@ sidebarDepth: 2
 
 # 网页截图 (Puppeteer)
 
-koishi-plugin-puppeteer 本身提供了网页截图（shot）指令和 TeX 渲染指令（tex），同时也封装了一系列与网页进行交互的接口。利用这些接口我们可以开发更多以渲染图片为基础的插件。
-
-::: warning 环境需求
+::: warning
 为了正常使用这个插件，你首先需要确保你的电脑上已经安装有 Chrome。同时，我们建议你保持 Chrome 和本插件的更新，因为版本不匹配可能会导致本插件无法正常使用。
 :::
+
+koishi-plugin-puppeteer 本身提供了网页截图（shot）指令和 TeX 渲染指令（tex），同时也封装了一系列与网页进行交互的接口。利用这些接口我们可以开发更多以渲染图片为基础的插件。
 
 ## 指令：shot
 

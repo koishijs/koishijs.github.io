@@ -63,14 +63,14 @@ interface Status {
 }
 ```
 
-## 状态扩展
+## 扩展 API
 
 你可以扩展 status 返回的结果，可配合 [format](#format) 选项使用：
 
 ```js
-const { extendStatus } = require('koishi-plugin-status')
+const { extend } = require('koishi-plugin-status')
 
-extendStatus(function (status, config) {
+extend(function (status, config) {
   status.foo = 'bar'
 })
 ```

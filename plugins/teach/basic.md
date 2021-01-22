@@ -46,7 +46,7 @@ sidebarDepth: 2
 ## 查看和修改问答
 
 ::: tip 提示
-为了避免刷屏，一次查看的问答数量不能超过 10。批量修改问答则没有这个限制。
+为了避免刷屏，一次查看的问答数量不能超过 10。批量修改问答则没有这个限制。你可以通过配置 [maxPreviews](./options.md#max-previews) 修改这个行为。
 :::
 
 使用 `#id` 查看一个问答的具体设置。
@@ -90,18 +90,18 @@ sidebarDepth: 2
 
 最后，在回答中可以使用一些特殊语法：
 
-- **%%**：一个普通的 % 字符
-- **%0**：收到的原文本
-- **%n**：分条发送
-- **%A**：@所有人
-- **%a**：@说话人
-- **%m**：@机器人
-- **%s**：说话人的名字
+- **$$**：一个普通的 $ 字符
+- **$0**：收到的原文本
+- **$n**：分条发送
+- **$A**：@所有人
+- **$a**：@说话人
+- **$m**：@机器人
+- **$s**：说话人的名字
 
 下面是一个简单的例子：
 
 <panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># 你好啊 %s，你好啊~</chat-message>
+<chat-message nickname="Alice" color="#cc0066"># 你好啊 $s，你好啊~</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1003。</chat-message>
 <chat-message nickname="Alice" color="#cc0066">你好啊！</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">Alice，你好啊~</chat-message>
@@ -121,7 +121,7 @@ sidebarDepth: 2
 
 <panel-view title="聊天记录">
 <chat-message nickname="Alice" color="#cc0066">## -v</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">近期的教学操作有：<br/>1001. [修改-15s] 问题：foo，回答：baz<br/>1002. [删除-10s] 问题：有空格 的问题，回答：有换行……<br/>1003. [添加-25s] 问题：你好啊，回答：%s，你好啊~</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">近期的教学操作有：<br/>1001. [修改-15s] 问题：foo，回答：baz<br/>1002. [删除-10s] 问题：有空格 的问题，回答：有换行……<br/>1003. [添加-25s] 问题：你好啊，回答：$s，你好啊~</chat-message>
 </panel-view>
 
 或者使用 `#id -v` 来查看特定问答近期的教学操作（这里会显示修改前的版本）：

@@ -5,7 +5,7 @@ sidebarDepth: 2
 # 正则匹配
 
 ::: warning
-正则匹配功能的最低使用权限为 3 级。你可以通过配置 [authority.regExp](./options.md#authority) 修改这个行为。
+正则匹配功能的最低使用权限为 3 级。你可以通过配置 [authority.regExp](./config.md#authority) 修改这个行为。
 :::
 
 ## 基本用法

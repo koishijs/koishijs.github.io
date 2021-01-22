@@ -46,7 +46,7 @@ sidebarDepth: 2
 ## 查看和修改问答
 
 ::: tip 提示
-为了避免刷屏，一次查看的问答数量不能超过 10。批量修改问答则没有这个限制。你可以通过配置 [maxPreviews](./options.md#max-previews) 修改这个行为。
+为了避免刷屏，一次查看的问答数量不能超过 10。批量修改问答则没有这个限制。你可以通过配置 [maxPreviews](./config.md#max-previews) 修改这个行为。
 :::
 
 使用 `#id` 查看一个问答的具体设置。

@@ -5,7 +5,7 @@ sidebarDepth: 2
 # 上下文机制
 
 ::: warning 提示
--D, -E, -g 三个选项的最低使用权限为 3 级。你可以通过配置 [authority.context](./options.md#authority) 修改这个行为。
+-D, -E, -g 三个选项的最低使用权限为 3 级。你可以通过配置 [authority.context](./config.md#authority) 修改这个行为。
 :::
 
 Koishi 的所有问答都是被存储在一起的，但是我们往往需要让某些问题在特定的频道生效，同时让另一些问题在所有频道生效。上下文机制就是为了解决这类问题而出现的。

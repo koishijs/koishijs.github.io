@@ -6,7 +6,7 @@ sidebarDepth: 2
 
 koishi-plugin-tools 是一系列小功能的合集。这些小功能将全部作为 tools 指令的子指令。
 
-尽管这看起来像是个大杂烩，但你可以按照需要在配置项中只开启其中的一部分。事实上，这个插件的体积并不及 koishi-plugin-common 或 koishi-plugin-teach，你大可以放心地引入它。如果你也写了什么有趣的小玩意儿，也欢迎给我们发个 Pull Request。
+尽管这看起来像是个大杂烩，但你可以按照需要在配置项中只开启其中的一部分。事实上，这个插件的体积并不及 koishi-plugin-common 或 koishi-plugin-teach，你大可以放心地引入它。如果你也写了什么有趣的小玩意儿，也欢迎给我们发个 pull request。
 
 ## 指令：alpha
 
@@ -33,13 +33,6 @@ koishi-plugin-tools 是一系列小功能的合集。这些小功能将全部作
 
 每个单元占用的比特数。
 
-### 配置项：brainfuck.memorySize
-
-- 类型: `number`
-- 默认值: `1024`
-
-允许的最大单元数目。如果超出这个数目将会抛出错误：max memory exceed。
-
 ### 配置项：brainfuck.maxSteps
 
 - 类型: `number`
@@ -47,17 +40,73 @@ koishi-plugin-tools 是一系列小功能的合集。这些小功能将全部作
 
 允许的最大步数。如果超出这个数目将会抛出错误：max step exceeded。
 
+### 配置项：brainfuck.memorySize
+
+- 类型: `number`
+- 默认值: `1024`
+
+允许的最大单元数目。如果超出这个数目将会抛出错误：max memory exceed。
+
 ## 指令：crypto
 
 ## 指令：magi
 
+调用 [magi](https://magi.com) 搜索。
+
+默认开启，配置 `magi` 为 `false` 以关闭本功能。
+
+- 基本语法：`magi <text>`
+- 选项列表：
+  - -c, --confidence 显示可信度
+
 ## 指令：maya
+
+玛雅日历换算。
+
+默认开启，配置 `maya` 为 `false` 以关闭本功能。
+
+- 基本语法：`maya <YYYY-MM-DD> [BC|AD]`
 
 ## 指令：mcping
 
+查看 Minecraft 服务器信息。
+
+默认开启，配置 `mcping` 为 `false` 以关闭本功能。
+
+- 基本语法：`mcping <url>`
+
 ## 指令：music
 
+点歌。目前支持 qq, netease 平台。
+
+默认开启，配置 `music` 为 `false` 以关闭本功能。
+
+- 基本语法：`music <keyword>`
+- 选项列表：
+  - -p, --platform \<platform> 点歌平台
+
+### 配置项：music.platform
+
+- 类型: `string`
+- 默认值: `'qq'`
+
+默认的点歌平台。
+
+### 配置项：music.showWarning
+
+- 类型: `boolean`
+
+点歌失败时是否发送提示。
+
 ## 指令：oeis
+
+调用 [OEIS](https://oeis.org) 数列查询。
+
+默认开启，配置 `oeis` 为 `false` 以关闭本功能。
+
+输入用逗号隔开的数作为要查询的数列的前几项，或者直接输入以 id:A 打头的数列编号。
+
+- 基本语法：`oeis <sequence>`
 
 ## 指令：qrcode
 

@@ -27,7 +27,7 @@ sidebarDepth: 2
 ## 问题重定向
 
 ::: tip
-为了安全性考虑，问题重定向的次数上限为 3 次，超过这个次数将视为触发失败。你可以通过配置 [maxRedirections](./options.md#max-redirections) 修改这个行为。
+为了安全性考虑，问题重定向的次数上限为 3 次，超过这个次数将视为触发失败。你可以通过配置 [maxRedirections](./config.md#max-redirections) 修改这个行为。
 :::
 
 Koishi 也支持将问题重定向到其他问题。使用 `# 问题1 => 问题2` 以进行问题的重定向。来看下面的例子：

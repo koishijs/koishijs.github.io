@@ -130,12 +130,16 @@ module.exports = context => ({
           '/plugins/teach/context',
           '/plugins/teach/prev-succ',
           '/plugins/teach/misc',
-          '/plugins/teach/options',
+          '/plugins/teach/config',
         ],
       }, {
         title: '执行脚本 (Eval)',
         collapsable: false,
         children: [
+          '/plugins/eval/basic',
+          '/plugins/eval/sandbox',
+          '/plugins/eval/addon',
+          '/plugins/eval/extension',
           '/plugins/eval/config',
         ],
       }, {

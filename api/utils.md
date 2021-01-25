@@ -4,31 +4,11 @@ sidebarDepth: 2
 
 # 常用工具 (Utils)
 
-包含了被 Koishi 使用的工具函数，它们由 `koishi-utils` 包提供。
-
 ::: tip 注意
 本页显示的版本号都表示对应的 koishi-utils 版本号（而不是对应的 koishi 版本号）。
 :::
 
-## noop()
-
-不进行任何操作（no operation）。
-
-- 返回值: `void`
-
-## sleep(ms?)
-
-等待一段时间。
-
-- **ms:** `number` 要等待的毫秒数
-- 返回值: `Promise<void>`
-
-## isInteger(value)
-
-判断传入的值是否为整数。
-
-- **value:** `any` 要判断的值
-- 返回值: `boolean` 是否为整数
+包含了被 Koishi 使用的工具函数，它们由 `koishi-utils` 包提供。
 
 ## 观察者对象
 
@@ -41,18 +21,18 @@ sidebarDepth: 2
 - **label:** `string` 对象的标签，用于标识
 - 返回值: `Observed<T>`
 
-### observer._diff
+### observed._diff
 
 观察者当前的对象变化。
 
-### observer._merge(source)
+### observed._merge(source)
 
 将某些属性合并入当前观察者，不会触发 diff 更新。
 
 - **source:** `object` 要合并的对象
 - 返回值: `this`
 
-### observer._update()
+### observed._update()
 
 更新观察者对象，同时清除 diff。
 
@@ -320,3 +300,25 @@ interface CQCode {
 - **weights:** `Record<T, number>` 权重表
 - **value:** `number` 一个 0 到 1 之间的随机数，默认为 `Math.random()`
 - 返回值: `T` 挑出的元素
+
+## 其他工具函数
+
+### noop()
+
+不进行任何操作（no operation）。
+
+- 返回值: `void`
+
+### sleep(ms?)
+
+等待一段时间。
+
+- **ms:** `number` 要等待的毫秒数
+- 返回值: `Promise<void>`
+
+### isInteger(value)
+
+判断传入的值是否为整数。
+
+- **value:** `any` 要判断的值
+- 返回值: `boolean` 是否为整数

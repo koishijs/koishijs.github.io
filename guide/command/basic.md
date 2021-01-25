@@ -2,11 +2,9 @@
 sidebarDepth: 2
 ---
 
-# 指令系统初探
+# 指令初探
 
 一个成功的机器人离不开强大的**指令系统**。正因为如此，Koishi 在编写时也广泛研究了许多指令系统的实现，并做成了如今的规模。使用 Koishi，你可以方便地创建和管理各种指令，并能够高效地处理大量指令的并发调用。同时，Koishi 还提供了快捷方式、多级指令、自定义前缀等功能，同时支持调用次数和频率限制，权限管理等高级特性，让你得以高自由度来配置你的机器人。
-
-## 指令初探
 
 编写下面的代码，你就实现了一个简单的 echo 指令：
 
@@ -31,7 +29,7 @@ app.command('echo <message>')
 
 正如你在上面所见的那样，使用 `app.command(desc)` 方法可以定义一个指令，其中 `desc` 是一个字符串，包含了**指令名**和**参数列表**。
 
-- 指令名可以包含数字、字母、下划线、短横线甚至中文字符，但不应该包含小数点 `.` 或斜杠 `/`。
+- 指令名可以包含数字、字母、下划线、短横线甚至中文字符，但不应该包含空格、小数点 `.` 或斜杠 `/`。
 - 一个指令可以含有任意个参数。其中**必选参数**用尖括号包裹，**可选参数**用方括号包裹。
 
 例如，下面的程序定义了一个拥有三个参数的指令，第一个为必选参数，后面两个为可选参数，它们将分别作为 `action` 回调函数的第 2, 3, 4 个参数：
@@ -170,7 +168,8 @@ import { Domain } from 'koishi-core'
 
 Domain.create('repeat', source => source.repeat(3))
 
-app.command('test [arg:repeat]').action((_, arg) => arg)
+app.command('test [arg:repeat]')
+  .action((_, arg) => arg)
 ```
 
 <panel-view title="聊天记录">
@@ -190,7 +189,8 @@ Domain.create('int', (source) => {
   return +source
 })
 
-app.command('test [x:int]').action((_, arg) => arg)
+app.command('test [x:int]')
+  .action((_, arg) => arg)
 ```
 
 <panel-view title="聊天记录">
@@ -203,7 +203,9 @@ app.command('test [x:int]').action((_, arg) => arg)
 你可以在 `cmd.option()` 的第三个参数中传入一个 `type` 属性，作为选项的临时类型声明。它可以是像上面的例子一样的回调函数，也可以是一个 `RegExp` 对象，表示传入的选项应当匹配的正则表达式：
 
 ```js
-app.command('test').option('foo', '-f <foo>', { type: /^ba+r$/ })
+app.command('test')
+  .option('foo', '-f <foo>', { type: /^ba+r$/ })
+  .action(({ options }) => options.foo)
 ```
 
 <panel-view title="聊天记录">

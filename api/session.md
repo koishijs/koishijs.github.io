@@ -154,6 +154,15 @@ sidebarDepth: 2
 
 ### session.$parse(message) <Badge text="beta" type="warn"/>
 
+### session.collect(argv, key, fields)
+
+按照 argv 中的 command 属性向 fields 添加所需的用户字段。它是一个内置的 before-user 监听器。
+
+- **argv:** [`ParsedArgv`](../guide/command.md#parsedargv-对象) 只需确保其中存在 command 属性即可
+- **key:** `T extends 'user' | 'group'` 用户字段集合
+- **fields:** `Set<keyof Tables[T]>` 用户字段集合
+- 返回值: `void`
+
 ### session.$execute(argv, next?) <Badge text="beta" type="warn"/>
 
 执行一个指令。可以传入一个 argv 对象或者指令对应的文本。

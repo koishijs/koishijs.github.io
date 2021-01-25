@@ -124,13 +124,20 @@ type PluginObject <T extends Context, U> = { apply: PluginFunction<T, U> }
 type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
 ```
 
-### ctx.command(rawName, description?, config?)
+### ctx.command(rawName, desc?, config?)
 
 在当前上下文中注册或修改一个指令。
 
 - **rawName:** `string` 指令名以及可能的参数
-- **description:** `string` 指令的描述
-- **config:** [`CommandConfig`](../guide/command-system.md#commandconfig-对象) 指令的配置
+- **desc:** `string` 指令的描述
+- **config:** `CommandConfig` 指令的配置
+  - **checkUnknown:** `boolean` 是否对未知选项进行检测，默认为 `false`
+  - **checkArgCount:** `boolean` 是否对参数个数进行检测，默认为 `false`
+  - **authority:** `number` 最低调用权限，默认为 `1`
+  - **maxUsage:** `number` 每天最多调用次数，默认为 `Infinity`
+  - **minInterval:** `number` 每次调用最短时间间隔，默认为 `0`
+  - **showWarning:** `boolean` 当小于最短间隔时是否进行提醒，默认为 `false`
+  - **usageName:** `string` 调用标识符，默认为指令名，如果多个指令使用同一个标识符，则它们的调用次数将合并计算
 - 返回值：[`Command`](./command.md) 注册或修改的指令
 
 ### ctx.logger(scope?)

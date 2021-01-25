@@ -4,29 +4,111 @@ sidebarDepth: 2
 
 # 查看和编写帮助
 
+::: tip
+下面的 echo 指令是为了理解方便而举的例子，与 koishi-plugin-common 中实际的 echo 指令可能不同。
+:::
+
 ## 查看帮助
 
-Koishi 拥有着强大的指令系统，然而过于复杂的功能也会困扰使用者。因此，Koishi 也内置了 help 指令，用于输出全部或特定指令的使用方法。你可以这样调用它：
+Koishi 拥有着强大的指令系统，然而过于复杂的功能也会困扰使用者。因此，Koishi 也内置了 help 指令，用于输出全部或特定指令的使用方法。你可以使用 `help` 查看指令列表：
 
-```sh
-help                # 显示一级指令列表
-help echo           # 显示 echo 指令的信息
-echo -h             # 显示 echo 指令的信息（与上面相同，且 -h 可以替换成 --help）
+<panel-view title="聊天记录">
+<chat-message nickname="Alice" color="#cc0066">help</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>当前可用的指令有：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;echo  输出收到的信息</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;help  显示帮助信息</p>
+<p>输入“帮助+指令名”查看特定指令的语法和使用示例。</p>
+</chat-message>
+</panel-view>
+
+或通过 `help echo` 或 `echo -h` 查看特定指令的信息，包括指令的名称，参数，选项，子指令，权限设置等等。这里的 echo 是指令名，但也可以换成 [指令别名](./call.md#指令别名) 甚至 [快捷方式](./call.md#快捷方式)。具体的细节将在下面的介绍。
+
+## 编写帮助
+
+之前已经介绍了 `ctx.command()` 和 `cmd.option()` 这两个方法，它们都能传入一个 `desc` 参数。你可以在这个参数的结尾补上对于指令或参数的说明文字，就像这样：
+
+```js
+ctx.command('echo <message:text> 输出收到的信息')
+  .option('timeout', '-t <seconds> 设定延迟发送的时间')
 ```
 
-这里的信息可以包含很多内容，比如指令的名词，参数，选项，子指令，权限设置等等。
+<panel-view title="聊天记录">
+<chat-message nickname="Alice" color="#cc0066">echo -h</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>echo &lt;message></p>
+<p>输出收到的信息</p>
+<p>可用的选项有：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-t, --timeout &lt;seconds>  设定延迟发送的时间</p>
+</chat-message>
+</panel-view>
 
-此外，尽管上面的 echo 是指令名，但是也可以换成别名甚至快捷调用，help 指令照样可以识别。
+### 添加用法和使用示例
 
-## 多级指令
+当然，我们还可以加入具体的用法和使用示例，进一步丰富这则使用说明：
+
+```js
+ctx.command('echo <message:text>', '输出收到的信息')
+  .option('-t, --timeout <seconds>', '设定延迟发送的时间')
+  .usage('注意：参数请写在最前面，不然会被当成 message 的一部分！')
+  .example('echo -t 300 Hello World  五分钟后发送 Hello World')
+```
+
+这时再调用 `echo -h`，你便会发现使用说明中已经添加了你刚刚的补充文本：
+
+<panel-view title="聊天记录">
+<chat-message nickname="Alice" color="#cc0066">echo -h</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>echo &lt;message></p>
+<p>输出收到的信息</p>
+<p>注意：参数请写在最前面，不然会被当成 message 的一部分！</p>
+<p>可用的选项有：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-t, --timeout &lt;seconds>  设定延迟发送的时间</p>
+<p>使用示例：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;echo -t 300 Hello World  五分钟后发送 Hello World</p>
+</chat-message>
+</panel-view>
+
+最后，如果直接调用 `help`，输出的会是全部指令组成的列表。
+
+### 隐藏指令和选项
+
+读到这里，细心的你可能会产生一丝好奇：如果 `echo -h` 能够被解析成查看帮助的话，这个 `-h` 为什么不出现在这个帮助中呢？答案很简单，因为这个内置选项被 Koishi 隐藏起来了。如果你希望隐藏一条指令或一条指令，只需要注册时将配置项 `hidden` 设置为 `true` 即可：
+
+```js
+ctx.command('bar 一条看不见的指令', { hidden: true })
+  .option('foo', '<text> 一个看不见的选项')
+  .action(({ options }) => 'secret: ' + options.foo)
+```
+
+<panel-view title="聊天记录">
+<chat-message nickname="Alice" color="#cc0066">help</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>当前可用的指令有：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;help  显示帮助信息</p>
+<p>输入“帮助+指令名”查看特定指令的语法和使用示例。</p>
+</chat-message>
+<chat-message nickname="Alice" color="#cc0066">bar --foo 123</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">secret: 123</chat-message>
+</panel-view>
+
+如果要查看隐藏的指令和选项，可以使用 `help -H`：
+
+<panel-view title="聊天记录">
+<chat-message nickname="Alice" color="#cc0066">help -H</chat-message>
+<chat-message nickname="Koishi" avatar="/koishi.png">
+<p>当前可用的指令有：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;help  显示帮助信息</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;bar  一条看不见的指令</p>
+<p>输入“帮助+指令名”查看特定指令的语法和使用示例。</p>
+</chat-message>
+</panel-view>
+
+## 指令的组织
 
 尽管指令的注册非常方便，但是当指令数量变多时，另一些问题也会随之浮现出来：大量的指令不便于列表显示（想象一下你的机器人输出由上百条指令构成的列表的时候会是何等的刷屏），同时来自不同插件的指令可能存在名称冲突。本节所介绍的**多级指令**，便是对这一类问题的解决方案。
 
 ### 子指令
-
-::: tip 提示
-这里的说明用到了一个 `help` 指令，将在官方插件中详细介绍。不过现在你只需要知道这个指令的作用是查看其他指令的信息即可。
-:::
 
 通过 `cmd.subcommand()` 方法可以创建子指令，它的调用方法与 `ctx.command()` 是完全一致的，唯一的区别是创建的指令将被标记为原来指令的子指令。下面我们举个简单的例子，假设你运行了下面的代码：
 
@@ -40,10 +122,15 @@ ctx.command('foo').subcommand('bar')
 
 ```js
 ctx.command('foo').subcommand('.bar')
-ctx.command('foo').subcommand('foo.bar') // 这种写法是等价的
+ctx.command('foo').subcommand('foo.bar') // 这两种写法是等价的
 ```
 
 此时将不会有 bar 这条指令，取而代之的是 foo.bar。调用 `help` 所获得的指令列表中将不会显示 foo.bar，但是同样会标注 foo 含有子指令。如果再调用 `help foo`，则可以看到其子指令列表中含有指令 foo.bar。与此同时，无论是直接调用 bar 指令还是调用 `help bar` 都是无效的，你必须显式地写出全名才行。这样一来，你就可以成功区分重名指令，从而解决上面提出的第二个问题。
+
+尽管有一些不同，但是上述两种指令都属于 foo 的子指令，因此它们：
+
+- 都不会显示在 `help` 的输出中（因为它们都不是一级指令）
+- 都会显示在 `help foo` 的输出中（因为它们都是 foo 的子指令）
 
 ### 链式注册
 
@@ -67,85 +154,3 @@ ctx.command('foo.bar') // 用小数点表示派生式子指令
 ctx.command('foo.bar/abc.xyz')
 ```
 
-### 查看子指令
-
-在 [子指令](../../guide/command-system.md#子指令) 一节中我们已经透露了 help 指令在查看子指令方面的行为。让我们先回顾一下 Koishi 支持的两种子指令格式。一种是**层级式**（例如 foo/bar），另一种则叫**派生式**（例如 foo.bar）。它们在使用上有所不同，层级式可以直接通过最后一级进行调用，而派生式则需要写全指令名。 
-
-尽管有这些不同，但是上述两个指令都属于 foo 的子指令，因此它们
-
-1. 都不会显示在 `help` 的输出中（因为它们都不是一级指令）
-2. 都会显示在 `help foo` 的输出中（因为它们都是 foo 的子指令）
-
-但是，我们又知道，foo/bar 是可以直接作为 bar 来调用的，而 foo.bar 不行，那么有没有一种方法可以插件全部可以直接调用的指令列表呢？Koishi 也提供了方法（这里的 -e 是 --expand 的缩写）：
-
-```sh
-help -e             # 显示全部可以直接调用的指令列表
-help baz -e         # 显示指令 baz 的信息，以及全部可以直接调用的 baz 的子指令列表
-```
-
-### 查看快捷方式
-
-我们已经学会了搜索特定指令，特定快捷方式和搜索全部指令，那么自然也有搜索全部快捷方式的方法（这里的 -s 是 --shortcut 的缩写）：
-
-```sh
-help -s             # 显示全部指令的快捷方式列表（无论是不是一级指令）
-```
-
-## 编写帮助
-
-::: tip 提示
-下面的 echo 指令是为了理解方便而举的例子，与真实的内置 echo 指令可能不同。
-:::
-
-之前已经介绍了 `ctx.command()` 和 `cmd.option()` 这两个方法，它们都能传入第二个字符串作为参数。这个字符串会作为这个指令或选项的描述文字。就像这样：
-
-```js
-ctx.command('echo <message...>', '输出收到的信息')
-  .option('-t, --timeout <seconds>', '设定延迟发送的时间')
-```
-
-那么这些内容如何才能让用户看到呢？别担心，koishi-plugin-common 中内置了一个强大的 help 指令，可以让你方便地查看一个指令的帮助文档。调用 `help echo` 或者 `echo -h`（这个默认情况下会被 Koishi 自动转化为 help 指令调用），你会看到这样的回复：
-
-```
-echo <message...>
-输出收到的信息
-可用的选项有：
-    -t, --timeout <seconds>  设定延迟发送的时间
-```
-
-### 添加用法和使用示例
-
-当然，我们还可以加入具体的用法和使用示例，进一步丰富这则使用说明：
-
-```js
-ctx.command('echo <message...>', '输出收到的信息')
-  .option('-t, --timeout <seconds>', '设定延迟发送的时间')
-  .usage('注意：参数请写在最前面，不然会被当成 message 的一部分！')
-  .example('echo -t 300 Hello World  五分钟后发送 Hello World')
-```
-
-这时再调用 `help echo` 或者 `echo -h`，你便会发现使用说明中已经添加了你刚刚的补充文本：
-
-```
-echo <message...>
-输出收到的信息
-注意：参数请写在最前面，不然会被当成 message 的一部分！
-可用的选项有：
-    -t, --timeout <seconds>  设定延迟发送的时间
-使用示例：
-    echo -t 300 Hello World  五分钟后发送 Hello World
-```
-
-最后，如果直接调用 `help`，输出的会是全部指令组成的列表。
-
-### 手动禁用 -h, --help 选项
-
-如果你编写的某个指令希望把 -h, --help 用作其他目的，你也可以在手动禁用内置的选项：
-
-```js
-ctx.command('echo <message...>', '输出收到的信息', { noHelpOption: true })
-```
-
-::: tip 注意
-作为内置选项，仅用 `cmd.removeOption()` 方法虽然能够将 -h, --help 的帮助删除，但是不能改变调用指令时显示帮助的行为。你应当确保通过 `noHelpOption` 来控制这个行为。
-:::

@@ -46,20 +46,28 @@ module.exports = context => ({
     logo: '/koishi.png',
     nav: [
       { text: '主页', link: '/' },
-      { text: '指南', link: '/guide/starter.html' },
+      { text: '指南', link: '/guide/intro/starter.html' },
       { text: 'API', link: '/api/' },
       { text: '官方插件', link: '/plugins/' },
       { text: 'GitHub', link: 'https://github.com/koishijs/koishi' },
     ],
     sidebar: {
       '/guide/': [{
-        title: '指南',
+        title: '入门',
         collapsable: false,
         children: [
-          '/guide/about',
-          '/guide/starter',
-          '/guide/cli',
-          '/guide/faq',
+          '/guide/intro/about',
+          '/guide/intro/starter',
+          '/guide/intro/cli',
+          '/guide/intro/faq',
+        ],
+      }, {
+        title: '指令',
+        collapsable: false,
+        children: [
+          '/guide/command/basic',
+          '/guide/command/call',
+          '/guide/command/help',
         ],
       }, {
         title: '深入',
@@ -67,7 +75,6 @@ module.exports = context => ({
         children: [
           '/guide/message',
           '/guide/context',
-          '/guide/command',
           '/guide/database',
           '/guide/authorization',
           '/guide/lifecycle',
@@ -112,7 +119,6 @@ module.exports = context => ({
         collapsable: false,
         children: [
           '/plugins/common/overview',
-          '/plugins/common/help',
           '/plugins/common/message',
           '/plugins/common/reply',
           '/plugins/common/handler',

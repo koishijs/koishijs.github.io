@@ -212,3 +212,20 @@ app.command('test')
 <chat-message nickname="Alice" color="#cc0066">test -f baaaz</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">选项 foo 输入无效，请检查语法。</chat-message>
 </panel-view>
+
+### 使用检查器
+
+从 v3 开始 Koishi 支持给一个指令配置多个回调函数，并引入了 `cmd.check()`。你可以利用这个接口定义一些更加复杂的类型检查逻辑。让我们在最后简单地了解一下这个特性。
+
+```js
+app.command('test')
+  .check(checker1)
+  .check(checker2)
+  .action(action1)
+  .action(action2)
+```
+
+在上面的代码中，我们给 test 指令配置了 4 个回调函数。在运行时，这 4 个函数将逐一被调用。当其中一个函数返回值的类型为 `string` 时，这个调用过程停止，并输出这个返回值（如果返回空串，调用依然会停止，此时没有输出）。当然，`.check()` 和 `.action()` 在使用上还是有一定的区别的：
+
+- check 回调函数必须是同步的，action 回调函数可以是同步或者异步的
+- check 回调函数的执行早于 before-command 事件，action 回调函数的执行则晚于该事件，因此 check 可以在 `usage` 这样的属性尚未发生更新时进行操作

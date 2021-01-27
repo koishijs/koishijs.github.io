@@ -99,16 +99,16 @@ sidebarDepth: 2
 - **fields:** `Iterable<User.Field>`
 - 返回值: `Promise<User.Observed>`
 
-### session.$group
+### session.$channel
 
 一个可观测的群数据对象。
 
-### session.$observeGroup(fields?)
+### session.$observeChannel(fields?)
 
-观测特定的用户字段，并更新到 [`session.$group`](#session-group) 中。
+观测特定的用户字段，并更新到 [`session.$channel`](#session-channel) 中。
 
-- **fields:** `Iterable<Group.Field>`
-- 返回值: `Promise<Group.Observed>`
+- **fields:** `Iterable<Channel.Field>`
+- 返回值: `Promise<Channel.Observed>`
 
 ### session.$send(message)
 

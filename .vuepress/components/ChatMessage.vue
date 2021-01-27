@@ -108,7 +108,6 @@ $msgbox-left = 4.2rem
   position relative
   margin-left $msgbox-left
   width fit-content
-  line-height 1.6
   border-radius 0.5rem
   background-color white
   word-break break-all
@@ -140,7 +139,6 @@ $msgbox-left = 4.2rem
 
   p
     margin 0
-    line-height 1.6
 
   blockquote
     font-size 0.9rem

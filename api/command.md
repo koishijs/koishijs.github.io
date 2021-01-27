@@ -131,7 +131,7 @@ type FieldCollector<K extends string> =
 
 - 返回值: `void`
 
-## 静态属性方法
+## 静态属性和方法
 
 这里包含了与 Command 类相关的静态属性和方法。
 

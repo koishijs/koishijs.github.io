@@ -54,28 +54,28 @@ sidebarDepth: 2
 - **authority:** `number` 权限等级
 - 返回值: `User`
 
-### Group.Flag
+### Channel.Flag
 
 所有群状态标签构成的枚举类型。参见 [状态标签](../guide/authorization.md#状态标签)。
 
-### Group.fields
+### Channel.fields
 
 所有群字段构成的列表。
 
-### Group.extend(getter)
+### Channel.extend(getter)
 
 扩展群字段。
 
 - **getter:** `(id: number, assignee: number) => object` 新字段的初始化函数，返回值应该是一个由要扩展的字段和它们的默认值构成的键值对
 - 返回值: `void`
 
-### Group.create(id, assignee)
+### Channel.create(id, assignee)
 
 创建一个新群数据对象。
 
 - **id:** `number` 用户 ID
 - **assignee:** `number` 代理者的 ID
-- 返回值: `Group`
+- 返回值: `Channel`
 
 ### extendDatabase(database, extension)
 
@@ -119,29 +119,29 @@ sidebarDepth: 2
 - **data:** `User` 要修改的数据（如果设置为 `null` 则清除该用户数据）
 - 返回值: `Promise<void>`
 
-### db.getGroup(type, id, fields?)
+### db.getChannel(type, id, fields?)
 
 向数据库请求群数据。如果传入的 id 是一个列表，则返回值也应当是一个列表。
 
 - **type:** `string` 平台名
 - **id:** `string | string[]` 群标识符
-- **fields:** `GroupField[]` 请求的字段，默认为全部字段
-- 返回值: `Promise<Group | Group[]>` 群数据
+- **fields:** `ChannelField[]` 请求的字段，默认为全部字段
+- 返回值: `Promise<Channel | Channel[]>` 群数据
 
-### db.getGroupList(fields?, type?, assignees?)
+### db.getChannelList(fields?, type?, assignees?)
 
 向数据库请求被特定机器人管理的所有群数据。这里的两个参数可以写任意一个，都可以识别。
 
-- **fields:** `GroupField[]` 请求的字段，默认为全部字段
+- **fields:** `ChannelField[]` 请求的字段，默认为全部字段
 - **type:** `string` 平台名，默认为全平台
 - **assignees:** `string[]` 代理者列表，默认为当前运行的全部机器人
-- 返回值: `Promise<Group[]>` 群数据列表
+- 返回值: `Promise<Channel[]>` 群数据列表
 
-### db.setGroup(type, id, data)
+### db.setChannel(type, id, data)
 
 向数据库写入群数据。
 
 - **type:** `string` 平台名
 - **id:** `number` 群标识符
-- **data:** `Group` 要修改的数据
+- **data:** `Channel` 要修改的数据
 - 返回值: `Promise<void>`

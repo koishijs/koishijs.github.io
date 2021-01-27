@@ -89,11 +89,15 @@
     font-family "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif
     font-size 14px
 
+  $errorColor = #f66
+  $infoColor = #409eff
   &.danger
-    border-left-color #f66
+    border-left-color $errorColor
   &.danger:before
-    background-color #f66
+    background-color $errorColor
+  &.tip
+    border-left-color $infoColor
   &.tip:before
-    background-color #42b983
+    background-color $infoColor
   &.warning:before
     background-color #e7c000

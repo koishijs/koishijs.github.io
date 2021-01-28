@@ -4,7 +4,11 @@ sidebarDepth: 2
 
 # 会话 (Session)
 
-会话来源于 Koishi v1 的元信息对象，并在 Koishi v2 中大幅扩展了功能。你几乎可以利用会话完成所有工作。会话对象的属性分为两类，一类是不以 `$` 开头的，这些属性来源于 CQHTTP 事件；另一类是以 `$` 开头的，它们是 Koishi 的扩展功能。在会话的序列化中，只有前一类属性会被保留。
+::: danger 注意
+这里是**正在施工**的 koishi v3 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
+:::
+
+会话来源于 Koishi v1 的元信息对象，并在后续的版本中发展成了专门的类并大幅扩展了功能。你几乎可以利用会话完成所有工作。会话对象的属性分为两类，一类是不以 `$` 开头的，这些属性来源于 CQHTTP 事件；另一类是以 `$` 开头的，它们是 Koishi 的扩展功能。在会话的序列化中，只有前一类属性会被保留。
 
 ## CQHTTP 原生属性
 
@@ -125,7 +129,7 @@ sidebarDepth: 2
 - **delay:** `number` 与下一条消息的时间间隔，缺省时会使用 [`$app.options.queueDelay`](./app.md#options-queuedelay)
 - 返回值: `Promise<void>`
 
-### session.middleware(middleware) <Badge text="beta" type="warn"/>
+### session.middleware(middleware)
 
 注册一个仅对当前会话生效的中间件。
 
@@ -139,7 +143,7 @@ sidebarDepth: 2
 - **timeout:** `number` 中间件的生效时间，缺省时会使用 [`$app.options.promptTimeout`](./app.md#options-prompttimeout)
 - 返回值: `Promise<string>` 用户输入
 
-### session.suggest(options) <Badge text="beta" type="warn"/>
+### session.suggest(options)
 
 尝试显示候选输入。
 
@@ -152,7 +156,7 @@ sidebarDepth: 2
 - **options.apply:** `(suggestion: string, next: NextFunction) => void` 确认后执行的操作
 - 返回值: `Promise<void>`
 
-### session.$parse(message) <Badge text="beta" type="warn"/>
+### session.resolve(argv)
 
 ### session.collect(argv, key, fields)
 
@@ -163,7 +167,7 @@ sidebarDepth: 2
 - **fields:** `Set<keyof Tables[T]>` 用户字段集合
 - 返回值: `void`
 
-### session.$execute(argv, next?) <Badge text="beta" type="warn"/>
+### session.execute(argv, next?)
 
 执行一个指令。可以传入一个 argv 对象或者指令对应的文本。
 

@@ -5,6 +5,10 @@ sidebarDepth: 2
 
 # koishi-database-mysql
 
+::: danger 注意
+这里是**正在施工**的 koishi v3 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
+:::
+
 ::: tip 注意
 本页显示的版本号都表示对应的 koishi-database-mysql 版本号（而不是对应的 koishi 版本号）。
 
@@ -51,22 +55,3 @@ sidebarDepth: 2
 
 - **table:** `string` 表名
 - 返回值: `Promise<number>` 表中的行数
-
-## 供参考的 MySQL 初始化代码
-
-```sql
-CREATE TABLE `user` (
-    `id` BIGINT(20) UNSIGNED NOT NULL,
-    PRIMARY KEY (`id`) USING BTREE,
-    `flag` INT(11) NOT NULL DEFAULT '0',
-    `authority` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
-    `usage` JSON NOT NULL
-);
-
-CREATE TABLE `group` (
-    `id` BIGINT(20) UNSIGNED NOT NULL,
-    PRIMARY KEY (`id`) USING BTREE,
-    `flag` TINYINT(4) UNSIGNED NOT NULL DEFAULT '0',
-    `assignee` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0'
-);
-```

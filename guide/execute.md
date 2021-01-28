@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# 指令的调用
+# 指令触发机制
 
 本节介绍有关指令调用的一些机制。
 
@@ -80,6 +80,17 @@ ctx.command('market <area>')
 
 不难看出，使用快捷方式会让你的输入方式更加接近自然语言，也会让你的机器人显得更平易近人。
 
+## 使用引号
+
+Koishi 会自动将引号（半角或者全角）中的内容视为一个整体。这在很多场景中都非常有用，下面举出了一些典型的例子：
+
+- 当希望传入带空格的参数时（默认行为是只解析空格前面的部分）
+- 当希望传入以 `-` 开头的参数时（默认的行为是解析成下一个选项）
+- 当希望传入一个空字符串时作为参数时（默认的行为是解析为 `true`）
+- 当希望传入只由数字构成的字符串参数时（默认行为是解析为 `number` 类型）
+
+当然，这些情况也都可以使用接下来要介绍的 [类型系统](#类型系统) 解决。
+
 ## 指令插值
 
 如果你希望在指令中使用其他指令的内容，可以使用 `$()` 进行指令插值：
@@ -96,7 +107,7 @@ Koishi 默认不转义单引号内的文本。如果你不希望某个参数被�
 <chat-message nickname="Koishi" avatar="/koishi.png">foo$(echo bar)</chat-message>
 </panel-view>
 
-最后，你还可以在 [koishi-plugin-eval](../../plugins/eval/basic.md) 中了解到另一种插值方法。
+最后，你还可以在 [koishi-plugin-eval](../plugins/eval/basic.md) 中了解到另一种插值方法。
 
 ## 模糊匹配
 
@@ -109,4 +120,4 @@ Koishi 默认不转义单引号内的文本。如果你不希望某个参数被�
 <chat-message nickname="Koishi" avatar="/koishi.png">hello</chat-message>
 </panel-view>
 
-如果想调整模糊匹配的程度，你还可以修改配置项 [similarityCoefficient](../../api/app.md#options-similaritycoefficient)。是不是很方便呢？
+如果想调整模糊匹配的程度，你还可以修改配置项 [similarityCoefficient](../api/app.md#options-similaritycoefficient)。是不是很方便呢？

@@ -62,21 +62,16 @@ module.exports = context => ({
           '/guide/intro/faq',
         ],
       }, {
-        title: '指令',
-        collapsable: false,
-        children: [
-          '/guide/command/basic',
-          '/guide/command/call',
-          '/guide/command/help',
-        ],
-      }, {
-        title: '深入',
+        title: '进阶',
         collapsable: false,
         children: [
           '/guide/message',
           '/guide/context',
+          '/guide/command',
+          '/guide/execute',
+          '/guide/help',
+          '/guide/manage',
           '/guide/database',
-          '/guide/authorization',
           '/guide/lifecycle',
           '/guide/multiple-bots',
           '/guide/logger',

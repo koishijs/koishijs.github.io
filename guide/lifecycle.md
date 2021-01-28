@@ -91,7 +91,7 @@ sidebarDepth: 2
     - 触发 before-group 事件
     - 获取群数据并存储于 `meta.$group`
     - 根据 flags, assignee 等字段判断是否应该处理该信息，如果不应该则直接返回
-    - 触发 attach-group 事件（用户可以在其中同步地更新群数据）
+    - 触发 attach-channel 事件（用户可以在其中同步地更新群数据）
     - 触发 before-user 事件
     - 获取用户数据并存储于 `meta.$user`
     - 根据 flags 等字段判断是否应该处理该信息，如果不应该则直接返回

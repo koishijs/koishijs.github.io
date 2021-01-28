@@ -141,7 +141,7 @@ metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 Ap
 
 请使用 [attach-user](#事件：attach-user) 事件。
 
-### 事件：attach-group <Badge text="1.10.0+"/>
+### 事件：attach-channel <Badge text="1.10.0+"/>
 
 当 Koishi 完成群数据获取后触发。调用时会传入一个 Meta 对象，将会拥有 `$group` 属性。你可以在回调函数中对这两个属性做同步的修改（注意：只能是同步的修改）。这些修改会在后续过程中自动更新到数据库。
 

@@ -5,7 +5,7 @@ sidebarDepth: 2
 # 查看和编写帮助
 
 ::: tip
-下面的 echo 指令是为了理解方便而举的例子，与 koishi-plugin-common 中实际的 echo 指令可能不同。
+下面的 echo 指令是为了理解方便而举的例子，与 koishi-plugin-common 中实际的 echo 指令并不相同。
 :::
 
 ## 查看帮助
@@ -22,7 +22,7 @@ Koishi 拥有着强大的指令系统，然而过于复杂的功能也会困扰�
 </chat-message>
 </panel-view>
 
-或通过 `help echo` 或 `echo -h` 查看特定指令的信息，包括指令的名称，参数，选项，子指令，权限设置等等。这里的 echo 是指令名，但也可以换成 [指令别名](./call.md#指令别名) 甚至 [快捷方式](./call.md#快捷方式)。具体的细节将在下面的介绍。
+或通过 `help echo` 或 `echo -h` 查看特定指令的信息，包括指令的名称，参数，选项，子指令，权限设置等等。这里的 echo 是指令名，但也可以换成 [指令别名](./execute.md#指令别名) 甚至 [快捷方式](./execute.md#快捷方式)。具体的细节将在下面的介绍。
 
 ## 编写帮助
 
@@ -49,7 +49,7 @@ ctx.command('echo <message:text> 输出收到的信息')
 
 ```js
 ctx.command('echo <message:text>', '输出收到的信息')
-  .option('-t, --timeout <seconds>', '设定延迟发送的时间')
+  .option('timeout', '-t <seconds> 设定延迟发送的时间')
   .usage('注意：参数请写在最前面，不然会被当成 message 的一部分！')
   .example('echo -t 300 Hello World  五分钟后发送 Hello World')
 ```

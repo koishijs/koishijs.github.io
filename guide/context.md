@@ -154,7 +154,7 @@ module.exports.name = 'detect-space'
 module.exports.apply = (ctx) => {
   ctx.middleware((meta, next) => {
     if (meta.message.match(/^\s*(\S +){2,}\S\s*$/g)) {
-      return meta.$send('说话带空格，有罪！')
+      return meta.send('说话带空格，有罪！')
     } else {
       return next()
     }

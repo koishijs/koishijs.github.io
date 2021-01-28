@@ -73,7 +73,7 @@ sidebarDepth: 2
 ## Koishi 扩展属性
 
 ::: tip 注意
-尽管下面的大部分属性和方法都存在于 Session 对象的原型链上，但你需要明白部分功能仅对于特定的事件生效。例如，假设 session 是一个心跳事件，那么试图调用 `session.$send()` 将会导致异常。
+尽管下面的大部分属性和方法都存在于 Session 对象的原型链上，但你需要明白部分功能仅对于特定的事件生效。例如，假设 session 是一个心跳事件，那么试图调用 `session.send()` 将会导致异常。
 :::
 
 ### session.$app
@@ -92,7 +92,7 @@ sidebarDepth: 2
 
 一个可观测的用户数据对象。
 
-### session.$observeUser(fields?)
+### session.observeUser(fields?)
 
 观测特定的用户字段，并更新到 [`session.$user`](#session-user) 中。
 
@@ -103,43 +103,43 @@ sidebarDepth: 2
 
 一个可观测的群数据对象。
 
-### session.$observeChannel(fields?)
+### session.observeChannel(fields?)
 
 观测特定的用户字段，并更新到 [`session.$channel`](#session-channel) 中。
 
 - **fields:** `Iterable<Channel.Field>`
 - 返回值: `Promise<Channel.Observed>`
 
-### session.$send(message)
+### session.send(message)
 
 在当前上下文发送消息。
 
 - **message:** `string` 要发送的内容
 - 返回值: `Promise<void>`
 
-### session.$sendQueued(message, delay?)
+### session.sendQueued(message, delay?)
 
-在当前上下文发送消息，并与下一条通过 `session.$sendQueued` 发送的消息之间保持一定的时间间隔。
+在当前上下文发送消息，并与下一条通过 `session.sendQueued` 发送的消息之间保持一定的时间间隔。
 
 - **message:** `string` 要发送的内容
 - **delay:** `number` 与下一条消息的时间间隔，缺省时会使用 [`$app.options.queueDelay`](./app.md#options-queuedelay)
 - 返回值: `Promise<void>`
 
-### session.$use(middleware) <Badge text="beta" type="warn"/>
+### session.middleware(middleware) <Badge text="beta" type="warn"/>
 
 注册一个仅对当前会话生效的中间件。
 
 - **middleware:** [`Middleware`](../guide/message.md#中间件) 要注册的中间件
 - 返回值: `() => void` 取消该中间件的函数
 
-### session.$prompt(timeout?) <Badge text="beta" type="warn"/>
+### session.prompt(timeout?) <Badge text="beta" type="warn"/>
 
 等待当前会话的下一次输入，如果超时则会 reject。
 
 - **timeout:** `number` 中间件的生效时间，缺省时会使用 [`$app.options.promptTimeout`](./app.md#options-prompttimeout)
 - 返回值: `Promise<string>` 用户输入
 
-### session.$suggest(options) <Badge text="beta" type="warn"/>
+### session.suggest(options) <Badge text="beta" type="warn"/>
 
 尝试显示候选输入。
 

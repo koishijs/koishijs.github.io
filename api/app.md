@@ -76,13 +76,13 @@ new App({
 
 - 类型：`number | ((message: string, session: Session) => number)`
 
-`session.$sendQueued` 的默认延迟时间，单位为毫秒。默认值为 `100`。
+`session.sendQueued` 的默认延迟时间，单位为毫秒。默认值为 `100`。
 
 ### options.promptTimeout
 
 - 类型：`number`
 
-`session.$prompt` 的默认等待时间，单位为毫秒。默认值为 `60000`。
+`session.prompt` 的默认等待时间，单位为毫秒。默认值为 `60000`。
 
 ### options.prettyErrors
 

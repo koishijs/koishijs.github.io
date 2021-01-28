@@ -137,7 +137,7 @@ const { commonPlugin } = require('koishi')
 commonPlugin.registerUserAction('set-money', (meta, user, value) => {
   user.money = +value   // 注意这里的 value 原来是字符串
   user._update()        // 如果目标不是自己，则数据不会自动更新，因此这里手动更新了数据
-  return meta.$send('余额已更新！')
+  return meta.send('余额已更新！')
 }, ['money'])
 ```
 

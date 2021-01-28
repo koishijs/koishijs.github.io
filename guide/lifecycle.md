@@ -65,7 +65,7 @@ sidebarDepth: 2
     - 如果是刚刚获取到的则更新 appMap，触发 ready 事件
 5. 将 CQHTTP 3.x 的格式转化成 4.x，转化数组格式的 message
 6. 解析元数据中的字段，生成 `$ctxType`, `$ctxId`
-7. 根据元数据中的字段生成可能的快捷操作函数，如 `$send`, `$delete` 等
+7. 根据元数据中的字段生成可能的快捷操作函数，如 `send`, `$delete` 等
 8. 逐一在相关上下文触发 message/normal, message 事件（下接[**内置监听器**](#内置监听器)）
 
 ### 内置监听器

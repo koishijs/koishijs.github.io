@@ -156,7 +156,7 @@ node .
 module.exports = (ctx) => {
   ctx.on('message', (session) => {
     if (session.content === '天王盖地虎') {
-      session.$send('宝塔镇河妖')
+      session.send('宝塔镇河妖')
     }
   })
 }

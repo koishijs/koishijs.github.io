@@ -77,8 +77,8 @@ const { MockedApp } = require('koishi-test-utils')
 const app = new MockedApp()
 
 // 这是一个简单的中间件例子，下面将测试这个中间件
-app.middleware(({ message, $send }, next) => {
-  if (message === '天王盖地虎') return $send('宝塔镇河妖')
+app.middleware(({ message, send }, next) => {
+  if (message === '天王盖地虎') return send('宝塔镇河妖')
   return next()
 })
 
@@ -116,8 +116,8 @@ const app = new MockedApp()
 const session = app.createSession('user', 123)
 
 // 还是刚刚那个例子
-app.middleware(({ message, $send }, next) => {
-  if (message === '天王盖地虎') return $send('宝塔镇河妖')
+app.middleware(({ message, send }, next) => {
+  if (message === '天王盖地虎') return send('宝塔镇河妖')
   return next()
 })
 

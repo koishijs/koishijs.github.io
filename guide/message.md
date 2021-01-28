@@ -22,7 +22,7 @@ sidebarDepth: 2
 // 如果收到“人有多大胆”，就回应“地有多大产”
 app.on('message', (session) => {
   if (session.content === '人有多大胆') {
-    session.$send('地有多大产')
+    session.send('地有多大产')
   }
 })
 ```
@@ -51,7 +51,7 @@ const groupInfo = await session.$bot.getGroupInfo(987654321)
 
 ### 快捷回复
 
-Meta 对象还提供了一个快捷回复方法 `session.$send`，调用它可以快速实现对原消息的回复。快捷操作的响应速度会高于普通的 Sender API 调用，但是默认情况下这种操作同上面的异步调用一样，这些操作也是无法获得调用结果的。完整的快捷操作列表参见 [Koishi 添加的属性](#koishi-添加的属性)。
+Meta 对象还提供了一个快捷回复方法 `session.send`，调用它可以快速实现对原消息的回复。快捷操作的响应速度会高于普通的 Sender API 调用，但是默认情况下这种操作同上面的异步调用一样，这些操作也是无法获得调用结果的。完整的快捷操作列表参见 [Koishi 添加的属性](#koishi-添加的属性)。
 
 这里也简单介绍一下快捷操作的原理。当正常使用 HTTP 模式时，每个事件上报和 API 调用都使用了不同的连接。那么快捷操作则相当于将 API 调用作为事件上报的响应。当然，这种做法有着很多限制，例如对 WebSocket 无效，同一个事件只能响应一次，以及需要手动处理响应超时的问题。因此，默认情况下这种优化是不开启的。如果手动配置了 `quickOperationTimeout`，则会将这个配置项作为时间限制，在这个时间限制内第一个调用快捷操作的会享受这种优化（事实上大部分操作都只有一个响应，所以这种优化对 HTTP 往往是非常有效的），之后的所有快捷操作调用都会自动转化为异步调用，这样可以保证快捷操作永远都是可用的。
 
@@ -111,7 +111,7 @@ app.middleware(async (session, next) => {
   // 这里只是示例，事实上 Koishi 会自动获取数据库中的信息并存放在 session.$user 中
   const user = await app.database.getUser(session.userId)
   if (user.authority === 0) {
-    return session.$send('抱歉，你没有权限访问机器人。')
+    return session.send('抱歉，你没有权限访问机器人。')
   } else {
     return next()
   }
@@ -138,7 +138,7 @@ app.receiver.on('message', (session) => {
   // 但这里我们假设机器人只处理一个群，这样可以简化逻辑
   if (session.message === message) {
     times += 1
-    if (times === 3) session.$send(message)
+    if (times === 3) session.send(message)
   } else {
     times = 0
     message = session.message
@@ -155,7 +155,7 @@ let message = '' // 当前消息
 app.prependMiddleware((session, next) => {
   if (session.message === message) {
     times += 1
-    if (times === 3) return session.$send(message)
+    if (times === 3) return session.send(message)
   } else {
     times = 0
     message = session.message
@@ -174,7 +174,7 @@ app.prependMiddleware((session, next) => {
 app.middleware((session, next) => {
   if (session.message === 'hlep') {
     // 如果该 session 没有被截获，则这里的回调函数将会被执行
-    return next(() => session.$send('你想说的是 help 吗？'))
+    return next(() => session.send('你想说的是 help 吗？'))
   } else {
     return next()
   }
@@ -190,7 +190,7 @@ let message = '' // 当前消息
 app.prependMiddleware((session, next) => {
   if (session.message === message) {
     times += 1
-    if (times === 3) return next(() => session.$send(message))
+    if (times === 3) return next(() => session.send(message))
   } else {
     times = 0
     message = session.message

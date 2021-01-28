@@ -35,7 +35,6 @@ mkdir my-bot && cd my-bot
 然后输入下面的命令行：
 
 <panel-view class="code" type="package-manager">
-
 ```npm
 # 初始化项目
 npm init
@@ -49,7 +48,6 @@ npx koishi init
 # 补全依赖
 npm i
 ```
-
 ```yarn
 # 初始化项目
 yarn init
@@ -63,7 +61,6 @@ yarn koishi init
 # 补全依赖
 yarn
 ```
-
 </panel-view>
 
 此时，你会看到在你刚刚创建的目录下多了一些文件，包括 `package.json` 和 `koishi.config.js`。后者应该大概长这样：
@@ -84,15 +81,12 @@ module.exports = {
 最后运行程序：
 
 <panel-view class="code" type="package-manager">
-
 ```npm
 npx koishi start
 ```
-
 ```yarn
 yarn koishi start
 ```
-
 </panel-view>
 
 现在可以对你的机器人说话了：
@@ -109,7 +103,6 @@ yarn koishi start
 首先初始化你的机器人目录并安装 Koishi 和所需的插件（这里以 koishi-adapter-onebot 和 koishi-plugin-common 为例）：
 
 <panel-view class="code" type="package-manager">
-
 ```npm
 # 初始化项目
 npm init
@@ -117,7 +110,6 @@ npm init
 # 安装 koishi 和相关库
 npm i koishi koishi-adapter-onebot koishi-plugin-common -D
 ```
-
 ```yarn
 # 初始化项目
 yarn init
@@ -125,7 +117,6 @@ yarn init
 # 安装 koishi 和相关库
 yarn add koishi koishi-adapter-onebot koishi-plugin-common -D
 ```
-
 </panel-view>
 
 新建入口文件 `index.js`，并写下这段代码：

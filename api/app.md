@@ -66,11 +66,17 @@ new App({
 
 对消息进行提前处理的方式，它将直接作用与 `session.message`。默认值为 `message => simplify(message.trim())`。
 
-### options.defaultAuthority
+### options.autoAuthorize
 
 - 类型：`number | ((session: Session) => number)`
 
 当获取不到用户数据时默认使用的权限等级。
+
+### options.autoAssign
+
+- 类型：`string | ((session: Session) => string)`
+
+当获取不到频道数据时默认使用的代理者。
 
 ### options.queueDelay
 

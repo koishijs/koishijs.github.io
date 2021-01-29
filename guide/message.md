@@ -4,112 +4,78 @@ sidebarDepth: 2
 
 # 接收和发送信息
 
-::: danger 注意
-这里是**正在施工**的 koishi v3 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
-:::
+从本节开始，我们开始深入研究如何利用 Koishi 的来接收和发送信息。
 
-从本节开始，我们开始深入研究如何利用 Koishi 的来接收和发送信息。如果你不是一个插件开发者，你可以选择跳过本节和接下来的几个章节。但如果你对如何开发 Koishi 感兴趣，那么真正有趣的部分才刚刚开始。
+## 基本实例
 
-::: tip 提示
-接下来的教程可能会涉及对 Koishi API 的调用。如果你不知道如何用这些 API 运行你的机器人，你可能需要查看 [调用 Koishi](./getting-started.md#调用-koishi) 一节。如果你想获得某个 API 的具体用法，你可以参考 [API 文档](../api/) 。
-:::
-
-## 接收消息
-
-在 Koishi 中接收消息的语法非常简单：
+首先让我们回顾一下之前展示过的例子：
 
 ```js
-// 如果收到“人有多大胆”，就回应“地有多大产”
-app.on('message', (session) => {
-  if (session.content === '人有多大胆') {
-    session.send('地有多大产')
+// 如果收到“天王盖地虎”，就回应“宝塔镇河妖”
+ctx.on('message', (session) => {
+  if (session.content === '天王盖地虎') {
+    session.send('宝塔镇河妖')
   }
 })
 ```
 
 在这个简单的示例中，这里有两件事你需要了解：
 
-上面的 `session` 对象被称为**会话**。会话具有通用的结构，只要是来自 [CQHTTP 的事件](https://cqhttp.cc/docs/4.15/#/Post)，无论类型都会被解析成这个统一结构。你可以在本节的最后查看 [会话的详细结构](#深入-session-对象)。
+上面的 `session` 对象被称为 **会话**。所有的上报事件都会被转化成一个会话对象。你可以利用这个对象访问与此事件有关的数据（例如用 `session.content` 表示消息的内容），或调用 API 作为对此事件的响应（例如用 `session.send()` 在当前频道内发送消息）。
 
-上面的 `message` 字符串被称为**事件名称**。Koishi 的事件名和 `session.postType` 字段进行对应。同时，根据 postType 的不同，Koishi 会相应地添加二级事件。二级事件和一级事件会被同时触发，因此你只需要根据具体的需求监听其中的一个即可。例如，一个 postType 为 `notice`，noticeType 为 `group_upload` 的事件会同时触发 `notice` 和 `notice/group_upload` 两个监听器。
+上面的 `message` 字符串被称为 **事件名称**。这个事件名称可能有多级：我们用 `message/group` 表示群组消息，`message/private` 表示私聊消息。这意味着你可以只监听收到消息的一部分。而当你监听 `message` 事件时，则所有收到的消息都会经由这个回调函数处理。
 
-除去由 CQHTTP 提供的事件外，Koishi 自身也提供了一批事件，你可以在 [**事件**](../api/event.md) 一章中看到目前支持的所有事件名。
+除去上面所介绍的 **上报事件** 外，Koishi 自身也提供了一批 **内部事件**，例如用 `connect` 事件表示应用启动完成等。你可以在 [**生命周期**](../api/events.md) 一章中看到更多使用事件的例子。
 
-## 发送消息
+## 使用中间件
 
-一个 **Bot 实例** 封装了一套 [CQHTTP API](https://cqhttp.cc/docs/4.12/#/API)。你可以像这样调用它：
-
-```js
-// 向服务器发送消息
-await session.$bot.sendPrivateMsg(123456789, 'Hello world')
-
-// 从服务器获取信息
-const groupInfo = await session.$bot.getGroupInfo(987654321)
-```
-
-如果你熟悉 CQHTTP API 的话，这对你一定不陌生。没错，这套接口和 CQHTTP 提供的接口是一一对应的。除此以外，由于 Koishi 全部使用 TypeScript 编写，我们还提供了完整的类型定义，让你在编写代码时再也无需查看 CQHTTP 文档。你可以在 [**机器人**](../api/bot.md) 一章中看到完整的 Sender API。
-
-### 快捷回复
-
-Meta 对象还提供了一个快捷回复方法 `session.send`，调用它可以快速实现对原消息的回复。快捷操作的响应速度会高于普通的 Sender API 调用，但是默认情况下这种操作同上面的异步调用一样，这些操作也是无法获得调用结果的。完整的快捷操作列表参见 [Koishi 添加的属性](#koishi-添加的属性)。
-
-这里也简单介绍一下快捷操作的原理。当正常使用 HTTP 模式时，每个事件上报和 API 调用都使用了不同的连接。那么快捷操作则相当于将 API 调用作为事件上报的响应。当然，这种做法有着很多限制，例如对 WebSocket 无效，同一个事件只能响应一次，以及需要手动处理响应超时的问题。因此，默认情况下这种优化是不开启的。如果手动配置了 `quickOperationTimeout`，则会将这个配置项作为时间限制，在这个时间限制内第一个调用快捷操作的会享受这种优化（事实上大部分操作都只有一个响应，所以这种优化对 HTTP 往往是非常有效的），之后的所有快捷操作调用都会自动转化为异步调用，这样可以保证快捷操作永远都是可用的。
-
-下面这张图比较了使用 HTTP 时，快捷操作与默认机制的区别：
-
-![quick-operation](/quick-operation.png)
-
-## 中间件
-
-有了接收和发送消息的能力，似乎你就能完成一切工作了——很多机器人框架也的确是这么想的。但是从 Koishi 的角度，这还远远不够。当载入的功能越来越多后，另一些严重的问题将逐渐浮现出来：如何限制消息能触发的应答次数？如何进行权限管理？如何提高机器人的性能？这些问题的答案将我们引向另一套更高级的系统——这也就是**中间件**的由来。
+有了接收和发送消息的能力，似乎你就能完成一切工作了——很多机器人框架也的确是这么想的。但是从 Koishi 的角度，这还远远不够。当载入的功能越来越多后，另一些严重的问题将逐渐浮现出来：如何限制消息能触发的应答次数？如何进行权限管理？如何提高机器人的性能？这些问题的答案将我们引向另一套更高级的系统——这也就是 **中间件** 的由来。
 
 中间件是对消息事件处理流程的再封装。你注册的所有中间件将会由一个事件监听器进行统一管理，数据流向下游，控制权流回上游——这可以有效确保了任意消息都只被处理一次。被认定为无需继续处理的消息不会进入下游的中间件——这让我们能够轻易地实现权限管理。与此同时，Koishi 的中间件也支持异步调用，这使得你可以在中间件函数中实现任何逻辑。事实上，相比更加底层地调用接收器，**使用中间件处理消息才是 Koishi 更加推荐的做法**。
 
-::: tip 提示
-在你阅读下面的内容之前，你首先应该了解中间件是为了**处理消息**而设计的。因此，如果你要处理的是 notice 或者 request 类型的元信息，那么你还是应该使用接收器来处理。
+::: tip
+在你阅读下面的内容之前，你首先应该了解中间件是为了 **处理消息** 而设计的。因此，如果你要处理的是加群申请之类的其他事件，那么你还是应该使用事件监听器来处理。
 :::
 
 中间件的本质是下面的函数。看起来挺简单的，不是吗？我们将在下面详细介绍它的运作方式。
 
-```ts
+```js
 type NextFunction = (next?: NextFunction) => any
-type Middleware = (session: Meta, next: NextFunction) => any
+type Middleware = (session: Session, next: NextFunction) => any
 ```
 
 ### 注册和取消中间件
 
-使用 `app.middleware` 注册中间件。这个方法接受一个回调函数，其第一个参数为一个 Meta 对象，第二个参数是 `next` 函数，只有调用了它才会进入接下来的流程。如果自始至终都没有调用 `next` 函数的话，之后的中间件都将不会被执行。
+使用 `ctx.middleware()` 方法注册中间件。这个方法接受一个回调函数，其第一个参数为一个会话对象，第二个参数是 `next` 函数，只有调用了它才会进入接下来的流程。如果自始至终都没有调用 `next` 函数的话，之后的中间件都将不会被执行。下面是一个例子：
 
 ```js
-app.middleware((session, next) => {
-  // 仅当接收到的消息包含 at 机器人时才继续处理
-  if (session.$parsed.atMe) return next()
+ctx.middleware((session, next) => {
+  // 仅当接收到的消息包含了对机器人的称呼时才继续处理（比如消息以 @机器人 开头）
+  if (session.$appel) {
+    return session.send('是你在叫我吗？')
+  } else {
+    // 如果去掉这一行，那么不满足上述条件的消息就不会进入下一个中间件了
+    return next()
+  }
 })
 ```
 
 这个函数的返回值是一个新的函数，调用这个函数就可以完成取消上述中间件：
 
 ```js
-const dispose = app.middleware(callback)
+const dispose = ctx.middleware(callback)
 dispose() // 取消中间件
-```
-
-你也可以直接通过 `app.removeMiddleware` 取消一个中间件：
-
-```js
-// callback 是上面的回调函数
-app.removeMiddleware(callback)
 ```
 
 ### 注册异步中间件
 
-下面给出一个异步的中间件作为示例：
+中间件也可以是异步的。下面给出一个示例：
 
 ```js
-app.middleware(async (session, next) => {
+ctx.middleware(async (session, next) => {
   // 获取数据库中的用户信息
   // 这里只是示例，事实上 Koishi 会自动获取数据库中的信息并存放在 session.$user 中
-  const user = await app.database.getUser(session.userId)
+  const user = await session.getUser(session.userId)
   if (user.authority === 0) {
     return session.send('抱歉，你没有权限访问机器人。')
   } else {
@@ -119,7 +85,7 @@ app.middleware(async (session, next) => {
 ```
 
 ::: warning 注意
-上述代码中 next 前面的 return 是必须的。如果删去将可能会导致时序错误，这在 Koishi 中将会抛出一个运行时警告。
+异步中间件代码中 next 前面的 return 是必须的。如果删去将可能会导致时序错误，这在 Koishi 中将会抛出一个运行时警告。
 :::
 
 ### 注册前置中间件
@@ -132,7 +98,7 @@ app.middleware(async (session, next) => {
 let times = 0 // 复读次数
 let message = '' // 当前消息
 
-app.receiver.on('message', (session) => {
+ctx.on('message', (session) => {
   // 这里其实有个小问题，因为来自不同群的消息都会触发这个回调函数
   // 因此理想的做法应该是分别记录每个群的当前消息和复读次数
   // 但这里我们假设机器人只处理一个群，这样可以简化逻辑
@@ -146,13 +112,13 @@ app.receiver.on('message', (session) => {
 })
 ```
 
-但是这样写出的机器人就存在所有用接收器写出的机器人的通病——如果这条消息本身可以触发其他回应，机器人就会多次回应。更糟糕的是，你无法预测哪一次回应先发生，因此这样写出的机器人就会产生延迟复读的迷惑行为。为了避免这种情况发生，Koishi 对这种情况也有对应的解决方案，那就是前置中间件：
+但是这样写出的机器人就存在所有用接收器写出的机器人的通病——如果这条消息本身可以触发其他回应，机器人就会多次回应。更糟糕的是，你无法预测哪一次回应先发生，因此这样写出的机器人就会产生延迟复读的迷惑行为。为了避免这种情况发生，Koishi 对这种情况也有对应的解决方案，那就是 **前置中间件**：
 
 ```js
 let times = 0 // 复读次数
 let message = '' // 当前消息
 
-app.prependMiddleware((session, next) => {
+ctx.middleware((session, next) => {
   if (session.message === message) {
     times += 1
     if (times === 3) return session.send(message)
@@ -161,7 +127,7 @@ app.prependMiddleware((session, next) => {
     message = session.message
     return next()
   }
-})
+}, true /* true 表示这是前置中间件 */)
 ```
 
 ### 注册临时中间件
@@ -171,7 +137,7 @@ app.prependMiddleware((session, next) => {
 为了应对这种问题 Koishi 提供了更加方便的写法：你只需要在调用 `next` 时再次传入一个回调函数即可！这个回调函数只接受一个 `next` 参数，且只会加入当前的中间件执行队列；无论这个回调函数执行与否，在本次中间件解析完成后，它都会被清除。下面是一个例子：
 
 ```js
-app.middleware((session, next) => {
+ctx.middleware((session, next) => {
   if (session.message === 'hlep') {
     // 如果该 session 没有被截获，则这里的回调函数将会被执行
     return next(() => session.send('你想说的是 help 吗？'))
@@ -187,7 +153,7 @@ app.middleware((session, next) => {
 let times = 0 // 复读次数
 let message = '' // 当前消息
 
-app.prependMiddleware((session, next) => {
+ctx.middleware((session, next) => {
   if (session.message === message) {
     times += 1
     if (times === 3) return next(() => session.send(message))
@@ -196,7 +162,94 @@ app.prependMiddleware((session, next) => {
     message = session.message
     return next()
   }
-})
+}, true)
 ```
 
-搭配使用上面几种中间件，你的机器人便拥有了无限可能。在 `koishi-plugin-common` 库中，就有着一个官方实现的复读功能，它远比上面的示例所显示的更加强大。如果想深入了解中间件机制，可以去研究一下这个功能的 [源代码](https://github.com/koishijs/koishi/blob/master/packages/plugin-common/src/repeater.ts)。
+搭配使用上面几种中间件，你的机器人便拥有了无限可能。在 koishi-plugin-common 库中，就有着一个官方实现的复读功能，它远比上面的示例所显示的更加强大。如果想深入了解中间件机制，可以去研究一下这个功能的 [源代码](https://github.com/koishijs/koishi/blob/master/packages/plugin-common/src/repeater.ts)。
+
+## 使用会话
+
+### 延时发送
+
+如果你需要连续发送多条消息，那么在各条消息之间留下一定的时间间隔是很重要的：一方面它可以防止消息刷屏和消息错位（后发的条消息呈现在先发的消息前面），提高了阅读体验；另一方面它能够有效降低机器人发送消息的频率，防止被平台误封。这个时候，`session.sendQueued()` 可以解决你的问题。
+
+```js
+// 发送两条消息，中间间隔一段时间，这个时间由系统计算决定
+await session.sendQueued('message1')
+await session.sendQueued('message2')
+
+// 清空等待队列
+await session.cancelQueued()
+```
+
+你也可以在发送时手动定义等待的时长：
+
+```js
+// 如果消息队列非空，在前一条消息发送完成后 1s 发送本消息
+await session.sendQueued('message3', Time.second)
+
+// 清空等待队列，并设定下一条消息发送距离现在至少 0.5s
+await session.cancelQueued(0.5 * Time.second)
+```
+
+事实上，对于不同的消息长度，系统等待的时间也是不一样的，你可以通过配置项修改这个行为：
+
+```js koishi.config.js
+module.exports = {
+  delay: {
+    // 消息里每有一个字符就等待 0.02s
+    character: 0.02 * Time.second,
+    // 每条消息至少等待 0.5s
+    message: 0.5 * Time.second,
+  },
+}
+```
+
+这样一来，一段长度为 60 个字符的消息发送后，下一条消息发送前就需要等待 1.2 秒了。
+
+### 等待用户输入
+
+当你需要进行一些交互式操作时，可以使用 `session.prompt()`：
+
+```js
+await session.send('请输入用户名：')
+
+const name = await session.prompt()
+if (!name) return session.send('输入超时。')
+
+// 执行后续操作
+ctx.database.setUser(session.kind, session.userId, { name })
+```
+
+你可以给这个方法传入一个 `timeout` 参数，或使用 `delay.prompt` 配置项，来作为等待的时间。
+
+### 调用底层接口
+
+当然，你所能做的并不只有在当前频道内发送信息那么简单。我们还提供了 Bot 类，允许你进行更多机器人操作。你可以像这样调用它：
+
+```js
+// 向特定频道发送消息
+await session.$bot.sendMessage(123456789, 'Hello world')
+
+// 获取特定群的成员列表
+const members = await session.$bot.getGroupMemberList(987654321)
+```
+
+你可以在 [**机器人**](../api/bot.md) 一章中看到完整的 API 列表。
+
+### 发送广播消息
+
+有的时候你可能希望向多个频道同时发送消息，我们也专门设计了相关的接口。
+
+```js
+// 使用当前机器人账户向多个频道发送消息
+await session.$bot.broadcast(['123456', '456789'], content)
+
+// 如果你有多个账号，请使用 ctx.broadcast，并在频道编号前加上平台名称
+await ctx.broadcast(['onebot:123456', 'discord:456789'], content)
+
+// 或者直接将消息发给所有频道
+await ctx.broadcast(content)
+```
+
+如果你希望广播消息的发送也有时间间隔的话，可以使用 `delay.broadcast` 配置项。

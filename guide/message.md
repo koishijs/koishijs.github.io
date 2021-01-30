@@ -2,13 +2,13 @@
 sidebarDepth: 2
 ---
 
-# 接收和发送信息
+# 接收和发送消息
 
-从本节开始，我们开始深入研究如何利用 Koishi 的来接收和发送信息。
+从本节开始，我们开始深入研究如何利用 Koishi 的来接收和发送消息。
 
 ## 基本实例
 
-首先让我们回顾一下之前展示过的例子：
+首先让我们回顾一下之前展示过的 [例子](./intro/starter.md#编写并调用你的插件)：
 
 ```js
 // 如果收到“天王盖地虎”，就回应“宝塔镇河妖”
@@ -27,7 +27,7 @@ ctx.on('message', (session) => {
 
 除去上面所介绍的 **上报事件** 外，Koishi 自身也提供了一批 **内部事件**，例如用 `connect` 事件表示应用启动完成等。你可以在 [**生命周期**](../api/events.md) 一章中看到更多使用事件的例子。
 
-## 使用中间件
+## 使用中间件 (Middleware)
 
 有了接收和发送消息的能力，似乎你就能完成一切工作了——很多机器人框架也的确是这么想的。但是从 Koishi 的角度，这还远远不够。当载入的功能越来越多后，另一些严重的问题将逐渐浮现出来：如何限制消息能触发的应答次数？如何进行权限管理？如何提高机器人的性能？这些问题的答案将我们引向另一套更高级的系统——这也就是 **中间件** 的由来。
 
@@ -167,7 +167,7 @@ ctx.middleware((session, next) => {
 
 搭配使用上面几种中间件，你的机器人便拥有了无限可能。在 koishi-plugin-common 库中，就有着一个官方实现的复读功能，它远比上面的示例所显示的更加强大。如果想深入了解中间件机制，可以去研究一下这个功能的 [源代码](https://github.com/koishijs/koishi/blob/master/packages/plugin-common/src/repeater.ts)。
 
-## 使用会话
+## 使用会话 (Session)
 
 ### 延时发送
 
@@ -218,7 +218,8 @@ const name = await session.prompt()
 if (!name) return session.send('输入超时。')
 
 // 执行后续操作
-ctx.database.setUser(session.kind, session.userId, { name })
+await ctx.database.setUser(session.kind, session.userId, { name })
+return session.send(`${name}，请多指教！`)
 ```
 
 你可以给这个方法传入一个 `timeout` 参数，或使用 `delay.prompt` 配置项，来作为等待的时间。

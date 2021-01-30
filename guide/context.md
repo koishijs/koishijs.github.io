@@ -4,126 +4,37 @@ sidebarDepth: 2
 
 # 插件与上下文
 
-::: danger 注意
-这里是**正在施工**的 koishi v3 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
-:::
+## 使用插件 (Plugin)
 
-在 [编写配置文件](./config-file.md) 一章中，我们已经了解了一部分有关插件的知识。而本章将会深入 Koishi 的插件系统，介绍插件的内部机制和运作方式。
+Koishi 官方实现了许多功能，但一个机器人很可能只会用到其中的一部分。因此我们采用了插件化的方式，将不同的功能解耦到了不同的包中。你可以在 [官方插件](../plugins/index.md) 中了解到各种不同的功能。
 
-## 使用插件 (plugin)
+### 安装插件
 
-你可以像这样添加一个插件：
+在之前的文档中，我们已经展示了如何通过配置文件和脚本调用两种方法使用插件，它们的写法略有不同。让我们先回顾一下：
 
 ```js koishi.config.js
 module.exports = {
-  plugins: [
-    './foo',
-    ['bar'],
-    ['baz', {
-      // 传给 koishi-plugin-baz 的选项
-    }]
-  ],
+  plugins: {
+    './my-plugin': true, // true 和 {} 的效果等价
+    'common': { /* 传给 koishi-plugin-common 的选项 */ },
+  },
 }
 ```
 
-`plugins` 是一个数组，其中的每一项可以是字符串或数组。如果是字符串，Koishi 会直接解析字符串为插件的路径；如果是数组，Koishi 会将数组的第一项解析为插件的路径，第二项将作为插件的选项。其中 `foo` 会被解析为 `koishi-plugin-foo`，`./foo.js`，`./foo/index.js` 等多个路径，会按照先后顺序进行匹配。因此，如果你想要向你的机器人添加这三种路径的插件，你都只需要写 `foo` 即可。当然，你仍然可以显式地书写 `koishi-plugin-foo`，`./foo.js`，`./foo/index.js` 等路径进行配置。
+`plugins` 是一个对象，其中的每一个键表示一个插件的路径。
+
+- 如果是一个绝对路径或者相对路径，我们会相对 koishi.config.js 所在的目录进行解析
+- 其他情况下我们将其视为包名，并允许省略 koishi-plugin- 这个前缀，并考虑 scope 带来的影响（例如对于 foo/bar，我们将尝试读取 koishi-plugin-foo/bar 和 foo/bar 两个包；对于 @foo/bar，我们将尝试读取 @foo/koishi-plugin-bar 和 @foo/bar 两个包）
 
 上面的写法使用 API 可以写成：
 
 ```js index.js
 app
-  .plugin(require('./foo'))
-  .plugin(require('koishi-plugin-bar'))
-  .plugin(require('koishi-plugin-baz'), options)
+  .plugin(require('./my-plugin'))
+  .plugin(require('koishi-plugin-common'), options)
 ```
 
-## 上下文 (context)
-
-一个**上下文**描述了机器人的一种可能的运行环境。例如，如果一个接收器或中间件被绑定在了上面例子中的上下文，那么只有该环境下的事件才会触发对应的回调函数。之前介绍过的 `receiver`, `sender`, `middleware` 以及 `plugin` 这些 API 本质上都是上下文所提供的方法，而我们能在 `app` 上调用这些方法只是因为 `App` 对象本身也是一个上下文而已。
-
-除去 `App` 本身外，我们还可以通过 `App` 原型链上的方法创建新的上下文：
-
-```js
-app.users // 由全部好友构成的上下文
-app.groups // 由全部群构成的上下文
-app.discusses // 由全部讨论组构成的上下文
-
-app.user(123) // 由好友 123 构成的上下文
-app.group(123) // 由群 123 构成的上下文
-app.discuss(123) // 由讨论组 123 构成的上下文
-
-app.users.except(123) // 由除了 123 以外的所有好友构成的上下文
-app.groups.except(123) // 由除了 123 以外的所有群构成的上下文
-app.discusses.except(123) // 由除了 123 以外的所有讨论组构成的上下文
-```
-
-利用上下文，你可以非常方便地对每个环境进行分别配置：
-
-```js
-// 在所有环境注册中间件
-app.middleware(callback)
-
-// 当有人申请加群 123 时触发 listener
-app.group(123).receiver.on('request/add', listener)
-
-// 安装插件对除了 987 以外的所有讨论组生效
-app.discusses.except(987).plugin(require('koishi-plugin-tools'))
-```
-
-是不是非常方便呢？
-
-### 上下文组合
-
-有的时候，我们也需要将一些上下文组合在一起使用，例如描述两个上下文的并集。为此，Koishi 也提供了相应的方法：
-
-```js
-// 返回两个上下文的并集
-context1.plus(context2)
-
-// 返回两个上下文的交集
-context1.intersect(context2)
-
-// 返回两个上下文的差集
-context1.minus(context2)
-
-// 返回一个上下文的补集
-context.inverse()
-
-// 判断上下文能否匹配元信息对象
-context.match(meta)
-
-// 判断当前上下文是否完全包含了另一个上下文
-context1.contain(context2)
-```
-
-这些方法会返回一个新的上下文，在其上使用监听器、中间件、指令或是插件就好像同时在多个上下文中使用一样。
-
-### 在配置文件中声明上下文 <Badge text="beta" type="warn"/>
-
-你也可以在配置文件中声明插件所在的上下文，不过这就牵扯到一种字符串语法。用分号分隔不同类型的上下文，每个类型后面可以通过“+”或者“-”表示包含和排除，再之后是用逗号隔开的 ID 列表。就像这样：
-
-```js koishi.config.js
-module.exports = {
-  plugins: {
-    // 在群 123, 456 上下文，除 789 以外的用户上下文和全部讨论组上下文中安装插件
-    'group+123,456;user-789;discuss': [
-      ['bar', options],
-    ],
-  },
-}
-```
-
-这相当于
-
-```js
-app
-  .group(123, 456)
-  .plus(app.users.except(789))
-  .plus(app.discusses)
-  .plugin('koishi-plugin-bar', options)
-```
-
-## 开发插件
+### 开发插件
 
 一个**插件**的本质是以下两个之一：
 
@@ -154,7 +65,7 @@ module.exports.name = 'detect-space'
 module.exports.apply = (ctx) => {
   ctx.middleware((meta, next) => {
     if (meta.message.match(/^\s*(\S +){2,}\S\s*$/g)) {
-      return meta.send('说话带空格，有罪！')
+      return meta.send('在？为什么说话带空格？')
     } else {
       return next()
     }
@@ -166,14 +77,13 @@ module.exports.apply = (ctx) => {
 
 ```js koishi.config.js
 module.exports = {
-  plugins: [
-    // 这里是其他插件
-    ['detect-space'],
-  ],
+  plugins: {
+    './detect-space': true,
+  },
 }
 ```
 
-调用 `koishi run`，你就可以看到这个插件在正常运行了。
+调用 `koishi start`，你就可以看到这个插件在正常运行的提示了。
 
 ### 嵌套插件
 
@@ -203,6 +113,70 @@ ctx.plugin(require('koishi-plugin-foo'))
 
 // 如果只希望启用一部分功能
 ctx.plugin(require('koishi-plugin-foo').pluginA)
+
+// 或者等价的写法
+ctx.plugin(require('koishi-plugin-foo/a'))
 ```
 
-Koishi 的官方插件 koishi-plugin-common 也使用了这种写法。
+Koishi 的官方插件 koishi-plugin-common 也使用了 [这种写法](https://github.com/koishijs/koishi/blob/master/packages/plugin-common/src/index.ts)。
+
+## 使用上下文 (Context)
+
+一个 **上下文** 描述了机器人的一种可能的运行环境。例如，如果一个指令或中间件被绑定在了上面例子中的上下文，那么只有该环境下的事件才会触发对应的回调函数。之前介绍过的 `ctx.on()`, `ctx.middleware()` 以及 `ctx.plugin()` 这些 API 都是上下文类所提供的方法，而我们能在 `app` 上调用这些方法只是因为 `App` 对象本身也是一个上下文而已。
+
+### 使用选择器
+
+我们可以通过 **选择器** 来快速创建新的上下文：
+
+```js
+app.select('groupId') // 选择全部群聊会话
+app.unselect('groupId') // 选择全部私聊会话
+
+app.select('groupId', '112233') // 选择来自群 112233 的会话
+app.unselect('groupId', '112233') // 选择来自除了群 112233 以外的群的会话
+
+app.select('userId', '445566') // 选择来自用户 445566 的会话（包括群聊和私聊）
+app.unselect('groupId').select('userId', '445566') // 选择来自用户 445566 的私聊会话
+```
+
+利用上下文，你可以非常方便地对每个环境进行分别配置：
+
+```js
+// 在所有环境注册中间件
+app.middleware(callback)
+
+// 当有人申请加群 112233 时触发 listener
+app.select('groupId', '112233').on('group-request', listener)
+
+// 注册指令 my-command，有数据库支持时才生效
+app.select('database').command('my-command')
+
+// 安装插件 ./my-plugin，仅限 OneBot 平台使用
+app.select('platform', 'onebot').plugin(require('./my-plugin'))
+```
+
+是不是非常方便呢？
+
+### 使用过滤器
+
+你也可以自定义一个上下文的 **过滤器** 函数：它传入一个会话对象，并返回一个 boolean 类型。
+
+```js
+// 满足当前上下文条件，且消息内容为“啦啦啦”
+ctx.intersect(session => session.content === '啦啦啦')
+
+// 满足当前上下文条件，或消息内容为“啦啦啦”
+ctx.union(session => session.content === '啦啦啦')
+```
+
+这里的两个方法 `ctx.intersect()` 和 `ctx.union()` 也可以传入一个上下文，表示两个上下文的交集和并集：
+
+```js
+// 选择来自用户 445566 的私聊会话
+app.unselect('groupId').intersect(app.select('userId', '445566'))
+
+// 选择来自用户 445566 的会话，以及全部私聊会话
+app.unselect('groupId').union(app.select('userId', '445566'))
+```
+
+这些方法会返回一个新的上下文，在其上使用监听器、中间件、指令或是插件就好像同时在多个上下文中使用一样。

@@ -94,20 +94,6 @@ ctx.servers['onebot'].bots['123456789']
 - **middleware:** [`Middleware`](../guide/message.md#中间件) 要注册的中间件
 - 返回值: `this`
 
-### ctx.prependMiddleware(middleware)
-
-当前上下文中注册一个前置中间件。
-
-- **middleware:** [`Middleware`](../guide/message.md#中间件) 要注册的前置中间件
-- 返回值: `this`
-
-### ctx.removeMiddleware(middleware)
-
-移除当前上下文中一个已注册的中间件。
-
-- **middleware:** [`Middleware`](../guide/message.md#中间件) 要移除的中间件
-- 返回值: `boolean` 是否存在该中间件
-
 ## 指令与插件
 
 ### ctx.plugin(plugin, options?)

@@ -30,6 +30,18 @@ ctx.app.emitEvent(...args)          =>  ctx.emit(...args)
 app.options.maxMiddlewares          =>  app.options.maxListeners
 ```
 
+## 选择器
+
+Koishi v3 提供了选择器，它完全覆盖了 v1 的上下文创建功能并有所增强。
+
+```js
+ctx.user(123, 456)                    =>  ctx.select('userId', '123', '456')
+ctx.groups.exclude(123, 456)          =>  ctx.unselect('groupId', '123', '456')
+ctx.groups.intersect(ctx.user(789))   =>  ctx.select('groupId').select('userId', '789')
+```
+
+相关文档：[使用选择器](../guide/context.md#使用选择器)
+
 ## 会话接口
 
 Koishi v3 新增了会话的概念，它向下兼容大部分 Koishi v1 元信息对象的特性，并增加了大量方法：
@@ -56,6 +68,8 @@ ses.observeUser()     // 绑定可观测用户实例
 ses.observeChannel()  // 绑定可观测频道实例
 ```
 
+相关文档：[使用会话](../guide/message.md#使用会话)
+
 ## 数据库变更
 
 Koishi v3 的数据库相比 v1 发生了许多改动，最为显著的一点就是大部分 group 被替换为了 channel：
@@ -73,6 +87,8 @@ ctx.db.getGroup(...args)    =>  ctx.db.getChannel(...args)
 ```
 
 同时由于 v3 的跨平台特性，你可能还需要留意 `database.getUser()` 这个接口本身的变化。
+
+相关文档：[使用数据库](../guide/database.md)
 
 ## 单一应用实例
 
@@ -117,4 +133,34 @@ cmd.option('--baz <arg>', 'description', { isString: true })
 cmd.option('foo', '-f <arg> description', { fallback: 123 })
 cmd.option('bar', '-B description', { value: false })
 cmd.option('baz', '<arg:string> description')
+```
+
+相关文档：[定义选项](../guide/command.md#定义选项)
+
+## 事件名称
+
+为跨平台考虑，Koishi v3 调整了部分事件名称：
+
+```js
+'group-recall'            =>  'message-deleted/group'
+'friend-recall'           =>  'message-deleted/private'
+
+'friend-add'              =>  'friend-added'
+'group-increase'          =>  'group-added'
+                          =>  'group-member-added'
+'group-decrease'          =>  'group-deleted'
+                          =>  'group-member-deleted'
+
+'group-upload'            =>  'group-file-added'
+'group-admin'             =>  'group-member/role'
+'group-ban'               =>  'group-member/ban'
+
+'notify/*'                =>  'notice/*'
+
+'request/friend'          =>  'friend-request'
+'request/group/invite'    =>  'group-request'
+'request/group/add'       =>  'group-member-request'
+
+'heartbeat'               =>  'lifecycle/heartbeat'
+'lifecycle/*'             =>  'lifecycle/*'
 ```

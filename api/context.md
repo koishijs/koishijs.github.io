@@ -26,11 +26,7 @@ ctx.router.get('/path', (ctx, next) => {
 
 ### ctx.servers
 
-一个键值对，保存了当前应用下的所有 Server 实例。可通过此属性获得特定的 Bot 实例：
-
-```js
-ctx.servers['onebot'].bots['123456789']
-```
+一个键值对，保存了当前应用下的所有 Server 实例。
 
 ## 过滤器
 

@@ -292,12 +292,12 @@ export interface ForwardMessage {
 - **remark:** `string` 好友备注名（仅当同意时有效）
 - 返回值: `Promise<void>`
 
-### bot.setGroupAddRequest(flag, subType, approve?, reason?)
+### bot.setGroupAddRequest(flag, subtype, approve?, reason?)
 
 处理加群请求或邀请。
 
 - **flag:** `string` 加群请求的 flag（需从上报的数据中获得）
-- **subType:** `'add' | 'invite'` 子类型，参见 [Request 型元数据属性](../guide/message.md#request-型元数据属性)
+- **subtype:** `'add' | 'invite'` 子类型，参见 [Request 型元数据属性](../guide/message.md#request-型元数据属性)
 - **approve:** `boolean` 是否同意请求，默认为 `true`
 - **reason:** `string` 拒绝理由（仅当拒绝时有效）
 - 返回值: `Promise<void>`

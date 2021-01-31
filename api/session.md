@@ -22,7 +22,7 @@ sidebarDepth: 2
 ### message 型元数据属性
 
 - **messageType:** `'private' | 'group'`
-- **subType:**
+- **subtype:**
   - 如果是私聊消息：`'friend' | 'group' | 'other'`
   - 如果是群消息：`'normal' | 'anonymous' | 'notice'`
 - **messageId:** `number` 消息 ID，用于撤回等
@@ -47,7 +47,7 @@ sidebarDepth: 2
 ### notice 型元数据属性
 
 - **noticeType:** `'group_upload' | 'group_admin' | 'group_increase' | 'group_ban' | 'friend_add'`
-- **subType:**
+- **subtype:**
   - 如果是管理员变动：`'set' | 'unset'`
   - 如果是群成员增加：`'approve' | 'invite'`
   - 如果是群成员减少：`'leave' | 'kick' | 'kick_me'`
@@ -63,14 +63,14 @@ sidebarDepth: 2
 ### request 型元数据属性
 
 - **requestType:** `'friend' | 'group'`
-- **subType:** `'add' | 'invite'`（如果是加群请求）
+- **subtype:** `'add' | 'invite'`（如果是加群请求）
 - **comment:** `string` 验证信息
 - **flag:** `string` 请求 flag，在调用处理请求的 API 时需要传入
 
 ### metaEvent 型元数据属性
 
 - **metaEventType:** `'lifecycle' | 'heartbeat'`
-- **subType:** `'enable' | 'disable'`（如果是生命周期）
+- **subtype:** `'enable' | 'disable'`（如果是生命周期）
 - **interval:** `number` 到下次心跳的间隔（毫秒）
 - **status:** `StatusInfo` 状态信息，请参考 [getStatus](../api/bot.md#bot-getstatus) 的返回值
 

@@ -90,6 +90,17 @@ ctx.db.getGroup(...args)    =>  ctx.db.getChannel(...args)
 
 相关文档：[使用数据库](../guide/database.md)
 
+## 应用示例选项
+
+Koishi v3 的 App 实例配置选项键名相较 v1 进行了一些变更：
+
+```js
+// 指令前缀
+options.commandPrefix    => options.prefix
+// 预设用户权限等级
+options.defaultAuthority => options.autoAuthorize
+```
+
 ## 单一应用实例
 
 Koishi v3 使用单一的 App 实例管理多个机器人账号，这将大幅提高程序的启动速度。

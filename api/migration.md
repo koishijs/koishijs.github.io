@@ -90,7 +90,7 @@ ctx.db.getGroup(...args)    =>  ctx.db.getChannel(...args)
 
 相关文档：[使用数据库](../guide/database.md)
 
-## 应用示例选项
+## 应用实例配置选项
 
 Koishi v3 的 App 实例配置选项键名相较 v1 进行了一些变更：
 

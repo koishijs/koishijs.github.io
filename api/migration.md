@@ -6,6 +6,12 @@ sidebarDepth: 2
 
 这个页面将介绍 Koishi v3 的新特性和对应的迁移方法。
 
+## 包名变更
+
+koishi-database-mysql 变更为 koishi-plugin-mysql。
+
+此外，你可能还需要额外安装 koishi-adapter-onebot 作为 QQ 平台的支持。
+
 ## 钩子函数
 
 Koishi v1 的 `ctx.receiver` 使用了 [EventEmitter](https://nodejs.org/api/events.html#events_class_eventemitter) 来分发事件，而 Koishi v3 则自己实现了一个事件系统。这样做将带来几点好处：
@@ -27,7 +33,6 @@ ctx.serial()    // 依次触发，返回第一个 resolve non-nullable 的结果
 ctx.receiver.on(event, callback)    =>  ctx.on(event, callback)
 ctx.receiver.emit(event, ...args)   =>  ctx.emit(event, ...args)
 ctx.app.emitEvent(...args)          =>  ctx.emit(...args)
-app.options.maxMiddlewares          =>  app.options.maxListeners
 ```
 
 ## 选择器
@@ -118,6 +123,12 @@ stopAll()               =>  app.stop()
 onStart(cb)             =>  ctx.on('connect', cb)
 onStop(cb)              =>  ctx.on('disconnect', cb)
 ```
+
+其他的构造选项变更：
+
+- commandPrefix -> prefix
+- maxMiddlewares -> maxListeners
+- quickOperationTimeout -> onebot.quickOperation
 
 ## 指令选项
 

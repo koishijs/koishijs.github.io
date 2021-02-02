@@ -46,17 +46,26 @@ type DomainType = string | RegExp | ((source: string) => any)
 - **example:** `text` 使用示例
 - 返回值: `this`
 
-## cmd.action(action)
+## cmd.action(action, prepend?)
 
 为指令添加执行函数。
 
 - **action:** `CommandAction` 执行函数
+- **prepend:** `boolean` 是否前置
 - 返回值: `this`
 
 ```js
 type Awaitable<T> = T extends Promise<unknown> ? T : T | Promise<T>
 type CommandAction = (argv: Argv, ...args: any[]) => Awaitable<string | void>
 ```
+
+## cmd.check(action, append?)
+
+为指令添加检测函数。
+
+- **action:** `CommandAction` 执行函数
+- **append:** `boolean` 是否后置
+- 返回值: `this`
 
 ## cmd.userFields(fields)
 

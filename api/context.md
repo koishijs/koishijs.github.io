@@ -6,7 +6,7 @@ sidebarDepth: 2
 
 **上下文 (Context)** 是 Koishi 的重要概念。你的每一个插件，中间件，监听器和指令都被绑定在上下文上。
 
-## 应用属性
+## 实例属性
 
 下面的属性为了访问方便而绑定，严格上它们对一个 App 实例下的所有上下文都是相同的。
 
@@ -30,65 +30,125 @@ ctx.router.get('/path', (ctx, next) => {
 
 ## 过滤器
 
-### ctx.user(...ids)
+### ctx.user(...values)
+### ctx.group(...values)
+### ctx.platform(...values)
 
-在已有上下文的基础上加上其他上下文。
+选取当前上下文的子集，限定用户编号 / 群组编号 / 平台名称为所给定的值。
 
-- **context:** `Context` 要加上的上下文
+- **values:** `string[]` 允许的用户编号 / 群组编号 / 平台名称构成的数组
 - 返回值: `Context` 新的上下文
 
-### ctx.private(...ids)
+### ctx.select(key, ...values)
 
-在已有上下文的基础上除去其他上下文。
+选取当前上下文的子集，限定会话对象的 key 属性所对应的值。
 
-- **context:** `Context` 要除去的上下文
+- **values:** `string[]` 如果非空则表示允许的 key 属性可选值；否则只需 key 属性为 truthy 即可
 - 返回值: `Context` 新的上下文
 
-### ctx.group(...ids)
+### ctx.user.except(...values)
+### ctx.group.except(...values)
+### ctx.platform.except(...values)
 
-给出当前上下文和其他上下文的交集
+选取当前上下文的子集，排除用户编号 / 群组编号 / 平台名称为所给定的值。
 
-- **context:** `Context` 要求交集的上下文
+- **values:** `string[]` 禁止的用户编号 / 群组编号 / 平台名称构成的数组
 - 返回值: `Context` 新的上下文
 
-### ctx.match(meta)
+### ctx.unselect(key, ...values)
 
-测试上下文能否匹配元信息对象。
+选取当前上下文的子集，排除会话对象的 key 属性所对应的值。
 
-- **meta:** `Meta` 元信息对象
+- **values:** `string[]` 如果非空则表示允许的 key 属性禁用值；否则只需 key 属性为 falsy 即可
+- 返回值: `Context` 新的上下文
+
+### ctx.union(filter)
+
+给出当前上下文和其他上下文的并集。
+
+- **context:** `Context | ((session: Session) => boolean)` 另一个上下文或者过滤器函数
+- 返回值: `Context` 新的上下文
+
+### ctx.intersect(filter)
+
+给出当前上下文和其他上下文的交集。
+
+- **context:** `Context | ((session: Session) => boolean)` 另一个上下文或者过滤器函数
+- 返回值: `Context` 新的上下文
+
+### ctx.match(session)
+
+测试上下文能否匹配会话对象。
+
+- **session:** [`Session`](./session.md) 会话对象
 - 返回值: `boolean` 匹配结果
-
-### ctx.contain(context)
-
-判断当前上下文是否完全包含了另一个上下文。
-
-- **context:** `Context` 要比较的上下文
-- 返回值: `boolean` 比较结果
 
 ## 钩子与中间件
 
-### ctx.emit(meta?, event, ...param)
+### ctx.emit(session?, event, ...param)
+### ctx.parallel(session?, event, ...param)
 
-### ctx.parallel(meta?, event, ...param)
+同时触发所有 event 事件的能够匹配 session 对象的回调函数。emit 为同步，parallel 为异步。
 
-### ctx.bail(meta?, event, ...param)
+- **session:** [`Session`](./session.md) 会话对象
+- **event:** `string` 事件名称
+- **param:** `any[]` 事件的参数
+- 返回值: `boolean` 匹配结果
 
-### ctx.serial(meta?, event, ...param)
+### ctx.bail(session?, event, ...param)
+### ctx.serial(session?, event, ...param)
 
-### ctx.on(event, listener)
+依次触发所有 event 事件的能够匹配 session 对象的回调函数。当返回一个 false, null, undefined 以外的值时将这个值作为结果返回。bail 为同步，serial 为异步。
 
-### ctx.once(event, listener)
+- **session:** [`Session`](./session.md) 会话对象
+- **event:** `string` 事件名称
+- **param:** `any[]` 事件的参数
+- 返回值: `boolean` 匹配结果
 
-### ctx.before(event, listener)
+### ctx.chain(session?, event, ...param)
+### ctx.waterfall(session?, event, ...param)
 
-### ctx.off(event, listener)
+依次触发所有 event 事件的能够匹配 session 对象的回调函数。每次用得到的返回值覆盖下一轮调用的第一个参数，并在所有函数执行完后返回最终结果。chain 为同步，waterfall 为异步。
 
-### ctx.middleware(middleware)
+- **session:** [`Session`](./session.md) 会话对象
+- **event:** `string` 事件名称
+- **param:** `any[]` 事件的参数
+- 返回值: `boolean` 匹配结果
+
+### ctx.on(event, listener, prepend?)
+
+监听一个事件。
+
+- **event:** `string` 事件名称
+- **listener:** `Function` 回调函数
+- **prepend:** `boolean` 是否前置
+- 返回值: `() => boolean` 取消这个监听器
+
+### ctx.once(event, listener, prepend?)
+
+监听一个事件，且确保回调函数只会被执行一次。
+
+- **event:** `string` 事件名称
+- **listener:** `Function` 回调函数
+- **prepend:** `boolean` 是否前置
+- 返回值: `() => boolean` 取消这个监听器
+
+### ctx.before(event, listener, append?)
+
+监听一个以 `before-` 开头的事件。
+
+- **event:** `string` 事件名称
+- **listener:** `Function` 回调函数
+- **append:** `boolean` 是否后置
+- 返回值: `() => boolean` 取消这个监听器
+
+### ctx.middleware(middleware, prepend?)
 
 当前上下文中注册一个中间件。
 
-- **middleware:** [`Middleware`](../guide/message.md#中间件) 要注册的中间件
-- 返回值: `this`
+- **middleware:** [`Middleware`](../guide/message.md#使用中间件) 要注册的中间件
+- **prepend:** `boolean` 是否前置
+- 返回值: `() => boolean` 取消这个中间件
 
 ## 指令与插件
 
@@ -96,21 +156,21 @@ ctx.router.get('/path', (ctx, next) => {
 
 当前上下文中安装一个插件。
 
-- **plugin:** `Plugin<T, U>` 要安装的插件
-- **options:** `U` 要传入插件的参数，如果为 `false` 则插件不会被安装
+- **plugin:** `Plugin` 要安装的插件
+- **options:** `any` 要传入插件的参数，如果为 `false` 则插件不会被安装
 - 返回值: `this`
 
 ```js
-type PluginFunction <T extends Context, U> = (ctx: T, options: U) => void
-type PluginObject <T extends Context, U> = { apply: PluginFunction<T, U> }
-type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
+type PluginFunction<U> = (ctx: Context, options: U) => void
+type PluginObject<U> = { apply: PluginFunction<T, U> }
+type Plugin<U> = PluginFunction<T, U> | PluginObject<T, U>
 ```
 
-### ctx.command(rawName, desc?, config?)
+### ctx.command(def, desc?, config?)
 
 在当前上下文中注册或修改一个指令。
 
-- **rawName:** `string` 指令名以及可能的参数
+- **def:** `string` 指令名以及可能的参数
 - **desc:** `string` 指令的描述
 - **config:** `CommandConfig` 指令的配置
   - **checkUnknown:** `boolean` 是否对未知选项进行检测，默认为 `false`
@@ -129,7 +189,7 @@ type Plugin <T extends Context, U> = PluginFunction<T, U> | PluginObject<T, U>
 - **scope:** `string` 要指定的类型，默认为 `''`
 - 返回值: [`Logger`](../guide/logger.md#使用-logger)
 
-### ctx.dispose() <Badge text="beta" type="warn"/>
+### ctx.dispose()
 
 移除当前插件中所注册的钩子、中间件和指令。
 

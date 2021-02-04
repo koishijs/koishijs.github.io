@@ -55,6 +55,22 @@ Meta 对象还提供了一个快捷回复方法 `session.send`，调用它可以
 
 从性能上说，WebSocket 占用的资源会更少（因为不需要每次都建立连接），但是响应速度可能不如 HTTP；另一方面，当一个 Koishi 应用同时管理着多个机器人时，HTTP 能通过快捷调用和服务器复用的方式来提高性能，但是 WebSocket 并没有这些机制。
 
+## 事件
+
+metaEvent 系列事件对应这 CQHTTP 插件本身的元事件，**只会在 App 实例触发**。所有这些事件的回调函数都会传入一个 [`Meta` 对象](../guide/message.md#深入-meta-对象)。这些事件的共同点是 `meta.postType` 都为 `'meta_event'`。
+
+### 事件：heartbeat
+
+心跳元事件，**仅对 WebSocket 生效**。产生此事件需要通过将配置项 `enable_heartbeat` 设置为 `true`，并可通过 `heartbeat_interval` 配置心跳间隔（单位毫秒）。
+
+### 事件：lifecycle
+
+生命周期事件，**仅对 HTTP 生效**。拥有下面的子事件：
+
+- lifecycle/enable: CQHTTP 插件启用
+- lifecycle/disable: CQHTTP 插件停用
+- lifecycle/connect: 成功建立 WebSocket 连接
+
 ## App 构造函数选项
 
 下面的配置项来自 koishi-adapter-cqhttp。你需要将你的 [`type`](#options-type) 字段配置为 `cqhttp`, `cqhttp:http`, `cqhttp:ws` 或 `cqhttp:ws-reverse` 中的一种。如果缺省或使用了 `cqhttp`，Koishi 会读取你的 `server` 选项，根据你配置的服务器 URL 进行适配。

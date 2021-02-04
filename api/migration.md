@@ -128,6 +128,7 @@ onStop(cb)              =>  ctx.on('disconnect', cb)
 
 - commandPrefix -> prefix
 - maxMiddlewares -> maxListeners
+- defaultAuthority -> autoAuthorize
 - quickOperationTimeout -> onebot.quickOperation
 
 ## 指令选项

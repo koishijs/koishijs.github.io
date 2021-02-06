@@ -8,7 +8,7 @@ sidebarDepth: 2
 这里是**正在施工**的 koishi v3 的文档。要查看 v1 版本的文档，请前往[**这里**](/v1/)。
 :::
 
-一个接收器是一个 [EventEmitter](https://nodejs.org/api/events.html#events_class_eventemitter) 实例，其上封装了所有 [CQHTTP 事件](https://cqhttp.cc/docs/4.12/#/Post)，并添加了一些专用于 Koishi 的事件。不同的事件可能触发在不同的上下文上。
+建议配套阅读：[事件与生命周期](../guide/lifecycle.md)
 
 ## 上报事件
 
@@ -28,7 +28,7 @@ sidebarDepth: 2
 
 ### 消息类事件
 
-跟消息有关的几种事件统称为消息事件，共有以下几种：
+跟消息有关的几种事件统称为消息类事件，共有以下几种：
 
 - message: 收到新消息
 - message-deleted: 消息被删除
@@ -55,7 +55,7 @@ sidebarDepth: 2
 
 ### 成员类事件
 
-跟群组、好友有关的事件统称为成员事件，共有以下几种：
+跟群组、好友有关的事件统称为成员类事件，共有以下几种：
 
 - group-added: 加入了群组
 - group-deleted: 退出了群组
@@ -99,9 +99,11 @@ sidebarDepth: 2
 <!-- - **file:** 文件信息 -->
 - TODO
 
+### 群成员类事件
+
 ### 通知类事件
 
-由系统在频道中发送的各种通知构成了通知事件，共有以下几种：
+由系统在频道中发送的各种通知构成了通知类事件，共有以下几种：
 
 - notice/poke: 戳一戳
 - notice/lucky-king: 运气王
@@ -112,57 +114,34 @@ sidebarDepth: 2
 - **targetId:** `string` 戳一戳的目标用户 ID，运气王的获得者 ID
 - **honorType:** `string` 荣誉类型，可能为 talkative, performer, emotion
 
-## Koishi 内部事件
-
-以下事件与 CQHTTP 无关，是 Koishi 内部的事件。
+## 内部事件
 
 ### 事件：before-connect
-
-开始连接到服务器时在 App 实例触发。
-
 ### 事件：connect
 
-成功连接到服务器时在 App 实例触发。
+开始 / 成功连接到服务器时在 App 实例触发。
 
-### 事件：ready
+### 事件：before-attach-channel
+### 事件：before-attach-user
 
-成功连接到服务器且已经获得 QQ 号时触发。参见 [ready 事件](../guide/lifecycle.md#ready-事件)。
+当 Koishi 试图从数据库获取频道 / 用户信息前触发。调用时会传入一个 `Set<string>` 对象和一个 [`Argv`](./command.md) 对象。如果当前没有正在解析的指令，则该对象只会有一个 `session` 属性。你可以在回调函数中修改传入的字段集合，增加的字段将可以被之后的中间件获取到。
 
-### 事件：before-group
+如果没有配置数据库，则两个事件都不会触发；如果不是群聊消息，则 before-attach-channel 事件不会触发。
 
-当 Koishi 试图从数据库获取群信息前触发。调用时会传入一个 `Set<GroupField>` 对象和一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。如果当前没有正在解析的指令，则该对象只会有一个 `meta` 属性。你可以在回调函数中修改传入的字段集合，增加的字段将可以被之后的中间件获取到。
+### 事件：attach-channel
+### 事件：attach-user
 
-如果没有配置数据库，则该事件不会触发。
+当 Koishi 完成频道 / 用户数据获取后触发。调用时会传入一个 Session 对象，将会拥有 `$channel`/`$user` 属性。你可以在回调函数中对这两个属性做同步的修改（注意：只能是同步的修改）。这些修改会在后续过程中自动更新到数据库。
 
-### 事件：before-user
-
-当 Koishi 试图从数据库获取用户信息前触发。调用时会传入一个 `Set<UserField>` 对象和一个 [`ParsedCommandLine`](../guide/command-system.md#parsedcommandline-对象) 对象。如果当前没有正在解析的指令，则该对象只会有一个 `meta` 属性。你可以在回调函数中修改传入的字段集合，增加的字段将可以被之后的中间件获取到。
-
-如果没有配置数据库，则该事件不会触发。
-
-### 事件：attach <Badge type="error" text="deprecated"/>
-
-请使用 [attach-user](#事件：attach-user) 事件。
-
-### 事件：attach-channel <Badge text="1.10.0+"/>
-
-当 Koishi 完成群数据获取后触发。调用时会传入一个 Meta 对象，将会拥有 `$group` 属性。你可以在回调函数中对这两个属性做同步的修改（注意：只能是同步的修改）。这些修改会在后续过程中自动更新到数据库。
-
-如果没有配置数据库或不是群聊消息，则该事件不会触发。
-
-### 事件：attach-user <Badge text="1.10.0+"/>
-
-当 Koishi 完成用户数据获取后触发。调用时会传入一个 Meta 对象，将会拥有 `$user` 属性（如果是群消息则还会拥有 `$group` 属性）。你可以在回调函数中对这两个属性做同步的修改（注意：只能是同步的修改）。这些修改会在后续过程中自动更新到数据库。
-
-如果没有配置数据库，则该事件不会触发。
+如果没有配置数据库，则两个事件都不会触发；如果不是群聊消息，则 attach-channel 事件不会触发。
 
 ### 事件：before-send
 
-准备发送信息时会在对应的上下文触发。调用时会传入一个伪 Meta 对象，拥有与 [`Meta`](../guide/message.md#深入-meta-对象) 对象类似的结构，但是 `postType` 字段为 `send`。
+准备发送信息时会在对应的上下文触发。调用时会传入一个事件类型为 send 的 `Session` 实例。
 
 ### 事件：send
 
-成功发送信息时会在对应的上下文触发。调用时会传入一个伪 Meta 对象，比 `before-send` 事件传入的对象多出一个 `messageId` 属性。
+成功发送信息时会在对应的上下文触发。调用时会传入一个 Meta 对象，比 `before-send` 事件传入的对象多出一个 `messageId` 属性。
 
 ::: tip 提示
 注意只有非异步 Sender API 成功调用会触发此事件，而异步调用和快速回复都只会触发 `before-send` 事件，因此你在实际使用中可能更需要上一个事件。

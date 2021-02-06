@@ -61,6 +61,14 @@ export interface MessageInfo {
 - **messageId:** `string` 消息 ID
 - 返回值: `Promise<void>`
 
+### bot.editMessage(messageId, content)
+
+修改特定信息。
+
+- **messageId:** `string` 消息 ID
+- **content:** `string` 要发送的内容
+- 返回值: `Promise<void>`
+
 ## 账号信息
 
 ### bot.getUser(userId)

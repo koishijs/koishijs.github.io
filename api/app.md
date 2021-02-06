@@ -54,6 +54,20 @@ new App({
 
 指令前缀字符，可以是字符串或字符串数组。将用于指令前缀的匹配。例如，如果配置该选项为 `.`，则你可以通过 `.help` 来进行 help 指令的调用。参见 [**指令前缀**](../guide/command.md#指令前缀) 一节。
 
+### options.delay
+
+- 类型：`DelayOptions`
+
+```js
+interface DelayOptions {
+  character?: number
+  message?: number
+  cancel?: number
+  broadcast?: number
+  prompt?: number
+}
+```
+
 ### options.maxListeners
 
 - 类型：`number`
@@ -74,21 +88,9 @@ new App({
 
 ### options.autoAssign
 
-- 类型：`string | ((session: Session) => string)`
+- 类型：`boolean | ((session: Session) => boolean)`
 
-当获取不到频道数据时默认使用的代理者。
-
-### options.queueDelay
-
-- 类型：`number | ((message: string, session: Session) => number)`
-
-`session.sendQueued` 的默认延迟时间，单位为毫秒。默认值为 `100`。
-
-### options.promptTimeout
-
-- 类型：`number`
-
-`session.prompt` 的默认等待时间，单位为毫秒。默认值为 `60000`。
+当获取不到频道数据时，是否使用接受者作为代理者。
 
 ### options.prettyErrors
 

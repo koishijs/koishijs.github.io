@@ -4,7 +4,7 @@ sidebarDepth: 2
 
 # 插件与上下文
 
-## 使用插件 (Plugin)
+## 使用插件
 
 Koishi 官方实现了许多功能，但一个机器人很可能只会用到其中的一部分。因此我们采用了插件化的方式，将不同的功能解耦到了不同的包中。你可以在 [官方插件](../plugins/index.md) 中了解到各种不同的功能。
 
@@ -120,7 +120,7 @@ ctx.plugin(require('koishi-plugin-foo/a'))
 
 Koishi 的官方插件 koishi-plugin-common 也使用了 [这种写法](https://github.com/koishijs/koishi/blob/master/packages/plugin-common/src/index.ts)。
 
-## 使用上下文 (Context)
+## 使用上下文
 
 一个 **上下文** 描述了机器人的一种可能的运行环境。例如，如果一个指令或中间件被绑定在了上面例子中的上下文，那么只有该环境下的事件才会触发对应的回调函数。之前介绍过的 `ctx.on()`, `ctx.middleware()` 以及 `ctx.plugin()` 这些 API 都是上下文类所提供的方法，而我们能在 `app` 上调用这些方法只是因为 `App` 对象本身也是一个上下文而已。
 
@@ -129,14 +129,21 @@ Koishi 的官方插件 koishi-plugin-common 也使用了 [这种写法](https://
 我们可以通过 **选择器** 来快速创建新的上下文：
 
 ```js
-app.select('groupId') // 选择全部群聊会话
-app.unselect('groupId') // 选择全部私聊会话
+app.group() // 选择全部群聊会话
+app.group.except() // 选择全部私聊会话
 
-app.select('groupId', '112233') // 选择来自群 112233 的会话
-app.unselect('groupId', '112233') // 选择来自除了群 112233 以外的群的会话
+app.group('112233') // 选择来自群 112233 的会话
+app.group.except('112233') // 选择来自除了群 112233 以外的群的会话
 
-app.select('userId', '445566') // 选择来自用户 445566 的会话（包括群聊和私聊）
-app.unselect('groupId').select('userId', '445566') // 选择来自用户 445566 的私聊会话
+app.user('445566') // 选择来自用户 445566 的会话（包括群聊和私聊）
+app.group.except().user('445566') // 选择来自用户 445566 的私聊会话
+```
+
+它们实际上是 `ctx.select()` 和 `ctx.unselect()` 方法的语法糖。对于上面的最后一个例子，你可以等价地表示成：
+
+```js
+// 选择来自用户 445566 的私聊会话
+app.unselect('groupId').select('userId', '445566')
 ```
 
 利用上下文，你可以非常方便地对每个环境进行分别配置：
@@ -146,7 +153,7 @@ app.unselect('groupId').select('userId', '445566') // 选择来自用户 445566 
 app.middleware(callback)
 
 // 当有人申请加群 112233 时触发 listener
-app.select('groupId', '112233').on('group-request', listener)
+app.group('112233').on('group-request', listener)
 
 // 注册指令 my-command，有数据库支持时才生效
 app.select('database').command('my-command')

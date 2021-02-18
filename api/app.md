@@ -74,12 +74,6 @@ interface DelayOptions {
 
 每种钩子的最大数量。如果超过这个数量，Koishi 会认定为发生了内存泄漏，将产生一个警告。默认值为 `64`。
 
-### options.processMessage
-
-- 类型：`(message: string) => string`
-
-对消息进行提前处理的方式，它将直接作用与 `session.message`。默认值为 `message => simplify(message.trim())`。
-
 ### options.autoAuthorize
 
 - 类型：`number | ((session: Session) => number)`
@@ -125,6 +119,12 @@ interface DelayOptions {
 - 类型：`Record<string, number>`
 
 用于在某些范围覆盖默认的输出等级。参见 [**过滤输出**](../guide/logger.md#过滤输出) 一节。
+
+### options.logTime
+
+- 类型：`string | boolean`
+
+输出日志所使用的时间格式。参见 [**输出时间**](../guide/logger.md#输出时间) 一节。
 
 ## 实例属性和方法
 

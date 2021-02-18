@@ -226,7 +226,7 @@ interface CQCode {
 - **source:** `string` 源文本
 - 返回值: `string` 转义前的文本
 
-### CQCode.stringify(type, data)
+### CQCode(type, data)
 
 将一个对象转化成 CQ 码文本。
 
@@ -238,7 +238,7 @@ interface CQCode {
 类型为 text 的 CQ 码将直接被转化为 `data.text` 输出。
 :::
 
-### CQCode.stringifyAll(codes)
+### CQCode.join(codes)
 
 将多个 CQCode 对象转化成文本并连接。
 

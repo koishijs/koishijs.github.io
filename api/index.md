@@ -16,6 +16,7 @@ koishi-core 中提供的 API，包括以下几个子页面：
 - [事件 (Events)](./events.md)
 - [会话 (Session)](./session.md)
 - [指令 (Command)](./command.md)
+- [消息段 (Segment)](./segment.md)
 - [数据库 (Database)](./database.md)
 
 ## 其他官方包 API

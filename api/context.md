@@ -24,9 +24,9 @@ ctx.router.get('/path', (ctx, next) => {
 })
 ```
 
-### ctx.servers
+### ctx.bots
 
-一个键值对，保存了当前应用下的所有 Server 实例。
+一个键值对，保存了当前应用下的所有 Bot 实例。
 
 ## 过滤器
 

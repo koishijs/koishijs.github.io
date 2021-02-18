@@ -93,6 +93,8 @@ module.exports = {
 
 当同时设置了 `logLevel` 和 `logFilter` 时，后者在 foo 插件的范围会覆盖前者，再用覆盖后的值与命令行取最小值，得到的就是 foo 插件的最终输出等级。
 
+### 输出时间
+
 ### 内置的输出
 
 Koishi 自身会产生下列类型的 logger 输出：

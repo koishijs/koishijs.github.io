@@ -176,7 +176,7 @@ interface CQNode {
 export interface GroupMessage {
   messageId: number
   realId: number
-  sender: AccountInfo
+  sender: AuthorInfo
   time: number
   content: string
 }
@@ -192,7 +192,7 @@ export interface GroupMessage {
 ```js
 export interface ForwardMessage {
   messages: {
-    sender: AccountInfo
+    sender: AuthorInfo
     time: number
     content: string
   }[]
@@ -324,10 +324,10 @@ export interface ForwardMessage {
 
 获取登录号信息。
 
-- 返回值: `Promise<AccountInfo>` 登录号信息
+- 返回值: `Promise<UserInfo>` 登录号信息
 
 ```js
-export interface AccountInfo {
+export interface UserInfo {
   userId: number
   nickname: string
 }
@@ -340,7 +340,7 @@ export interface AccountInfo {
 - 返回值: `Promise<VipInfo>` 会员信息
 
 ```js
-export interface VipInfo extends AccountInfo {
+export interface VipInfo extends UserInfo {
   level: number
   levelSpeed: number
   vipLevel: number
@@ -358,7 +358,7 @@ export interface VipInfo extends AccountInfo {
 - 返回值: `Promise<StrangerInfo>` 陌生人信息
 
 ```js
-export interface StrangerInfo extends AccountInfo {
+export interface StrangerInfo extends UserInfo {
   sex: 'male' | 'female' | 'unknown'
   age: number
 }
@@ -371,7 +371,7 @@ export interface StrangerInfo extends AccountInfo {
 - 返回值: `Promise<FriendInfo[]>` 好友列表
 
 ```js
-export interface FriendInfo extends AccountInfo {
+export interface FriendInfo extends UserInfo {
   remark: string
 }
 ```

@@ -88,6 +88,7 @@ module.exports = context => ({
           '/api/events',
           '/api/session',
           '/api/command',
+          '/api/segment',
           '/api/database',
         ],
       }, {

@@ -8,6 +8,65 @@ sidebarDepth: 2
 
 消息段协议本身也是 OneBot 协议的 [一部分](https://github.com/howmanybots/onebot/blob/master/v11/specs/message/segment.md)，但该协议与 Koishi 所使用的消息段**存在一定的区别，在实际使用时请以本页文档为准**。由于 koishi-adapter-onebot 会自动进行两种协议间的转换，你并不需要担心兼容性问题。
 
+## 消息段操作
+
+一个消息段对象的结构如下：
+
+```js
+interface Segment {
+  type: string
+  data: Record<string, string | number | boolean>
+}
+```
+
+### Segment(type, data)
+
+将一个对象转化成消息段文本。
+
+- **type:** `string` 消息段类型
+- **data:** `object` 消息段参数
+- 返回值: `string` 生成的消息段
+
+::: tip 注意
+类型为 text 的消息段将直接被转化为 `data.text` 输出。
+:::
+
+### Segment.join(codes)
+
+将多个 Segment 对象转化成文本并连接。
+
+- **codes:** `Segment[]` 消息段数组
+- 返回值: `string` 生成的文本
+
+### Segment.escape(source, inline?)
+
+转义一段文本到消息段格式。
+
+- **source:** `string` 源文本
+- **inline:** `boolean` 在消息段内部转义（会额外处理逗号）
+- 返回值: `string` 转义过后的文本
+
+### Segment.unescape(souce)
+
+取消一段文本的消息段转义。
+
+- **source:** `string` 源文本
+- 返回值: `string` 转义前的文本
+
+### Segment.find(source)
+
+将一个消息段文本解析成对象。
+
+- **source:** `string` 源文本
+- 返回值: `Segment` 消息段的类型和参数
+
+### Segment.parse(source)
+
+解析一段文本内的全部消息段。其中的纯文本将会解析成 text 类型。
+
+- **source:** `string` 源文本
+- 返回值: `Segment[]` 消息段数组
+
 ## 元素码
 
 元素码是一段拥有特定语义的文本，通常可以出现在一段消息中的任何位置。发送时只需提供 `id`。当存在不受支持的元素码时，适配器应该用 `alt` 或 `id` 代替。

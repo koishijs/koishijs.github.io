@@ -30,13 +30,22 @@ ctx.router.get('/path', (ctx, next) => {
 
 ## 过滤器
 
+### ctx.self(...values)
 ### ctx.user(...values)
 ### ctx.group(...values)
+### ctx.channel(...values)
 ### ctx.platform(...values)
 
-选取当前上下文的子集，限定用户编号 / 群组编号 / 平台名称为所给定的值。
+选取当前上下文的子集，限定机器人 / 用户 / 群组 / 频道 / 平台名称为所给定的值。
 
-- **values:** `string[]` 允许的用户编号 / 群组编号 / 平台名称构成的数组
+- **values:** `string[]` 允许的机器人 / 用户 / 群组 / 频道 / 平台名称构成的数组
+- 返回值: `Context` 新的上下文
+
+### ctx.{type}.except(...values)
+
+选取当前上下文的子集，排除机器人 / 用户 / 群组 / 频道 / 平台名称为所给定的值。这里的 type 同上文。
+
+- **values:** `string[]` 禁止的机器人 / 用户 / 群组 / 频道 / 平台名称构成的数组
 - 返回值: `Context` 新的上下文
 
 ### ctx.select(key, ...values)
@@ -44,15 +53,6 @@ ctx.router.get('/path', (ctx, next) => {
 选取当前上下文的子集，限定会话对象的 key 属性所对应的值。
 
 - **values:** `string[]` 如果非空则表示允许的 key 属性可选值；否则只需 key 属性为 truthy 即可
-- 返回值: `Context` 新的上下文
-
-### ctx.user.except(...values)
-### ctx.group.except(...values)
-### ctx.platform.except(...values)
-
-选取当前上下文的子集，排除用户编号 / 群组编号 / 平台名称为所给定的值。
-
-- **values:** `string[]` 禁止的用户编号 / 群组编号 / 平台名称构成的数组
 - 返回值: `Context` 新的上下文
 
 ### ctx.unselect(key, ...values)

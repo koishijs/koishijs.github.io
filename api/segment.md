@@ -13,13 +13,13 @@ sidebarDepth: 2
 一个消息段对象的结构如下：
 
 ```js
-interface Segment {
+interface segment {
   type: string
   data: Record<string, string | number | boolean>
 }
 ```
 
-### Segment(type, data)
+### segment(type, data)
 
 将一个对象转化成消息段文本。
 
@@ -31,14 +31,14 @@ interface Segment {
 类型为 text 的消息段将直接被转化为 `data.text` 输出。
 :::
 
-### Segment.join(codes)
+### segment.join(codes)
 
-将多个 Segment 对象转化成文本并连接。
+将多个 segment 对象转化成文本并连接。
 
-- **codes:** `Segment[]` 消息段数组
+- **codes:** `segment[]` 消息段数组
 - 返回值: `string` 生成的文本
 
-### Segment.escape(source, inline?)
+### segment.escape(source, inline?)
 
 转义一段文本到消息段格式。
 
@@ -46,26 +46,26 @@ interface Segment {
 - **inline:** `boolean` 在消息段内部转义（会额外处理逗号）
 - 返回值: `string` 转义过后的文本
 
-### Segment.unescape(souce)
+### segment.unescape(souce)
 
 取消一段文本的消息段转义。
 
 - **source:** `string` 源文本
 - 返回值: `string` 转义前的文本
 
-### Segment.find(source)
+### segment.from(source)
 
 将一个消息段文本解析成对象。
 
 - **source:** `string` 源文本
-- 返回值: `Segment` 消息段的类型和参数
+- 返回值: `segment` 消息段的类型和参数
 
-### Segment.parse(source)
+### segment.parse(source)
 
 解析一段文本内的全部消息段。其中的纯文本将会解析成 text 类型。
 
 - **source:** `string` 源文本
-- 返回值: `Segment[]` 消息段数组
+- 返回值: `segment[]` 消息段数组
 
 ## 元素码
 
@@ -119,18 +119,16 @@ interface Segment {
 
 ## 前缀码
 
-前缀码只会出现在一段消息的第一个，用于表示这段消息的发送方式。由于前缀码本身不包含任何信息，发送前应从消息中清除。如果某个平台不支持特定的前缀码，适配器应当判断 `ignore` 属性：如果可忽略，则直接删去此前缀码；否则应当抛出错误。
-
-- **ignore:** `boolean` 是否可忽略
+前缀码只会出现在一段消息的第一个，用于表示这段消息的发送方式。由于前缀码本身不包含任何信息，发送前应从消息中清除。
 
 ### 引用 (quote)
 
 - **id:** `string` 要引用的消息 ID
 
-### 卡片 (card)
-
-参见上述通用属性。
-
 ### 匿名 (anonymous)
 
-参见上述通用属性。
+- **ignore:** `boolean` 当无法发送匿名消息时，如果此项为 `true`，则直接删去此前缀码；否则将不产生任何输出
+
+### Markdown (markdown)
+
+### 卡片 (card)

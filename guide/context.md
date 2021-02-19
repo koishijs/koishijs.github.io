@@ -187,3 +187,37 @@ app.unselect('groupId').union(app.select('userId', '445566'))
 ```
 
 这些方法会返回一个新的上下文，在其上使用监听器、中间件、指令或是插件就好像同时在多个上下文中使用一样。
+
+## 可卸载的插件
+
+通常来说一个插件的效应应该是永久的，但如果你想在运行时卸载一个插件，应该怎么做？你可以使用插件定义中的那个 Context 对象来解决。
+
+```js my-plugin.js
+module.exports = (ctx, options) => {
+  // 编写你的插件逻辑
+  ctx.on('message', someListener)
+  ctx.command('foo').action(callback)
+  ctx.middleware(callback)
+  ctx.plugin(require('another-plugin'))
+
+  // 卸载这个插件，取消上面的全部操作
+  ctx.dispose()
+}
+```
+
+看起来很神奇，不过它的实现方式也非常简单。当一个插件被注册时，Koishi 会记录注册过程中定义的所有事件钩子、指令、中间件乃至子插件。当 `ctx.dispose()` 被调用时，再逐一取消上述操作的效应。因此，它的局限性也很明显：它并不能妥善处理除了 Context API 以外的副作用。不过，我们也准备了额外的解决办法：
+
+```js my-plugin.js
+module.exports = (ctx, options) => {
+  // ctx.dispose 无法消除 setInterval 的效果
+  const timer = setInterval(callback, 60000)
+
+  // 添加一个特殊的回调函数来处理副作用
+  ctx.on('dispose', () => {
+    clearInterval(timer)
+  })
+
+  // 现在我们又可以愉快地使用 ctx.dispose() 啦
+  ctx.dispose()
+}
+```

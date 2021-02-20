@@ -98,6 +98,7 @@ module.exports = context => ({
           '/api/utils',
           '/api/test-utils',
           '/api/adapter/onebot',
+          '/api/adapter/telegram',
           '/api/adapter/kaiheila',
           '/api/database/mongo',
           '/api/database/mysql',

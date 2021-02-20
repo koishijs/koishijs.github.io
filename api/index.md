@@ -26,6 +26,7 @@ koishi-core 中提供的 API，包括以下几个子页面：
 - [常用工具 (Utils)](./utils.md)
 - [测试工具 (Test Utils)](./test-utils.md)
 - [平台：OneBot](./adapter/onebot.md)
+- [平台：Telegram](./adapter/telegram.md)
 - [平台：Kaiheila](./adapter/kaiheila.md)
 - [数据库：Mongo](./database/mongo.md)
 - [数据库：MySQL](./database/mysql.md)

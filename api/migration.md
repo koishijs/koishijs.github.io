@@ -52,8 +52,8 @@ ctx.groups.intersect(ctx.user(789))   =>  ctx.select('groupId').select('userId',
 Koishi v3 新增了会话的概念，它向下兼容大部分 Koishi v1 元信息对象的特性，并增加了大量方法：
 
 ```js
-ses.$app              // App 实例
-ses.$bot              // Bot 实例
+ses.app               // App 实例
+ses.bot               // Bot 实例
 
 ses.send()            // 发送消息
 ses.sendQueued()      // 延时发送消息

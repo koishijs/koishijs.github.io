@@ -13,12 +13,12 @@ sidebarDepth: 2
 - **name:** `string` 选项的名字
 - **desc:** `string` 选项的描述
 - **config:** `OptionConfig`
-  - **config.fallback:** `any` 选项的[默认值](../guide/command/basic.md#选项的默认值)
-  - **config.value:** `any` 选项的[重载值](../guide/command/basic.md#选项的重载)
-  - **config.type:** `DomainType` 选项的[类型定义](../guide/command/basic.md#选项的临时类型)
-  - **config.hidden:** `boolean` 是否[隐藏选项](../guide/command/basic.md#隐藏指令和选项)
-  - **config.notUsage:** `boolean` 是否[计入调用]()
-  - **config.authority:** `number` 选项的[权限等级]()
+  - **config.fallback:** `any` 选项的[默认值](../guide/command.md#选项的默认值)
+  - **config.value:** `any` 选项的[重载值](../guide/command.md#选项的重载)
+  - **config.type:** `DomainType` 选项的[类型定义](../guide/command.md#选项的临时类型)
+  - **config.hidden:** `boolean` 是否[隐藏选项](../guide/help.md#隐藏指令和选项)
+  - **config.notUsage:** `boolean` 是否[计入调用](../guide/manage.md#指令调用管理)
+  - **config.authority:** `number` 选项的[权限等级](../guide/manage.md#设置调用权限)
 - 返回值: `this`
 
 ```js
@@ -131,7 +131,7 @@ type FieldCollector<K extends string> =
   - **argv.args:** `any[]` 指令的参数列表
   - **argv.options:** `Record<string, any>` 指令的选项
   - **argv.session:** [`Session`](./session.md) 当前的会话对象
-- **next:** [`NextFunction`](../guide/message.md#中间件) 所处的中间件的 `next` 回调函数
+- **next:** [`NextFunction`](../guide/message.md#使用中间件) 所处的中间件的 `next` 回调函数
 - 返回值: `Promise<string>` 执行函数的返回结果，可用于指令插值
 
 ## cmd.dispose()

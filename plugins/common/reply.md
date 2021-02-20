@@ -115,7 +115,7 @@ module.exports = {
 
       // 检测打断复读
       interruptCheck: (repeated, times) => repeated && times >= 3 && Math.random() > 0.5,
-      interruptCheckText: (userId) => `[CQ:at,qq=${userId}] 在？为什么打断复读？`,
+      interruptCheckText: (userId) => segment.at(userId) + '在？为什么打断复读？',
     },
   }]],
 }
@@ -161,8 +161,8 @@ const defaultOptions: RepeaterOptions = {
   interrupt: false,
   interruptText: '打断复读！',
   repeatCheck: false,
-  repeatCheckText: (userId) => `[CQ:at,qq=${userId}] 在？为什么重复复读？`,
+  repeatCheckText: (userId) => segment.at(userId) + '在？为什么重复复读？',
   interruptCheck: false,
-  interruptCheckText: (userId) => `[CQ:at,qq=${userId}] 在？为什么打断复读？`,
+  interruptCheckText: (userId) => segment.at(userId) + '在？为什么打断复读？',
 }
 ```

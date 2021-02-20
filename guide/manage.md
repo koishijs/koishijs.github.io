@@ -184,7 +184,7 @@ ctx.command('accurate 精准抽卡', { maxUsage: 10, usageName: 'lottery' })
 
 ### 观察者对象
 
-之前我们已经提到过，你可以在 `session.$user` 上获得本次事件相关的用户数据，但实际上 `session.$user` 能做的远远不止这些。它的本质其实是一个**观察者**对象。假如我们有下面的代码：
+之前我们已经提到过，你可以在 `session.user` 上获得本次事件相关的用户数据，但实际上 `session.user` 能做的远远不止这些。它的本质其实是一个**观察者**对象。假如我们有下面的代码：
 
 ```js
 // 定义一个 items 字段，用于存放物品列表
@@ -196,12 +196,12 @@ ctx.command('lottery')
     // 这里假设 item 是一个字符串，表示抽到的物品
     const item = getLotteryItem()
     // 将抽到的物品存放到 user.items 中
-    session.$user.items.push(item)
+    session.user.items.push(item)
     return `恭喜您获得了 ${item}！`
   })
 ```
 
-上面的代码看起来完全无法工作，因为我们都知道将数据写入数据库是一个异步的操作，但是在上面的中间件中我们没有调用任何异步操作。然而如果你运行这段代码，你会发现用户数据被成功地更新了。这就归功于观察者机制。`session.$user` 的本质是一个 **观察者对象**，它检测在其上面做的一切更改并缓存下来。当任务进行完毕后，Koishi 又会自动将变化的部分进行更新，同时将缓冲区清空。
+上面的代码看起来完全无法工作，因为我们都知道将数据写入数据库是一个异步的操作，但是在上面的中间件中我们没有调用任何异步操作。然而如果你运行这段代码，你会发现用户数据被成功地更新了。这就归功于观察者机制。`session.user` 的本质是一个 **观察者对象**，它检测在其上面做的一切更改并缓存下来。当任务进行完毕后，Koishi 又会自动将变化的部分进行更新，同时将缓冲区清空。
 
 这套机制不仅可以将多次更新合并成一次以提高程序性能，更能解决数据竞争的问题。如果两条信息先后被接收到，如果单纯地使用 getUser / setUser 进行处理，可能会发生后一次 getUser 在前一次 setUser 之前完成，导致本应获得 2 件物品，但实际只获得了 1 件的问题。而观察者会随时同步同源数据，数据安全得以保证。
 
@@ -222,7 +222,7 @@ import { Command } from 'koishi-core'
 Command.userFields(['name'])
 
 app.before('command', ({ session, command }) => {
-  console.log('%s calls command %s', session.$user.name, command.name)
+  console.log('%s calls command %s', session.user.name, command.name)
 })
 ```
 
@@ -237,7 +237,7 @@ app.before('attach-user', fields => fields.add('msgCount'))
 
 app.middleware((session, next) => {
   // 这里更新了 msgCount 数据
-  session.$user.msgCount++
+  session.user.msgCount++
   return next()
 })
 ```

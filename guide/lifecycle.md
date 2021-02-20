@@ -86,15 +86,15 @@ const dispose = ctx.on('foo', (...args) => {
 ### 内置中间件
 
 1. 从前缀中匹配 at 机器人，nickname 或 prefix
-2. 预处理消息内容，生成 `session.$appel` 和 `session.$perfix`
+2. 预处理消息内容，生成 [`session.parsed`](../api/session.md#session-parsed)
 3. 触发 [before-parse](../api/events.md#事件：before-parse) 事件，尝试解析消息内容（[快捷方式](./execute.md#快捷方式) 的解析也在此处完成）
 4. 如果数据库存在：
     - 触发 [before-attach-channel](../api/events.md#事件：before-attach-channel) 事件
-    - 获取频道数据并存储于 `session.$channel`
+    - 获取频道数据并存储于 [`session.channel`](../api/session.md#session-channel)
     - 根据 flags, assignee 等字段判断是否应该处理该信息，如果不应该则直接返回
     - 触发 [attach-channel](../api/events.md#事件：attach-channel) 事件（用户可以在其中同步地更新群数据，或中止执行后续操作）
     - 触发 [before-attach-user](../api/events.md#事件：before-attach-user) 事件
-    - 获取用户数据并存储于 `session.$user`
+    - 获取用户数据并存储于 [`session.user`](../api/session.md#session-user)
     - 根据 flags 等字段判断是否应该处理该信息，如果不应该则直接返回
     - 触发 [attach-user](../api/events.md#事件：attach-user) 事件（用户可以在其中同步地更新群和用户数据，或中止执行后续操作）
 5. 如果解析出指令：执行该指令（下接 [指令执行流程](#指令执行流程)）

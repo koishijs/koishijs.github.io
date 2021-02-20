@@ -47,6 +47,7 @@ sidebarDepth: 2
   - **author.avatar:** `string` 发送者的头像链接
   - **author.username:** `string` 发送者的平台昵称
   - **author.nickname:** `string` 发送者在当前群组中的昵称
+- **quote:** 引用的消息，同样包含 `messageId`, `content` 等属性
 
 ### 成员类事件
 
@@ -157,7 +158,7 @@ sidebarDepth: 2
 - **session:** `Session` 当前会话
 - **触发方式:** serial
 
-当 Koishi 完成频道 / 用户数据获取后触发。调用时会传入一个 Session 对象，将会拥有 `$channel`/`$user` 属性。你可以在回调函数中修改这两个属性，这些修改会在后续过程中自动更新到数据库。如果你在回调函数中返回一个 truthy 值，则该会话不会触发指令以及之后的中间件。
+当 Koishi 完成频道 / 用户数据获取后触发。调用时会传入一个 Session 对象，将会拥有 `channel`/`user` 属性。你可以在回调函数中修改这两个属性，这些修改会在后续过程中自动更新到数据库。如果你在回调函数中返回一个 truthy 值，则该会话不会触发指令以及之后的中间件。
 
 如果没有配置数据库，则两个事件都不会触发；如果不是群聊消息，则 attach-channel 事件不会触发。
 

@@ -4,6 +4,22 @@ sidebarDepth: 2
 
 # 数据库 (Database)
 
+## 数据类型
+
+### User
+
+- **id:** `number` 内部编号
+- **flag:** `number` 状态标签
+- **authority:** `number` 用户权限
+- **usage:** `Record<string, number>` 指令调用次数
+- **timers:** `Record<string, number>` 指令调用时间
+
+### Channel
+
+- **id:** `string` 频道标识符
+- **flag:** `number` 状态标签
+- **assignee:** `string` 代理者
+
 ## 全局接口
 
 ### User.Flag, Channel.Flag

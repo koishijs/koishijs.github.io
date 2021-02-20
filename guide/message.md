@@ -48,7 +48,7 @@ type Middleware = (session: Session, next: NextFunction) => any
 ```js
 ctx.middleware((session, next) => {
   // 仅当接收到的消息包含了对机器人的称呼时才继续处理（比如消息以 @机器人 开头）
-  if (session.$appel) {
+  if (session.parsed.appel) {
     return session.send('是你在叫我吗？')
   } else {
     // 如果去掉这一行，那么不满足上述条件的消息就不会进入下一个中间件了
@@ -71,7 +71,7 @@ dispose() // 取消中间件
 ```js
 ctx.middleware(async (session, next) => {
   // 获取数据库中的用户信息
-  // 这里只是示例，事实上 Koishi 会自动获取数据库中的信息并存放在 session.$user 中
+  // 这里只是示例，事实上 Koishi 会自动获取数据库中的信息并存放在 session.user 中
   const user = await session.getUser(session.userId)
   if (user.authority === 0) {
     return session.send('抱歉，你没有权限访问机器人。')
@@ -227,10 +227,10 @@ return session.send(`${name}，请多指教！`)
 
 ```js
 // 向特定频道发送消息
-await session.$bot.sendMessage(123456789, 'Hello world')
+await session.bot.sendMessage(123456789, 'Hello world')
 
 // 获取特定群的成员列表
-const members = await session.$bot.getGroupMemberList(987654321)
+const members = await session.bot.getGroupMemberList(987654321)
 ```
 
 你可以在 [**机器人**](../api/bot.md) 一章中看到完整的 API 列表。
@@ -241,7 +241,7 @@ const members = await session.$bot.getGroupMemberList(987654321)
 
 ```js
 // 使用当前机器人账户向多个频道发送消息
-await session.$bot.broadcast(['123456', '456789'], content)
+await session.bot.broadcast(['123456', '456789'], content)
 
 // 如果你有多个账号，请使用 ctx.broadcast，并在频道编号前加上平台名称
 await ctx.broadcast(['onebot:123456', 'discord:456789'], content)

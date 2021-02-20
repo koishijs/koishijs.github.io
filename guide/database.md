@@ -88,7 +88,7 @@ ctx.database.setSchedule(id, data)
 session.getUser(id, authority, fields)
 
 // 在当前会话上绑定一个可观测用户实例
-// 也就是所谓的 session.$user
+// 也就是所谓的 session.user
 session.observeUser(fields)
 
 // 中间增加了一个第二参数，表示默认情况下的 assignee
@@ -98,7 +98,7 @@ session.observeUser(fields)
 session.getChannel(id, selfId, fields)
 
 // 在当前会话上绑定一个可观测频道实例
-// 也就是所谓的 session.$channel
+// 也就是所谓的 session.channel
 session.observeChannel(fields)
 ```
 

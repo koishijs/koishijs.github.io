@@ -99,16 +99,16 @@ ctx.db.getGroup(...args)    =>  ctx.db.getChannel(...args)
 
 Koishi v3 使用单一的 App 实例管理多个机器人账号，这将大幅提高程序的启动速度。
 
-现在可以通过 `ctx.bots` 访问当前 App 下的所有机器人，也可以用 `session.$app` 和 `session.$bot` 访问当前会话所在的 App 和 Bot 实例了。
+现在可以通过 `ctx.bots` 访问当前 App 下的所有机器人，也可以用 `session.app` 和 `session.bot` 访问当前会话所在的 App 和 Bot 实例了。
 
 ```js
 appMap[selfId].sender       =>  ctx.bots[selfId]
 appList.forEach(cb)         =>  ctx.bots.forEach(cb)
 ctx.sender.sendGroupMsg()   =>  ctx.bots[selfId].sendMessage()
 
-appMap[selfId]              =>  session.$app
-appMap[selfId].sender       =>  session.$bot
-ctx.sender.sendGroupMsg()   =>  session.$bot.sendMessage()
+appMap[selfId]              =>  session.app
+appMap[selfId].sender       =>  session.bot
+ctx.sender.sendGroupMsg()   =>  session.bot.sendMessage()
 
 app.selfId                  =>  bot.selfId
 getSelfIds()                =>  app.bots.map(bot => bot.selfId)
@@ -175,4 +175,14 @@ cmd.option('baz', '<arg:string> description')
 
 'heartbeat'               =>  'lifecycle/heartbeat'
 'lifecycle/*'             =>  'lifecycle/*'
+```
+
+## 消息段变更
+
+CQCode 在 v3 中升级为了 [消息段](./segment.md)。你需要调整这些消息段：
+
+```js
+'[CQ:at,qq=123]'          =>  '[CQ:at,id=123]'      // 接收和发送
+'[CQ:reply,id=123]'       =>  '[CQ:quote,id=123]'   // 接收和发送
+'[CQ:image,file=///]'     =>  '[CQ:image,url=///]'  // 仅限发送（接收逻辑不变）
 ```

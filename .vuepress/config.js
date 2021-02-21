@@ -46,7 +46,7 @@ module.exports = context => ({
     logo: '/koishi.png',
     nav: [
       { text: '主页', link: '/' },
-      { text: '指南', link: '/guide/intro/starter.html' },
+      { text: '指南', link: '/guide/starter.html' },
       { text: 'API', link: '/api/' },
       { text: '官方插件', link: '/plugins/' },
       { text: 'GitHub', link: 'https://github.com/koishijs/koishi' },
@@ -56,10 +56,10 @@ module.exports = context => ({
         title: '入门',
         collapsable: false,
         children: [
-          '/guide/intro/about',
-          '/guide/intro/starter',
-          '/guide/intro/cli',
-          '/guide/intro/faq',
+          '/guide/about',
+          '/guide/starter',
+          '/guide/cli',
+          '/guide/faq',
         ],
       }, {
         title: '进阶',

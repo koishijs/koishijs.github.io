@@ -12,7 +12,7 @@ sidebarDepth: 2
 
 ```js
 app.start().then(() => {
-  app.adapters.onebot.bots.forEach((bot) => {
+  app.bots.forEach((bot) => {
     bot.sendPrivateMsg('123456789', '你的机器人上线了')
   })
 })
@@ -22,7 +22,7 @@ app.start().then(() => {
 
 ```js
 app.on('connect', () => {
-  app.adapters.onebot.bots.forEach((bot) => {
+  app.bots.forEach((bot) => {
     bot.sendPrivateMsg('123456789', '你的机器人上线了')
   })
 })

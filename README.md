@@ -4,7 +4,7 @@ heroImage: /koishi.png
 heroText: Koishi
 tagline: 一个跨平台的机器人框架
 actionText: 快速上手 →
-actionLink: /guide/intro/starter
+actionLink: /guide/starter
 features:
 - title: 开箱即用
   details: 高度便利的 CLI 和 API 可以让你无需基础在几分钟之内搭建自己的机器人。

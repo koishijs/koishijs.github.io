@@ -20,6 +20,10 @@ Koishi 支持多个聊天平台，对于不同的平台，你也需要做好相�
 
 请注意：尽管 Koishi 使用的协议是 [MIT](https://choosealicense.com/licenses/mit/) 协议，但上面陈述的三种途径的相关框架都使用了基于 [AGPL 3.0](https://choosealicense.com/licenses/agpl-3.0/) 的协议。**因此如果你使用 koishi-adapter-onebot 运行你的机器人，你将可能受到 AGPL 3.0 协议的限制，必须将你的代码开源并保持同协议**。Koishi 及其作者对使用上述框架或违反上述限制的行为所可能造成的一切后果概不负责。
 
+### Telegram (Telegram)
+
+TODO
+
 ### Kaiheila (开黑啦)
 
 TODO
@@ -194,7 +198,7 @@ app.plugin(require('./my-plugin'))
 ```js koishi.config.js
 module.exports = {
   port: 7070,
-  cqhttp: {
+  onebot: {
     // onebot 服务将在 http://localhost:7070/onebot 进行处理
     path: '/event',
     secret: 'my-secret',
@@ -205,11 +209,11 @@ module.exports = {
   },
   bots: [
     // 在这里写上不同的机器人配置
-    { type: 'onebot:http', selfId: 123456789, server: 'http://onebot-server' },
-    { type: 'onebot:ws', selfId: 987654321, token: 'my-onebot-token' },
+    { type: 'onebot:http', selfId: '123456789', server: 'http://onebot-server' },
+    { type: 'onebot:ws', selfId: '987654321', token: 'my-onebot-token' },
     { type: 'kaiheila:ws', selfId: 'aAbBcCdD', token: 'my-kaiheila-token' },
   ],
 }
 ```
 
-运行程序后，Koishi 将同时登陆三个机器人。有关多机器人的详细使用方法，可以参见 [**多机器人开发**](./multiple-bots.md) 一章。
+运行程序后，Koishi 将同时登陆三个机器人。有关多机器人的详细使用方法，可以参见 [**多账户与跨平台**](../adapter.md) 一章。

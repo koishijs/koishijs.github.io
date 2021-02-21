@@ -73,7 +73,7 @@ module.exports = context => ({
           '/guide/manage',
           '/guide/database',
           '/guide/lifecycle',
-          '/guide/multiple-bots',
+          '/guide/adapter',
           '/guide/logger',
           '/guide/unit-tests',
         ],
@@ -90,6 +90,7 @@ module.exports = context => ({
           '/api/command',
           '/api/segment',
           '/api/database',
+          '/api/adapter',
         ],
       }, {
         title: '其他官方包',

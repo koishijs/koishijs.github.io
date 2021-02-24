@@ -204,6 +204,10 @@ sidebarDepth: 2
 
 ### new Logger(name)
 
+### logger.level
+
+### logger.extend()
+
 ### logger.error()
 
 ### logger.success()

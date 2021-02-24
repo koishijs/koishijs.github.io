@@ -56,12 +56,19 @@ koishi init [file] [-f]
 koishi start（或 koishi run）指令用于运行一个配置文件。它的完整语法为：
 
 ```cli
-koishi start [file] [--log-level <level>] [--debug <namespace>]
+koishi start [file] [options]
 ```
 
-其中 `file` 参数表示要执行的文件位置。文件尾的后缀名可以省略，Koishi 会自动寻找可用的文件作为配置文件（各种文件格式的最低所需版本与上面所述的相同）。
+其中 `file` 参数表示要执行的文件位置。文件尾的后缀名可以省略，Koishi 会自动寻找可用的文件作为配置文件。
 
-`--log-level` 选项用于控制输出等级，`--debug` 用于制定最高输出等级的命名空间。参见 [在 CLI 中控制输出](./logger.md#在-cli-中控制输出) 一节。
+此外，这个指令还支持一些额外的配置项：
+
+- **--log-level:** 控制输出等级
+- **--log-time:** 在日志中显示时间
+- **--debug:** 最高等级输出的命名空间
+- **--watch:** 监听文件变化并重载插件
+
+与输出日志相关的选项请参见 [输出与日志](./logger.md) 一章。
 
 ### 自动重启
 

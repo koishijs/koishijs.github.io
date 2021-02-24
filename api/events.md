@@ -202,7 +202,7 @@ sidebarDepth: 2
 
 成功关闭服务器后触发。
 
-### 事件：dispose
+### 事件：dispose <Badge text="beta" type="warn" />
 
 - **触发方式:** 特殊
 

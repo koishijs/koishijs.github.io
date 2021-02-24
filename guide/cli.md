@@ -56,12 +56,12 @@ koishi init [file] [-f]
 koishi start（或 koishi run）指令用于运行一个配置文件。它的完整语法为：
 
 ```cli
-koishi start [file] [--debug|--silent|--log-level <level>]
+koishi start [file] [--log-level <level>] [--debug <namespace>]
 ```
 
 其中 `file` 参数表示要执行的文件位置。文件尾的后缀名可以省略，Koishi 会自动寻找可用的文件作为配置文件（各种文件格式的最低所需版本与上面所述的相同）。
 
-`--log-level` 选项用于控制输出等级，`--debug` 和 `--silent` 则表示输出等级为 3 和 0 的两种特殊情况，参见 [在 CLI 中控制输出](./logger.md#在-cli-中控制输出) 一节。
+`--log-level` 选项用于控制输出等级，`--debug` 用于制定最高输出等级的命名空间。参见 [在 CLI 中控制输出](./logger.md#在-cli-中控制输出) 一节。
 
 ### 自动重启
 
@@ -74,6 +74,27 @@ Koishi 的命令行工具支持自动重启。当运行 Koishi 的进程崩溃�
 <chat-message nickname="Koishi" avatar="/koishi.png">正在重启……</chat-message>
 <chat-message nickname="Koishi" avatar="/koishi.png">重启完成。</chat-message>
 </panel-view>
+
+### 插件热重载 <Badge text="beta" type="warn" />
+
+::: warning
+此功能目前属于测试功能，你需要显式地声明你的插件为可重载的。参见 [插件热重载](./context.md#插件热重载)。
+:::
+
+如果你开发着一个巨大的 Koishi 项目，可能光是加载一遍全部插件就需要好几秒了。在这种时候，像前端框架一样支持模块热替换就成了一个很棒的主意。Koishi 也做到了！在启动脚本后加上 `--watch`，就可以实现插件级别的热替换了。每当你修改你的本地文件时，Koishi 就会尝试重载你的插件，并在控制台提醒你。
+
+这里的行为也可以在配置文件中进行定制：
+
+```js koishi.config.js
+module.export = {
+  watch: {
+    // 要监听的根目录，相对于工作路径
+    root: 'src',
+    // 要忽略的文件列表，支持 glob patterns
+    ignore: ['some-file'],
+  },
+}
+```
 
 ### 使用 TypeScript
 

@@ -9,7 +9,7 @@ sidebarDepth: 2
 你可以使用 echo 指令发送消息到特定的上下文：
 
 ```sh
-echo [-u ids] [-g ids] [-d ids] <text...>
+echo [-u ids] [-g ids] [-d ids] <text:text>
 echo foo bar              # 向你发送 foo bar
 echo -u 123 foo bar       # 向用户 123 私聊发送 foo bar
 echo -g 456,789 foo bar   # 向群 456 和 789 同时发送 foo bar

@@ -126,6 +126,13 @@ interface DelayOptions {
 
 输出日志所使用的时间格式。参见 [**输出时间**](../guide/logger.md#输出时间) 一节。
 
+### options.watch
+
+- 类型：[`WatchOptions`](https://github.com/paulmillr/chokidar#api) 外加下面的属性：
+  - **watch.root:** `string` 要监听的根目录，相对于工作路径
+
+监听文件变化的选项。参见 [**插件热重载**](../guide/cli.md#插件热重载) 一节。
+
 ## 实例属性和方法
 
 ### app.options

@@ -188,7 +188,7 @@ app.unselect('groupId').union(app.select('userId', '445566'))
 
 这些方法会返回一个新的上下文，在其上使用监听器、中间件、指令或是插件就好像同时在多个上下文中使用一样。
 
-## 可卸载的插件
+## 可卸载的插件 <Badge text="beta" type="warn" />
 
 通常来说一个插件的效应应该是永久的，但如果你想在运行时卸载一个插件，应该怎么做？你可以使用插件定义中的那个 Context 对象来解决。
 
@@ -221,3 +221,5 @@ module.exports = (ctx, options) => {
   ctx.dispose()
 }
 ```
+
+### 插件热重载

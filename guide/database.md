@@ -122,7 +122,7 @@ User.extend(() => ({ foo: 'bar' }))
 ```js
 import { User } from 'koishi'
 
-declare module 'koishi-core/dist/database' {
+declare module 'koishi-core' {
   interface User {
     foo: string
   }
@@ -165,7 +165,7 @@ export interface Schedule {
   foo: string
 }
 
-declare module 'koishi-core/dist/database' {
+declare module 'koishi-core' {
   interface Database {
     createSchedule(...args): Promise<Schedule>
   }
@@ -190,7 +190,7 @@ extendDatabase<MysqlDatabase>('mysql', {
 import { createPool, Pool, PoolConfig } from 'mysql'
 import { extendDatabase } from 'koishi'
 
-declare module 'koishi-core/dist/database' {
+declare module 'koishi-core' {
   interface Database extends MysqlDatabase {}
 }
 

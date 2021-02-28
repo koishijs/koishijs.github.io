@@ -92,7 +92,7 @@ interface DelayOptions {
 
 启用报错优化模式。在此模式下 Koishi 会对程序抛出的异常进行整理，过滤掉框架内部的调用记录，输出更易读的提示信息。默认值为 `true`。
 
-### options.similarityCoefficient
+### options.minSimilarity
 
 - 类型：`number`
 

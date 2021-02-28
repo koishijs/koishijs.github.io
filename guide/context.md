@@ -213,7 +213,7 @@ module.exports = (ctx, options) => {
   const timer = setInterval(callback, 60000)
 
   // 添加一个特殊的回调函数来处理副作用
-  ctx.on('dispose', () => {
+  ctx.before('disconnect', () => {
     clearInterval(timer)
   })
 

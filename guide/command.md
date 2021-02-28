@@ -150,12 +150,12 @@ app.command('my-command [arg:number]')
 
 ### 定义新类型
 
-使用 `Domain.create()` 创建新类型：
+使用 `Argv.createDomain()` 创建新类型：
 
 ```js
 import { Domain } from 'koishi-core'
 
-Domain.create('repeat', source => source.repeat(3))
+Argv.createDomain('repeat', source => source.repeat(3))
 
 app.command('test [arg:repeat]')
   .action((_, arg) => arg)
@@ -168,12 +168,12 @@ app.command('test [arg:repeat]')
 
 ### 类型检查
 
-你也可以在 `Domain.create()` 的回调函数中抛出错误，以实现类型检查的目的：
+你也可以在 `Argv.createDomain()` 的回调函数中抛出错误，以实现类型检查的目的：
 
 ```js
-import { Domain } from 'koishi-core'
+import { Argv } from 'koishi-core'
 
-Domain.create('int', (source) => {
+Argv.createDomain('int', (source) => {
   if (/^-?\d+$/.test(source)) throw new Error('应为整数。')
   return +source
 })

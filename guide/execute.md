@@ -120,4 +120,4 @@ Koishi 默认不转义单引号内的文本。如果你不希望某个参数被�
 <chat-message nickname="Koishi" avatar="/koishi.png">hello</chat-message>
 </panel-view>
 
-如果想调整模糊匹配的程度，你还可以修改配置项 [similarityCoefficient](../api/app.md#options-similaritycoefficient)。是不是很方便呢？
+如果想调整模糊匹配的程度，你还可以修改配置项 [minSimilarity](../api/app.md#options-minsimilarity)。是不是很方便呢？

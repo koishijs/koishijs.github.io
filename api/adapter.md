@@ -79,11 +79,11 @@ Adapter.from(app, bot).create(bot)
 
 ## 类：Adapter.WsClient
 
-### new Adapter.WsClient(app, BotStatic, options)
+### new Adapter.WsClient(app, BotStatic, options?)
 
 - **app:** `App` 应用实例
 - **BotStatic:** `Bot.Constructor` 机器人构造函数
-- **options:** `WsClientOptions`
+- **options:** `WsClientOptions` 连接配置
 
 创建一个 WsClient 适配器实例。
 

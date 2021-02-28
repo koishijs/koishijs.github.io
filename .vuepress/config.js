@@ -116,7 +116,7 @@ module.exports = context => ({
         title: '常用功能 (Common)',
         collapsable: false,
         children: [
-          '/plugins/common/overview',
+          '/plugins/common/',
           '/plugins/common/message',
           '/plugins/common/reply',
           '/plugins/common/handler',
@@ -127,7 +127,7 @@ module.exports = context => ({
         title: '教学系统 (Teach)',
         collapsable: false,
         children: [
-          '/plugins/teach/basic',
+          '/plugins/teach/',
           '/plugins/teach/interp',
           '/plugins/teach/prob',
           '/plugins/teach/regexp',
@@ -140,7 +140,7 @@ module.exports = context => ({
         title: '执行脚本 (Eval)',
         collapsable: false,
         children: [
-          '/plugins/eval/basic',
+          '/plugins/eval/',
           '/plugins/eval/sandbox',
           '/plugins/eval/addon',
           '/plugins/eval/extension',

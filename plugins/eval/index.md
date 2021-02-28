@@ -4,6 +4,10 @@ sidebarDepth: 2
 
 # 基本用法
 
+::: danger 注意
+这里是**正在施工**的 koishi v3 的文档。
+:::
+
 ::: tip 提示
 本章节将同时介绍 koishi-plugin-eval 和 koishi-plugin-eval-addons 两个插件，后者的功能将作为前者的补充。
 :::

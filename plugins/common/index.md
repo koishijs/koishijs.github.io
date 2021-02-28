@@ -24,7 +24,6 @@ koishi-plugin-common 包含了一些基本插件，它们在你使用 `koishi` �
 | exec | 4 | 否 |
 | exit | 4 | 否 |
 | help | 0 | 否 |
-| info (i) | 0 | 是 |
 
 你也可以在安装插件时显式地声明某些指令不注册：
 

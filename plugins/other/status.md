@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# 运行状态 (Status)
+# 状态监控 (Status)
 
 ::: warning
 要使用本插件，你需要安装 mysql 或 mongo 数据库支持。

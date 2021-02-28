@@ -84,7 +84,7 @@ sidebarDepth: 2
 - **options.next:** [`NextFunction?`](../guide/message.md#使用中间件) 回调函数
 - **options.prefix:** `string?` 显示在候选输入前的文本
 - **options.suffix:** `string` 当只有一个选项时，显示在候选输入后的文本
-- **options.coefficient:** `number` 用于模糊匹配的相似系数，缺省时会使用 [`app.options.similarityCoefficient`](./app.md#options-similaritycoefficient)
+- **options.coefficient:** `number` 用于模糊匹配的相似系数，缺省时会使用 [`app.options.minSimilarity`](./app.md#options-minsimilarity)
 - **options.apply:** `(suggestion: string, next: NextFunction) => void` 确认后执行的操作
 - 返回值: `Promise<void>`
 

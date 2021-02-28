@@ -118,9 +118,9 @@ module.exports = context => ({
         children: [
           '/plugins/common/',
           '/plugins/common/message',
-          '/plugins/common/reply',
           '/plugins/common/handler',
           '/plugins/common/admin',
+          '/plugins/common/debug',
         ],
       }, {
         title: '教学系统 (Teach)',

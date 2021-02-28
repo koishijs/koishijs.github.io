@@ -9,6 +9,10 @@ sidebarDepth: 2
 本章介绍的功能都由 koishi-plugin-common 插件提供。
 :::
 
+::: danger 注意
+这里是**正在施工**的 koishi v3 的文档。
+:::
+
 koishi-plugin-common 包含了一些基本插件，它们在你使用 `koishi` 库时是默认安装的。
 
 ## 指令列表

@@ -24,9 +24,12 @@ Koishi 支持多个聊天平台，对于不同的平台，你也需要做好相�
 
 TODO
 
-### Kaiheila (开黑啦)
+### Discord (Discord)
 
-TODO
+1. 前往 [https://discord.com/developers/applications](https://discord.com/developers/applications)，登录账号创建一个应用
+2. 点击「Bot」并创建一个新的机器人，保存这个页面中的令牌（请注意不要泄露）
+3. 要将机器人拉进你的服务器，点击「OAuth2」，并在网址生成器中勾选 Bot 和机器人所需要的权限
+4. 打开生成的链接，选择你具有管理权限的服务器，就成功把机器人添加进去了
 
 ## 使用命令行工具
 

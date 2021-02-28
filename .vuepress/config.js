@@ -120,8 +120,7 @@ module.exports = context => ({
           '/plugins/common/message',
           '/plugins/common/reply',
           '/plugins/common/handler',
-          '/plugins/common/information',
-          '/plugins/common/process',
+          '/plugins/common/admin',
         ],
       }, {
         title: '教学系统 (Teach)',

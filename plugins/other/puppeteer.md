@@ -25,7 +25,6 @@ koishi-plugin-puppeteer 本身提供了网页截图（shot）指令和 TeX 渲�
 LaTeX 渲染。渲染器由 [https://www.zhihu.com/equation](https://www.zhihu.com/equation) 提供。
 
 - 基本语法：`tex <code>`
-- 别名：screenshot
 - 选项列表：
   - `-s, --scale  <scale>` 缩放比例
 

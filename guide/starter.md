@@ -155,6 +155,28 @@ node .
 
 这样也能运行你的机器人。尽管这显得稍微麻烦一点，但是你的机器人也因此获得了更高的自由度。在下一章我们会简单对比这两种方法。
 
+## 使用 Docker
+
+Koishi 还支持在 Docker 中运行，你需要安装 [Docker](https://www.docker.com)，但不必安装有 NodeJS。
+
+首先创建如下的配置文件：
+
+```js koishi.config.js
+module.exports = {
+  bots: [],
+}
+```
+
+完成之后，挂载 `koishi.config.js` 并启动容器：
+
+```cli
+docker run -d --name koishi \
+  -v $PWD/koishi.config.js:/app/koishi.config.js \
+  koishijs/koishi:latest
+```
+
+Koishi 启动后，你就可以在容器中安装所需要的插件，具体操作请参见 [使用 Docker](./docker.md) 一章。
+
 ## 编写并调用你的插件
 
 在机器人目录中添加文件 `my-plugin.js`：

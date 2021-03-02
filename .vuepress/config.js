@@ -59,6 +59,7 @@ module.exports = context => ({
           '/guide/about',
           '/guide/starter',
           '/guide/cli',
+          '/guide/docker',
           '/guide/faq',
         ],
       }, {

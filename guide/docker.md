@@ -42,7 +42,6 @@ docker exec -it koishi sh
 
 在容器内，你可以安装所需要的插件（这里以 koishi-adapter-onebot 和 koishi-plugin-common 为例）：
 
-<panel-view class="code" type="package-manager">
 ```cli
 # 安装插件
 npm i koishi-adapter-onebot koishi-plugin-common
@@ -50,7 +49,6 @@ npm i koishi-adapter-onebot koishi-plugin-common
 # 退出容器
 exit
 ```
-</panel-view>
 
 修改配置文件以启用这些插件：
 

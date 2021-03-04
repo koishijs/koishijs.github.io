@@ -1,7 +1,7 @@
 <template>
   <div class="chat-message" :class="{ shown }">
     <img v-if="avatar" class="avatar" :src="avatar"/>
-    <div v-else class="avatar" :style="{ backgroundColor: color }">{{ nickname[0] }}</div>
+    <div v-else class="avatar" :style="{ backgroundColor }">{{ nickname[0] }}</div>
     <div class="nickname">{{ nickname }}</div>
     <div class="message-box">
       <slot>&nbsp;</slot>
@@ -11,11 +11,23 @@
 
 <script>
 
+const colorMap = {
+  Alice: '#cc0066',
+  Bob: '#00994d',
+  Carol: '#1e90ff',
+  Dave: '#f4a460',
+}
+
+const avatarMap = {
+  孤梦星影: '/avatar/satori.png',
+  四季酱: '/avatar/shiki.png',
+  Koishi: '/koishi.png',
+}
+
 export default {
   props: {
     nickname: String,
     color: String,
-    avatar: String,
   },
 
   data: () => ({
@@ -23,6 +35,16 @@ export default {
     active: false,
     moving: false,
   }),
+
+  computed: {
+    backgroundColor() {
+      return this.color || colorMap[this.nickname]
+    },
+
+    avatar() {
+      return this.nickname in avatarMap ? this.$withBase(avatarMap[this.nickname]) : ''
+    },
+  },
 
   watch: {
     active (value) {

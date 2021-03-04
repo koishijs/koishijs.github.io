@@ -12,7 +12,17 @@
         </template>
       </div>
     </div>
-    <div class="content"><slot :name="tab"/></div>
+    <div class="content">
+      <template v-if="messages">
+        <chat-message v-for="(message, index) of messages" :nickname="message[0]" :key="index">
+          <template v-for="(content, index) in message.slice(1)">
+            <p v-if="typeof content === 'string'" :key="index">{{ content }}&nbsp;</p>
+            <component v-else :key="index" :is="content.tag" v-bind="content.attrs"/>
+          </template>
+        </chat-message>
+      </template>
+      <slot v-else :name="tab"/>
+    </div>
   </div>
 </template>
 
@@ -26,6 +36,7 @@ export default {
   props: {
     controls: Boolean,
     title: String,
+    messages: Array,
     type: {
       type: String,
       required: false,
@@ -41,6 +52,7 @@ export default {
       return Object.keys(this.$slots)
     },
     titleText() {
+      if (this.messages) return '聊天记录'
       return titleMap[this.type] || this.title
     },
   },

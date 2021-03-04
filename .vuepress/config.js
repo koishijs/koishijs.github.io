@@ -133,7 +133,7 @@ module.exports = context => ({
           '/plugins/teach/prob',
           '/plugins/teach/regexp',
           '/plugins/teach/context',
-          '/plugins/teach/prev-succ',
+          // '/plugins/teach/prev-succ',
           '/plugins/teach/misc',
           '/plugins/teach/config',
         ],

@@ -148,7 +148,7 @@ export default {
         title: '命令行',
         controls: !mini,
       },
-    }, this.lines.map(({ type, active, content, shown, message }, index) => {
+    }, this.lines.map(({ type, active, content, shown }, index) => {
       const children = content.map(child => typeof child === 'string'
         ? child
         : createElement(child.tag || 'span', { class: child.class }, child.text))

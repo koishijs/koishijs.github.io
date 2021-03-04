@@ -13,10 +13,10 @@ app.command('echo <message>')
   .action((_, message) => message)
 ```
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">echo Hello!</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">Hello!</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', 'echo Hello!'],
+  ['Koishi', 'Hello!'],
+]"/>
 
 让我们回头看看这段代码是如何工作的：
 
@@ -78,10 +78,10 @@ app.command('my-command')
   .action(({ options }) => JSON.stringify(options))
 ```
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">my-command -adb text --gamma=1 --foo-bar baz --no-xyz</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">{ "alpha": true, "d": true, "beta": "text", "gamma": 1, "fooBar": "baz", "xyz": false }</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', 'my-command -adb text --gamma=1 --foo-bar baz --no-xyz'],
+  ['Koishi', '{ \x22alpha\x22: true, \x22d\x22: true, \x22beta\x22: \x22text\x22, \x22gamma\x22: 1, \x22fooBar\x22: \x22baz\x22, \x22xyz\x22: false }'],
+]"/>
 
 从上面的例子中我们不难看出 Koishi 指令系统的许多方便的特性：
 
@@ -106,10 +106,10 @@ app.command('my-command')
   .action(({ options }) => JSON.stringify(options))
 ```
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">my-command -b 80</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">{ "alpha": 100, "beta": 80 }</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', 'my-command -b 80'],
+  ['Koishi', '{ \x22alpha\x22: 100, \x22beta\x22: 80 }'],
+]"/>
 
 ### 选项的重载
 
@@ -122,10 +122,10 @@ app.command('my-command')
   .action(({ options }) => JSON.stringify(options))
 ```
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">my-command --anonymous</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">{ "writer": 0 }</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', 'my-command --anonymous'],
+  ['Koishi', '{ \x22writer\x22: 0 }'],
+]"/>
 
 ## 类型系统
 
@@ -141,10 +141,10 @@ app.command('my-command [arg:number]')
   .action(({ options }, arg) => `${showValue(arg)} ${showValue(options.foo)}`)
 ```
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">my-command 100 --foo 200</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">number 100 string "200"</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', 'my-command 100 --foo 200'],
+  ['Koishi', 'number 100 string \x22200\x22'],
+]"/>
 
 如你所见，上文所介绍的文本参数也正是一个内置类型。
 
@@ -161,10 +161,10 @@ app.command('test [arg:repeat]')
   .action((_, arg) => arg)
 ```
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">test foo</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">foofoofoo</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', 'test foo'],
+  ['Koishi', 'foofoofoo'],
+]"/>
 
 ### 类型检查
 
@@ -182,10 +182,10 @@ app.command('test [x:int]')
   .action((_, arg) => arg)
 ```
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">test 0.5</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">参数 x 输入无效，应为整数。</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', 'test 0.5'],
+  ['Koishi', '参数 x 输入无效，应为整数。'],
+]"/>
 
 ### 选项的临时类型
 
@@ -197,10 +197,10 @@ app.command('test')
   .action(({ options }) => options.foo)
 ```
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">test -f baaaz</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">选项 foo 输入无效，请检查语法。</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', 'test -f baaaz'],
+  ['Koishi', '选项 foo 输入无效，请检查语法。'],
+]"/>
 
 ### 使用检查器
 

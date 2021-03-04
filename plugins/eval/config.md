@@ -57,7 +57,7 @@ sidebarDepth: 2
 
 扩展模块更新时的 remote 链接。
 
-## moduleRoot <Badge text="addons"/>
+## addonRoot <Badge text="addons"/>
 
 - 类型: `string`
 

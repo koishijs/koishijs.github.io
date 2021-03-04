@@ -30,6 +30,18 @@ ctx.router.get('/path', (ctx, next) => {
 
 ## 过滤器
 
+### ctx.all()
+
+选取上下文全集。
+
+- 返回值: `Context` 新的上下文
+
+::: tip
+`ctx.app` 与 `ctx.all()` 的区别在于，前者不受插件管理器控制，容易产生内存泄漏。因此我们建议除非你已经为你的插件声明了副作用，你应当在所有可以用后者的地方使用后者。
+
+参见：[插件热重载](../guide/context.md#插件热重载)
+:::
+
 ### ctx.self(...values)
 ### ctx.user(...values)
 ### ctx.group(...values)

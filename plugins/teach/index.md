@@ -16,21 +16,21 @@ sidebarDepth: 2
 
 使用 `# 问题 回答` 的语法来添加问答。
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># foo bar</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1001。</chat-message>
-<chat-message nickname="Alice" color="#cc0066">foo</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">bar</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '# foo bar'],
+  ['Koishi', '问答已添加，编号为 1001。'],
+  ['Alice', 'foo'],
+  ['Koishi', 'bar'],
+]"/>
 
 如果问题或回答中包含空白字符（空格，换行等），应该将对应的部分用引号包裹起来（半角全角均可）：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># &quot;有空格 的问题&quot; “有换行<br/>的回答”</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1002。</chat-message>
-<chat-message nickname="Alice" color="#cc0066">有空格 的问题</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">有换行<br/>的回答</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '的回答”'],
+  ['Koishi', '问答已添加，编号为 1002。'],
+  ['Alice', '有空格 的问题'],
+  ['Koishi', '的回答'],
+]"/>
 
 如果要添加的问答已经存在，且拥有修改权限，则会使用额外传入的参数对现有的问答进行修改。添加或修改完成后会提示该问答的编号。
 
@@ -38,12 +38,12 @@ sidebarDepth: 2
 
 使用 `## 问题 回答` 的语法来搜索问答的编号。如果只搜索特定问题的所有回答，可以使用 `## 问题`。反之，如果只搜索特定回答的所有问题，可以使用 `## ~ 回答`。这里的 `~` 充当占位符的作用。
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">## foo</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问题“foo”的回答如下：<br/>1001. bar</chat-message>
-<chat-message nickname="Alice" color="#cc0066">## ~ bar</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问题“foo”的回答如下：<br/>1001. foo</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '## foo'],
+  ['Koishi', '1001. bar'],
+  ['Alice', '## ~ bar'],
+  ['Koishi', '1001. foo'],
+]"/>
 
 由于过长的文本容易带来刷屏的不良体验，因此 Koishi 一次只会提供不超过 30 条搜索结果。如果搜索结果超过这个数字则会进行分页，同时只显示第一页的内容。可以通过 `/ 页码` 调整要查看的页码。
 
@@ -55,27 +55,27 @@ sidebarDepth: 2
 
 使用 `#id` 查看一个问答的具体设置。
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">#1001</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">编号为 1001 的问答信息：<br/>问题：foo<br/>回答：bar</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '#1001'],
+  ['Koishi', '回答：bar'],
+]"/>
 
 如果传入了额外的选项和参数，则会视为对该问题的修改。例如，`#id 问题` 用于修改该问答的问题，`#id ~ 回答` 用于修改该问答的回答，`#id -p 0.5` 用于设置问答的概率为 0.5（参见 [**概率机制**](./prob.md) 一节），`#id -e` 用于使该问答在本群生效（参见 [**上下文机制**](./context.md) 一节）等等。
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">#1001 ~ baz</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答 1001 已成功修改。</chat-message>
-<chat-message nickname="Alice" color="#cc0066">foo</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">baz</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '#1001 ~ baz'],
+  ['Koishi', '问答 1001 已成功修改。'],
+  ['Alice', 'foo'],
+  ['Koishi', 'baz'],
+]"/>
 
 特别地，`#id -r` 用于彻底删除一个问答，之后无法恢复。
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">#1002 -r</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答 1002 已成功删除。</chat-message>
-<chat-message nickname="Alice" color="#cc0066">有空格 的问题</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '#1002 -r'],
+  ['Koishi', '问答 1002 已成功删除。'],
+  ['Alice', '有空格 的问题'],
+]"/>
 
 你也可以将上面的 `id` 替换成由半角逗号隔开的多个问答编号，这样就可以同时查看或者修改多个问答了，例如 `#123,456`。更特别地，如果你要查看或修改的多个问答有着连续的编号，你还可以使用 `#123..126` 表示 `#123,124,125,126`。
 
@@ -104,12 +104,12 @@ sidebarDepth: 2
 
 下面是一个简单的例子：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># 你好啊 $s，你好啊~</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1003。</chat-message>
-<chat-message nickname="Alice" color="#cc0066">你好啊！</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">Alice，你好啊~</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '# 你好啊 $s，你好啊~'],
+  ['Koishi', '问答已添加，编号为 1003。'],
+  ['Alice', '你好啊！'],
+  ['Koishi', 'Alice，你好啊~'],
+]"/>
 
 ## 管道操作
 
@@ -123,25 +123,25 @@ sidebarDepth: 2
 
 可以使用 `## -v` 来查询近期的教学操作：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">## -v</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">近期的教学操作有：<br/>1001. [修改-15s] 问题：foo，回答：baz<br/>1002. [删除-10s] 问题：有空格 的问题，回答：有换行……<br/>1003. [添加-25s] 问题：你好啊，回答：$s，你好啊~</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '## -v'],
+  ['Koishi', '1003. [添加-25s] 问题：你好啊，回答：$s，你好啊~'],
+]"/>
 
 或者使用 `#id -v` 来查看特定问答近期的教学操作（这里会显示修改前的版本）：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">#1001 -v</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">编号为 1001 的问答信息：<br/>问题：foo<br/>回答：bar<br/>修改于：15 秒前</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '#1001 -v'],
+  ['Koishi', '修改于：15 秒前'],
+]"/>
 
 ## 回退近期操作
 
 可以使用 `#id -V` 来回退特定问答近期的教学操作：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">#1001 -V</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答 1001 已回退完成。</chat-message>
-<chat-message nickname="Alice" color="#cc0066">foo</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">bar</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '#1001 -V'],
+  ['Koishi', '问答 1001 已回退完成。'],
+  ['Alice', 'foo'],
+  ['Koishi', 'bar'],
+]"/>

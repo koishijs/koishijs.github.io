@@ -12,12 +12,12 @@ sidebarDepth: 2
 
 如果你希望匹配问题中的某些特征而不是问题整体，你可以使用 `-x` 进行正则表达式匹配。下面是一个例子：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># ^(.+)一时爽$ 一直%1一直爽 -x</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1001。</chat-message>
-<chat-message nickname="Alice" color="#cc0066">挖坑一时爽</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">一直挖坑一直爽</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '# ^(.+)一时爽$ 一直%1一直爽 -x'],
+  ['Koishi', '问答已添加，编号为 1001。'],
+  ['Alice', '挖坑一时爽'],
+  ['Koishi', '一直挖坑一直爽'],
+]"/>
 
 在这个例子中，`^` 和 `$` 分别匹配问答的起始和结尾，`.+` 匹配若干个非换行字符，`%1` 表示第一个括号内的文本。这样的语法极大地提升了问答捕获的自由度。
 
@@ -60,16 +60,16 @@ TODO
 
 最常见的情况就是我们希望用正则表达式来搜索问答原文（这听起来与普通的搜索有点类似，但实际上这里的匹配关系是相反的）。对于这种情况，只需在搜索时附带一个 `-x` 即可。而此时的搜索结果也会显示完整的问题和回答（如果不使用正则匹配，由于你已经提供了完整的问题或回答，则不会重复显示）：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">## 一时 -x</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问题正则表达式“一时”的搜索结果如下：<br/>1001. 正则：^(.+)一时爽$，回答：一直$1一直爽</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '## 一时 -x'],
+  ['Koishi', '1001. 正则：^(.+)一时爽$，回答：一直$1一直爽'],
+]"/>
 
 另一种情况则是我们希望只显示那些非正则匹配到的结果。此时只需在搜索时附带一个 `-X` 即可。我们来对比一下搜索结果：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">## 挖坑一时爽</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问题“挖坑一时爽”的回答如下：<br/>1001. [正则] 一直$1一直爽</chat-message>
-<chat-message nickname="Alice" color="#cc0066">## 挖坑一时爽 -X</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">没有搜索到问题“挖坑一时爽”。</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '## 挖坑一时爽'],
+  ['Koishi', '1001. [正则] 一直$1一直爽'],
+  ['Alice', '## 挖坑一时爽 -X'],
+  ['Koishi', '没有搜索到问题“挖坑一时爽”。'],
+]"/>

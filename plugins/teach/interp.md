@@ -8,21 +8,21 @@ sidebarDepth: 2
 
 你可以使用 `$()` 的高级语法来在回答中插入指令调用的结果：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># 我的回合，抽卡！ $(lottery)</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1201。</chat-message>
-<chat-message nickname="Alice" color="#cc0066">我的回合，抽卡！</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">恭喜 Alice 获得了国士无双之药（SR）！<br/>月之贤者为了测试这瓶药的效果，曾给某只兔子强行灌了一桶。</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '# 我的回合，抽卡！ $(lottery)'],
+  ['Koishi', '问答已添加，编号为 1201。'],
+  ['Alice', '我的回合，抽卡！'],
+  ['Koishi', '月之贤者为了测试这瓶药的效果，曾给某只兔子强行灌了一桶。'],
+]"/>
 
 当然你也可以在回答中插入多条指令，它们会逐一完成调用后统一输出：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># 吊死鬼元音开局 &quot;$(hangman)<br/>$(hangman aeiou)&quot;</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1202。</chat-message>
-<chat-message nickname="Alice" color="#cc0066">吊死鬼元音开局</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">游戏开始，要猜的词为 ???????，剩余 10 次机会。<br/>尝试成功！剩余字母为 ?i?u?e?，已使用的字母为 aeiou，剩余 8 次机会。</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '$(hangman aeiou)&quot;'],
+  ['Koishi', '问答已添加，编号为 1202。'],
+  ['Alice', '吊死鬼元音开局'],
+  ['Koishi', '尝试成功！剩余字母为 ?i?u?e?，已使用的字母为 aeiou，剩余 8 次机会。'],
+]"/>
 
 ## 问题重定向
 
@@ -32,12 +32,12 @@ sidebarDepth: 2
 
 Koishi 也支持将问题重定向到其他问题。使用 `# 问题1 => 问题2` 以进行问题的重定向。来看下面的例子：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># 你可以一天不吃饭 但不能一天不背单词 -p 0.6</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1203。</chat-message>
-<chat-message nickname="Alice" color="#cc0066"># 人可以一天不吃饭 =&gt; 你可以一天不吃饭 -p 0.8</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1204。</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '# 你可以一天不吃饭 但不能一天不背单词 -p 0.6'],
+  ['Koishi', '问答已添加，编号为 1203。'],
+  ['Alice', '# 人可以一天不吃饭 =&gt; 你可以一天不吃饭 -p 0.8'],
+  ['Koishi', '问答已添加，编号为 1204。'],
+]"/>
 
 由于重定向问答是一个独立的问答，因此它也拥有完全独立的上下文、好感度、概率、后继问题等机制。例如当输入“人可以一天不吃饭”时，将以 0.8 的概率重定向为问题“你可以一天不吃饭”，因此会以 0.6×0.8=0.48 的概率触发回答“但不能一天不背单词”。
 
@@ -47,30 +47,30 @@ Koishi 也支持将问题重定向到其他问题。使用 `# 问题1 => 问题2
 
 首先让我们看一个简单的例子：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># 我可以做什么 抽卡</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1205。</chat-message>
-<chat-message nickname="Alice" color="#cc0066"># 我可以做什么 钓鱼</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1206。</chat-message>
-<chat-message nickname="Alice" color="#cc0066">## 我可以做什么</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问题“我可以做什么”的回答如下：<br/>1205. 抽卡<br/>1206. 钓鱼</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '# 我可以做什么 抽卡'],
+  ['Koishi', '问答已添加，编号为 1205。'],
+  ['Alice', '# 我可以做什么 钓鱼'],
+  ['Koishi', '问答已添加，编号为 1206。'],
+  ['Alice', '## 我可以做什么'],
+  ['Koishi', '1206. 钓鱼'],
+]"/>
 
 如果我们对添加一个重定向到上述问题的问答，则此时在搜索结果中将自动展开其重定向的结果：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066"># 我能做什么 =&gt; 我可以做什么</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问答已添加，编号为 1207。</chat-message>
-<chat-message nickname="Alice" color="#cc0066">## 我能做什么</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问题“我能做什么”的回答如下：<br/>1207. $(dialogue 我可以做什么)<br/>= 1205. 抽卡<br/>= 1206. 钓鱼</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '# 我能做什么 =&gt; 我可以做什么'],
+  ['Koishi', '问答已添加，编号为 1207。'],
+  ['Alice', '## 我能做什么'],
+  ['Koishi', '= 1206. 钓鱼'],
+]"/>
 
 这是因为调用 `##` 进行搜索时程序会自动递归地搜索所有回答的重定向。你也可以使用 `-R` 来让 Koishi 不显示上面的重定向结果：
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">## 我能做什么 -R</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">问题“我能做什么”的回答如下：<br/>1207. $(dialogue 我可以做什么)</chat-message>
-</panel-view>
+<panel-view :messages="[
+  ['Alice', '## 我能做什么 -R'],
+  ['Koishi', '1207. $(dialogue 我可以做什么)'],
+]"/>
 
 ## 处理分条消息
 

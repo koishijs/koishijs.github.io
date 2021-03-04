@@ -211,7 +211,7 @@ module.exports = (ctx, options) => {
 
 ```js my-plugin.js
 module.exports = (ctx, options) => {
-  const server = createServer(callback, 60000)
+  const server = createServer()
 
   ctx.on('connect', () => {
     // ctx.dispose 无法消除 server.listen 带来的副作用

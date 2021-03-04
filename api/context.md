@@ -37,9 +37,7 @@ ctx.router.get('/path', (ctx, next) => {
 - 返回值: `Context` 新的上下文
 
 ::: tip
-`ctx.app` 与 `ctx.all()` 的区别在于，前者不受插件管理器控制，容易产生内存泄漏。因此我们建议除非你已经为你的插件声明了副作用，你应当在所有可以用后者的地方使用后者。
-
-参见：[插件热重载](../guide/context.md#插件热重载)
+这个方法与 `ctx.app` 的区别在于，后者不受插件管理器控制，容易产生内存泄漏。因此我们建议，除非你已经为你的插件声明了副作用，你应当尽量使用这个方法。参见 [插件热重载](../guide/context.md#插件热重载)。
 :::
 
 ### ctx.self(...values)
@@ -161,6 +159,18 @@ ctx.router.get('/path', (ctx, next) => {
 - **middleware:** [`Middleware`](../guide/message.md#使用中间件) 要注册的中间件
 - **prepend:** `boolean` 是否前置
 - 返回值: `() => boolean` 取消这个中间件
+
+### ctx.setTimeout(callback, ms, ...args)
+### ctx.setInterval(callback, ms, ...args)
+
+注册一个可卸载的定时器。
+
+- 参数: 与原生的 Node.js [Timers](https://nodejs.org/api/timers.html) 一致
+- 返回值: `() => boolean` 取消这个定时器
+
+::: tip
+在大部分时候你仍然可以直接使用原生的 Timers API。上述两个方法的使用场景仅限于注册存在时间长且作用明显的回调函数，例如 [koishi-plugin-schedule](../plugins/other/schedule.md)。
+:::
 
 ## 指令与插件
 

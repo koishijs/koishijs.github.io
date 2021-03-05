@@ -45,7 +45,7 @@ sidebarDepth: 2
 - **id:** `string` 用户 / 频道标识符
 - 返回值: `User` / `Channel`
 
-### extendDatabase(database, extension)
+### Database.extend(database, extension)
 
 扩展一个数据库的方法。
 

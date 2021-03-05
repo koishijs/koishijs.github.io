@@ -133,14 +133,14 @@ User.extend(() => ({ foo: 'bar' }))
 
 ### 扩展方法和表实现
 
-要添加新的数据库方法，只需调用 `extendDatabase()`：
+要添加新的数据库方法，只需调用 `Database.extend()`：
 
 ```js
-import { extendDatabase } from 'koishi'
+import { Database } from 'koishi'
 
 // 第一个参数声明这个方法依赖于 mysql 数据库
 // 第二个参数表明这次调用注入的是 user 表
-extendDatabase('koishi-plugin-mysql', {
+Database.extend('koishi-plugin-mysql', {
   // 要扩展的方法实现
   createSchedule(...args) {
     // 此时这里的 this 实际上是一个 MysqlDatabase 对象
@@ -157,8 +157,9 @@ ctx.database.myMethod(...args)
 
 ```js
 // 你应该将 koishi-plugin-mysql 作为插件的 devDependency
-import type MysqlDatabase from 'koishi-plugin-mysql'
-import { extendDatabase } from 'koishi'
+// 这个空的导入在编译中会自然消失，但会提供必要的类型注入
+import {} from 'koishi-plugin-mysql'
+import { Database } from 'koishi'
 
 // 导出这张表的接口可以方便别人向这张表注入新的字段
 export interface Schedule {
@@ -171,8 +172,7 @@ declare module 'koishi-core' {
   }
 }
 
-// 这里需要手动标明类型参数为 MysqlDatabase
-extendDatabase<MysqlDatabase>('mysql', {
+Database.extend('koishi-database-mysql', {
   createSchedule(...args) {
     // 这里已经可以进行类型推断了
     return this.query(sql)
@@ -188,13 +188,22 @@ extendDatabase<MysqlDatabase>('mysql', {
 
 ```js
 import { createPool, Pool, PoolConfig } from 'mysql'
-import { extendDatabase } from 'koishi'
+import { Database } from 'koishi'
 
+// 类型注入
 declare module 'koishi-core' {
-  interface Database extends MysqlDatabase {}
+  namespace Database {
+    interface Statics {
+      // 别忘了加 typeof
+      'koishi-plugin-mysql': typeof MysqlDatabase
+    }
+  }
 }
 
-export default class MysqlDatabase {
+// 防止下面产生类型报错
+interface MysqlDatabase extends Database {}
+
+class MysqlDatabase {
   private pool: Pool
 
   constructor(config: PoolConfig = {}) {
@@ -214,16 +223,18 @@ export default class MysqlDatabase {
   }
 }
 
-// extendDatabase 方法也可以直接传入一个数据库类
-extendDatabase(MysqlDatabase, {
-  // builtin methods
+// Database.extend 方法也可以直接传入一个数据库类
+Database.extend(MysqlDatabase, {
+  // 提供内置方法的实现（参见上一节）
 })
+
+export default MysqlDatabase
 
 export const name = 'mysql'
 
 export function apply(ctx: Context, config: PoolConfig = {}) {
   const db = new MysqlDatabase(ctx.app, config)
-  ctx.database = db as Database
+  ctx.database = db
 }
 ```
 

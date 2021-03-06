@@ -102,9 +102,11 @@ Koishi v3 使用单一的 App 实例管理多个机器人账号，这将大幅�
 现在可以通过 `ctx.bots` 访问当前 App 下的所有机器人，也可以用 `session.app` 和 `session.bot` 访问当前会话所在的 App 和 Bot 实例了。
 
 ```js
-appMap[selfId].sender       =>  ctx.bots[selfId]
-appList.forEach(cb)         =>  ctx.bots.forEach(cb)
-ctx.sender.sendGroupMsg()   =>  ctx.bots[selfId].sendMessage()
+// ctx.bot 支持以两种方式索引：
+// 首先其本身是一个数组，可以直接用下标或者 forEach, map 等方法
+// 其次我们也支持通过 platform:selfId 的方式进行索引
+ctx.sender.sendGroupMsg()   =>  ctx.bots[0].sendMessage()
+ctx.sender.sendGroupMsg()   =>  ctx.bots[`${platform}:${selfId}`].sendMessage()
 
 appMap[selfId]              =>  session.app
 appMap[selfId].sender       =>  session.bot
@@ -129,6 +131,7 @@ onStop(cb)              =>  ctx.on('disconnect', cb)
 - commandPrefix -> prefix
 - maxMiddlewares -> maxListeners
 - defaultAuthority -> autoAuthorize
+- similarityCoefficient -> minSimilarity
 - quickOperationTimeout -> onebot.quickOperation
 
 ## 指令选项

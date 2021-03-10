@@ -42,17 +42,31 @@ Koishi 会监听 [GitHub Webhooks](https://developer.github.com/webhooks/)，将
 ## 支持的事件
 
 - commit_comment
+  - created
 - create
 - delete
 - fork
-- issues (opened/closed)
+- issues
+  - opened
+  - closed
 - issue_comment
-- milestone (created)
-- pull_request (opened/closed)
-- pull_request_review (submitted)
+  - created
+- milestone
+  - created
+- pull_request
+  - opened
+  - closed
+  - reopened
+  - ready_for_review
+  - converted_to_draft
+  - review_requested
+- pull_request_review
+  - submitted
 - pull_request_review_comment
+  - created
 - push
-- star (created)
+- star
+  - created
 
 ## 配置项
 

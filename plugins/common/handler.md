@@ -118,15 +118,15 @@ module.exports = {
 }
 ```
 
-在这种配置下，当复读语句达到3句后，每一次其他人的复读都有50%的概率触发机器人的复读行为。而一旦复读后，机器人将不再重复复读。
+在这种配置下，当复读语句达到 3 句后，每一次其他人的复读都有 50% 的概率触发机器人的复读行为。而一旦复读后，机器人将不再重复复读。
 
 onRepeat除了可以接受一个对象作为参数以外，也支持接受一个函数来自定义当机器人检测到复读时执行的具体行为。下面我们来举几个例子。
 
 ### 自动打断复读
 
-onRepeat函数可以接受两个参数，第一个参数为当前复读行为的状态state，其中包含目前复读次数times, 复读语句内容content，参与复读的用户与他们的复读次数users，机器人是否已经复读repeated。
+onRepeat 函数可以接受两个参数，第一个参数为当前复读行为的状态 state，其中包含目前复读次数 times, 复读语句内容 content，参与复读的用户与他们的复读次数 users，机器人是否已经复读 repeated。
 
-第二个参数是当前的会话session。
+第二个参数是当前的会话 session。
 
 当我们也不希望机器人复读所有的内容，我们可以通过如下配置让机器人自动打断某些复读：
 
@@ -157,13 +157,9 @@ module.exports = {
 module.exports = {
   plugins: {
     common: {
-      onRepeat: (state) => {
-        for (const user of Object.entries(state.users)) {
-          if (user[1] > 1) {
-            return segment.at(user[0]) + "不许重复复读！";
-          }
-        }
-      },
+      onRepeat: (state) =>
+        state.users[session.userId] &&
+        segment.at(session.userId) + "不许重复复读！"
     },
   },
 }
@@ -178,7 +174,7 @@ module.exports = {
 
 ### 检测打断复读
 
-复读机插件支持的另一个参数onInterrupt可以定义机器人在检测到复读被其他人打断时的行为。可以传入一个函数来定义此行为，函数签名与onRepeat一致。
+复读机插件支持的另一个参数 onInterrupt 可以定义机器人在检测到复读被其他人打断时的行为。可以传入一个函数来定义此行为，函数签名与 onRepeat 一致。
 
 例如，如果你想让你的机器人在一条信息已经复读过 5 次以上，且自己也已经复读过后，对任何打断复读的人以 50% 的概率出警。你可以这样配置：
 

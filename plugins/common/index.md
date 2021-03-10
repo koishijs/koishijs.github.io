@@ -47,7 +47,7 @@ module.exports = {
 |:-:|:-:|
 | broadcastInterval | [向所有群广播消息](./message.md#向所有群广播消息) |
 | respondent | [配置内置问答](./reply.md#配置内置问答) |
-| repeater | [配置复读机](./reply.md#配置复读机) |
+| repeater | [配置复读机](./handler.md#配置复读机) |
 | handleFriend | [处理好友申请](./handler.md#处理好友申请、加群邀请和申请) |
 | handleGroupAdd | [处理加群申请](./handler.md#处理好友申请、加群邀请和申请) |
 | handleGroupInvite | [处理加群邀请](./handler.md#处理好友申请、加群邀请和申请) |

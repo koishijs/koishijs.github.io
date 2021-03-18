@@ -5,6 +5,28 @@ noOutboundLinks: true
 
 # v3 更新日志
 
+## [Koishi 3.2.1](https://github.com/koishijs/koishi/releases/tag/3.2.1)
+
+## Notable Changes
+
+- 下一代 status 插件支持了沙箱和登录功能，并提供了 mongo 数据库支持
+
+## Features
+
+- **database:** 支持了自定义表，允许不同数据库对统一功能提供不同实现 (=875f75b16e0205ae0492823c8cab61014e5f5e71)
+- **status:** 加入了路由，导航栏和侧边栏，优化了页面样式 (=89583a357814ce286637da45e8d1f25d99d5fb23, =c8df0fa9f27e6373603d5fa0c5ed02ae3b4dbe72, =86043a4ac33e2ac2ccf7f53e6c4969f79ae9ef67, =1cf52be1b6c11136d16e44fb2917427efc40db39, =42381c5d5752d9af63525ec5b34945a4e587f973, =5ff956f8cc6f2e2ff22f471a4de34d0e02afc2dd, =bd33be6536a6a33f18e6f754f8186f9ddd49c775)
+- **status:** 实现了沙箱和登录功能，增加了 token 机制 (=bf99513a04e7199e71ede2a22cc66ff7b8b17bb5, =c50ba31962e8ae53bf251ed858c1ef5e565439ed, =064810cf22b89131feb4b7ef86a9d52e79b07514, =bbfac8af45384f3e2f8f4b31857bf4e14fdb98a2, =2e03e5d3dc01627d62820f74d4b1248965d98a19)
+- **status:** 优化了数据传输接口，并支持显示数据库大小 (=d17428e25b82248e0ff428554da25d3db30a4659, =dfdba08a6c913c97b8edf44db89274401e715998)
+- **status:** 提供了 mongo 数据库支持 (#160) (=6956c815bfa2522b5e47619b425e4dd2c8e953ae)
+- **utils:** 新增了 `remove()` 帮助函数 (=e50017899232a6772133fec94bc6c8e8438b4854)
+
+## Bug Fixes
+
+- **core:** 将 disable 设置为指令所需字段，修复了定时指令报错的问题 (#155) (=97d8732cf6f0be32057dde4ef14ae51d6aff151d)
+- **status:** 修复了仪表盘中图表溢出界面问题，在沙箱中提供了自动滚动至底部的功能 (#157) (=a9760356c02698733b7ac05364462187bae03239)
+- **discord:** 回退了上个版本更新的 embed segment，采用会话属性的方式重新实现 (=7da07841c18dd3c83e42f60e0e0750f7dd66bb78)
+- **core:** 修复了快捷调用不会受到上下文限制的问题 (#159) (=49c2c398c956cd6365e3462a5c38168a8011ba97)
+
 ## [Koishi 3.2.0](https://github.com/koishijs/koishi/releases/tag/3.2.0)
 
 ### Notable Changes
@@ -20,8 +42,8 @@ noOutboundLinks: true
 - **common:** 优化了 switch 指令的提示文本 (=389341f67175168aa9e510ae4ae73bfa98a7b6f4)
 - **discord:** 在消息中添加了 embed segment (=22dc77439c7fec81b2c1bf545fb8f136112aeebd)
 - **image-search:** 优化了错误处理 (=14a2aeeb4aacdc91af36b733e358487d2ac0cefd)
+- **status:** 支持了网页端和数据统计功能 (=9dcdd694735a12ee767c379594446f29e867e41a, =10e9bf696fe861e1e96c86b960fac53dfdd09dc4, =964390b59953c75623baf185fd35e5c972f42f54, =1f8b1adbfda2f6b1d973f8d33c63fc736b45caaf, =2c91f87fba9ac2df58245622ac5f4fababe5c973, =fbd767a29a52b299595199c4a3227f732d4600ec, =66a46a64a1f990cb0db17462aacaf84e8da74727, =b3b4711240ebe5b1f574089e73f0bc7b61d5bfa2, =b3d8b70a66a7998cd92b5723ab0225d5096681ad, =00f9c469f9207ebcfc9a5cdf47050ebc4c7bc26c, =cbe38c34e2ed0e2b353aefc8b8b8bfcf369cd954, =5ddf07bf2e5d1aa2ab24ba356cb6dd1adaa6cfec, =c539454acd48ca0663b664bba06d87fab525ced6, =ee112cf0296e8a8a42d16033146dc6f2e37c5f80, =db6f80876cc48789f5e582117968c22ae37aad06, =593f3e94b6903f47c2032bbd486fed7f62dec65f, =0a83138bc041c33d038eca7d993f3b874e75671d)
 - **tools:** 新增了百度百科支持 (#153) (=ae3f004e8ffc7ca6c1dfb02893e0bc83a47e308d)
-- **status:** 新增了网页 UI 支持 (=9dcdd694735a12ee767c379594446f29e867e41a, =10e9bf696fe861e1e96c86b960fac53dfdd09dc4, =964390b59953c75623baf185fd35e5c972f42f54, =1f8b1adbfda2f6b1d973f8d33c63fc736b45caaf, =2c91f87fba9ac2df58245622ac5f4fababe5c973, =fbd767a29a52b299595199c4a3227f732d4600ec, =66a46a64a1f990cb0db17462aacaf84e8da74727, =b3b4711240ebe5b1f574089e73f0bc7b61d5bfa2, =b3d8b70a66a7998cd92b5723ab0225d5096681ad, =00f9c469f9207ebcfc9a5cdf47050ebc4c7bc26c, =cbe38c34e2ed0e2b353aefc8b8b8bfcf369cd954, =5ddf07bf2e5d1aa2ab24ba356cb6dd1adaa6cfec, =c539454acd48ca0663b664bba06d87fab525ced6, =ee112cf0296e8a8a42d16033146dc6f2e37c5f80, =db6f80876cc48789f5e582117968c22ae37aad06, =593f3e94b6903f47c2032bbd486fed7f62dec65f, =0a83138bc041c33d038eca7d993f3b874e75671d)
 
 ### Bug Fixes
 

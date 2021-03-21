@@ -12,9 +12,9 @@ sidebarDepth: 2
 module.exports = {
   plugins: {
     common: {
-      handleFriend: true, // 通过所有好友申请
-      handleGroupMember: undefined, // 忽略所有加群申请（当然这没必要写出来）
-      async handleGroups(session) {
+      onFriendRequest: true, // 通过所有好友申请
+      onGroupMemberRequest: undefined, // 忽略所有加群申请（当然这没必要写出来）
+      async onGroupRequest(session) {
         // 拒绝所有来自 1 级以下，通过所有来自 3 级或以上权限用户的加群邀请，其他不处理
         const user = await session.observeUser(['authority'])
         if (user.authority >= 3) {
@@ -28,7 +28,7 @@ module.exports = {
 }
 ```
 
-在上面的例子中，`handleFriend`, `handleGroupMember` 和 `handleGroup` 分别用于处理好友申请，加群申请和加群邀请。每个选项的值都可以是下面几种类型：
+在上面的例子中，`onFriendRequest`, `onGroupMemberRequest` 和 `onGroupRequest` 分别用于处理好友申请，加群申请和加群邀请。每个选项的值都可以是下面几种类型：
 
 - true: 表示通过申请
 - false: 表示拒绝申请

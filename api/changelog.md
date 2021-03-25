@@ -19,9 +19,13 @@ noOutboundLinks: true
 - **github:** 支持了 github.repos 指令，用于安全地添加 webhooks (=9e962dc98d44527e99c3681896df5b6f070f18a3, =c67ffeea691568ff96db60c00878c0f7e5a57cff)
 - **github:** 优化了 github 指令，用于在任意频道内订阅已添加的仓库 (=6ef52a53714df877d629710d8a2d9be16c7efcd5)
 - **github:** 优化了指令的提示信息，将 github 和 github.repos 指令整合使用 (=53f4e8fe8347ee125f20e0232fc2fe366458ab3d)
+- **utils:** `clone()` 方法支持了 RegExp 和 Date 类型的数据 (=f2e5535df0c82e947c0fd133b366dda8174fa409)
+- **utils:** 使用内置模板函数来格式化输出的时间以实现不同地区输出的统一 (=f2e5535df0c82e947c0fd133b366dda8174fa409)
 
 ### Bug Fixes
 
+- **core:** 修复了当含有插值调用的时候，有小概率不会获取内层指令所需字段的问题 (=f2e5535df0c82e947c0fd133b366dda8174fa409)
+- **utils:** 修复了 `clone()` 方法无法处理 undefined 和 null 的问题 (=f2e5535df0c82e947c0fd133b366dda8174fa409)
 - **github:** 修复了一个 typo (#181) (=5378134c57e2602d6ad014c916702127d1928aa3)
 - **github:** 修复了大小写混用带来的无法识别问题 (=780466330c3a7897256879e60032dc4ce03de9f1)
 

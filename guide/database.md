@@ -102,6 +102,8 @@ session.getChannel(id, selfId, fields)
 session.observeChannel(fields)
 ```
 
+## 使用 ORM <Badge text="3.4.0"/>
+
 ## 扩展数据库
 
 由于 Koishi 的数据库实现使用了注入策略，因此无论是字段，表，方法还是数据库都是可以扩展的。

@@ -130,8 +130,6 @@ module.exports = {
 
 GitHub 服务的路径。
 
-显示在每条消息前的文本。
-
 ### appId
 
 - 类型: `string`
@@ -148,6 +146,8 @@ GitHub 服务的路径。
 
 - 类型: `string`
 - 默认值: `'[GitHub] '`
+
+显示在每条消息前的文本。
 
 ### promptTimeout
 

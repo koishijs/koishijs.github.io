@@ -5,6 +5,34 @@ noOutboundLinks: true
 
 # v3 更新日志
 
+## [Koishi 3.5.0](https://github.com/koishijs/koishi/releases/tag/3.5.0)
+
+- koishi-plugin-status@4.0.0 正式发布
+- 新增了 `ctx.transformAssets()` 方法，结合同时发布的新官方插件 koishi-plugin-assets，可用于实现图片等资源文件的在线转存
+
+## Features
+
+- **assets:** 支持了使用 koa 构建的图片转存服务 (=990748efebe9c713863a9be270a90af99413e7db)
+- **assets:** 支持了 [sm.ms](https://sm.ms/) 的图片转存服务 (=95ad71e27eda07501632344cde76a1c297365f10)
+- **cli:** koishi init 现在支持初始化 discord 机器人了 (=cc8f60907273f17bff2d1cd2124179e80c6ed3cf)
+- **core:** 新增了 `ctx.assets` 接口和 `ctx.transformAssets()` 方法 (=fa9331f30d0fec2fb9c325772a4d525fe7477fcb)
+- **github:** 支持了资源转存机制，以避免链接失效的问题 (=f6875a17aa3fd9543d19cebee86f8ce08d1274d1)
+- **mysql:** 利用 ORM 机制，现在不需要手动指定 index 了 (=f15df3b2754a330df77e355a8fc54603d44971f8)
+- **status:** 优化了 `Profile` 的获取机制和类型标注 (=f8f8d6efcc428b85064fd589207b43771500541a)
+- **status:** 新增了「教学」页面，将显示 koishi-plugin-teach 相关信息 (=29f2d8a762f43cd697adb34cdfd4e1f6d6fcb68a)
+- **teach:** 使用 ORM API 重构并简化了部分数据库代码 (#185) (=cca4ded842ad6d1bfe8e27012472f9a18547ad3d)
+- **teach:** 支持了资源转存机制，以避免链接失效的问题 (=b009502cd71a3bff305e4db36e7b514fc76a3d52)
+- **utils:** 新增了 `segment.transform()` 方法 (=a78f40791515854f015c1afd71d6c412271a01f0)
+
+## Bug Fixes
+
+- **core:** 修复了使用 WebSocket 在运行时长时间离线导致的报错问题 (#180) (=ff470d5af998a3e3d958e4fc4ee273036cae12e6)
+- **github:** 修复了 GitHub 相关功能不支持带 `.` 的仓库名的问题 (#183) (=a09081417d0fda300dc9401a2ad9a074e5280a20)
+- **github:** 修复了 GitHub 相关数据库使用 MySQL 的初始化问题 (#184) (=eb9ada57ad73729137f85929f8187b519f8bfc41)
+- **github:** 修复了快速回复机制失效的问题 (=8b6f0a452c34dfffc5697e6fa5e5fc427051ca58)
+- **kaiheila:** 修复了 WebSocket 重连失败的问题 (#187) (=2b99b08a3f02b0955a41fe1445038190707ac04b)
+- **kaiheila:** 修复了 WebSocket 启动时未能获取机器人信息的问题 (=6a47e39d33235543c76d691763db9f28750c0a46)
+
 ## [Koishi 3.4.0](https://github.com/koishijs/koishi/releases/tag/3.4.0)
 
 ### Notable Changes

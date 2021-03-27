@@ -152,6 +152,7 @@ module.exports = context => ({
         title: '其他官方插件',
         collapsable: false,
         children: [
+          '/plugins/other/assets',
           '/plugins/other/chess',
           '/plugins/other/github',
           '/plugins/other/image-search',

@@ -68,6 +68,12 @@ interface DelayOptions {
 }
 ```
 
+### options.selfUrl
+
+- 类型：`string`
+
+Koishi 服务暴露在公网的地址。部分功能（例如 [adapter-telegram](./adapter/telegram.md) 或是 [plugin-assets](../plugins/other/assets.md)）需要用到。
+
 ### options.maxListeners
 
 - 类型：`number`

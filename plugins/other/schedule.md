@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# 添加计划任务 (Schedule)
+# 计划任务 (Schedule)
 
 ::: warning
 要使用本插件，你需要安装 mysql 或 mongo 数据库支持。

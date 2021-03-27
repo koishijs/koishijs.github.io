@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# 搜图 (Image Search)
+# 图片搜索 (Image Search)
 
 koishi-plugin-image-search 封装了一系列搜图相关的指令，目前支持以下平台：
 

@@ -8,9 +8,9 @@ noOutboundLinks: true
 ## [Koishi 3.5.0](https://github.com/koishijs/koishi/releases/tag/3.5.0)
 
 - koishi-plugin-status@4.0.0 正式发布
-- 新增了 `ctx.transformAssets()` 方法，结合同时发布的新官方插件 koishi-plugin-assets，可用于实现图片等资源文件的在线转存
+- 新增了 `ctx.transformAssets()` 方法，结合同时发布的新官方插件 koishi-plugin-assets，可用于实现图片等资源文件的在线转存 (#186)
 
-## Features
+### Features
 
 - **assets:** 支持了使用 koa 构建的图片转存服务 (=990748efebe9c713863a9be270a90af99413e7db)
 - **assets:** 支持了 [sm.ms](https://sm.ms/) 的图片转存服务 (=95ad71e27eda07501632344cde76a1c297365f10)
@@ -24,7 +24,7 @@ noOutboundLinks: true
 - **teach:** 支持了资源转存机制，以避免链接失效的问题 (=b009502cd71a3bff305e4db36e7b514fc76a3d52)
 - **utils:** 新增了 `segment.transform()` 方法 (=a78f40791515854f015c1afd71d6c412271a01f0)
 
-## Bug Fixes
+### Bug Fixes
 
 - **core:** 修复了使用 WebSocket 在运行时长时间离线导致的报错问题 (#180) (=ff470d5af998a3e3d958e4fc4ee273036cae12e6)
 - **github:** 修复了 GitHub 相关功能不支持带 `.` 的仓库名的问题 (#183) (=a09081417d0fda300dc9401a2ad9a074e5280a20)

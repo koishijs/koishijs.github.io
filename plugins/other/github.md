@@ -90,8 +90,6 @@ module.exports = {
 
 ## 指令：github.authorize
 
-## 指令：github.recent
-
 ## 支持的事件
 
 - commit_comment

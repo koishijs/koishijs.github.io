@@ -144,9 +144,25 @@ app.command('my-command [arg:number]')
 <panel-view :messages="[
   ['Alice', 'my-command 100 --foo 200'],
   ['Koishi', 'number 100 string \x22200\x22'],
+  ['Alice', 'my-command xyz'],
+  ['Koishi', '参数 arg 输入无效，请提供一个数字。'],
 ]"/>
 
 如你所见，上文所介绍的文本参数也正是一个内置类型。
+
+### 内置类型
+
+目前 Koishi 支持的内置类型有如下：
+
+- string: `string` 字符串
+- number: `number` 数值
+- boolean: `boolean` 布尔值（实际上不带参数）
+- text: `string` 贪婪匹配的字符串
+- user: `string` 用户，格式为 `{platform}:{id}`
+- channel: `string` 频道，格式为 `{platform}:{id}`
+- integer: `number` 整数
+- posint: `number` 正整数
+- date: `Date` 日期
 
 ### 定义新类型
 

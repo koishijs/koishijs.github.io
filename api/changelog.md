@@ -5,6 +5,32 @@ noOutboundLinks: true
 
 # v3 更新日志
 
+## [Koishi 3.6.0](https://github.com/koishijs/koishi/releases/tag/3.6.0)
+
+### Notable Changes
+
+- koishi-plugin-status 更名为 koishi-plugin-webui 并发布，支持了由插件扩展页面的功能
+- koishi-plugin-common 支持了 recall 指令，同时丰富了 echo 指令的语法
+
+### Features
+
+- **core:** 允许在一个插件内注册当另一个插件加载时触发的子插件 (=cfd91517f74854bddfe24d2ed35c5b910ba4da8b)
+- **core:** 新增了 `Context.delegate()` 方法 (=84dc67650bba26e4c82f087345f4c7e7f4427ef7)
+- **chat:** 初始化 chat 插件，提供了等价于原 common 插件 debug 的功能 (=c3270c47240666afaf82c0de54b5fde7bdb654ff)
+- **common:** 将每个子功能分别暴露为插件导出 (=8f1ba356967cfdf9dd0a2ecc65069a3810a22d56)
+- **common:** 新增了 echo -c / -u 选项，用于指定输出的目标 (=70bb26c0fbf6d5cafac258b8806a265e5af08cb5)
+- **common:** 新增了 recall 指令，用于撤回当前频道中的发言 (=f78651677542915318235d2e60b21702b9c88bcb)
+- **discord:** 支持了发送 base64 格式的资源消息段 (#196) (=2e94f454b91080997a998999a2574b1152a94bc8)
+- **utils:** 支持了在模板中使用双花括号插值的语法 (=5c7ff2a0bcf052baf49f3ddaaf724ebcdf97b2be)
+- **utils:** 支持了 `segment.image()` 方法中直接传入 Buffer 或 ArrayBuffer，会自动转换为 base64 格式 (=02691b8c86b6faf851f43762cdae7d42fa213177)
+- **webui:** 重构了服务端代码，提供了 `ctx.webui` 接口，并允许其他插件扩展页面 (=a8ff8a62abeb0483b1bc4a61dc3aa4607fb81b70, =e7e28cb4c0806fca1ddc720845f7287b014060ab, =d626a14c7f6341cf0e25fb76c754360a3f1e0f8d, =904e589fa0a613931796b8d6b9127f04eba7e948, =2cf79b5ecf457e00ae646729482ecfb068498498, =217fbcdba46cec74559e022bd37e41d35a85a1e5)
+- **webui:** 支持了页面访问权限检查 (=a9b4cf4bfda4330167a6a5870375e1814cbe82a2)
+
+### Bug Fixes
+
+- **onebot:** 修复了错误的 `bot.$sendGroupNotice` 实现 (#191) (=dc7d83247d877812f11172a8aae810fb2d323d36)
+- **puppeteer:** 修复了 tex 指令输入没有被转义的问题 (=d8b0f7558389c5554a3c8d880d9c581b65f531e1)
+
 ## [Koishi 3.5.0](https://github.com/koishijs/koishi/releases/tag/3.5.0)
 
 - koishi-plugin-status@4.0.0 正式发布

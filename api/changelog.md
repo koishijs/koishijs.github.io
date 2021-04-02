@@ -5,6 +5,28 @@ noOutboundLinks: true
 
 # v3 更新日志
 
+## [Koishi 3.6.1](https://github.com/koishijs/koishi/releases/tag/3.6.1)
+
+### Features
+
+- **assets:** 支持了 base64 协议 (=95adc1773591e613ecc70339db688cda96dd6347)
+- **assets:** 优化了配置项默认值的推导 (=8ec40d7e470209ca770396e310e2d9b2a05c2c6f)
+- **core:** 支持了函数类型的 `optionConfig.hidden` (=c72f607befaf12e918b097bc76aee0a320900af1)
+- **common:** delay after each recall (=dfede399984728f7fe3350b4e786a5c11641a499)
+- **github:** github 指令选项添加了权限限制和上下文检查 (#182) (=a4264e9f302116538fa678aeca9a6f1b6ad13fd6)
+- **webui:** 在沙箱中支持了 clear 指令，用于清除历史记录 (=d23c170af8ccc2ec5d28df18d22b024800d201a6)
+- **webui:** 在沙箱中支持了发送和接收图片，并提供了统一的 chat-panel 组件 (=7c1724a1b4c9e07dbf004d63ad79014fb37f642f, =0f95246ad269c9c4525bfe90f1181713b8c3129a)
+
+### Bug Fixes
+
+- **cli:** 修复了触发热重载时会删除部分 node_modules 中的文件缓存的问题 (=ee7bf3df3b23281a456bf9e7c05fa7b05c0fdd6e)
+- **core:** 修复了在指令回调中 `return session.execute()` 会导致产生两个输出的问题 (=a2993f7a3409f3cbc3cf604026218eedfa24dea6)
+- **core:** 修复了指令调用以插值结尾时，会产生错误输出的问题 (#190) (=ed1e2d07c43af159bbcfed258a0d840a201a02f4)
+- **discord:** 修复了 `axiosConfig` 配置对发送 embed 消息无效的问题 (#198) (=679e8e00bace7ccc481ee91fb5f50e45908e9464)
+- **eval:** 修复了当会话不处于生命周期时，调用 eval 会导致报错的问题 (#197) (=66342989cfaa0c9578d3e6fbee75ea6850420134)
+- **kaiheila:** 修复了网络异常时可能导致程序崩溃的问题 (=bc1817051a44b215a1f53abc79c89629ae6f3997)
+- **mongo:** 修复了 `db.update()` 不产生效果的问题 (#188) (=d5c707fe6a1d7e0a3e13b41dced81e3fb8600871)
+
 ## [Koishi 3.6.0](https://github.com/koishijs/koishi/releases/tag/3.6.0)
 
 ### Notable Changes
@@ -14,12 +36,12 @@ noOutboundLinks: true
 
 ### Features
 
-- **core:** 允许在一个插件内注册当另一个插件加载时触发的子插件 (=cfd91517f74854bddfe24d2ed35c5b910ba4da8b)
-- **core:** 新增了 `Context.delegate()` 方法 (=84dc67650bba26e4c82f087345f4c7e7f4427ef7)
 - **chat:** 初始化 chat 插件，提供了等价于原 common 插件 debug 的功能 (=c3270c47240666afaf82c0de54b5fde7bdb654ff)
 - **common:** 将每个子功能分别暴露为插件导出 (=8f1ba356967cfdf9dd0a2ecc65069a3810a22d56)
 - **common:** 新增了 echo -c / -u 选项，用于指定输出的目标 (=70bb26c0fbf6d5cafac258b8806a265e5af08cb5)
 - **common:** 新增了 recall 指令，用于撤回当前频道中的发言 (=f78651677542915318235d2e60b21702b9c88bcb)
+- **core:** 允许在一个插件内注册当另一个插件加载时触发的子插件 (=cfd91517f74854bddfe24d2ed35c5b910ba4da8b)
+- **core:** 新增了 `Context.delegate()` 方法 (=84dc67650bba26e4c82f087345f4c7e7f4427ef7)
 - **discord:** 支持了发送 base64 格式的资源消息段 (#196) (=2e94f454b91080997a998999a2574b1152a94bc8)
 - **utils:** 支持了在模板中使用双花括号插值的语法 (=5c7ff2a0bcf052baf49f3ddaaf724ebcdf97b2be)
 - **utils:** 支持了 `segment.image()` 方法中直接传入 Buffer 或 ArrayBuffer，会自动转换为 base64 格式 (=02691b8c86b6faf851f43762cdae7d42fa213177)

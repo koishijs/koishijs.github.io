@@ -89,6 +89,7 @@ Adapter.from(app, bot).create(bot)
 
 ```js
 export interface WsClientOptions {
+  retryLazy?: number
   retryTimes?: number
   retryInterval?: number
 }

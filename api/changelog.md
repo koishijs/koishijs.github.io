@@ -12,7 +12,7 @@ noOutboundLinks: true
 - **assets:** 支持了 base64 协议 (=95adc1773591e613ecc70339db688cda96dd6347)
 - **assets:** 优化了配置项默认值的推导 (=8ec40d7e470209ca770396e310e2d9b2a05c2c6f)
 - **core:** 支持了函数类型的 `optionConfig.hidden` (=c72f607befaf12e918b097bc76aee0a320900af1)
-- **common:** delay after each recall (=dfede399984728f7fe3350b4e786a5c11641a499)
+- **common:** recall 指令每次撤回后将按照 `delay.broadcast` 延迟一段时间 (=dfede399984728f7fe3350b4e786a5c11641a499)
 - **github:** github 指令选项添加了权限限制和上下文检查 (#182) (=a4264e9f302116538fa678aeca9a6f1b6ad13fd6)
 - **webui:** 在沙箱中支持了 clear 指令，用于清除历史记录 (=d23c170af8ccc2ec5d28df18d22b024800d201a6)
 - **webui:** 在沙箱中支持了发送和接收图片，并提供了统一的 chat-panel 组件 (=7c1724a1b4c9e07dbf004d63ad79014fb37f642f, =0f95246ad269c9c4525bfe90f1181713b8c3129a)

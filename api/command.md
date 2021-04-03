@@ -6,6 +6,15 @@ sidebarDepth: 2
 
 指令系统是 Koishi 的核心功能之一。通过 `ctx.command()` 方法获得的是指令的实例，它含有下面的方法：
 
+## Argv 对象
+
+Argv 对象会作为 `cmd.action()`, `cmd.userFields()` 等方法的回调函数中的第一个参数。它具有以下的属性：
+
+- **args:** `any[]` 参数列表
+- **options:** `{}` 选项列表
+- **next:** `NextFunction` 中间件的 next 回调函数
+- **session:** [`Session`](./session.md) 所在的会话对象
+
 ## cmd.option(name, desc?, config?)
 
 为指令添加一个选项。

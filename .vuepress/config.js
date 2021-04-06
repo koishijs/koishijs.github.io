@@ -120,10 +120,10 @@ module.exports = context => ({
         collapsable: false,
         children: [
           '/plugins/common/',
-          '/plugins/common/message',
+          '/plugins/common/basic',
           '/plugins/common/handler',
+          '/plugins/common/repeater',
           '/plugins/common/admin',
-          '/plugins/common/debug',
         ],
       }, {
         title: '教学系统 (Teach)',

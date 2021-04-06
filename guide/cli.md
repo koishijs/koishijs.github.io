@@ -123,7 +123,8 @@ yarn add typescript ts-node -D
 npx koishi start -- -r ts-node/register
 ```
 ```yarn
-yarn koishi start -- -r ts-node/register
+# 因为 yarn 自己会吞掉 -- 所以需要额外写一个
+yarn koishi start -- -- -r ts-node/register
 ```
 </panel-view>
 

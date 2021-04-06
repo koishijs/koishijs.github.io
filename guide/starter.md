@@ -215,7 +215,7 @@ module.exports = (ctx) => {
 ```js koishi.config.js
 module.exports = {
   plugins: {
-    'my-plugin': {},
+    './my-plugin': {},
   },
 }
 ```

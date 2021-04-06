@@ -109,10 +109,10 @@ Koishi 支持直接调用 TypeScript 编写的插件。首先安装 typescript �
 
 <panel-view class="code" type="package-manager">
 ```npm
-npm i typescript ts-node -D
+npm i typescript ts-node tslib -D
 ```
 ```yarn
-yarn add typescript ts-node -D
+yarn add typescript ts-node tslib -D
 ```
 </panel-view>
 

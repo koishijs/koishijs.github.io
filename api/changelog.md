@@ -5,6 +5,49 @@ noOutboundLinks: true
 
 # v3 更新日志
 
+## [Koishi 3.7.1](https://github.com/koishijs/koishi/releases/tag/3.7.1)
+
+### Features
+
+- **adventure:** 加入了好感度相关教学功能 (=f7e77f03ebdbc4160ee5c26be24547b2160b482c)
+- **adventure:** 重新组织了模块结构 (=d6dd1289629ae8d066a302105fc61998f0ef8740)
+- **chat:** 支持了客户端发送消息 (=27da2e5e0febbd8cebde8901f6773a0e5babc26c)
+- **chat:** 支持了头像显示和引用回复 (=9ced6c19361f5b612843116f2046b2b5389dd16f, =2abdd458847211f747e185ee00cdb12773d5a7cf)
+- **core:** 在 send 事件中加入更多 author 字段 (=59ebaa468c79782edbdeb9032bfb7c309b5f12aa)
+- **webui:** 支持了资源服务器以解决跨域问题 (=16f24411cecb5053f4e8191e0487b346a81e9715)
+- **webui:** 支持了图片查看器，包括图片点击缩放、切换和旋转等功能 (=9d20614d4fc13e55efed6757d6b04d3ffc023596, =95e5181be07858106a3957bb7bc4e3db87485e0b, =6a48912e7d55350c57a699f093a6405f385baeb8)
+
+### Bug Fixes
+
+- **chat:** 修复了没有鉴权的问题 (=c0738b7efa1ac93aee9ef08b251c9410c22cdc2b)
+- **cli:** 支持了在 koishi.config.js 中使用 es 模块语法 (=8a20fa7957ffe1ab51b2437eea67ec37e5274279)
+- **common:** 修复了撤回失败时异常报错的问题 (=c9f665ef4e22bbfb72126801400cbe741672f494)
+- **common:** 修复了无配置时部分事件会触发报错的问题 (#209) (=3ab470fb2ce3c8c6eb10d7acef9ddbffeef8304e)
+
+## [Koishi 3.7.0](https://github.com/koishijs/koishi/releases/tag/3.7.0)
+
+### Notable Changes
+
+- 提供了 `ctx.with()` 方法，能够妥善处理插件之间的依赖关系
+
+### Features
+
+- **chat:** 支持了消息推送 (=eb1ed8582d99530f8a16feff0f95cd0e53ed0b46, =d6509c3e8f90dcbb76ba2c01c86f2ec5cd7cf6f4)
+- **core:** 支持了 `ctx.with()` 方法 (=fa03edebe00c0bb0e00bbd9743844ebc65041c20)
+- **discord:** 添加了一批 Bot API (#193) (#204) (=aae8a25f1b62897067c88e66f5bf810e8c1e902a)
+- **eval:** 支持了沙箱本地存储 (#96) (=1d8ee8ffe7ad88f052f490e01ae8463f598aac59, =f705a03058823904dc258fe242c11ce33bfd0351)
+- **eval:** 重构了事件钩子，允许用户处理发送行为 (#194) (=cf4be063646c9e6046628dd64e87b1f8834c5aed)
+
+### Bug Fixes
+
+- **discord:** 修复了发送本地文件失败的问题 (#201) (#202) (=e0576e5ff74fc80ff12b6869410ee4570106db82)
+- **teach:** 修复了未使用 Assets API 时前端显示 NaN 的问题 (=a45811dafc4c9be9e462262463ce944c2d1c981f)
+- **utils:** 修复了 `segment.parse()` 未返回转义前文本节点的问题 (=2cad31231aa4e4d3cb6b2218ed43cfd64e280875)
+- **webui:** 修复了未使用 Assets API 时服务端报错的问题 (=4c84f33a86cdec25fef529dd708b6206414e55ce)
+- **webui:** 修复了鼠标悬浮到小时图表的时候报错的问题 (=22988d5cb46533c9703e814602fb91b748173bbd)
+- **webui:** 修复了登录和登出时页面切换异常的问题 (=72373773eda0aa9f6174755bf324bb08e0bad87e)
+- **webui:** 修复了使用扩展路由时，初始访问无法显示页面的问题 (=5b5a21c1a0f5c7d68959f7aaa3a1e41eeec4115e)
+
 ## [Koishi 3.6.1](https://github.com/koishijs/koishi/releases/tag/3.6.1)
 
 ### Features

@@ -188,6 +188,14 @@ type PluginObject<U> = { apply: PluginFunction<T, U> }
 type Plugin<U> = PluginFunction<T, U> | PluginObject<T, U>
 ```
 
+### ctx.with(deps, plugin)
+
+安装一个存在依赖的插件，参见 [声明依赖关系](../guide/context.md#声明依赖关系)。请注意：这里的依赖列表都应该是 node 模块名，并且都必须直接以插件的形式导出（如所有官方插件都具备这个特征）。
+
+- **deps:** `string[]` 依赖列表
+- **plugin:** `Plugin` 要安装的插件
+- 返回值: `this`
+
 ### ctx.command(def, desc?, config?)
 
 在当前上下文中注册或修改一个指令。

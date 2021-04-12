@@ -6,15 +6,13 @@ sidebarDepth: 2
 
 ## 关于生命周期
 
-### 应该如何保证一段代码在成功完成初始化之后执行？
+### 应该如何保证一段代码在成功连接服务器之后执行？
 
 可以有很多种方式。你可以利用 `app.start()` 返回的 `Promise` 对象：
 
 ```js
 app.start().then(() => {
-  app.bots.forEach((bot) => {
-    bot.sendPrivateMsg('123456789', '你的机器人上线了')
-  })
+  app.bots[0].sendPrivateMsg('123456789', '你的机器人上线了')
 })
 ```
 
@@ -22,9 +20,7 @@ app.start().then(() => {
 
 ```js
 app.on('connect', () => {
-  app.bots.forEach((bot) => {
-    bot.sendPrivateMsg('123456789', '你的机器人上线了')
-  })
+  app.bots[0].sendPrivateMsg('123456789', '你的机器人上线了')
 })
 
 // 先注册回调函数，再启动应用

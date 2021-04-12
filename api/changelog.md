@@ -5,6 +5,51 @@ noOutboundLinks: true
 
 # v3 更新日志
 
+## [Koishi 3.8.0](https://github.com/koishijs/koishi/releases/tag/3.8.0)
+
+### Notable Changes
+
+- koishi start 加入了针对 koishi.config.js 等文件变动的重载支持
+- koishi-plugin-eval 支持了多语言接口（目前官方仅支持 typescript）
+
+### Features
+
+- **cli:** 新增了 `fullReload` 配置项 (=44881a7b8263fe84f5271f98815343c7a2a7b2df)
+- **core:** 修改了 `autoAssign`, `autoAuthorize` 的默认值以获得更好的上手体验 (=8a7503d651c39d6ab0a04508843a7032e3f10236)
+- **core:** 优化了 `Adapter.WsClient` 的提示信息 (=959fa2b4498429c539ec49a37d7b04d86033e204)
+- **eval:** 新增了 `loader` 配置项，可用于实现多语言 (=b4dc3350bf327895744bc33fc62d006e6445142b, =f16c64f7d60c4b35cd4211f3a31699e86aa64a25, =8639942d937593ace10f753efb90fa6a539642c5)
+- **puppeteer:** 新增了 puppeteer/start 事件 (=ad9aa35b5d254562435c9069465ff065b560d4c9)
+- **webui:** 重构了部分代码，将 `ctx.webui` 实现为一个 Adapter 实例，同时与沙箱有关的功能移至 koishi-plugin-chat (=6089379fae4f4b6ac1d5d21288cea57acc3689c6, =8735b3b9cccee00f7d35eb91fc2f99c1d0d97caa, =43e00b924940c12cb704a6673e14501237699b8d, =fc0b2a7137b580ef1ceff360c286e3d46a232cc8)
+
+### Bug Fixes
+
+- **chat:** 修复了 windows 客户端发消息产生的 \r 导致控制台信息异常的问题 (=7e1953901ad8252b3558961c185a820830501157)
+- **discord:** 修复了 #212 带来的报错问题 (=3a7e6b27d22c625504e756df856f5ac857420b3f)
+- **onebot:** 修改了 http, ws-reverse 协议中的默认路径为 `/onebot` (=f4ab9c176d4c17bad39e8ffe5e92150983d3eb2d)
+- **webui:** 使用 `ref` 代替 `ctx.$el`，修复了生产环境报错问题 (#221) (=312356c6d424e7a9ab2e1caccbc3b33a49758bc1)
+- **webui:** 修复了 body 无法滚动的问题 (#220) (=e3b68947b3a364c734f03aa09a0306b32861733d)
+- **webui:** 修复了 #215 带来的沙箱页面样式失效问题 (=3f489741a7fa8672fe2690469c9f04d9cf2d66a6)
+- **webui:** 修复了 MySQL 支持未能正确实现 ORM 导致 webui 加载报错的问题 (#224) (=211bd99421399711c5ab720725f0b32ff6b7d9a0)
+
+## [Koishi 3.7.2](https://github.com/koishijs/koishi/releases/tag/3.7.2)
+
+### Features
+
+- **discord:** 优化了消息类会话的附属字段 (#212) (=a280e52561551d7fe6174dcc675ff5046022ab02)
+- **eval:** 现在可以在上下文中直接访问 `ctx.worker` 了 (=1e23160347c3708a4a726a3ae7ff0e290826ec94)
+- **eval:** 实验性地支持了 `worker.addSetupFile()` (=c5f3079e9c6053e712b18a8e35269b7e40c3f110)
+- **utils:** `segment.from()` 新增了第二个参数 `options` (=6c59d862b5479ec7578491075dfa7219d444aba9)
+- **webui:** 支持了虚拟消息列表，解决了大量消息同屏渲染的性能问题 (#215) (=3a72c99e8335721f49cb7aa60af370e4fc302296)
+- **webui:** 图片查看器支持了快捷键（包括方向键，esc 和回车） (=91247e14cadc12af450e42ffc0dd27dd462aee7d)
+
+### Bug Fixes
+
+- **cli:** 修复了 koishi init 在 windows 上可能报错的问题 (#205) (=691b7c7c6bc174da870b0adf838bd6df89f7d1ba)
+- **cli:** 修复了执行热重载时会非预期地重载部分插件的问题 (=32e9f2da3e54015d3f43e92076450dc5d7955e8a)
+- **teach:** 修复了错误的 `authority.context` 配置项行为 (#208) (=89d53b10a85c40d2f5b27d10867b592b699f5811)
+- **webui:** 修复了插件提供的 CSS 没有被网页加载的问题 (#214) (=1de4e7b6470f3e39f75cfb9166dc10820eafbbb4)
+- **webui:** 修复了 title 配置项对导航栏不生效的问题 (#213) (=b429522775c4cbcca0ef1ae482a49093d920a7ce)
+
 ## [Koishi 3.7.1](https://github.com/koishijs/koishi/releases/tag/3.7.1)
 
 ### Features

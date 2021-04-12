@@ -13,6 +13,12 @@ sidebarDepth: 2
 
 快捷调用的前缀字符。设置为 `null` 可以取消 evaluate 指令的快捷调用。
 
+## loader
+
+- 类型: `string`
+
+使用的 Loader 名称。内置的可选值包括 typescript 和 esbuild。你也可以自己编写一个 Loader，并在这里配置项中填入文件路径。
+
 ## timeout
 
 - 类型: `number`

@@ -14,7 +14,7 @@ noOutboundLinks: true
 
 ### Features
 
-- **cli:** 新增了 `fullReload` 配置项 (=44881a7b8263fe84f5271f98815343c7a2a7b2df)
+- **cli:** 新增了 `watch.fullReload` 配置项 (=44881a7b8263fe84f5271f98815343c7a2a7b2df)
 - **core:** 修改了 `autoAssign`, `autoAuthorize` 的默认值以获得更好的上手体验 (=8a7503d651c39d6ab0a04508843a7032e3f10236)
 - **core:** 优化了 `Adapter.WsClient` 的提示信息 (=959fa2b4498429c539ec49a37d7b04d86033e204)
 - **eval:** 新增了 `loader` 配置项，可用于实现多语言 (=b4dc3350bf327895744bc33fc62d006e6445142b, =f16c64f7d60c4b35cd4211f3a31699e86aa64a25, =8639942d937593ace10f753efb90fa6a539642c5)

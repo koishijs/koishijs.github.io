@@ -143,9 +143,10 @@ module.exports = context => ({
         collapsable: false,
         children: [
           '/plugins/eval/',
-          '/plugins/eval/sandbox',
           '/plugins/eval/addon',
-          '/plugins/eval/extension',
+          '/plugins/eval/main',
+          '/plugins/eval/worker',
+          '/plugins/eval/sandbox',
           '/plugins/eval/config',
         ],
       }, {

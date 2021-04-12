@@ -136,6 +136,7 @@ Koishi 服务暴露在公网的地址。部分功能（例如 [adapter-telegram]
 
 - 类型：[`WatchOptions`](https://github.com/paulmillr/chokidar#api) 外加下面的属性：
   - **watch.root:** `string` 要监听的根目录，相对于工作路径
+  - **watch.fullReload:** `boolean` 当检测到非插件变更时，是否重载整个应用
 
 监听文件变化的选项。参见 [**插件热重载**](../guide/cli.md#插件热重载) 一节。
 

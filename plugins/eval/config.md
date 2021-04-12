@@ -26,12 +26,6 @@ sidebarDepth: 2
 
 单轮 evaluate 指令执行过程允许的最大等待时长，单位为毫秒。
 
-## maxLogs
-
-- 类型: `number`
-
-单轮 evaluate 指令执行过程中允许 [`send`](#send) 被调用的最大次数。
-
 ## userFields
 
 - 类型: `string[]`

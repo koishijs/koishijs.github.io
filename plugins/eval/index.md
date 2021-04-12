@@ -4,21 +4,15 @@ sidebarDepth: 2
 
 # 基本用法
 
-::: danger 注意
-这里是**正在施工**的 koishi v3 的文档。
-:::
-
-::: tip 提示
-本章节将同时介绍 koishi-plugin-eval 和 koishi-plugin-eval-addons 两个插件，后者的功能将作为前者的补充。
-:::
-
 ::: warning 注意
-由于这两个插件使用了许多最新的特性。目前使用 koishi-plugin-eval 的功能需要你的 Node 版本不小于 14.6，并在运行时附上 `--enable-source-maps`。如果要使用 koishi-plugin-eval-addons，还需要额外附上 `--experimental-vm-modules` 参数。
+由于本插件使用了许多最新的特性，因此需要你的 Node 版本不小于 14.6，并在运行时附上 `--enable-source-maps` 和 `--experimental-vm-modules` 参数。
 :::
 
 koishi-plugin-eval 允许用户直接使用机器人执行脚本。它利用了 Node.js 的 vm 和 worker_thread 模块，在保护执行安全的前提下能够获得较快的响应速度。同时，插件还提供了一些内置的 API 供用户调用，结合教学功能可以在客户端实现复杂的行为。
 
-koishi-plugin-eval-addons 在前一个插件的基础上，允许用户编写自己的模块并永久保存。插件将自动加载特定目录下的文件，并将其作为机器人的内置功能。用户可以利用此功能存储较为复杂的代码，甚至扩展新的指令。同时，如果上述目录是一个 git 目录，该插件也提供了自动更新等机制。
+addons 功能在上述功能的基础上，允许用户编写自己的模块并永久保存。插件将自动加载特定目录下的文件，并将其作为机器人的内置功能。用户可以利用此功能存储较为复杂的代码，甚至扩展新的指令。同时，如果上述目录是一个 git 目录，该插件也提供了自动更新等机制。
+
+## 指令：evaluate
 
 ## 安全性
 

@@ -2,5 +2,7 @@
 sidebarDepth: 2
 ---
 
-# 编写扩展
+# 扩展开发
+
+## 指令：addons
 

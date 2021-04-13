@@ -4,7 +4,7 @@ sidebarDepth: 2
 
 # 配置项
 
-请注意标有 <Badge text="addons" vertical="baseline"/> 的配置项需要配合 koishi-plugin-eval-addons 使用。但你可以将相应的参数传给任何一个插件，效果是等价的。
+请注意标有 <Badge text="addons" vertical="baseline"/> 的配置项需要配合 addons 使用。但你可以将相应的参数传给任何一个插件，效果是等价的。
 
 ## prefix
 
@@ -13,11 +13,12 @@ sidebarDepth: 2
 
 快捷调用的前缀字符。设置为 `null` 可以取消 evaluate 指令的快捷调用。
 
-## loader
+## scriptLoader
 
 - 类型: `string`
+- 默认值: `'default'`
 
-使用的 Loader 名称。内置的可选值包括 typescript 和 esbuild。你也可以自己编写一个 Loader，并在这里配置项中填入文件路径。
+evaluate 指令和插值所使用的 Loader。内置的可选值包括 default, typescript 和 esbuild。你也可以自己编写一个 Loader，并在这里配置项中填入文件路径。
 
 ## timeout
 
@@ -51,14 +52,21 @@ sidebarDepth: 2
 
 用于将传入 [`send`](#send) 方法的参数转化成字符串的配置项。
 
+## root <Badge text="addons"/>
+
+- 类型: `string`
+
+扩展模块的根目录路径。仅当配置了此选项时才会加载 addons 相关特性。
+
 ## gitRemote <Badge text="addons"/>
 
 - 类型: `string`
 
 扩展模块更新时的 remote 链接。
 
-## addonRoot <Badge text="addons"/>
+## moduleLoaders <Badge text="addons"/>
 
-- 类型: `string`
+- 类型: `Record<string, string>`
+- 默认值: `{}`
 
-扩展模块的根目录路径。
+扩展模块所使用的 Loader。键名为文件后缀名，值为对应的 Loader 名称，用法与 [`scriptLoader`](#scriptloader) 类似。

@@ -4,6 +4,28 @@ sidebarDepth: 2
 
 # 常见问题
 
+## 最常见的问题
+
+### 能收到消息但是不能发消息是什么原因？
+
+如果你使用的是 koishi-adapter-onebot，请先查看你的 go-cqhttp 控制台，看看是不是因为风控导致的消息无法发送。
+
+### 使用 TypeScript 开发时，部分必需的字段并没有代码提示？
+
+你需要手动引入依赖。例如如果你使用 koishi-adapter-onebot，你可以这样做：
+
+```js koishi.config.ts
+import { AppConfig } from 'koishi'
+import {} 'koishi-adapter-onebot'
+
+export default {
+  type: 'onebot',
+  selfId: '123456789',
+  // 如果没有引入上面的模块，这里的字段就没有代码提示
+  server: 'http://localhost:5700',
+} as AppConfig
+```
+
 ## 关于生命周期
 
 ### 应该如何保证一段代码在成功连接服务器之后执行？

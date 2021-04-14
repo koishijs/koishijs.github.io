@@ -21,9 +21,9 @@ addons 功能在上述功能的基础上，允许用户编写自己的模块并�
 koishi-plugin-eval 提供了一套陷阱 API。它会影响 evaluate 指令和扩展指令中的用户数据。你可以通过下面的方式来定义一个陷阱：
 
 ```js
-import { userTrap } from 'koishi-plugin-eval'
+import { Trap } from 'koishi-plugin-eval'
 
-userTrap.define('foo', {
+Trap.user.define('foo', {
   fields: ['bar'],
   get: user => user.bar,
   set: (user, value) => user.bar = value,

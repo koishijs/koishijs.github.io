@@ -4,7 +4,27 @@ sidebarDepth: 2
 
 # 子线程 API
 
-子线程 API 可通过 [`setupFiles`](./config.md#setupfiles) 配置项访问。
+子线程 API 可通过 [`setupFiles`](./config.md#setupfiles) 配置项访问：
+
+```js koishi.config.js
+export default {
+  plugins: {
+    eval: {
+      setupFiles: {
+        worker: '/path/to/worker.js',
+      },
+    },
+  },
+}
+```
+
+```js worker.js
+import { synthetize } from 'koishi-plugin-eval/lib/worker'
+```
+
+::: warning
+本章中介绍的 API 都只能在子线程中访问，请不要尝试在主线程中这么写！
+:::
 
 ## main
 

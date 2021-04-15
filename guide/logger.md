@@ -130,7 +130,7 @@ module.exports = {
 
 如果你不希望使用 Koishi 的命令行工具，同时又想使用上述种种特性，你可以考虑直接调用 Logger 的底层方法来进行配置。
 
-::: danger
+::: warning
 由于手动调用 Logger 并不是我们所推荐的行为，本节中介绍的属性和方法不会记录在文档中，Koishi 也不会保证这些功能不会在版本更新中发生变化。在开发时，请尽量以 koishi-utils 包提供的 dts 文件，而非本页面为准。
 :::
 
@@ -138,13 +138,19 @@ module.exports = {
 
 - 类型：`string`
 
-对应配置项 `logTime`，只支持字符串格式。默认值为空串。
+对应配置项 [`logTime`](../api/app.md#options-logtime)，只支持字符串格式。默认值为空串。
+
+### Logger.showDiff
+
+- 类型：`boolean`
+
+对应配置项 [`logDiff`](../api/app.md#options-logdiff)。默认值为 `false`。
 
 ### Logger.levels
 
 - 类型：`LogLevelConfig`
 
-对应配置项 `logLevel`，只支持对象格式。默认值为 `{ base: 2 }`。
+对应配置项 [`logLevel`](../api/app.md#options-loglevel) 和 [`logFilter`](../api/app.md#options-logfilter)，只支持对象格式。默认值为 `{ base: 2 }`。
 
 ## 内置的输出
 

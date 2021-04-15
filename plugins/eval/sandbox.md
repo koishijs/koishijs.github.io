@@ -71,3 +71,14 @@ evaluate 指令会创建一个沙箱环境。这个沙箱环境支持 ES2020 的
 ### koishi/utils
 
 ### koishi/addons
+
+## 多语言支持
+
+下面是支持的文件后缀名。部分后缀名虽然有内置的支持，但需要你提前安装部分依赖。
+
+- **js/json:** 原生支持
+- **yml/yaml:** 原生支持
+- **coffee:** 需要安装 coffeescript
+- **ts:** 需要安装下面两组中的一组
+  - typescript + json5
+  - esbuild

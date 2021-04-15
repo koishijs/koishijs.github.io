@@ -19,7 +19,9 @@ export default {
 ```
 
 ```js worker.js
-import { synthetize } from 'koishi-plugin-eval/lib/worker'
+import { internal } from 'koishi-plugin-eval/lib/worker'
+
+internal.setGlobal('foo', 1)
 ```
 
 ::: warning
@@ -114,6 +116,13 @@ koishi-plugin-eval 中的代码在一个沙箱环境中运行，而这个沙箱�
 - **name:** `string | number | symbol` 属性名称
 - **value:** `object` 沙箱外的对象（这个方法会调用 contextify 进行打包）
 - **writable:** `boolean` 是否可覆写（这里的可覆写性包括此属性值是否被覆盖和此属性的深层子属性值是否可以在沙箱内部被修改）
+
+### internal.getGlobal(name)
+
+获取沙箱内全局属性 name 的值。
+
+- **name:** `string | number | symbol` 属性名称
+- 返回值: `any`
 
 ### internal.connect(outer, inner)
 

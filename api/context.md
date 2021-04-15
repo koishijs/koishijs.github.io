@@ -86,6 +86,13 @@ ctx.router.get('/path', (ctx, next) => {
 - **context:** `Context | ((session: Session) => boolean)` 另一个上下文或者过滤器函数
 - 返回值: `Context` 新的上下文
 
+### ctx.except(filter)
+
+给出当前上下文和其他上下文的差集。
+
+- **context:** `Context | ((session: Session) => boolean)` 另一个上下文或者过滤器函数
+- 返回值: `Context` 新的上下文
+
 ### ctx.match(session)
 
 测试上下文能否匹配会话对象。
@@ -159,18 +166,6 @@ ctx.router.get('/path', (ctx, next) => {
 - **middleware:** [`Middleware`](../guide/message.md#使用中间件) 要注册的中间件
 - **prepend:** `boolean` 是否前置
 - 返回值: `() => boolean` 取消这个中间件
-
-### ctx.setTimeout(callback, ms, ...args)
-### ctx.setInterval(callback, ms, ...args)
-
-注册一个可卸载的定时器。
-
-- 参数: 与原生的 Node.js [Timers](https://nodejs.org/api/timers.html) 一致
-- 返回值: `() => boolean` 取消这个定时器
-
-::: tip
-在大部分时候你仍然可以直接使用原生的 Timers API。上述两个方法的使用场景仅限于注册存在时间长且作用明显的回调函数，例如 [koishi-plugin-schedule](../plugins/other/schedule.md)。
-:::
 
 ## 指令与插件
 

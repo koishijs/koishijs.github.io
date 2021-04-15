@@ -114,6 +114,25 @@ Koishi 服务暴露在公网的地址。部分功能（例如 [adapter-telegram]
 
 要安装的插件列表。如果传入一个列表，则依次安装列表中的插件；如果传入一个对象，则以对象的键为插件名，值为插件的选项进行安装。参见 [**插件与上下文**](../guide/plugin-and-context.md) 一章。
 
+我们还支持配置插件的上下文选择器：
+
+```js
+type SelectorValue = boolean | string | string[]
+
+interface Selection {
+  $user: SelectorValue
+  $channel: SelectorValue
+  $group: SelectorValue
+  $private: SelectorValue
+  $self: SelectorValue
+  $platform: SelectorValue
+  $union: Selection[]
+  $except: Selection
+}
+```
+
+参见 [**在配置文件中使用选择器**](../guide/context.md#在配置文件中使用选择器) 一节。
+
 ### options.logLevel
 
 - 类型：`number`
@@ -131,6 +150,12 @@ Koishi 服务暴露在公网的地址。部分功能（例如 [adapter-telegram]
 - 类型：`string | boolean`
 
 输出日志所使用的时间格式。参见 [**输出时间**](../guide/logger.md#输出时间) 一节。
+
+### options.logDiff
+
+- 类型：`boolean`
+
+是否标注相邻两次输出的时间差。默认值初始未设置，在 connect 事件触发后修改为 `!options.logTime`。参见 [**输出时间**](../guide/logger.md#输出时间) 一节。
 
 ### options.watch
 

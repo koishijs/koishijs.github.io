@@ -188,6 +188,65 @@ app.unselect('groupId').union(app.select('userId', '445566'))
 
 这些方法会返回一个新的上下文，在其上使用监听器、中间件、指令或是插件就好像同时在多个上下文中使用一样。
 
+### 在配置文件中使用选择器
+
+如果你使用配置文件，我们也提供了使用选择器的方法：
+
+```js koishi.config.js
+export default {
+  plugins: {
+    common: {
+      // 选择器配置
+      // 仅在 onebot 平台下 2 个特定频道内注册插件
+      $platform: 'onebot',
+      $channel: ['123456', '456789'],
+
+      // 其他配置
+      onRepeat: {
+        minTimes: 3,
+        probability: 0.5,
+      },
+    },
+  },
+}
+```
+
+这相当于
+
+```js
+app
+  .platform('onebot')
+  .channel('123456', '456789')
+  .plugin(require('koishi-plugin-common'), {
+    onRepeat: {
+      minTimes: 3,
+      probability: 0.5,
+    },
+  })
+```
+
+当你要使用集合运算的时候，也有对应的语法：
+
+```yaml koishi.config.yml
+# 我们也支持 yaml 格式的配置文件
+plugins:
+  eval:
+    # 禁止 discord 平台触发，除非特定调用者在私聊访问
+    $union:
+      - $private: '123456789'
+      - $except:
+          $platform: 'discord'
+```
+
+这相当于
+
+```js
+app
+  .private('123456789')
+  .union(app.except(app.platform('discord')))
+  .plugin(require('koishi-plugin-eval'), {})
+```
+
 ## 插件热重载
 
 ::: tip

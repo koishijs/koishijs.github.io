@@ -77,18 +77,21 @@ Koishi 服务暴露在公网的地址。部分功能（例如 [adapter-telegram]
 ### options.maxListeners
 
 - 类型：`number`
+- 默认值：`64`
 
-每种钩子的最大数量。如果超过这个数量，Koishi 会认定为发生了内存泄漏，将产生一个警告。默认值为 `64`。
+每种钩子的最大数量。如果超过这个数量，Koishi 会认定为发生了内存泄漏，将产生一个警告。
 
 ### options.autoAuthorize
 
 - 类型：`number | ((session: Session) => number)`
+- 默认值：`1`
 
 当获取不到用户数据时默认使用的权限等级。
 
 ### options.autoAssign
 
 - 类型：`boolean | ((session: Session) => boolean)`
+- 默认值：`true`
 
 当获取不到频道数据时，是否使用接受者作为代理者。
 
@@ -136,26 +139,30 @@ interface Selection {
 ### options.logLevel
 
 - 类型：`number`
+- 默认值：`2`
 
-默认的输出等级。默认值为 `2`。参见 [**设置输出等级**](../guide/logger.md#设置输出等级) 一节。
+默认的输出等级。参见 [**设置输出等级**](../guide/logger.md#设置输出等级) 一节。
 
 ### options.logFilter
 
 - 类型：`Record<string, number>`
+- 默认值：`{}`
 
 用于在某些范围覆盖默认的输出等级。参见 [**过滤输出**](../guide/logger.md#过滤输出) 一节。
 
 ### options.logTime
 
 - 类型：`string | boolean`
+- 默认值：`false`
 
 输出日志所使用的时间格式。参见 [**输出时间**](../guide/logger.md#输出时间) 一节。
 
 ### options.logDiff
 
 - 类型：`boolean`
+- 默认值：初始未设置，在 connect 事件触发后修改为 `!options.logTime`
 
-是否标注相邻两次输出的时间差。默认值初始未设置，在 connect 事件触发后修改为 `!options.logTime`。参见 [**输出时间**](../guide/logger.md#输出时间) 一节。
+是否标注相邻两次输出的时间差。参见 [**输出时间**](../guide/logger.md#输出时间) 一节。
 
 ### options.watch
 

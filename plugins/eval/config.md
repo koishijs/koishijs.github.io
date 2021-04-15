@@ -29,10 +29,17 @@ evaluate 指令和插值所使用的 Loader。内置的可选值包括 default, 
 
 ## userFields
 
-- 类型: `string[]`
+- 类型: `Access<User.Fields>`
 - 默认值: `['id', 'authority']`
 
 能够在 evaluate 指令中被访问的用户字段列表。这里的字段也是受 [陷阱](#使用陷阱) 影响的。
+
+## channelFields
+
+- 类型: `Access<Channel.Fields>`
+- 默认值: `['id']`
+
+能够在 evaluate 指令中被访问的频道字段列表。这里的字段也是受 [陷阱](#使用陷阱) 影响的。
 
 ## resourceLimits
 

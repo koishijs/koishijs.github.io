@@ -30,9 +30,9 @@ internal.setGlobal('foo', 1)
 
 ## main
 
-- 类型: `MainHandle`
+- 类型: [`MainHandle`](./main.md#mainhandle)
 
-主线程 MainHandle 对象的代理。koishi 的内部机制将允许你如同直接在主线程里调用 MainHandle 方法那样调用这里的 `main` 对象。当然你只能通过 main 做到这件事。
+主线程 MainHandle 对象的代理。Koishi 的内部机制将允许你如同直接在主线程里调用 MainHandle 方法那样调用这里的 `main` 对象。当然你只能通过 `main` 做到这件事。
 
 ## config
 
@@ -65,7 +65,18 @@ internal.setGlobal('foo', 1)
 - **options:** `EvalOptions` 执行脚本的选项
   - **options.silent:** `boolean` 是否不产生输出
   - **options.source:** `string` 要执行的脚本
-- 返回值: `Promise<string>`
+- 返回值: `Promise<string>` 执行结果
+
+### handle.callAddon(data, argv)
+
+在沙箱中调用一个扩展指令。
+
+- **data:** `SessionData` 会话上下文数据
+- **argv:** `AddonArgv` Argv 对象
+  - **argv.name:** `string` 指令名
+  - **argv.args:** `any[]` 参数列表
+  - **argv.options:** `{}` 选项列表
+- 返回值: `Promise<string>` 调用结果
 
 ## createSession(data)
 

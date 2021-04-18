@@ -154,6 +154,7 @@ module.exports = context => ({
         collapsable: false,
         children: [
           '/plugins/other/assets',
+          '/plugins/other/chat',
           '/plugins/other/chess',
           '/plugins/other/github',
           '/plugins/other/image-search',

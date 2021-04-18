@@ -8,7 +8,7 @@ sidebarDepth: 2
 
 ### User
 
-- **id:** `number` 内部编号
+- **id:** `string` 内部编号
 - **name:** `string` 用户昵称
 - **flag:** `number` 状态标签
 - **authority:** `number` 用户权限

@@ -37,27 +37,27 @@ sidebarDepth: 2
 
 ### bot.sendMessage(channelId, content)
 
-向特定频道发送消息。
-
 - **channelId:** `string` 频道 ID
 - **content:** `string` 要发送的内容
 - 返回值: `Promise<string>` 发送的消息 ID
 
-### bot.sendPrivateMessage(userId, content)
+向特定频道发送消息。
 
-向特定用户发送私聊消息。
+### bot.sendPrivateMessage(userId, content)
 
 - **userId:** `string` 对方 ID
 - **content:** `string` 要发送的内容
 - 返回值: `Promise<string>` 发送的消息 ID
 
-### bot.getMessage(channelId, messageId)
+向特定用户发送私聊消息。
 
-获取特定消息。
+### bot.getMessage(channelId, messageId)
 
 - **channelId:** `string` 频道 ID
 - **messageId:** `string` 消息 ID
 - 返回值: `Promise<MessageInfo>`
+
+获取特定消息。
 
 ```js
 export interface MessageInfo {
@@ -71,37 +71,37 @@ export interface MessageInfo {
 
 ### bot.deleteMessage(channelId, messageId)
 
-撤回特定消息。
-
 - **channelId:** `string` 频道 ID
 - **messageId:** `string` 消息 ID
 - 返回值: `Promise<void>`
 
-### bot.editMessage(channelId, messageId, content)
+撤回特定消息。
 
-修改特定消息。
+### bot.editMessage(channelId, messageId, content)
 
 - **channelId:** `string` 频道 ID
 - **messageId:** `string` 消息 ID
 - **content:** `string` 要发送的内容
 - 返回值: `Promise<void>`
 
-### bot.broadcast(channels, content, delay?) <Badge text="内置"/>
+修改特定消息。
 
-向多个频道广播消息。如有失败不会抛出错误。
+### bot.broadcast(channels, content, delay?) <Badge text="内置"/>
 
 - **channels:** `string[]` 频道列表
 - **content:** `string` 要发送的内容
 - **delay:** `number` 发送消息间的延迟，默认值为 [`app.options.delay.broadcast`](./app.md#options-delay)
 - 返回值: `Promise<string[]>` 成功发送的消息 ID 列表
 
+向多个频道广播消息。如有失败不会抛出错误。
+
 ## 获取数据
 
 ### bot.getSelf()
 
-获取机器人自己的信息。
-
 - 返回值: `Promise<UserInfo>` 用户信息
+
+获取机器人自己的信息。
 
 ```js
 export interface UserInfo {
@@ -113,23 +113,23 @@ export interface UserInfo {
 
 ### bot.getUser(userId)
 
-获取用户信息。
-
 - **userId:** `string` 目标用户 ID
 - 返回值: `Promise<UserInfo>` 用户信息
 
-### bot.getFriendList()
+获取用户信息。
 
-获取机器人的好友列表。
+### bot.getFriendList()
 
 - 返回值: `Promise<UserInfo[]>` 好友列表
 
-### bot.getGroup(groupId)
+获取机器人的好友列表。
 
-获取群组信息。
+### bot.getGroup(groupId)
 
 - **groupId:** `string` 目标群 ID
 - 返回值: `Promise<GroupInfo>` 群组信息
+
+获取群组信息。
 
 ```js
 export interface GroupInfo {
@@ -140,17 +140,17 @@ export interface GroupInfo {
 
 ### bot.getGroupList()
 
-获取机器人加入的群组列表。
-
 - 返回值: `Promise<GroupInfo[]>` 群组列表
 
-### bot.getGroupMember(groupId, userId)
+获取机器人加入的群组列表。
 
-获取群成员信息。
+### bot.getGroupMember(groupId, userId)
 
 - **groupId:** `string` 目标群 ID
 - **userId:** `string` 目标用户 ID
 - 返回值: `Promise<GroupMemberInfo>` 群成员信息
+
+获取群成员信息。
 
 ```js
 export interface GroupMemberInfo extends UserInfo {
@@ -160,24 +160,24 @@ export interface GroupMemberInfo extends UserInfo {
 
 ### bot.getGroupMemberList(groupId)
 
-获取群成员列表。
-
 - **groupId:** `string` 目标群 ID
 - 返回值: `Promise<GroupMemberInfo[]>` 群成员列表
 
-### bot.getGroupMemberMap(groupId) <Badge text="内置"/>
+获取群成员列表。
 
-获取群成员列表，返回一个用户 ID 到昵称的键值对，若无 nickname 则使用 username。
+### bot.getGroupMemberMap(groupId) <Badge text="内置"/>
 
 - **groupId:** `string` 目标群 ID
 - 返回值: `Promise<Record<string, string>>` 群成员昵称的键值对
 
-### bot.getChannel(channelId)
+获取群成员列表，返回一个用户 ID 到昵称的键值对，若无 nickname 则使用 username。
 
-获取频道信息。
+### bot.getChannel(channelId)
 
 - **channelId:** `string` 目标频道 ID
 - 返回值: `Promise<ChannelInfo>` 频道信息
+
+获取频道信息。
 
 ```js
 export interface ChannelInfo {
@@ -188,47 +188,47 @@ export interface ChannelInfo {
 
 ### bot.getChannelList(groupId)
 
-获取某个群的频道列表。
-
 - **groupId:** `string` 目标群 ID
 - 返回值: `Promise<ChannelInfo[]>` 频道列表
+
+获取某个群组的频道列表。
 
 ## 处理请求
 
 ### bot.handleFriendRequest(messageId, approve, comment?)
 
-处理好友请求。
-
 - **messageId:** `string` 请求 ID
 - **approve:** `boolean` 是否通过请求
 - **comment:** `string` 备注信息
 - 返回值: `Promise<void>`
+
+处理好友请求。
 
 ### bot.handleGroupRequest(messageId, approve, comment?)
 
-处理来自群组的邀请。
-
 - **messageId:** `string` 请求 ID
 - **approve:** `boolean` 是否通过请求
 - **comment:** `string` 备注信息
 - 返回值: `Promise<void>`
+
+处理来自群组的邀请。
 
 ### bot.handleGroupMemberRequest(messageId, approve, comment?)
 
-处理加群请求。
-
 - **messageId:** `string` 请求 ID
 - **approve:** `boolean` 是否通过请求
 - **comment:** `string` 备注信息
 - 返回值: `Promise<void>`
+
+处理加群请求。
 
 ## 其他
 
 ### bot.getStatus()
 
-获取当前运行状态。
-
 - 返回值: `Promise<BotStatus>`
+
+获取当前运行状态。
 
 ```js
 export enum Status {
@@ -249,7 +249,7 @@ export enum Status {
 
 ### bot.createSession(session) <Badge text="内置"/>
 
-创建一个 send 类型的会话，供 `bot.sendMessage()` 等 API 使用。
-
 - **session:** `Partial<Session>` 会话数据
 - 返回值: `Session` 新会话
+
+创建一个 send 类型的会话，供 `bot.sendMessage()` 等 API 使用。

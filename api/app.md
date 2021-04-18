@@ -176,9 +176,13 @@ interface Selection {
 
 ### app.options
 
+- 类型: `AppOptions`
+
 当前 App 创建时传入的配置。
 
 ### app.status
+
+- 类型: `App.Status`
 
 当前 App 的运行状态。它可能是下列数值中的一个：
 
@@ -189,12 +193,12 @@ interface Selection {
 
 ### app.start()
 
-启动此应用。
-
 - 返回值: `Promise<void>`
+
+启动此应用。
 
 ### app.stop()
 
-停止此应用。
-
 - 返回值: `Promise<void>`
+
+停止此应用。

@@ -25,7 +25,7 @@ sidebarDepth: 2
 - **session:** `Session` 当前会话
 - **触发方式:** waterfall
 
-在子线程中调用 `main.send()`，主线程实际发送消息之前触发。
+在子线程中调用 `main.send()`，主线程实际发送消息之前触发。你可以在这里修改 `content` 的值并返回。
 
 ## Trap 实例方法
 

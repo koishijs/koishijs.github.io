@@ -83,26 +83,6 @@ interface AuthorityConfig {
 
 - 类型: `number`
 
-## imagePath
-
-- 类型: `string`
-
-## imageServer
-
-- 类型: `string`
-
-## uploadKey
-
-- 类型: `string`
-
-## uploadPath
-
-- 类型: `string`
-
-## uploadServer
-
-- 类型: `string`
-
 ## preventLoop
 
 - 类型: `number | LoopConfig | LoopConfig[]`

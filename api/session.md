@@ -61,6 +61,13 @@ sidebarDepth: 2
 - **delay:** `number` 与下一条消息的时间间隔，缺省时会使用 [`app.options.delay.queue`](./app.md#options-delay)
 - 返回值: `Promise<void>`
 
+### session.cancelQueued(delay?)
+
+取消当前正在等待发送的消息队列，并重置与下一条通过 `session.sendQueued` 发送的消息之间的时间间隔。
+
+- **delay:** `number` 与下一条消息的时间间隔，默认值为 `0`
+- 返回值: `Promise<void>`
+
 ### session.middleware(middleware)
 
 注册一个仅对当前会话生效的中间件。

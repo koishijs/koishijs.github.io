@@ -21,47 +21,47 @@ interface segment {
 
 ### segment(type, data)
 
-将一个对象转化成消息段文本。
-
 - **type:** `string` 消息段类型
 - **data:** `object` 消息段参数
 - 返回值: `string` 生成的消息段
 
-### segment.join(codes)
+将一个对象转化成消息段文本。
 
-将多个 segment 对象转化成文本并连接。
+### segment.join(codes)
 
 - **codes:** `segment[]` 消息段数组
 - 返回值: `string` 生成的文本
 
-### segment.escape(source, inline?)
+将多个 segment 对象转化成文本并连接。
 
-转义一段文本到消息段格式。
+### segment.escape(source, inline?)
 
 - **source:** `string` 源文本
 - **inline:** `boolean` 在消息段内部转义（会额外处理逗号）
 - 返回值: `string` 转义过后的文本
 
-### segment.unescape(souce)
+转义一段文本到消息段格式。
 
-取消一段文本的消息段转义。
+### segment.unescape(souce)
 
 - **source:** `string` 源文本
 - 返回值: `string` 转义前的文本
 
-### segment.from(source)
+取消一段文本的消息段转义。
 
-将一个消息段文本解析成对象。
+### segment.from(source)
 
 - **source:** `string` 源文本
 - 返回值: `segment` 消息段的类型和参数
 
-### segment.parse(source)
+将一个消息段文本解析成对象。
 
-解析一段文本内的全部消息段。其中的纯文本将会解析成 text 类型。
+### segment.parse(source)
 
 - **source:** `string` 源文本
 - 返回值: `segment[]` 消息段数组
+
+解析一段文本内的全部消息段。其中的纯文本将会解析成 text 类型。
 
 ## 元素消息段
 

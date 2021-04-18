@@ -52,14 +52,12 @@ internal.setGlobal('foo', 1)
 
 ### handle.sync(scope)
 
-同步会话上下文（包括应用 user, channel 属性的变更，保存 storage 到本地等）。
-
 - **scope:** `WorkerSession` [会话上下文](./sandbox.md#会话上下文)
 - 返回值: `Promise<void>`
 
-### handle.eval(data, options)
+同步会话上下文（包括应用 user, channel 属性的变更，保存 storage 到本地等）。
 
-在沙箱中执行一段脚本。
+### handle.eval(data, options)
 
 - **data:** `SessionData` 会话上下文数据
 - **options:** `EvalOptions` 执行脚本的选项
@@ -67,9 +65,9 @@ internal.setGlobal('foo', 1)
   - **options.source:** `string` 要执行的脚本
 - 返回值: `Promise<string>` 执行结果
 
-### handle.callAddon(data, argv)
+在沙箱中执行一段脚本。
 
-在沙箱中调用一个扩展指令。
+### handle.callAddon(data, argv)
 
 - **data:** `SessionData` 会话上下文数据
 - **argv:** `AddonArgv` Argv 对象
@@ -77,6 +75,8 @@ internal.setGlobal('foo', 1)
   - **argv.args:** `any[]` 参数列表
   - **argv.options:** `{}` 选项列表
 - 返回值: `Promise<string>` 调用结果
+
+在沙箱中调用一个扩展指令。
 
 ## createSession(data)
 
@@ -87,18 +87,18 @@ internal.setGlobal('foo', 1)
 
 ## formatError(error)
 
-格式化异常信息。这个方法会处理 `error.stack` 的内容以保护你的真实文件路径不被暴露。
-
 - **error:** `Error` 异常信息
 - 返回值: `string`
 
-## synthetize(identifier, namespace, globalName?)
+格式化异常信息。这个方法会处理 `error.stack` 的内容以保护你的真实文件路径不被暴露。
 
-创建一个虚拟模块。如果传入了 `globalName`，还会将这个模块暴露为全局属性。
+## synthetize(identifier, namespace, globalName?)
 
 - **identifier:** `string` 模块名称
 - **namespace:** `object` 模块的导出
 - **globalName:** `string` 全局属性名称
+
+创建一个虚拟模块。如果传入了 `globalName`，还会将这个模块暴露为全局属性。
 
 ## Internal
 
@@ -110,37 +110,37 @@ koishi-plugin-eval 中的代码在一个沙箱环境中运行，而这个沙箱�
 
 ### internal.contextify(value)
 
-将一个沙箱外的对象打包成沙箱内的对象。
-
 - **value:** `object` 沙箱外的对象
+
+将一个沙箱外的对象打包成沙箱内的对象。
 
 ### internal.decontextify(value)
 
-将一个沙箱内的对象解包为沙箱外的对象。
-
 - **value:** `object` 沙箱内的对象
 
-### internal.setGlobal(name, value, writable?)
+将一个沙箱内的对象解包为沙箱外的对象。
 
-设置沙箱内全局属性 name 的值为 value。
+### internal.setGlobal(name, value, writable?)
 
 - **name:** `string | number | symbol` 属性名称
 - **value:** `object` 沙箱外的对象（这个方法会调用 contextify 进行打包）
 - **writable:** `boolean` 是否可覆写（这里的可覆写性包括此属性值是否被覆盖和此属性的深层子属性值是否可以在沙箱内部被修改）
 
-### internal.getGlobal(name)
+设置沙箱内全局属性 name 的值为 value。
 
-获取沙箱内全局属性 name 的值。
+### internal.getGlobal(name)
 
 - **name:** `string | number | symbol` 属性名称
 - 返回值: `any`
 
-### internal.connect(outer, inner)
+获取沙箱内全局属性 name 的值。
 
-将对象 inner 与 outer 相绑定。每当要打包 outer 为沙箱内的对象时返回 inner；反之每当要将 inner 解包为沙箱外的对象时返回 outer。
+### internal.connect(outer, inner)
 
 - **outer:** `object` 要绑定对象
 - **inner:** `object` 要绑定对象
+
+将对象 inner 与 outer 相绑定。每当要打包 outer 为沙箱内的对象时返回 inner；反之每当要将 inner 解包为沙箱外的对象时返回 outer。
 
 ## mapDirectory(identifier, filename)
 

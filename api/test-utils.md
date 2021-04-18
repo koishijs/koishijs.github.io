@@ -12,10 +12,10 @@ koishi-test-utils 包含了被 Koishi 使用的测试工具。
 
 ## testDatabase(app: App)
 
-测试全部内置数据库方法。
-
 - **app:** [`App`](./app.md) 用于测试的 App 实例
 - 返回值: [`App`](./app.md) 用于测试的 App 实例
+
+测试全部内置数据库方法。
 
 ## 类：MockedApp
 
@@ -29,26 +29,26 @@ const mockedApp = new App()
 
 ### new MockedApp(options?)
 
-这里的 `options` 除了支持 App 类的所有构造选项外，还支持下列选项：
-
 - **options.mockStart:** `boolean` 使构造的应用处于已连接状态
 - **options.mockDatabase:** `boolean` 给构造的应用配置一个 [MemoryDatabase](#类-memorydatabase)
 - 返回值: `MockedApp`
 
-### app.receive(meta)
+这里的 `options` 除了支持 App 类的所有构造选项外，还支持下列选项：
 
-触发会话事件。
+### app.receive(meta)
 
 - **meta:** `Partial<Session>` 事件所需的 Session 属性
 - 返回值: `string`
 
-### app.session(userId, channelId?)
+触发会话事件。
 
-创建一个测试会话。
+### app.session(userId, channelId?)
 
 - **userId:** `string` 用户 ID
 - **channelId:** `string` 频道 ID
 - 返回值: `TestSession`
+
+创建一个测试会话。
 
 ## 类：TestSession
 
@@ -66,26 +66,26 @@ const mockedApp = new App()
 
 ### session.receive(content, count?)
 
-模拟发送一条消息。
-
 - **content:** `string` 要发送的信息
 - **count:** `number` 等待的回复数量
 - 返回值: `Promise<string[]>` 收到的回复列表
 
-### session.shouldReply(content, reply?)
+模拟发送一条消息。
 
-断言某条信息应存在某些回复。
+### session.shouldReply(content, reply?)
 
 - **content:** `string` 要发送给机器人的信息
 - **reply:** `string | RegExp | readonly (string | RegExp)[]` 应有的回复，如果略去则不会进行比较
 - 返回值: `Promise<void>`
 
-### session.shouldNotReply(content)
+断言某条信息应存在某些回复。
 
-断言某条信息不应存在任何回复。
+### session.shouldNotReply(content)
 
 - **content:** `string` 要发送给机器人的信息
 - 返回值: `Promise<void>`
+
+断言某条信息不应存在任何回复。
 
 ## 类：MemoryDatabase
 

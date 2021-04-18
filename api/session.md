@@ -48,43 +48,41 @@ sidebarDepth: 2
 
 ### session.send(message)
 
-在当前上下文发送消息。
-
 - **message:** `string` 要发送的内容
 - 返回值: `Promise<void>`
 
-### session.sendQueued(message, delay?)
+在当前上下文发送消息。
 
-在当前上下文发送消息，并与下一条通过 `session.sendQueued` 发送的消息之间保持一定的时间间隔。
+### session.sendQueued(message, delay?)
 
 - **message:** `string` 要发送的内容
 - **delay:** `number` 与下一条消息的时间间隔，缺省时会使用 [`app.options.delay.queue`](./app.md#options-delay)
 - 返回值: `Promise<void>`
 
-### session.cancelQueued(delay?)
+在当前上下文发送消息，并与下一条通过 `session.sendQueued` 发送的消息之间保持一定的时间间隔。
 
-取消当前正在等待发送的消息队列，并重置与下一条通过 `session.sendQueued` 发送的消息之间的时间间隔。
+### session.cancelQueued(delay?)
 
 - **delay:** `number` 与下一条消息的时间间隔，默认值为 `0`
 - 返回值: `Promise<void>`
 
-### session.middleware(middleware)
+取消当前正在等待发送的消息队列，并重置与下一条通过 `session.sendQueued` 发送的消息之间的时间间隔。
 
-注册一个仅对当前会话生效的中间件。
+### session.middleware(middleware)
 
 - **middleware:** [`Middleware`](../guide/message.md#中间件) 要注册的中间件
 - 返回值: `() => void` 取消该中间件的函数
 
-### session.prompt(timeout?) <Badge text="beta" type="warn"/>
+注册一个仅对当前会话生效的中间件。
 
-等待当前会话的下一次输入，如果超时则会 reject。
+### session.prompt(timeout?) <Badge text="beta" type="warn"/>
 
 - **timeout:** `number` 中间件的生效时间，缺省时会使用 [`app.options.delay.prompt`](./app.md#options-delay)
 - 返回值: `Promise<string>` 用户输入
 
-### session.suggest(options)
+等待当前会话的下一次输入，如果超时则会 reject。
 
-尝试显示候选输入。
+### session.suggest(options)
 
 - **options.target:** `string` 目标字符串
 - **options.items:** `string[]` 源字符串列表
@@ -95,12 +93,14 @@ sidebarDepth: 2
 - **options.apply:** `(suggestion: string, next: NextFunction) => void` 确认后执行的操作
 - 返回值: `Promise<void>`
 
-### session.resolve(argv)
+尝试显示候选输入。
 
-尝试解析一个 argv 所关联的指令。
+### session.resolve(argv)
 
 - **argv:** `Argv` 运行时参数对象
 - 返回值: [`Command`](./command.md) 关联的指令
+
+尝试解析一个 argv 所关联的指令。
 
 ### session.collect(argv, key, fields)
 
@@ -113,8 +113,8 @@ sidebarDepth: 2
 
 ### session.execute(argv, next?)
 
-执行一个指令。可以传入一个 argv 对象或者指令对应的文本。
-
 - **argv:** `string | Argv` 指令文本或运行时参数对象
 - **next:** [`NextFunction`](../guide/message.md#使用中间件) 回调函数
 - 返回值: `Promise<void>`
+
+执行一个指令。可以传入一个 argv 对象或者指令对应的文本。

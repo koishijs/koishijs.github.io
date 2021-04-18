@@ -125,20 +125,20 @@ WebSocket 重新尝试连接前的等待时间，单位为毫秒。默认值为 
 
 ### bot.$sendGroupMsg(groupId, message, autoEscape?)
 
-发送群消息。
-
 - **groupId:** `number` 群号
 - **message:** `string` 要发送的内容
 - **autoEsacpe:** `boolean` 消息内容是否作为纯文本发送（即不解析 CQ 码）
 - 返回值: `Promise<number>` 新信息的 messageId
 
-### bot.$sendGroupForwardMsg(groupId, nodes) <Badge text="go-cqhttp" type="warn"/>
+发送群消息。
 
-发送群批量转发消息。
+### bot.$sendGroupForwardMsg(groupId, nodes) <Badge text="go-cqhttp" type="warn"/>
 
 - **groupId:** `number` 群号
 - **nodes:** `CQNode[]` 消息节点列表
 - 返回值: `Promise<void>`
+
+发送群批量转发消息。
 
 ```js
 interface CQNode {
@@ -155,11 +155,11 @@ interface CQNode {
 
 ### bot.$sendLike(userId, times?)
 
-给好友点赞。
-
 - **userId:** `number` 好友 QQ 号
 - **times:** `number` 点赞次数
 - 返回值: `Promise<void>`
+
+给好友点赞。
 
 ::: warning 注意
 本接口仅限**对好友**使用。
@@ -167,10 +167,10 @@ interface CQNode {
 
 ### bot.$getGroupMsg(messageId) <Badge text="go-cqhttp" type="warn"/>
 
-发送群批量转发消息。
-
 - **messageId:** `number` 消息编号
 - 返回值: `Promise<GroupMessage>`
+
+发送群批量转发消息。
 
 ```js
 export interface GroupMessage {
@@ -184,10 +184,10 @@ export interface GroupMessage {
 
 ### bot.$getForwardMsg(messageId) <Badge text="go-cqhttp" type="warn"/>
 
-发送群批量转发消息。
-
 - **messageId:** `number` 消息编号
 - 返回值: `Promise<ForwardMessage>`
+
+发送群批量转发消息。
 
 ```js
 export interface ForwardMessage {
@@ -203,76 +203,74 @@ export interface ForwardMessage {
 
 ### bot.$setGroupKick(groupId, userId, rejectAddRequest?)
 
-踢出群聊或拒绝加群。
-
 - **groupId:** `number` 群号
 - **userId:** `number` QQ 号
 - **rejectAddRequest:** `boolean` 拒绝此人的加群请求
 - 返回值: `Promise<void>`
 
-### bot.$setGroupBan(groupId, userId, duration?)
+踢出群聊或拒绝加群。
 
-群组单人禁言。
+### bot.$setGroupBan(groupId, userId, duration?)
 
 - **groupId:** `number` 群号
 - **userId:** `number` QQ 号
 - **duration:** `number` 禁言时长（秒），设为 0 表示解除禁言
 - 返回值: `Promise<void>`
 
-### bot.$setGroupAnonymousBan(groupId, anonymous, duration?)
+群组单人禁言。
 
-群组匿名用户禁言。
+### bot.$setGroupAnonymousBan(groupId, anonymous, duration?)
 
 - **groupId:** `number` 群号
 - **anonymous:** `object | string` 匿名用户的信息或 flag，参见 [Message 型元数据属性](../guide/message.md#message-型元数据属性)
 - **duration:** `number` 禁言时长（秒），设为 0 表示解除禁言
 - 返回值: `Promise<void>`
 
-### bot.$setGroupWholeBan(groupId, enable?)
+群组匿名用户禁言。
 
-群组全员禁言。
+### bot.$setGroupWholeBan(groupId, enable?)
 
 - **groupId:** `number` 群号
 - **enable:** `boolean` 是否禁言，默认为 `true`
 - 返回值: `Promise<void>`
 
-### bot.$setGroupAdmin(groupId, userId, enable?)
+群组全员禁言。
 
-群组设置管理员。
+### bot.$setGroupAdmin(groupId, userId, enable?)
 
 - **groupId:** `number` 群号
 - **userId:** `number` QQ 号
 - **enable:** `boolean` 是否设置为管理员，默认为 `true`
 - 返回值: `Promise<void>`
 
-### bot.$setGroupAnonymous(groupId, enable?)
+群组设置管理员。
 
-群组设置匿名。
+### bot.$setGroupAnonymous(groupId, enable?)
 
 - **groupId:** `number` 群号
 - **enable:** `boolean` 是否允许匿名，默认为 `true`
 - 返回值: `Promise<void>`
 
-### bot.$setGroupCard(groupId, userId, card?)
+群组设置匿名。
 
-设置群名片。
+### bot.$setGroupCard(groupId, userId, card?)
 
 - **groupId:** `number` 群号
 - **userId:** `number` QQ 号
 - **card:** `string` 群名片
 - 返回值: `Promise<void>`
 
-### bot.$setGroupLeave(groupId, isDismiss?)
+设置群名片。
 
-退出群组。
+### bot.$setGroupLeave(groupId, isDismiss?)
 
 - **groupId:** `number` 群号
 - **isDismiss:** `boolean` 是否解散群（仅对群主生效）
 - 返回值: `Promise<void>`
 
-### bot.$setGroupSpecialTitle(groupId, userId, specialTitle?, duration?)
+退出群组。
 
-设置群组专属头衔。
+### bot.$setGroupSpecialTitle(groupId, userId, specialTitle?, duration?)
 
 - **groupId:** `number` 群号
 - **userId:** `number` QQ 号
@@ -280,37 +278,37 @@ export interface ForwardMessage {
 - **duration:** `number` 有效时长（秒，目前可能没用）
 - 返回值: `Promise<void>`
 
-### bot.$sendGroupNotice(groupId, title, content)
+设置群组专属头衔。
 
-发布群公告。
+### bot.$sendGroupNotice(groupId, title, content)
 
 - **groupId:** `number` 群号
 - **title:** `string` 标题
 - **content:** `string` 内容
 - 返回值: `Promise<void>`
 
-### bot.$setGroupName(groupId, name) <Badge text="go-cqhttp" type="warn"/>
+发布群公告。
 
-修改群名称。
+### bot.$setGroupName(groupId, name) <Badge text="go-cqhttp" type="warn"/>
 
 - **groupId:** `number` 群号
 - **name:** `string` 群名称
 - 返回值: `Promise<void>`
 
+修改群名称。
+
 ## 处理请求
 
 ### bot.$setFriendAddRequest(flag, approve?, remark?)
-
-处理加好友请求。
 
 - **flag:** `string` 加好友请求的 flag（需从上报的数据中获得）
 - **approve:** `boolean` 是否同意请求，默认为 `true`
 - **remark:** `string` 好友备注名（仅当同意时有效）
 - 返回值: `Promise<void>`
 
-### bot.$setGroupAddRequest(flag, subtype, approve?, reason?)
+处理加好友请求。
 
-处理加群请求或邀请。
+### bot.$setGroupAddRequest(flag, subtype, approve?, reason?)
 
 - **flag:** `string` 加群请求的 flag（需从上报的数据中获得）
 - **subtype:** `'add' | 'invite'` 子类型，参见 [Request 型元数据属性](../guide/message.md#request-型元数据属性)
@@ -318,13 +316,15 @@ export interface ForwardMessage {
 - **reason:** `string` 拒绝理由（仅当拒绝时有效）
 - 返回值: `Promise<void>`
 
+处理加群请求或邀请。
+
 ## 账号信息
 
 ### bot.$getLoginInfo()
 
-获取登录号信息。
-
 - 返回值: `Promise<UserInfo>` 登录号信息
+
+获取登录号信息。
 
 ```js
 export interface UserInfo {
@@ -335,9 +335,9 @@ export interface UserInfo {
 
 ### bot.$getVipInfo()
 
-获取会员信息。
-
 - 返回值: `Promise<VipInfo>` 会员信息
+
+获取会员信息。
 
 ```js
 export interface VipInfo extends UserInfo {
@@ -351,11 +351,11 @@ export interface VipInfo extends UserInfo {
 
 ### bot.$getStrangerInfo(userId, noCache?)
 
-获取陌生人信息。
-
 - **userId:** `number` 目标 QQ 号
 - **noCache:** `boolean` 是否不使用缓存，默认为 `false`
 - 返回值: `Promise<StrangerInfo>` 陌生人信息
+
+获取陌生人信息。
 
 ```js
 export interface StrangerInfo extends UserInfo {
@@ -366,9 +366,9 @@ export interface StrangerInfo extends UserInfo {
 
 ### bot.$getFriendList()
 
-获取好友列表。
-
 - 返回值: `Promise<FriendInfo[]>` 好友列表
+
+获取好友列表。
 
 ```js
 export interface FriendInfo extends UserInfo {
@@ -378,9 +378,9 @@ export interface FriendInfo extends UserInfo {
 
 ### bot.$getGroupList()
 
-获取群列表。
-
 - 返回值: `Promise<ListedGroupInfo[]>` 群信息列表
+
+获取群列表。
 
 ```js
 export interface ListedGroupInfo {
@@ -391,11 +391,11 @@ export interface ListedGroupInfo {
 
 ### bot.$getGroupInfo(groupId, noCache?)
 
-获取群信息。
-
 - **groupId:** `number` 目标群号
 - **noCache:** `boolean` 是否不使用缓存，默认为 `false`
 - 返回值: `Promise<GroupInfo>` 群信息
+
+获取群信息。
 
 ```js
 export interface GroupInfo extends ListedGroupInfo {
@@ -406,12 +406,12 @@ export interface GroupInfo extends ListedGroupInfo {
 
 ### bot.$getGroupMemberInfo(groupId, userId, noCache?)
 
-获取群成员信息。
-
 - **groupId:** `number` 目标群号
 - **userId:** `number` 目标 QQ 号
 - **noCache:** `boolean` 是否不使用缓存，默认为 `false`
 - 返回值: `Promise<GroupMemberInfo>` 群成员信息
+
+获取群成员信息。
 
 ```js
 export interface SenderInfo extends StrangerInfo {
@@ -434,17 +434,17 @@ export interface GroupMemberInfo extends SenderInfo {
 
 ### bot.$getGroupMemberList(groupId)
 
-获取群成员列表。
-
 - **groupId:** `number` 目标群号
 - 返回值: `Promise<GroupMemberInfo[]>` 群成员列表
 
-### bot.$getGroupNotice(groupId)
+获取群成员列表。
 
-获取群公告列表。部分字段具体含义可能需要自行理解。
+### bot.$getGroupNotice(groupId)
 
 - **groupId:** `number` 目标群号
 - 返回值: `Promise<GroupNoticeInfo[]>` 群公告列表
+
+获取群公告列表。部分字段具体含义可能需要自行理解。
 
 ```js
 export interface GroupNoticeInfo {
@@ -471,23 +471,23 @@ export interface GroupNoticeInfo {
 
 ### bot.$getCookies(domain?)
 
-获取 Cookies。
-
 - **domain:** `string` 需要获取 cookies 的域名
 - 返回值: `Promise<string>` cookies
 
-### bot.$getCsrfToken()
+获取 Cookies。
 
-获取 CSRF Token。
+### bot.$getCsrfToken()
 
 - 返回值: `Promise<string>` CSRF Token
 
-### bot.$getCredentials()
+获取 CSRF Token。
 
-获取 QQ 相关接口凭证，相当于上面两个接口的合并。
+### bot.$getCredentials()
 
 - **domain:** `string` 需要获取 cookies 的域名
 - 返回值: `Promise<Credentials>` 接口凭证
+
+获取 QQ 相关接口凭证，相当于上面两个接口的合并。
 
 ```js
 export interface Credentials {
@@ -498,12 +498,12 @@ export interface Credentials {
 
 ### bot.$getRecord(file, outFormat, fullPath?)
 
-获取语音：并不是真的获取语音，而是转换语音到指定的格式，然后返回 `data/record` 目录下的语音文件名。注意，要使用此接口，需要安装 CoolQ 的 [语音组件](https://cqp.cc/t/21132)。
-
 - **file:** `string` 语音文件名
 - **outFormat:** `'mp3' | 'amr' | 'wma' | 'm4a' | 'spx' | 'ogg' | 'wav' | 'flac'`
 - **fullPath:** `boolean` 是否返回文件的绝对路径
 - 返回值: `Promise<RecordInfo>`
+
+获取语音：并不是真的获取语音，而是转换语音到指定的格式，然后返回 `data/record` 目录下的语音文件名。注意，要使用此接口，需要安装 CoolQ 的 [语音组件](https://cqp.cc/t/21132)。
 
 ```js
 export interface RecordInfo {
@@ -513,10 +513,10 @@ export interface RecordInfo {
 
 ### bot.$getImage(file)
 
-获取图片：与上面类似，不过返回 `data/image` 目录下的图片路径。
-
 - **file:** `string` 图片文件名
 - 返回值: `Promise<ImageInfo>`
+
+获取图片：与上面类似，不过返回 `data/image` 目录下的图片路径。
 
 ```js
 export interface ImageInfo {
@@ -531,21 +531,21 @@ export interface ImageInfo {
 
 ### bot.$canSendImage()
 
-检查是否可以发送图片。
-
 - 返回值: `Promise<boolean>` 是否可以发送图片
+
+检查是否可以发送图片。
 
 ### bot.$canSendRecord()
 
-检查是否可以发送语音。
-
 - 返回值: `Promise<boolean>` 是否可以发送语音
+
+检查是否可以发送语音。
 
 ### bot.$getStatus()
 
-获取插件运行状态。
-
 - 返回值: `Promise<StatusInfo>` 插件运行状态
+
+获取插件运行状态。
 
 ```js
 export interface StatusInfo {
@@ -560,9 +560,9 @@ export interface StatusInfo {
 
 ### bot.$getVersionInfo()
 
-获取 OneBot 的版本信息。
-
 - 返回值: `Promise<VersionInfo>` 插件版本信息
+
+获取 OneBot 的版本信息。
 
 ```js
 export interface VersionInfo {
@@ -581,12 +581,12 @@ export interface VersionInfo {
 
 ### bot.$setRestart(cleanLog?, cleanCache?, cleanEvent?)
 
-重启 CoolQ，并以当前登录号自动登录（需勾选快速登录）。
-
 - **cleanLog:** `boolean` 是否在重启时清空 CoolQ 的日志数据库（log*.db）
 - **cleanCache:** `boolean` 是否在重启时清空 CoolQ 的缓存数据库（cache.db）
 - **cleanEvent:** `boolean` 是否在重启时清空 CoolQ 的事件数据库（eventv2.db）
 - 返回值: `Promise<void>`
+
+重启 CoolQ，并以当前登录号自动登录（需勾选快速登录）。
 
 ::: warning 警告
 由于强行退出可能导致 CoolQ 数据库损坏而影响功能，此接口除非必要请尽量避免使用。
@@ -594,20 +594,20 @@ export interface VersionInfo {
 
 ### bot.$setRestartPlugin(delay?)
 
-重启 HTTP API 插件。
-
 - **delay:** `string` 要延迟的毫秒数，如果默认情况下无法重启，可以尝试设置延迟为 2000 左右
 - 返回值: `Promise<void>`
 
-### bot.$cleanDataDir(dataDir)
+重启 HTTP API 插件。
 
-清理积攒了太多旧文件的数据目录。
+### bot.$cleanDataDir(dataDir)
 
 - **dataDir:** `'image' | 'record' | 'show' | 'bface'` 要清理的目录名
 - 返回值: `Promise<void>`
 
+清理积攒了太多旧文件的数据目录。
+
 ### bot.$cleanPluginLog()
 
-清空插件的日志文件。
-
 - 返回值: `Promise<void>`
+
+清空插件的日志文件。

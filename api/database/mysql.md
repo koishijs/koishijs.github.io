@@ -17,22 +17,20 @@ sidebarDepth: 2
 
 ## db.mysql.joinKeys(keys?)
 
-连接字段成字符串。
-
 - **keys:** `string[]` 要连接的字段
 - 返回值: `string` 连接后的结果
 
-## db.mysql.query(sql, values?)
+连接字段成字符串。
 
-发送 SQL 请求。
+## db.mysql.query(sql, values?)
 
 - **sql:** `string` SQL 字符串
 - **value:** `any` 要插入的值
 - 返回值: `Promise<any>` 请求结果
 
-## db.mysql.select(table, fields?, conditional?, values?)
+发送 SQL 请求。
 
-搜索表中的数据。
+## db.mysql.select(table, fields?, conditional?, values?)
 
 - **table:** `string` 表名
 - **fields:** `string[]` 字段列表
@@ -40,18 +38,20 @@ sidebarDepth: 2
 - **values:** `any` 要插入的值
 - 返回值: `Promise<any>`
 
-## db.mysql.update(table, id, data)
+搜索表中的数据。
 
-更新表中的某行。
+## db.mysql.update(table, id, data)
 
 - **table:** `string` 表名
 - **id:** `number` 行号
 - **data:** `any` 要更新的数据
 - 返回值: `Promise<any>`
 
-## db.mysql.count(table)
+更新表中的某行。
 
-计算表中的行数。
+## db.mysql.count(table)
 
 - **table:** `string` 表名
 - 返回值: `Promise<number>` 表中的行数
+
+计算表中的行数。

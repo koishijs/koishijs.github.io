@@ -169,7 +169,7 @@ app.command('my-command [arg:number]')
 使用 `Argv.createDomain()` 创建新类型：
 
 ```js
-import { Domain } from 'koishi-core'
+import { Argv } from 'koishi-core'
 
 Argv.createDomain('repeat', source => source.repeat(3))
 

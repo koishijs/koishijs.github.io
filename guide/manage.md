@@ -17,7 +17,7 @@ Koishi 内置了下面几个数据库字段：
 - **user:** 用户表
   - **id:** `string` 内部编号
   - **name:** `string` 用户昵称
-  - **???:** `string` 平台编号 [见下](#平台相关字段)
+  - **???:** `string` [平台编号](#平台相关字段)
   - **flag:** `number` 状态标签
   - **authority:** `number` 用户权限
   - **usage:** `Record<string, number>` 指令调用次数

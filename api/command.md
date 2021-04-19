@@ -125,6 +125,7 @@ type FieldCollector<K extends string> =
 - 返回值：`Command` 注册或修改的指令
 
 注册或修改子指令。子指令会继承当期指令的上下文。
+关于子指令以及为什么使用子指令，你可以参考指南[指令的多级结构](https://koishi.js.org/guide/help.html#%E6%8C%87%E4%BB%A4%E7%9A%84%E5%A4%9A%E7%BA%A7%E7%BB%93%E6%9E%84)部分
 
 ## cmd.parse(input)
 

@@ -96,6 +96,7 @@ type FieldCollector<K extends string> =
 - 返回值: `this`
 
 如果指令需要用到频道数据，你可以提前声明，这样有助于合并多次请求，从而提高性能。
+参见[按需加载](../guide/manage.md#声明所需字段)章节。
 
 ## cmd.alias(...names)
 
@@ -124,8 +125,7 @@ type FieldCollector<K extends string> =
 - **config:** [`CommandConfig`](./context.md#ctx-command) 指令的配置
 - 返回值：`Command` 注册或修改的指令
 
-注册或修改子指令。子指令会继承当期指令的上下文。
-关于子指令以及为什么使用子指令，参见[指令的多级结构](../guide/help.md#指令的多级结构)章节。
+注册或修改子指令。子指令会继承当期指令的上下文。参见[指令的多级结构](../guide/help.md#指令的多级结构)章节。
 
 ## cmd.parse(input)
 
@@ -175,3 +175,4 @@ type FieldCollector<K extends string> =
 - **fields:** `FieldCollector<ChannelField>` 要请求的频道字段
 
 如果所有指令都需要用到频道数据，你可以提前声明，这样有助于合并多次请求，从而提高性能。
+参见[按需加载](../guide/manage.md#声明所需字段)章节。

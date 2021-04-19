@@ -18,20 +18,8 @@ module.exports = {
     // ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
   ],
 
-  plugins: [
-    [require('./markdown/highlight')],
-    [require('./markdown/link')],
-    [require('./markdown/github')],
-    ['medium-zoom', {
-      selector: '.theme-default-content :not(a) > img:not(.no-zooming)',
-    }],
-    ['@vuepress/back-to-top'],
-    // ...!(console.log(context.isProd, '\n'.repeat(10)), process.exit(), context.isProd) ? [
-      ['@vuepress/git', false],
-    // ] : [],
-  ],
-
   markdown: {
+    code: false,
     slugify (str) {
       const rControl = /[\u0000-\u001f]/g
       const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'“”‘’<>,.?/]+/g

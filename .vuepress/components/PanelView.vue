@@ -57,6 +57,8 @@ export default {
     },
   },
 
+  inject: ['$storage'],
+
   mounted() {
     if (!this.type) return
     this.$watch(() => this.$storage[this.type], (val) => {

@@ -8,7 +8,7 @@ Koishi 提供了名为 `koishi` 的命令行工具，相信你已经在之前的
 
 ## koishi init
 
-<Terminal :content="[
+<terminal :content="[
   { text: 'cd my-bot', type: 'input' },
   { text: 'koishi init', type: 'input' },
   { message: 'Connection Type',
@@ -24,7 +24,7 @@ Koishi 提供了名为 `koishi` 的命令行工具，相信你已经在之前的
   { message: 'Secret for Koishi Server', type: 'question', lineDelay: 300 },
   { message: 'Token for CoolQ Server', type: 'question', lineDelay: 300 },
   { content: [{ text: 'success', class: 'success' }, ' created config file: my-bot/koishi.config.js'] },
-]"></Terminal>
+]"></terminal>
 
 koishi init 指令用于生成一个 koishi 配置文件，通常是 koishi.config.js。相信看过前几章的你已经对这个文件的结构足够熟悉了。这个指令的完整语法如下：
 
@@ -44,14 +44,14 @@ koishi init [file] [-f]
 
 ## koishi start
 
-<Terminal :content="[
+<terminal :content="[
   { text: 'koishi start', type: 'input' },
   { content: [{ text: 'info', class: 'info' }, ' apply plugin ', { text: 'common', class: 'info' }] },
   { content: [{ text: 'info', class: 'info' }, ' Koishi/1.8.1 CoolQ/Pro CQHTTP/4.12.3'] },
   { content: [{ text: 'info', class: 'info' }, ' server listening at ', { text: '8080', class: 'info' }] },
   { content: [{ text: 'info', class: 'info' }, ' connected to ', { text: 'http://localhost:5700', class: 'info' }] },
   { content: [{ text: 'success', class: 'success' }, ' bot started successfully in 141 ms.'] },
-]"></Terminal>
+]"></terminal>
 
 koishi start（或 koishi run）指令用于运行一个配置文件。它的完整语法为：
 

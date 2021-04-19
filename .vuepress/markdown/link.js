@@ -1,7 +1,7 @@
-module.exports = (options, ctx) => ({
+module.exports = {
   name: 'enhanced-links',
 
-  extendMarkdown (md) {
+  extendsMarkdown (md) {
     const ruleLinkClose = md.renderer.rules.link_close
     md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
       const text = ruleLinkClose(tokens, idx, options, env, self)
@@ -11,4 +11,4 @@ module.exports = (options, ctx) => ({
       return text
     }
   },
-})
+}

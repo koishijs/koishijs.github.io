@@ -7,7 +7,7 @@ let highlighter1, highlighter2
 const cliAliases = ['npm', 'yarn']
 const tomorrow = loadTheme(resolve(__dirname, 'tomorrow.json'))
 
-module.exports = (options, ctx) => ({
+module.exports = {
   name: 'enhanced-highlight',
 
   async ready () {
@@ -27,7 +27,7 @@ module.exports = (options, ctx) => ({
   },
 
   extendsMarkdown (config) {
-    // console.log(config)
+    console.log(Object.keys(config))
     return
     config.plugins.delete('pre-wrapper')
 
@@ -58,4 +58,4 @@ module.exports = (options, ctx) => ({
       }
     })
   },
-})
+}

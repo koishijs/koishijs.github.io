@@ -1,5 +1,7 @@
 <script>
 
+import { h } from 'vue'
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
@@ -137,9 +139,9 @@ export default {
     },
   },
 
-  render (createElement) {
+  render () {
     const mini = !this.title && this.static
-    return createElement('panel-view', {
+    return h('panel-view', {
       class: 'terminal',
       style: {
         height: (this.lines.length * 1.4 + (mini ? 2 : 3.4)) * 16 + 'px',
@@ -151,8 +153,8 @@ export default {
     }, this.lines.map(({ type, active, content, shown }, index) => {
       const children = content.map(child => typeof child === 'string'
         ? child
-        : createElement(child.tag || 'span', { class: child.class }, child.text))
-      return createElement('div', {
+        : h(child.tag || 'span', { class: child.class }, child.text))
+      return h('div', {
         key: index,
         class: ['line', type, { active, shown }],
       }, children)

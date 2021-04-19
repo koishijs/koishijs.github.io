@@ -23,10 +23,10 @@ function github(state, silent) {
   return false
 }
 
-module.exports = (options, ctx) => ({
+module.exports = {
   name: 'github-links',
 
-  extendMarkdown (md) {
+  extendsMarkdown (md) {
     md.inline.ruler.after('emphasis', 'github', github)
     md.renderer.rules.github_commit = (tokens, index, options, env) => {
       const body = tokens[index].content.slice(1)
@@ -37,4 +37,4 @@ module.exports = (options, ctx) => ({
       return `<a href="https://github.com/koishijs/koishi/issues/${body}" target="_blank" rel="noopener noreferrer">#${body}</a>`
     }
   },
-})
+}

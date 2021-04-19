@@ -171,6 +171,12 @@ app.command('my-command [arg:number]')
 ```js
 import { Argv } from 'koishi-core'
 
+declare module 'koishi-core' {
+  interface Domain {
+    repeat: string
+  }
+}
+
 Argv.createDomain('repeat', source => source.repeat(3))
 
 app.command('test [arg:repeat]')

@@ -82,6 +82,7 @@ type CommandAction = (argv: Argv, ...args: any[]) => Awaitable<string | void>
 - 返回值: `this`
 
 如果指令需要用到用户数据，你可以提前声明，这样有助于合并多次请求，从而提高性能。
+你可以参考指南[按需加载](https://koishi.js.org/guide/manage.html#%E5%A3%B0%E6%98%8E%E6%89%80%E9%9C%80%E5%AD%97%E6%AE%B5)部分
 
 ```js
 type FieldCollector<K extends string> =

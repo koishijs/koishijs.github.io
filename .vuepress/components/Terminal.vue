@@ -162,68 +162,70 @@ export default {
 
 </script>
 
-<style lang="stylus">
+<style lang="scss">
 
-.terminal.panel-view
-  color #eeeeee
-  background-color #032f62
-  overflow auto
+$textShadow: 1px 1px 1px rgba(23, 31, 35, 0.5);
 
-  .content
-    padding 2.4rem 1.2rem 1rem !important
-    text-shadow $textShadow
+.terminal.panel-view{
+  color: #eeeeee;
+  background-color: #032f62;
+  overflow: auto;
 
-  &.mini .content
-    padding-top 1rem !important
+  .content{
+    padding: 2.4rem 1.2rem 1rem !important;
+    text-shadow: $textShadow;}
 
-.terminal .line
-  line-height 1.4rem
-  font-size 0.85em
-  white-space pre
-  font-family source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace
+  &.mini .content{
+    padding-top: 1rem !important;}}
 
-  &::after
-    content ' '
+.terminal .line{
+  line-height: 1.4rem;
+  font-size: 0.85em;
+  white-space: pre;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 
-  &:not(.shown)
-    display none
+  &::after{
+    content: ' ';}
 
-  &.active::after
-    content '▋'
-    font-family monospace
-    animation blink 1s infinite
+  &:not(.shown){
+    display: none;}
 
-  .variable
-    color #ffa500
+  &.active::after{
+    content: '▋';
+    font-family: monospace;
+    animation: blink 1s infinite;}
 
-  .string
-    color #3fbfff
+  .variable{
+    color: #ffa500;}
 
-  .hint
-    color #9f9f9f
+  .string{
+    color: #3fbfff;}
 
-  .input
-    color #ffff00
+  .hint{
+    color: #9f9f9f;}
 
-  .prefix
-    color #3fbfff
+  .input{
+    color: #ffff00;}
 
-  .info
-    color #3fbfff
+  .prefix{
+    color: #3fbfff;}
 
-  .accent
-    color #3fbfff
-    font-weight bold
+  .info{
+    color: #3fbfff;}
 
-  .message
-    color #ffffff
-    font-weight bold
+  .accent{
+    color: #3fbfff;
+    font-weight: bold;}
 
-  .success
-    color #7fff00
+  .message{
+    color: #ffffff;
+    font-weight: bold;}
 
-@keyframes blink
-  50%
-    opacity 0
+  .success{
+    color: #7fff00;}}
+
+@keyframes blink{
+  50%{
+    opacity: 0;}}
 
 </style>

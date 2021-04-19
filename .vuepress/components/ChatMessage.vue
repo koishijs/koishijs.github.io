@@ -64,7 +64,7 @@ export default {
     addEventListener('resize', this.handleScroll)
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     removeEventListener('scroll', this.handleScroll)
     removeEventListener('resize', this.handleScroll)
   },
@@ -89,86 +89,86 @@ export default {
 
 </script>
 
-<style lang="stylus">
+<style lang="scss">
 
-.chat-message
-  position relative
-  margin 1rem 0
-  opacity 0
-  transform translateX(-20%)
-  transition transform 0.3s ease-out, opacity 0.3s ease
+.chat-message{
+  position: relative;
+  margin: 1rem 0;
+  opacity: 0;
+  transform: translateX(-20%);
+  transition: transform 0.3s ease-out, opacity 0.3s ease;
 
-  &.shown
-    opacity 1
-    transform translateX(0)
+  &.shown{
+    opacity: 1;
+    transform: translateX(0);}}
 
-$avatar-size = 2.8rem
-$msgbox-left = 4.2rem
+$avatar-size: 2.8rem;
+$msgbox-left: 4.2rem;
 
-.avatar
-  width $avatar-size
-  height $avatar-size
-  position absolute
-  border-radius 100%
-  transform translateY(-1px)
-  user-select none
-  pointer-events none
-  text-align center
-  line-height $avatar-size
-  font-size 1.6rem
-  color white
-  font-family "Comic Sans MS"
+.avatar{
+  width: $avatar-size;
+  height: $avatar-size;
+  position: absolute;
+  border-radius: 100%;
+  transform: translateY(-1px);
+  user-select: none;
+  pointer-events: none;
+  text-align: center;
+  line-height: $avatar-size;
+  font-size: 1.6rem;
+  color: white;
+  font-family: "Comic Sans MS";}
 
-.nickname
-  user-select none
-  position relative
-  margin 0 0 0.4rem $msgbox-left
-  font-weight bold
-  font-size 0.9rem
+.nickname{
+  user-select: none;
+  position: relative;
+  margin: 0 0 0.4rem $msgbox-left;
+  font-weight: bold;
+  font-size: 0.9rem;}
 
-.message-box
-  position relative
-  margin-left $msgbox-left
-  width fit-content
-  border-radius 0.5rem
-  background-color white
-  word-break break-all
+.message-box{
+  position: relative;
+  margin-left: $msgbox-left;
+  width: fit-content;
+  border-radius: 0.5rem;
+  background-color: white;
+  word-break: break-all;
 
-  .chat-message:not(.no-padding) &
-    padding 0.5rem 0.7rem
+  .chat-message:not(.no-padding) &{
+    padding: 0.5rem 0.7rem;}
 
-  > img
-    border-radius 0.5rem
+  > img{
+    border-radius: 0.5rem;}
 
-  img
-    vertical-align middle
+  img{
+    vertical-align: middle;}
 
-  p > img
-    margin 0.2rem 0
+  p > img{
+    margin: 0.2rem 0;}
 
-  &::before
-    content ''
-    position absolute
-    right 100%
-    top 0px
-    width 12px
-    height 12px
-    border 0 solid transparent
-    border-bottom-width 8px
-    border-bottom-color currentColor
-    border-radius 0 0 0 32px
-    color white
+  &::before {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 0px;
+    width: 12px;
+    height: 12px;
+    border: 0 solid transparent;
+    border-bottom-width: 8px;
+    border-bottom-color: currentColor;
+    border-radius: 0 0 0 32px;
+    color: white;}
 
-  p
-    margin 0
+  p {
+    margin: 0;}
 
-  blockquote
-    font-size 0.9rem
-    margin 0 0 0.2rem
-    background-color #f3f6f9
-    border none
-    border-radius 0.5rem
-    padding 0.2rem 0.6rem
-    color grayscale(10%)
+  blockquote {
+    font-size: 0.9rem;
+    margin: 0 0 0.2rem;
+    background-color: #f3f6f9;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.6rem;
+    color: grayscale(10%);}}
 
 </style>

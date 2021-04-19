@@ -8,16 +8,16 @@
         <span class="title-text">{{ titleText }}</span>
         <template v-if="tabs.length > 1">
           <span :class="['tab', { active: tab === name }]" @click="tab = name"
-            v-for="(name, index) in tabs" :key="index">{{ name }}</span>
+            v-for="(name, index) in tabs">{{ name }}</span>
         </template>
       </div>
     </div>
     <div class="content">
       <template v-if="messages">
-        <chat-message v-for="(message, index) of messages" :nickname="message[0]" :key="index">
+        <chat-message v-for="(message, index) of messages" :nickname="message[0]">
           <template v-for="(content, index) in message.slice(1)">
-            <p v-if="typeof content === 'string'" :key="index">{{ content }}&nbsp;</p>
-            <component v-else :key="index" :is="content.tag" v-bind="content.attrs"/>
+            <p v-if="typeof content === 'string'">{{ content }}&nbsp;</p>
+            <component v-else :is="content.tag" v-bind="content.attrs"/>
           </template>
         </chat-message>
       </template>
@@ -70,78 +70,79 @@ export default {
 
 </script>
 
-<style lang="stylus">
+<style lang="scss">
 
-$circleRadius = 6px
-$circleSpacing = 19px
+$circleRadius: 6px;
+$circleSpacing: 19px;
+$textShadow: 1px 1px 1px rgba(23, 31, 35, 0.5);
 
-.panel-view
-  position relative
-  border-radius 6px
-  margin 1rem 0
-  overflow-x auto
-  background-color #f3f6f9
+.panel-view{
+  position: relative;
+  border-radius: 6px;
+  margin: 1rem 0;
+  overflow-x: auto;
+  background-color: #f3f6f9;
 
-  &.package-manager
-    background-color #032f62
+  &.package-manager{
+    background-color: #032f62;}
 
-  .controls
-    display initial
-    position absolute
-    top 0.8rem
-    width 100%
+  .controls{
+    display: initial;
+    position: absolute;
+    top: 0.8rem;
+    width: 100%;}
 
-    .circle
-      position absolute
-      top 8px - $circleRadius
-      width 2 * $circleRadius
-      height 2 * $circleRadius
-      border-radius $circleRadius
-      &.red
-        left 17px
-        background-color #ff5f56
-      &.yellow
-        left 17px + $circleSpacing
-        background-color #ffbd2e
-      &.green
-        left 17px + 2 * $circleSpacing
-        background-color #27c93f
+    .circle{
+      position: absolute;
+      top: 8px - $circleRadius;
+      width: 2 * $circleRadius;
+      height: 2 * $circleRadius;
+      border-radius: $circleRadius;
+      &.red{
+        left: 17px;
+        background-color: #ff5f56;}
+      &.yellow{
+        left: 17px + $circleSpacing;
+        background-color: #ffbd2e;}
+      &.green{
+        left: 17px + 2 * $circleSpacing;
+        background-color: #27c93f;}}
 
-    .title
-      text-align center
-      width 100%
-      font-size 0.9rem
-      line-height 1rem
+    .title{
+      text-align: center;
+      width: 100%;
+      font-size: 0.9rem;
+      line-height: 1rem;
 
-      .tab
-        color gray
-        cursor pointer
-        transition .3s ease
+      .tab{
+        color: gray;
+        cursor: pointer;
+        transition: .3s ease;}
 
-      .tab.active
-        color white
-        cursor default
+      .tab.active{
+        color: white;
+        cursor: default;}
 
-      .title-text + .tab::before
-        color gray
-        content " - "
+      .title-text + .tab::before{
+        color: gray;
+        content: " - ";}
 
-      .tab + .tab::before
-        cursor default
-        content " | "
-        color gray
+      .tab + .tab::before{
+        cursor: default;
+        content: " | ";
+        color: gray;}}
 
-  .content
-    padding 0.2rem 1.2rem
+  .content{
+    padding: 0.2rem 1.2rem;
   
-    > p
-      font-size 0.8rem
-      color #909399
-      text-align center
+    > p{
+      font-size: 0.8rem;
+      color: #909399;
+      text-align: center;}}
 
-  &.mini .controls
-    display none
-  &:not(.mini) .content
-    padding-top 2rem
+  &.mini .controls{
+    display: none;}
+  &:not(.mini) .content{
+    padding-top: 2rem;}}
 
 </style>

@@ -26,7 +26,9 @@ module.exports = (options, ctx) => ({
     })
   },
 
-  chainMarkdown (config) {
+  extendsMarkdown (config) {
+    // console.log(config)
+    return
     config.plugins.delete('pre-wrapper')
 
     config.options.highlight((code, lang) => {

@@ -82,7 +82,7 @@ type CommandAction = (argv: Argv, ...args: any[]) => Awaitable<string | void>
 - 返回值: `this`
 
 如果指令需要用到用户数据，你可以提前声明，这样有助于合并多次请求，从而提高性能。
-你可以参考指南[按需加载](https://koishi.js.org/guide/manage.html#%E5%A3%B0%E6%98%8E%E6%89%80%E9%9C%80%E5%AD%97%E6%AE%B5)部分
+你可以参考[按需加载](../guide/manage.md#声明所需字段)章节
 
 ```js
 type FieldCollector<K extends string> =
@@ -125,7 +125,7 @@ type FieldCollector<K extends string> =
 - 返回值：`Command` 注册或修改的指令
 
 注册或修改子指令。子指令会继承当期指令的上下文。
-关于子指令以及为什么使用子指令，你可以参考指南[指令的多级结构](https://koishi.js.org/guide/help.html#%E6%8C%87%E4%BB%A4%E7%9A%84%E5%A4%9A%E7%BA%A7%E7%BB%93%E6%9E%84)部分
+关于子指令以及为什么使用子指令，你可以参考[指令的多级结构](../guide/help.md#指令的多级结构)章节。
 
 ## cmd.parse(input)
 

@@ -154,7 +154,7 @@ require('koishi-adapter-onebot')
 const app = new App({
   // 这部分与上面的配置文件作用基本相同
   type: 'onebot:http',
-  selfId: 123456789,
+  selfId: '123456789',
 })
 
 // 注册插件，作用相当于上面配置文件中的 plugins 部分
@@ -163,6 +163,8 @@ app.plugin(require('koishi-plugin-common'))
 // 启动应用
 app.start()
 ```
+
+上面的配置项参见 [App 的构造函数选项](../api/app.md#构造函数选项)。
 
 最后运行这个文件：
 

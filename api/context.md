@@ -12,9 +12,13 @@ sidebarDepth: 2
 
 ### ctx.database
 
+- 类型: `Database`
+
 当前应用的 [Database](./database.md#数据库对象) 对象。
 
 ### ctx.router
+
+- 类型: `KoaRouter`
 
 如果你配置了 [port](./app.md#option-port) 选项，则这个属性将作为一个 [KoaRouter](https://github.com/koajs/router/blob/master/API.md) 实例。你可以在上面自定义新的路由：
 
@@ -26,9 +30,13 @@ ctx.router.get('/path', (ctx, next) => {
 
 ### ctx.bots
 
+- 类型: `Bot[] & Record<string, Bot>`
+
 一个键值对，保存了当前应用下的所有 Bot 实例。
 
 ## 过滤器
+
+有关这里的 API，请参见 [使用上下文](../guide/context.md#使用上下文)。
 
 ### ctx.all()
 
@@ -102,6 +110,8 @@ ctx.router.get('/path', (ctx, next) => {
 
 ## 钩子与中间件
 
+有关这里的 API，请参见 [事件系统](../guide/lifecycle.md#事件系统)。
+
 ### ctx.emit(session?, event, ...param)
 ### ctx.parallel(session?, event, ...param)
 
@@ -152,12 +162,12 @@ ctx.router.get('/path', (ctx, next) => {
 
 ### ctx.before(event, listener, append?)
 
-监听一个以 `before-` 开头的事件。
-
 - **event:** `string` 事件名称
 - **listener:** `Function` 回调函数
 - **append:** `boolean` 是否后置
 - 返回值: `() => boolean` 取消这个监听器
+
+监听一个以 `before-` 开头的事件。
 
 ### ctx.middleware(middleware, prepend?)
 
@@ -185,11 +195,11 @@ type Plugin<U> = PluginFunction<T, U> | PluginObject<T, U>
 
 ### ctx.with(deps, plugin)
 
-安装一个存在依赖的插件，参见 [声明依赖关系](../guide/context.md#声明依赖关系)。请注意：这里的依赖列表都应该是 node 模块名，并且都必须直接以插件的形式导出（如所有官方插件都具备这个特征）。
-
 - **deps:** `string[]` 依赖列表
 - **plugin:** `Plugin` 要安装的插件
 - 返回值: `this`
+
+安装一个存在依赖的插件，参见 [声明依赖关系](../guide/context.md#声明依赖关系)。请注意：这里的依赖列表都应该是 node 模块名，并且都必须直接以插件的形式导出（如所有官方插件都具备这个特征）。
 
 ### ctx.command(def, desc?, config?)
 
@@ -222,18 +232,32 @@ type Plugin<U> = PluginFunction<T, U> | PluginObject<T, U>
 - **forced:** `boolean` 是否无视 silent 标记
 - 返回值: `Promise<string[]>` 成功发送的消息 ID 列表
 
-所有机器人向自己分配的频道广播消息，存在标记 silent 的频道除外。如有失败不会抛出错误。
+所有机器人向自己分配的频道广播消息，存在标记 silent 的频道除外。如有失败不会抛出错误。参见 [发送广播消息](../guide/message.md#发送广播消息)。
 
 ### ctx.logger(scope?)
 
-根据 namespace 生成一个 [Logger 对象](../guide/logger.md#使用-logger)。
-
 - **scope:** `string` 要指定的类型，默认为 `''`
 - 返回值: [`Logger`](../guide/logger.md#使用-logger)
+
+根据 namespace 生成一个 [Logger 对象](../guide/logger.md#使用-logger)。
 
 ### ctx.dispose(plugin?)
 
 - **plugin:** `Plugin` 要移除的插件
 - 返回值: `void`
 
-移除插件中所注册的钩子、中间件、指令和子插件等。`plugin` 是默认为当前上下文所在的插件。如果既没有提供 `plugin`，上下文也不是一个插件上下文的话，会抛出一个错误。
+移除插件中所注册的钩子、中间件、指令和子插件等。`plugin` 是默认为当前上下文所在的插件。如果既没有提供 `plugin`，上下文也不是一个插件上下文的话，会抛出一个错误。参见 [卸载插件](../guide/context.md#卸载插件)。
+
+## 静态属性和方法
+
+### Context.current
+
+- 类型: `symbol`
+
+特殊的键值，可以在通用上下文属性对象的方法上访问。参见 [声明通用上下文属性](../guide/context.md#声明通用上下文属性)。
+
+### Context.delegate(name)
+
+- **name:** `string` 属性名称
+
+声明一个通用上下文属性。参见 [声明通用上下文属性](../guide/context.md#声明通用上下文属性)。

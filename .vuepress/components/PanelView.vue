@@ -14,12 +14,15 @@
     </div>
     <div class="content">
       <template v-if="messages">
-        <chat-message v-for="(message, index) of messages" :nickname="message[0]" :key="index">
-          <template v-for="(content, index) in message.slice(1)">
-            <p v-if="typeof content === 'string'" :key="index">{{ content }}&nbsp;</p>
-            <component v-else :key="index" :is="content.tag" v-bind="content.attrs"/>
-          </template>
-        </chat-message>
+        <template v-for="(message, index) of messages">
+          <p v-if="typeof message === 'string'" :key="index">{{ message }}</p>
+          <chat-message v-else :nickname="message[0]" :key="index">
+            <template v-for="(content, index) in message.slice(1)">
+              <p v-if="typeof content === 'string'" :key="index">{{ content }}&nbsp;</p>
+              <component v-else :key="index" :is="content.tag" v-bind="content.attrs"/>
+            </template>
+          </chat-message>
+        </template>
       </template>
       <slot v-else :name="tab"/>
     </div>

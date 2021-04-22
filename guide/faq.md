@@ -14,9 +14,9 @@ sidebarDepth: 2
 
 你需要手动引入依赖。例如如果你使用 koishi-adapter-onebot，你可以这样做：
 
-```js koishi.config.ts
+```ts koishi.config.ts
 import { AppConfig } from 'koishi'
-import {} 'koishi-adapter-onebot'
+import {} from 'koishi-adapter-onebot'
 
 export default {
   type: 'onebot',

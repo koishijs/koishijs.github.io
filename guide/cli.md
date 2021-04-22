@@ -103,18 +103,18 @@ module.export = {
 
 Koishi 支持直接调用 TypeScript 编写的插件。首先安装 typescript 和 ts-node：
 
-<panel-view class="code" type="package-manager">
+::: code-group manager
 ```npm
 npm i typescript ts-node -D
 ```
 ```yarn
 yarn add typescript ts-node -D
 ```
-</panel-view>
+:::
 
 接着在你的命令行之后加上一段额外的参数：
 
-<panel-view class="code" type="package-manager">
+::: code-group manager
 ```npm
 npx koishi start -- -r ts-node/register
 ```
@@ -122,6 +122,6 @@ npx koishi start -- -r ts-node/register
 # 因为 yarn 自己会吞掉 -- 所以需要额外写一个
 yarn koishi start -- -- -r ts-node/register
 ```
-</panel-view>
+:::
 
 这样你就可以直接使用 koishi.config.ts，或在 koishi.config.js 中引用 ts 文件作为插件了。

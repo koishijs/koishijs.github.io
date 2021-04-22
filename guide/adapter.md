@@ -22,7 +22,8 @@ sidebarDepth: 2
 
 在 [快速上手](./starter.md#配置多机器人) 一章中我们已经给出了一个简单的例子：
 
-```js koishi.config.js
+::: code-group language koishi.config
+```js
 module.exports = {
   port: 7070,
   onebot: {
@@ -42,10 +43,49 @@ module.exports = {
   ],
 }
 ```
+```ts
+// 这只是为了引入类型，本身没有作用
+import { AppConfig } from 'koishi'
+import {} from 'koishi-adapter-onebot'
+import {} from 'koishi-adapter-kaiheila'
+
+export default {
+  port: 7070,
+  onebot: {
+    // onebot 服务将在 http://localhost:7070/onebot 进行处理
+    path: '/event',
+    secret: 'my-secret',
+  },
+  kaiheila: {
+    // kaiheila 服务将在 http://localhost:7070/kaiheila 进行处理
+    path: '/kaiheila',
+  },
+  bots: [
+    // 在这里写上不同的机器人配置
+    { type: 'onebot:http', selfId: '123456789', server: 'http://onebot-server' },
+    { type: 'onebot:ws', selfId: '987654321', token: 'my-onebot-token' },
+    { type: 'kaiheila:ws', selfId: 'aAbBcCdD', token: 'my-kaiheila-token' },
+  ],
+} as AppConfig
+```
+:::
 
 这里是使用配置文件的写法，如果要使用 Koishi API，你只需要做一点变化：
 
-```js index.js
+::: code-group language index
+```js
+const { App } = require('koishi-core')
+
+// 你需要手动安装所有相关平台的适配器
+require('koishi-adapter-onebot')
+require('koishi-adapter-kaiheila')
+
+new App({ /* 同上述配置 */ })
+
+// 启动应用
+app.start()
+```
+```ts
 import { App } from 'koishi-core'
 
 // 你需要手动安装所有相关平台的适配器
@@ -57,6 +97,7 @@ new App({ /* 同上述配置 */ })
 // 启动应用
 app.start()
 ```
+:::
 
 让我们来简单地总结一下多机器人的配置方法：
 
@@ -69,7 +110,7 @@ Koishi 通过 **适配器 (Adapter)** 实现对多账户和跨平台的实现。
 
 当应用被创建时，它会按照配置创建所有的适配器和机器人实例。如果多个机器人使用了同一种适配器，那么会创建一个适配器实例绑定多个机器人。它们的关系用代码表示就是这样：
 
-```js
+```ts
 class App {
   // 可以使用 adapters[type] 找到对应的适配器
   adapters: Record<string, Adapter>
@@ -104,7 +145,37 @@ class Bot {
 
 下面是一个使用 Webhook 的例子。适配器通过 http post 请求接受事件推送。
 
+::: code-group language adapter
 ```js
+const { Adapter, Bot, Session } = require('koishi-core')
+
+class MyBot extends Bot {
+  async sendMessage(channelId, content) {
+    // 这里应该执行发送操作
+    this.logger.debug('send:', content)
+    return Random.uuid()
+  }
+}
+
+class MyAdapter extends Adapter {
+  constructor(app) {
+    // 请注意这里的第二个参数是应该是一个构造函数而非实例
+    super(app, MyBot)
+  }
+
+  start() {
+    // 收到 http post 请求时，生成会话对象并触发事件
+    this.app.router.post('/', (ctx) => {
+      const session = new Session(this.app, ctx.request.body)
+      this.dispatch(session)
+    })
+  }
+}
+
+// 注册适配器
+Adapter.types['my-adapter'] = MyAdapter
+```
+```ts
 import { Adapter, Bot, Session } from 'koishi-core'
 
 class MyBot extends Bot {
@@ -133,23 +204,25 @@ class MyAdapter extends Adapter {
 // 注册适配器
 Adapter.types['my-adapter'] = MyAdapter
 ```
+:::
 
 ### 一个 WebSocket 例子
 
 WebSocket 的逻辑相比 Webhook 要稍微复杂一些，因此我们提供了一个工具类：
 
+::: code-group language adapter
 ```js
-import { Adapter, Bot, Session } from 'koishi-core'
-import WebSocket from 'ws'
+const { Adapter, Bot, Session } = require('koishi-core')
+const WebSocket = require('ws')
 
 class MyAdapter2 extends Adapter.WsClient {
-  constructor(app: App) {
+  constructor(app) {
     // MyBot 跟上面一样，我就不写了
     super(app, MyBot)
   }
 
   // prepare 方法要求你返回一个 WebSocket 实例
-  prepare(bot: MyBot) {
+  prepare(bot) {
     return new WebSocket('ws://websocket-endpoint')
   }
 
@@ -166,17 +239,54 @@ class MyAdapter2 extends Adapter.WsClient {
 // 注册适配器
 Adapter.types['another-adapter'] = MyAdapter2
 ```
+```ts
+import { Adapter, Bot, Session } from 'koishi-core'
+import WebSocket from 'ws'
+
+class MyAdapter2 extends Adapter.WsClient {
+  constructor(app: App) {
+    // MyBot 跟上面一样，我就不写了
+    super(app, MyBot)
+  }
+
+  // prepare 方法要求你返回一个 WebSocket 实例
+  prepare(bot: MyBot) {
+    return new WebSocket('ws://websocket-endpoint')
+  }
+
+  // connect 方法将作为 socket.on('open') 的回调函数
+  connect(bot: MyBot) {
+    bot.socket.on('message', (data) => {
+      const body = JSON.parse(data.toString())
+      const session = new Session(this.app, body)
+      this.dispatch(session)
+    })
+  }
+}
+
+// 注册适配器
+Adapter.types['another-adapter'] = MyAdapter2
+```
+:::
 
 ### 适配器重定向
 
 如果你嫌 onebot:http, onebot:ws 的写法太麻烦，不如试试下面的写法：
 
-```js koishi.config.js
+::: code-group language koishi.config
+```js
 module.exports = {
   type: 'onebot',
   server: 'ws://localhost:6700',
 }
 ```
+```ts
+export default {
+  type: 'onebot',
+  server: 'ws://localhost:6700',
+}
+```
+:::
 
 启动程序，你将发现它也能按照 onebot:ws 的逻辑正常运行。这是因为 Koishi 提供了一个重定向方法，专门用于处理这种需求。你只需要这样定义即可：
 

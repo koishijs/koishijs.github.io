@@ -1,13 +1,20 @@
 export default ({ Vue }) => {
   Vue.prototype.$storage = new Vue({
-    data: { ['package-manager']: null },
+    data: {
+      manager: 'yarn',
+      language: 'ts',
+    },
     created() {
       if (this.$isServer) return
-      const key = 'koishi.package-manager'
-      this.$watch(() => this['package-manager'], (val) => {
-        localStorage.setItem(key, val)
+      const key = 'koishi.docs.config'
+      this.$watch('manager', () => {
+        localStorage.setItem(key, JSON.stringify(this._data))
       })
-      this['package-manager'] = localStorage.getItem(key) || 'yarn'
+      this.$watch('language', () => {
+        localStorage.setItem(key, JSON.stringify(this._data))
+      })
+      const config = localStorage.getItem(key)
+      if (config) Object.assign(this, JSON.parse(config))
     },
   })
 }

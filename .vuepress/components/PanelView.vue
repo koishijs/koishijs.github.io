@@ -29,7 +29,7 @@
 <script>
 
 const titleMap = {
-  'package-manager': '命令行',
+  manager: '命令行',
 }
 
 export default {
@@ -53,7 +53,7 @@ export default {
     },
     titleText() {
       if (this.messages) return '聊天记录'
-      return titleMap[this.type] || this.title
+      return this.title || titleMap[this.type]
     },
   },
 
@@ -82,7 +82,7 @@ $circleSpacing = 19px
   overflow-x auto
   background-color #f3f6f9
 
-  &.package-manager
+  &.manager
     background-color #032f62
 
   .controls

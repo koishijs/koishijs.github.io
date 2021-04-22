@@ -15,8 +15,7 @@ features:
 footer: MIT Licensed | Copyright © 2019-present Shigma
 ---
 
-<panel-view class="code" type="package-manager">
-
+::: code-group manager
 ```npm
 # 创建并进入文件夹
 mkdir my-bot && cd my-bot
@@ -33,7 +32,6 @@ npm i
 # 运行你的 Bot
 npx koishi start
 ```
-
 ```yarn
 # 创建并进入文件夹
 mkdir my-bot && cd my-bot
@@ -50,8 +48,7 @@ yarn
 # 运行你的 Bot
 yarn koishi start
 ```
-
-</panel-view>
+:::
 
 现在可以对你的机器人说话了：
 

@@ -5,18 +5,19 @@ const { resolve } = require('path')
 let highlighter1, highlighter2
 
 const cliAliases = ['npm', 'yarn']
-const tomorrow = loadTheme(resolve(__dirname, 'tomorrow.json'))
 
 module.exports = {
   name: 'enhanced-highlight',
 
   async ready () {
+    ctx.tomorrow = await loadTheme(resolve(__dirname, 'tomorrow.json'))
+
     highlighter1 = await getHighlighter({
       theme: 'monokai',
     })
 
     highlighter2 = await getHighlighter({
-      theme: tomorrow,
+      theme: ctx.tomorrow,
       langs: [{
         id: 'cli',
         scopeName: 'source.batchfile',
@@ -26,9 +27,7 @@ module.exports = {
     })
   },
 
-  extendsMarkdown (config) {
-    console.log(Object.keys(config))
-    return
+  chainMarkdown(config) {
     config.plugins.delete('pre-wrapper')
 
     config.options.highlight((code, lang) => {
@@ -42,8 +41,8 @@ module.exports = {
     config.plugin('code-container').use((md) => {
       const fence = md.renderer.rules.fence
       md.renderer.rules.fence = (...args) => {
-        const [tokens, idx] = args
-        const token = tokens[idx]
+        let [tokens, index] = args, temp
+        const token = tokens[index]
         if (!token.title) {
           const rawInfo = token.info || ''
           const [langName, title = ''] = rawInfo.split(/\s+/)
@@ -51,9 +50,13 @@ module.exports = {
           token.title = title.trim()
         }
         const rawCode = fence(...args)
-        if (cliAliases.includes(token.info)) return `<template #${token.info}>${rawCode}</template>`
+        while ((temp = tokens[--index])?.type === 'fence');
+        const isCodeGroupItem = temp?.type === 'container_code-group_open'
+        if (isCodeGroupItem) {
+          return `<template #${token.info}>${rawCode}</template>`
+        }
         let style = ''
-        if (token.info === 'cli') style += `; background-color: ${tomorrow.bg}`
+        if (token.info === 'cli') style += `; background-color: ${ctx.tomorrow.bg}`
         return `<panel-view class="code" title=${JSON.stringify(token.title)} style="${style.slice(2)}">${rawCode}</panel-view>`
       }
     })

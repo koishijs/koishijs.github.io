@@ -14,12 +14,15 @@
     </div>
     <div class="content">
       <template v-if="messages">
-        <chat-message v-for="(message, index) of messages" :nickname="message[0]">
-          <template v-for="(content, index) in message.slice(1)">
-            <p v-if="typeof content === 'string'">{{ content }}&nbsp;</p>
-            <component v-else :is="content.tag" v-bind="content.attrs"/>
-          </template>
-        </chat-message>
+        <template v-for="(message, index) of messages">
+          <p v-if="typeof message === 'string'">{{ message }}</p>
+          <chat-message v-else :nickname="message[0]">
+            <template v-for="(content, index) in message.slice(1)">
+              <p v-if="typeof content === 'string'">{{ content }}&nbsp;</p>
+              <component v-else :is="content.tag" v-bind="content.attrs"/>
+            </template>
+          </chat-message>
+        </template>
       </template>
       <slot v-else :name="tab"/>
     </div>
@@ -29,7 +32,7 @@
 <script>
 
 const titleMap = {
-  'package-manager': '命令行',
+  manager: '命令行',
 }
 
 export default {
@@ -53,7 +56,7 @@ export default {
     },
     titleText() {
       if (this.messages) return '聊天记录'
-      return titleMap[this.type] || this.title
+      return this.title || titleMap[this.type]
     },
   },
 
@@ -85,7 +88,7 @@ $textShadow: 1px 1px 1px rgba(23, 31, 35, 0.5);
   overflow-x: auto;
   background-color: #f3f6f9;
 
-  &.package-manager{
+  &.manager{
     background-color: #032f62;}
 
   .controls{

@@ -16,7 +16,7 @@ sidebarDepth: 2
 
 正如上面所说的，如果你是插件开发者，你可能不需要关心具体的数据库实现（除非你本身需要新的表来存储数据）。但是如果你是 Koishi 的使用者，只有当安装了数据库你才能正常使用所有的特性。首先你需要安装数据库依赖：
 
-<panel-view class="code" type="package-manager">
+::: code-group manager
 ```npm
 # 我们以 mysql 数据库为例
 npm i koishi-plugin-mysql -D
@@ -25,7 +25,7 @@ npm i koishi-plugin-mysql -D
 # 我们以 mysql 数据库为例
 yarn add koishi-plugin-mysql -D
 ```
-</panel-view>
+:::
 
 然后与你添加插件同样的方法配置你的数据库：
 

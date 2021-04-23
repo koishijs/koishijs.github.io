@@ -43,13 +43,13 @@ Koishi 使用**状态标签**来管理用户和群的可能状态。状态标签
 import { Channel } from 'koishi'
 
 // 判断会话用户是否被设置了 ignore 状态
-if (session.$group.flag & Channel.Flag.ignore) {}
+if (session.channel.flag & Channel.Flag.ignore) {}
 
 // 为频道设置一个 ignore 状态
-session.$group.flag |= Channel.Flag.ignore
+session.channel.flag |= Channel.Flag.ignore
 
 // 为频道取消一个 silent 状态
-session.$group.flag &= ~Channel.Flag.silent
+session.channel.flag &= ~Channel.Flag.silent
 ```
 
 ### 用户权限

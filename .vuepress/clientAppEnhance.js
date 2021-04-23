@@ -14,9 +14,13 @@ export default defineClientAppEnhance(({ app }) => {
   app.component('chat-message', ChatMessage)
   app.component('panel-view', PanelView)
   app.component('terminal', Terminal)
-  console.log(app)
   const key = 'koishi.docs.config'
-  const data = { 'package-manager': 'yarn', ...getStorage(key) }
+  const data = {
+    manager: 'yarn',
+    language: 'ts',
+  }
+  const config = localStorage.getItem(key)
+  if (config) Object.assign(data, JSON.parse(config))
   const storage = reactive(data)
   app.provide('$storage', storage)
   watch(storage, (val) => {

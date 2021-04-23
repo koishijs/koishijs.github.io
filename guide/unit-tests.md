@@ -22,17 +22,14 @@ sidebarDepth: 2
 
 安装最新版本的 Mocha, Chai 和 koishi-test-utils：
 
-<panel-view class="code" type="package-manager">
-
+::: code-group manager
 ```npm
 npm i mocha chai koishi-test-utils -D
 ```
-
 ```yarn
 yarn add mocha chai koishi-test-utils -D
 ```
-
-</panel-view>
+:::
 
 ::: tip 提示
 你可以在 [这里](../api/test-utils.md) 看到完整的接口列表和所需的最低版本。
@@ -42,17 +39,14 @@ yarn add mocha chai koishi-test-utils -D
 
 如果你使用 TypeScript 进行开发，你可能还需要下面这些依赖（当然你可能已经安装了它们）：
 
-<panel-view class="code" type="package-manager">
-
+::: code-group manager
 ```npm
 npm i typescript ts-node @types/node @types/mocha @types/chai -D
 ```
-
 ```yarn
 yarn add typescript ts-node @types/node @types/mocha @types/chai -D
 ```
-
-</panel-view>
+:::
 
 接着编辑你的 `.mocharc.js` 文件：
 

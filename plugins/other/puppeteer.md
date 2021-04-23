@@ -28,9 +28,48 @@ LaTeX 渲染。渲染器由 [https://www.zhihu.com/equation](https://www.zhihu.c
 - 选项列表：
   - `-s, --scale  <scale>` 缩放比例
 
+## 类：Puppeteer
+
+可以通过 `ctx.puppet` 访问。
+
+### puppet.launch()
+
+- 返回值: `Promise<void>`
+
+启动并连接浏览器。
+
+### puppet.close()
+
+- 返回值: `Promise<void>`
+
+关闭浏览器并取消连接。
+
+### puppet.page()
+
+- 返回值: `Promise<Page>`
+
+创建一个新页面。
+
+### puppet.svg(options?)
+
+- **options:** `SVGOptions` 图形选项
+- 返回值: `SVGElement`
+
+启动并连接浏览器。
+
+### puppet.render(content, callback?)
+
+- **content:** `string` 要渲染的 HTML
+- **callback:** `(page, next) => Promise<string>` 回调函数
+  - **page:** `Page` 页面实例
+  - **next:** `(handle: ElementHandle) => Promise<string>` 渲染函数
+- 返回值: `string`
+
+渲染一个 HTML 页面。
+
 ## 扩展事件
 
-### puppeteer/validate(url)
+### puppeteer/validate
 
 - **url:** `string`
 - 返回值: `string`

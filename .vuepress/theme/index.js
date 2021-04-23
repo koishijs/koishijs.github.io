@@ -15,5 +15,14 @@ module.exports = {
     ['medium-zoom', {
       selector: '.theme-default-content :not(a) > img:not(.no-zooming)',
     }],
+    ['@vuepress/container', {
+      type: 'code-group',
+      before: (info) => {
+        const [type] = info.split(' ', 1)
+        const title = info.slice(type.length).trimStart()
+        return `<PanelView class="code" type=${JSON.stringify(type)} title=${JSON.stringify(title)}>`
+      },
+      after: () => '</PanelView>',
+    }],
   ],
 }

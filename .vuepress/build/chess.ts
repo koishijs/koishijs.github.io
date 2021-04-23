@@ -8,11 +8,11 @@ mkdirSync(outFolder, { recursive: true })
 class ImageState extends State {
   index = 0
 
-  constructor (size: number, placement: 'cross' | 'grid', public file: string) {
+  constructor(size: number, placement: 'cross' | 'grid', public file: string) {
     super(null, null, size, placement)
   }
 
-  dump (x?: number, y?: number) {
+  dump(x?: number, y?: number) {
     return writeFile(`${outFolder}/${this.file}-${++this.index}.svg`, this.drawSvg(x, y).outer)
   }
 }

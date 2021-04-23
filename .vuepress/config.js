@@ -162,6 +162,11 @@ module.exports = {
     docsBranch: 'docs',
     editLinks: true,
     editLinkText: '帮助我们改善此页面',
+
+    themePlugins: {
+      // only enable git plugin in production mode
+      git: process.env.NODE_ENV === 'production',
+    },
   },
 
   evergreen: () => false,// !context.isProd,

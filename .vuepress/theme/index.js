@@ -6,7 +6,9 @@ module.exports = {
   },
 
   plugins: [
-    ['@vuepress/git', false],
+    ['@vuepress/palette', {
+      preset: 'sass',
+    }],
     [require('../markdown/highlight')],
     [require('../markdown/link')],
     [require('../markdown/github')],

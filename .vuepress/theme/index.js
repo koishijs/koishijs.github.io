@@ -20,9 +20,9 @@ module.exports = {
       before: (info) => {
         const [type] = info.split(' ', 1)
         const title = info.slice(type.length).trimStart()
-        return `<PanelView class="code" type=${JSON.stringify(type)} title=${JSON.stringify(title)}>`
+        return `<panel-view class="code" type=${JSON.stringify(type)} title=${JSON.stringify(title)}>`
       },
-      after: () => '</PanelView>',
+      after: () => '</panel-view>',
     }],
   ],
 }

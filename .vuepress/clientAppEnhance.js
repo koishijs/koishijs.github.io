@@ -4,12 +4,6 @@ import Terminal from './components/Terminal.vue'
 import { reactive, watch } from 'vue'
 import { defineClientAppEnhance } from '@vuepress/client'
 
-function getStorage(key) {
-  const raw = localStorage.getItem(key)
-  if (!raw) return
-  return JSON.parse(raw)
-}
-
 export default defineClientAppEnhance(({ app }) => {
   app.component('chat-message', ChatMessage)
   app.component('panel-view', PanelView)
@@ -24,6 +18,6 @@ export default defineClientAppEnhance(({ app }) => {
   const storage = reactive(data)
   app.provide('$storage', storage)
   watch(storage, (val) => {
-    localStorage.setItem(key, val)
+    localStorage.setItem(key, JSON.stringify(val))
   })
 })

@@ -61,7 +61,8 @@ interface Status {
 
 可以使用模板语法修改 status 指令的输出。默认的代码实现如下：
 
-::: v-pre
+<div v-pre>
+
 ```js
 template.set('status', {
   bot: '{{ username }}：{{ code ? `无法连接` : `工作中（${currentRate[0]}/min）` }}',
@@ -75,7 +76,7 @@ template.set('status', {
   ].join('\n'),
 })
 ```
-:::
+</div>
 
 ### 添加前端入口文件
 

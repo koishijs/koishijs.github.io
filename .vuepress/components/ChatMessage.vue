@@ -100,7 +100,9 @@ export default {
 
   &.shown{
     opacity: 1;
-    transform: translateX(0);}}
+    transform: translateX(0);
+  }
+}
 
 $avatar-size: 2.8rem;
 $msgbox-left: 4.2rem;
@@ -117,7 +119,8 @@ $msgbox-left: 4.2rem;
   line-height: $avatar-size;
   font-size: 1.6rem;
   color: white;
-  font-family: "Comic Sans MS";}
+  font-family: "Comic Sans MS";
+}
 
 .nickname{
   user-select: none;
@@ -135,16 +138,20 @@ $msgbox-left: 4.2rem;
   word-break: break-all;
 
   .chat-message:not(.no-padding) &{
-    padding: 0.5rem 0.7rem;}
+    padding: 0.5rem 0.7rem;
+  }
 
   > img{
-    border-radius: 0.5rem;}
+    border-radius: 0.5rem;
+  }
 
   img{
-    vertical-align: middle;}
+    vertical-align: middle;
+  }
 
   p > img{
-    margin: 0.2rem 0;}
+    margin: 0.2rem 0;
+  }
 
   &::before {
     content: '';
@@ -157,10 +164,12 @@ $msgbox-left: 4.2rem;
     border-bottom-width: 8px;
     border-bottom-color: currentColor;
     border-radius: 0 0 0 32px;
-    color: white;}
+    color: white;
+  }
 
   p {
-    margin: 0;}
+    margin: 0;
+  }
 
   blockquote {
     font-size: 0.9rem;
@@ -169,6 +178,8 @@ $msgbox-left: 4.2rem;
     border: none;
     border-radius: 0.5rem;
     padding: 0.2rem 0.6rem;
-    color: grayscale(10%);}}
+    color: grayscale(10%);
+  }
+}
 
 </style>

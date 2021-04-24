@@ -168,66 +168,84 @@ export default {
 
 $textShadow: 1px 1px 1px rgba(23, 31, 35, 0.5);
 
-.terminal.panel-view{
+.terminal.panel-view {
   color: #eeeeee;
   background-color: #032f62;
   overflow: auto;
 
-  .content{
+  .content {
     padding: 2.4rem 1.2rem 1rem !important;
-    text-shadow: $textShadow;}
+    text-shadow: $textShadow;
+  }
 
-  &.mini .content{
-    padding-top: 1rem !important;}}
+  &.mini .content {
+    padding-top: 1rem !important;
+  }
+}
 
-.terminal .line{
+.terminal .line {
   line-height: 1.4rem;
   font-size: 0.85em;
   white-space: pre;
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 
-  &::after{
-    content: ' ';}
+  &::after {
+    content: ' ';
+  }
 
-  &:not(.shown){
-    display: none;}
+  &:not(.shown) {
+    display: none;
+  }
 
-  &.active::after{
+  &.active::after {
     content: '▋';
     font-family: monospace;
-    animation: blink 1s infinite;}
+    animation: blink 1s infinite;
+  }
 
-  .variable{
-    color: #ffa500;}
+  .variable {
+    color: #ffa500;
+  }
 
-  .string{
-    color: #3fbfff;}
-
-  .hint{
-    color: #9f9f9f;}
-
-  .input{
-    color: #ffff00;}
-
-  .prefix{
-    color: #3fbfff;}
-
-  .info{
-    color: #3fbfff;}
-
-  .accent{
+  .string {
     color: #3fbfff;
-    font-weight: bold;}
+  }
 
-  .message{
+  .hint {
+    color: #9f9f9f;
+  }
+
+  .input {
+    color: #ffff00;
+  }
+
+  .prefix {
+    color: #3fbfff;
+  }
+
+  .info {
+    color: #3fbfff;
+  }
+
+  .accent {
+    color: #3fbfff;
+    font-weight: bold;
+  }
+
+  .message {
     color: #ffffff;
-    font-weight: bold;}
+    font-weight: bold;
+  }
 
-  .success{
-    color: #7fff00;}}
+  .success {
+    color: #7fff00;
+  }
+}
 
-@keyframes blink{
-  50%{
-    opacity: 0;}}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
 
 </style>

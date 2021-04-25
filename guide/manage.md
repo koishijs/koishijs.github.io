@@ -40,7 +40,7 @@ Koishi 使用**状态标签**来管理用户和群的可能状态。状态标签
 利用位运算操作符，你可以用下面的方法辨别和修改状态信息：
 
 ```js
-import { Channel } from 'koishi'
+const { Channel } = require('koishi-core')
 
 // 判断会话用户是否被设置了 ignore 状态
 if (session.channel.flag & Channel.Flag.ignore) {}
@@ -160,7 +160,7 @@ ctx.command('lottery 抽卡', { maxUsage: 10 })
 有些指令（例如高强度刷屏）我们并不希望被短时间内重复调用，这时我们可以设置最短触发间隔：
 
 ```js
-import { Time } from 'koishi-core'
+const { Time } = require('koishi-core')
 
 // 设置 lottery 指令每 60 秒只能调用 1 次
 ctx.command('lottery', { minInterval: Time.minute })
@@ -217,7 +217,7 @@ ctx.command('lottery')
 如果你需要对全体指令添加所需的用户字段，可以使用 `Command.userFields()`。下面是一个例子：
 
 ```js
-import { Command } from 'koishi-core'
+const { Command } = require('koishi-core')
 
 // 注意这不是实例方法，而是类上的静态方法
 Command.userFields(['name'])

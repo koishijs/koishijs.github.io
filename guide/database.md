@@ -113,7 +113,7 @@ session.observeChannel(fields)
 向内置的 User 和 Channel 两张表中注入字段的方式如下：
 
 ```js
-import { User } from 'koishi'
+const { User } = require('koishi-core')
 
 // 向用户数据库中注入字段 foo，默认值为 'bar'
 User.extend(() => ({ foo: 'bar' }))
@@ -122,7 +122,7 @@ User.extend(() => ({ foo: 'bar' }))
 如果你是 TypeScript 用户，你可能还需要进行定义合并：
 
 ```js
-import { User } from 'koishi'
+import { User } from 'koishi-core'
 
 declare module 'koishi-core' {
   interface User {
@@ -138,7 +138,7 @@ User.extend(() => ({ foo: 'bar' }))
 要添加新的数据库方法，只需调用 `Database.extend()`：
 
 ```js
-import { Database } from 'koishi'
+const { Database } = require('koishi-core')
 
 // 第一个参数声明这个方法依赖于 mysql 数据库
 // 第二个参数表明这次调用注入的是 user 表
@@ -161,7 +161,7 @@ ctx.database.myMethod(...args)
 // 你应该将 koishi-plugin-mysql 作为插件的 devDependency
 // 这个空的导入在编译中会自然消失，但会提供必要的类型注入
 import {} from 'koishi-plugin-mysql'
-import { Database } from 'koishi'
+import { Database } from 'koishi-core'
 
 // 导出这张表的接口可以方便别人向这张表注入新的字段
 export interface Schedule {
@@ -190,7 +190,7 @@ Database.extend('koishi-database-mysql', {
 
 ```js
 import { createPool, Pool, PoolConfig } from 'mysql'
-import { Database } from 'koishi'
+import { Database } from 'koishi-core'
 
 // 类型注入
 declare module 'koishi-core' {

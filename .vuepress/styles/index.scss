@@ -20,17 +20,20 @@
 }
 
 .medium-zoom-image--opened {
-  border-radius: 0 !important;}
+  border-radius: 0 !important;
+}
 
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;}
 
 ::-webkit-scrollbar-track-piece {
-  background-color: #eaecef;}
+  background-color: #eaecef;
+}
 
 ::-webkit-scrollbar-thumb {
-  background-color: #5546a3;}
+  background-color: #5546a3;
+}
 
 @media (max-width: 960px /* $MQMobile */) {
   ::-webkit-scrollbar {
@@ -73,7 +76,8 @@
 }
 
 h1, h2, h3, h4, h5, h6 {
-  line-height: 1.5;}
+  line-height: 1.5;
+}
 
 h1, h4 {
   .header-anchor {
@@ -82,7 +86,8 @@ h1, h4 {
 }
 
 h3 + h3 {
-  margin-top: -3.6rem !important;}
+  margin-top: -3.6rem !important;
+}
 
 .custom-container {
   padding: 1px 1.5rem !important;

@@ -127,7 +127,8 @@ $msgbox-left: 4.2rem;
   position: relative;
   margin: 0 0 0.4rem $msgbox-left;
   font-weight: bold;
-  font-size: 0.9rem;}
+  font-size: 0.9rem;
+}
 
 .message-box{
   position: relative;

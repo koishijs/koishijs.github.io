@@ -273,20 +273,12 @@ Adapter.types['another-adapter'] = MyAdapter2
 
 如果你嫌 onebot:http, onebot:ws 的写法太麻烦，不如试试下面的写法：
 
-::: code-group language koishi.config
-```js
+```js koishi.config.js
 module.exports = {
   type: 'onebot',
   server: 'ws://localhost:6700',
 }
 ```
-```ts
-export default {
-  type: 'onebot',
-  server: 'ws://localhost:6700',
-}
-```
-:::
 
 启动程序，你将发现它也能按照 onebot:ws 的逻辑正常运行。这是因为 Koishi 提供了一个重定向方法，专门用于处理这种需求。你只需要这样定义即可：
 

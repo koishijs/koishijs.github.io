@@ -83,9 +83,9 @@ template.set('status', {
 你可以使用 `webui.addEntry()` 方法添加入口文件。下面是一个例子：
 
 ```js my-plugin.js
-import { resolve } from 'path'
+const { resolve } = require(path)
 
-export function apply(ctx) {
+module.exports = (ctx) => {
   ctx.with('koishi-plugin-webui', () => {
     ctx.webui.addEntry(resolve(__dirname, 'client-entry.js'))
   })
@@ -101,9 +101,9 @@ console.log(window) // 你现在可以操作客户端了！
 调试模式将允许你使用 SFC, HMR 等特性，便于开发自己的功能。
 
 ```js src/index.js
-import { resolve } from 'path'
+const { resolve } = require(path)
 
-export function apply(ctx) {
+module.exports = (ctx) => {
   // 这个方法可以确保其中的内容仅当 webui 插件被载入时调用
   // 即使使用者没有安装 koishi-plugin-webui，你的插件也不会因此而报错
   ctx.with('koishi-plugin-webui', () => {
@@ -116,7 +116,7 @@ export function apply(ctx) {
 ```
 
 ```js client/index.ts
-// 支持 ts，同时这里也有类型标注
+// 支持 typescript 和 esmodule，同时这里也有类型标注
 import { router } from 'koishi-plugin-webui/client'
 import MyPage from './my-page.vue'
 

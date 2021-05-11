@@ -28,6 +28,17 @@ ctx.router.get('/path', (ctx, next) => {
 })
 ```
 
+如果你需要配置子路由，那么你需要加上一个配置项，让 koishi 的 despose 生效
+
+```js
+const router = new Router({
+  prefix: '/foo'
+})
+// 加上下面这行
+router[Context.current] = ctx
+ctx.router.use(router.routes(), router.allowedMethods())
+```
+
 ### ctx.bots
 
 - 类型: `Bot[] & Record<string, Bot>`

@@ -1,0 +1,1 @@
+const t={key:"v-3d714ce6",path:"/plugins/other/monitor.html",title:"koishi-plugin-monitor",lang:"en-US",frontmatter:{sidebarDepth:2},excerpt:"",headers:[],filePathRelative:"plugins/other/monitor.md",git:{updatedTime:1619330999e3,contributors:[]}};export{t as data};

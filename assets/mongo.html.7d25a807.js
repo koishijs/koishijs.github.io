@@ -1,0 +1,1 @@
+const e={key:"v-2569b6eb",path:"/api/database/mongo.html",title:"数据库：Mongo",lang:"en-US",frontmatter:{title:"数据库：Mongo",sidebarDepth:2},excerpt:"",headers:[],filePathRelative:"api/database/mongo.md",git:{updatedTime:1619330999e3,contributors:[]}};export{e as data};

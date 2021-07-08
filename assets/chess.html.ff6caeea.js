@@ -1,0 +1,1 @@
+const e={key:"v-e4ff4e80",path:"/plugins/other/chess.html",title:"棋类游戏 (Chess)",lang:"en-US",frontmatter:{sidebarDepth:2},excerpt:"",headers:[{level:2,title:"开始和停止棋局",slug:"开始和停止棋局",children:[]},{level:2,title:"落子，悔棋和跳过",slug:"落子-悔棋和跳过",children:[]}],filePathRelative:"plugins/other/chess.md",git:{updatedTime:1619330999e3,contributors:[]}};export{e as data};

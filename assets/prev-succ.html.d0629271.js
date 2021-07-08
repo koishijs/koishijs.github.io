@@ -1,0 +1,1 @@
+import{o as a,c as e,a as r,b as n}from"./app.2e1eaa90.js";const s={},t={id:"前置与后继问答",tabindex:"-1"},d=r("a",{class:"header-anchor",href:"#前置与后继问答","aria-hidden":"true"},"#",-1),o=n(" 前置与后继问答");s.render=function(r,n){return a(),e("h1",t,[d,o])};export default s;

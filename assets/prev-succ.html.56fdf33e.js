@@ -1,0 +1,1 @@
+const e={key:"v-8cceb7c2",path:"/plugins/teach/prev-succ.html",title:"前置与后继问答",lang:"en-US",frontmatter:{sidebarDepth:2},excerpt:"",headers:[],filePathRelative:"plugins/teach/prev-succ.md",git:{updatedTime:1619330999e3,contributors:[]}};export{e as data};

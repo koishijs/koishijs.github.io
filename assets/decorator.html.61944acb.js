@@ -1,0 +1,1 @@
+const e={key:"v-7611bd2c",path:"/guide/decorator.html",title:"使用装饰器",lang:"en-US",frontmatter:{sidebarDepth:2},excerpt:"",headers:[{level:2,title:"插件上下文",slug:"插件上下文",children:[]},{level:2,title:"使用选择器",slug:"使用选择器",children:[]}],filePathRelative:"guide/decorator.md",git:{updatedTime:1623825276e3,contributors:[]}};export{e as data};

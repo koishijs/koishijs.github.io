@@ -1,0 +1,1 @@
+const e={key:"v-111a6664",path:"/plugins/eval/addon.html",title:"扩展开发",lang:"en-US",frontmatter:{sidebarDepth:2},excerpt:"",headers:[{level:2,title:"指令：addons",slug:"指令-addons",children:[]}],filePathRelative:"plugins/eval/addon.md",git:{updatedTime:1619330999e3,contributors:[]}};export{e as data};

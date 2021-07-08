@@ -1,0 +1,1 @@
+const e={key:"v-744497ce",path:"/api/",title:"API 文档",lang:"en-US",frontmatter:{sidebarDepth:0},excerpt:"",headers:[{level:2,title:"核心 API",slug:"核心-api",children:[]},{level:2,title:"其他官方包 API",slug:"其他官方包-api",children:[]},{level:2,title:"更新与迁移",slug:"更新与迁移",children:[]}],filePathRelative:"api/index.md",git:{updatedTime:1619542071e3,contributors:[]}};export{e as data};

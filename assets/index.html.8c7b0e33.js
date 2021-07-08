@@ -1,0 +1,1 @@
+const e={key:"v-67d16688",path:"/plugins/",title:"官方插件",lang:"en-US",frontmatter:{sidebarDepth:0,noOutboundLinks:!0},excerpt:"",headers:[{level:2,title:"核心插件",slug:"核心插件",children:[]},{level:2,title:"其他官方插件",slug:"其他官方插件",children:[]}],filePathRelative:"plugins/index.md",git:{updatedTime:1619375493e3,contributors:[]}};export{e as data};

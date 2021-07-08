@@ -1,0 +1,1 @@
+const e={key:"v-667270b2",path:"/plugins/adventure/",title:"基本用法",lang:"en-US",frontmatter:{sidebarDepth:2},excerpt:"",headers:[],filePathRelative:"plugins/adventure/index.md",git:{updatedTime:162482521e4,contributors:[]}};export{e as data};

@@ -1,0 +1,1 @@
+const e={key:"v-f76d3728",path:"/plugins/teach/context.html",title:"上下文机制",lang:"en-US",frontmatter:{sidebarDepth:2},excerpt:"",headers:[{level:2,title:"基本用法",slug:"基本用法",children:[]},{level:2,title:"深入原理",slug:"深入原理",children:[]}],filePathRelative:"plugins/teach/context.md",git:{updatedTime:1619330999e3,contributors:[]}};export{e as data};

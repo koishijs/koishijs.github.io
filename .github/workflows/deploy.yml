@@ -56,7 +56,7 @@ jobs:
           ln -s ../.external/eval/docs ./community/eval
           ln -s ../.external/github/docs ./community/github
       - name: Build
-        run: yarn docs build
+        run: yarn build
       - name: Deploy
         if: ${{ github.repository == 'koishijs/koishijs.github.io' && github.ref == 'refs/heads/master' }}
         uses: peaceiris/actions-gh-pages@v3

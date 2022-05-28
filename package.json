@@ -10,6 +10,7 @@
     "build": "yarn prepare && vuepress build ."
   },
   "devDependencies": {
+    "@koishijs/market": "^2.0.0",
     "@koishijs/plugin-adapter-discord": "^2.1.2",
     "@koishijs/plugin-adapter-onebot": "^4.2.7",
     "@koishijs/plugin-adapter-telegram": "^2.2.7",
@@ -22,10 +23,13 @@
     "@vuepress/plugin-pwa": "2.0.0-beta.43",
     "@vuepress/plugin-pwa-popup": "2.0.0-beta.43",
     "@vuepress/plugin-register-components": "2.0.0-beta.43",
+    "axios": "^0.24.0",
     "diacritics": "^1.3.0",
     "esbuild": "^0.12.29",
     "esbuild-register": "^3.3.2",
+    "fs-extra": "^10.1.0",
     "koishi": "^4.7.2",
+    "marked": "^4.0.16",
     "remark-shiki-twoslash": "^3.0.9",
     "shiki": "^0.9.15",
     "typescript": "^4.7.2",

@@ -1,4 +1,4 @@
-import scan, { AnalyzedPackage } from '@koishijs/market/src'
+import scan, { AnalyzedPackage } from '@koishijs/market'
 import { mkdirSync, writeFileSync } from 'fs-extra'
 import { resolve } from 'path'
 import { marked } from 'marked'

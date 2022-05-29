@@ -33,7 +33,7 @@ yarn add mocha chai @koishijs/plugin-mock -D
 
 接着创建存放测试文件的 `tests` 目录，并在其中新建一个 `index.spec.js` 文件，开始编写你的单元测试：
 
-```ts title=tests/index.spec.js
+```ts title=tests/index.spec.js no-extra-header
 import { App } from 'koishi'
 import mock from '@koishijs/plugin-mock'
 

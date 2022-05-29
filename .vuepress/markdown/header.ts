@@ -21,6 +21,7 @@ declare global {
   type Argv = import('koishi').Argv
   type Context = import('koishi').Context
   type Disposable = import('koishi').Disposable
+  type Middleware = import('koishi').Middleware
   type Service = import('koishi').Service
 
   const Context: typeof import('koishi').Context

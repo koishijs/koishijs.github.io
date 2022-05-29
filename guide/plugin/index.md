@@ -8,12 +8,13 @@ sidebarDepth: 2
 
 ## 插件的基本形式
 
-一个插件的本质是以下两个之一：
+一个插件需要是以下三种基本形式之一：
 
-- 一个接受两个参数的函数，第一个参数是所在的上下文，第二个参数是传入的选项
-- 一个对象，其中的 `apply` 方法是上面所说的函数
+1. 一个接受两个参数的函数，第一个参数是所在的上下文，第二个参数是传入的选项
+2. 一个接受两个参数的类，第一个参数是所在的上下文，第二个参数是传入的选项
+3. 一个对象，其中的 `apply` 方法是第一种形式中所说的函数
 
-而一个插件在被加载时，则相当于进行了上述函数的调用。因此，下面的三种写法是基本等价的：
+而一个插件在被加载时，则相当于进行了上述函数的调用。因此，下面的四种写法是基本等价的：
 
 ```ts
 declare const callback: Middleware
@@ -25,38 +26,46 @@ ctx.plugin(ctx => ctx.middleware(callback))
 ctx.plugin({
   apply: ctx => ctx.middleware(callback),
 })
+
+ctx.plugin(class {
+  constructor(ctx) {
+    ctx.middleware(callback)
+  }
+})
 ```
 
 看起来插件似乎只是将函数调用换了一种写法，但这种写法能够帮助我们将多个逻辑组合在一起并模块化，同时可以在插件内部对所需的选项进行初始化，这些都能极大地提高了代码的可维护性。
-
-## 类形式的插件
-
-由于 JavaScript 中类本身也是一种函数，因此我们也可以将插件写成类的形式。
-
-```ts title=example-plugin.ts
-import { Context, Next, Session } from 'koishi'
-
-interface Config {}
-
-class ExamplePlugin {
-  // 保存插件的上下文和选项
-  constructor(private ctx: Context, private config: Config) {
-    // 上述插件的等价形式
-    ctx.middleware(this.callback.bind(this))
-  }
-
-  callback(session: Session, next: Next) {}
-}
-```
 
 ## 模块化的插件
 
 一个模块可以作为插件被 Koishi 加载，其需要满足以下两条中的一条：
 
-- 此模块的默认导出是一个插件
-- 此模块的导出整体是一个插件
+- 此模块的**默认导出**是一个插件
+- 此模块的**导出整体**是一个插件
 
 这两种写法并无优劣之分，你完全可以按照自己的需求调整导出的形式。按照惯例，如果你的插件是一个函数，我们通常直接导出 apply 方法，并将导出整体作为一个插件；如果你的插件是一个类，那么我们通常使用默认导出的形式。
+
+```ts
+// 导出 apply 方法
+export interface Config {}
+
+export function apply(ctx: Context, config: Config) {}
+
+// 将模块整体作为插件
+import * as plugin from './plugin'
+```
+
+```ts
+// 默认导出一个类
+export interface Config {}
+
+export default class ExamplePlugin {
+  constructor(ctx: Context, config: Config) {}
+}
+
+// 将默认导出作为插件
+import plugin from './plugin'
+```
 
 ::: tip
 这里默认导出的优先级更高。因此，只要模块提供了默认导出，Koishi 就会尝试加载这个默认导出，而不是导出整体。在开发中请务必注意这一点。
@@ -71,7 +80,9 @@ class ExamplePlugin {
 ```ts title=detect-space.ts
 import { Context } from 'koishi'
 
-export default function detectSpace(ctx: Context) {
+export const name = 'detect-space'
+
+export function apply(ctx: Context) {
   ctx.middleware((session, next) => {
     if (session.content.match(/^\s*(\S +){2,}\S\s*$/g)) {
       return '在？为什么说话带空格？'
@@ -95,7 +106,7 @@ import { Context } from 'koishi'
 import pluginA from './a'
 import pluginB from './b'
 
-export default function (ctx: Context) {
+export function apply(ctx: Context) {
   // 依次安装 a, b 两个插件
   ctx.plugin(pluginA)
   ctx.plugin(pluginB)
@@ -104,7 +115,7 @@ export default function (ctx: Context) {
 
 这样当你加载 nested-plugin 时，就相当于同时加载了 a 和 b 两个插件。
 
-Koishi 的许多插件都采用了这种写法，例如 [koishi-plugin-tools](https://github.com/koishijs/koishi-plugin-tools)。
+当你在开发较为复杂的功能时，可以将插件分解成多个独立的子插件，并在入口文件中依次加载这些子插件。许多大型插件都采用了这种写法。
 
 ## 卸载插件
 
@@ -138,7 +149,7 @@ app.dispose(callback)
 import { Context } from 'koishi'
 import { createServer } from 'http'
 
-export default function (ctx: Context, options) {
+export function apply(ctx: Context, options) {
   const server = createServer()
 
   ctx.on('ready', () => {
@@ -152,3 +163,5 @@ export default function (ctx: Context, options) {
   })
 }
 ```
+
+这里的 `ready` 和 `dispose` 被称为**生命周期事件**，我们将会在后续的章节中进一步介绍。

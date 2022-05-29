@@ -10,11 +10,13 @@
     "build": "yarn prepare && vuepress build ."
   },
   "devDependencies": {
+    "@koishijs/client": "^3.3.3",
     "@koishijs/market": "^2.0.0",
     "@koishijs/plugin-adapter-discord": "^2.1.2",
     "@koishijs/plugin-adapter-onebot": "^4.2.7",
     "@koishijs/plugin-adapter-telegram": "^2.2.7",
     "@koishijs/plugin-console": "^3.3.3",
+    "@koishijs/plugin-mock": "^1.0.5",
     "@koishijs/plugin-rate-limit": "^1.1.5",
     "@koishijs/plugin-schedule": "^4.2.1",
     "@rollup/plugin-yaml": "^3.1.0",

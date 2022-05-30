@@ -174,6 +174,12 @@ module.exports = {
         children: [
           '/guide/misc/unit-tests.md',
         ],
+      }, {
+        text: '深入底层',
+        children: [
+          '/guide/in-depth/module.md',
+          '/guide/in-depth/message.md',
+        ],
       }],
 
       '/api/': [{

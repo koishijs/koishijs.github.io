@@ -191,10 +191,10 @@ yarn dep
 
 ::: code-group manager
 ```npm
-npm run publish [...folder]
+npm run pub [...folder]
 ```
 ```yarn
-yarn publish [...folder]
+yarn pub [...folder]
 ```
 :::
 

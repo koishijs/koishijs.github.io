@@ -127,6 +127,7 @@ module.exports = {
           '/guide/plugin/lifecycle.md',
           '/guide/plugin/service.md',
           '/guide/plugin/schema.md',
+          '/guide/plugin/publish.md',
         ],
       }, {
         text: '数据库',
@@ -320,8 +321,8 @@ module.exports = {
       }],
     },
 
-    docsRepo: 'koishijs/koishi',
-    docsDir: 'docs',
+    docsRepo: 'koishijs/koishijs.github.io',
+    docsBranch: 'docs',
     editLinkText: '帮助我们改善此页面',
     contributors: false,
   }),

@@ -55,6 +55,12 @@ sidebarDepth: 2
 }
 ```
 
+- **author:** 插件作者，通常使用 `名字 <邮箱>` 的格式
+- **maintainers:** 插件维护者，应该是一个数组，其中元素格式同上
+- **license:** 插件许可证，你可以在 [这里](https://choosealicense.com/licenses/) 了解各种许可证的详细信息
+- **homepage:** 插件主页，可以是一个网址 (也可以放你的 GitHub 项目地址)
+- **keywords:** 插件关键词，应该是一个字符串数组，会用于插件市场中的搜索功能
+
 ## `koishi` 字段
 
 除此以外，我们还提供了一个额外的 `koishi` 字段，用于指定与 Koishi 相关的信息。
@@ -78,7 +84,16 @@ sidebarDepth: 2
     },
     "locales": ["en", "zh"],                // 支持的语言
     "recommendeds": [                       // 推荐同时安装的插件
-      "koishi-plugin-dialogue-flow",
+      "dialogue-flow",
     ],
   }
 }
+```
+
+- **description:** 插件描述，应该是一个对象，其中的键代表语言名，值是对应语言下的描述
+- **service:** 插件的服务相关信息，具体包含下列属性：
+  - **required:** 必需的服务，应该是一个服务名构成的数组
+  - **optional:** 可选的服务，应该是一个服务名构成的数组
+  - **implements:** 实现的服务，应该是一个服务名构成的数组
+- **locales:** 插件支持的语言，应该是一个语言名构成的数组
+- **recommendeds:** 推荐同时安装的插件，应该是一个插件名构成的数组

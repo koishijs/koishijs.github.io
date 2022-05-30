@@ -163,19 +163,20 @@ module.exports = {
           '/guide/service/logger.md',
         ],
       }, {
-        text: '控制台开发',
+        text: '控制台',
         children: [
           '/guide/console/index.md',
           '/guide/console/extension.md',
           '/guide/console/data.md',
         ],
       }, {
-        text: '单元测试',
+        text: '测试',
         children: [
-          '/guide/misc/unit-tests.md',
+          '/guide/testing/sandbox.md',
+          '/guide/testing/unit-tests.md',
         ],
       }, {
-        text: '深入底层',
+        text: '深入',
         children: [
           '/guide/in-depth/module.md',
           '/guide/in-depth/message.md',

@@ -1,5 +1,7 @@
 ---
 sidebarDepth: 2
+redirectFrom:
+  - /guide/misc/unit-tests.md
 ---
 
 # 单元测试

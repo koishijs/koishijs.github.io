@@ -124,6 +124,7 @@ module.exports = {
         children: [
           '/guide/plugin/index.md',
           '/guide/plugin/context.md',
+          '/guide/plugin/events.md',
           '/guide/plugin/lifecycle.md',
           '/guide/plugin/service.md',
           '/guide/plugin/schema.md',

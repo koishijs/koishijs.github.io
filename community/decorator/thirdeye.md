@@ -927,8 +927,7 @@ export class MyPhotoRegistry extends StarterPlugin(Config) {
 
 我们配置这些插件的时候，会像下面这样书写配置：
 
-```yaml
-# koishi.yml
+```yaml title=koishi.yml
 plugins:
   autopic:
     instances:
@@ -1039,8 +1038,7 @@ export default class AutoPicPlugin extends MultiInstancePlugin(AutoPicInstancePl
 
 加载多实例插件时，每个实例的配置均在配置的 `instances` 属性下，对应切面插件的配置项。
 
-```yaml
-# koishi.yml
+```yaml title=koishi.yml
 plugins:
   autopic:
     instances:
@@ -1078,8 +1076,7 @@ export class Config {
 export default class AutoPicPlugin extends MultiInstancePlugin(AutoPicInstancePlugin, Config) {}
 ```
 
-```yaml
-# koishi.yml
+```yaml title=koishi.yml
 plugins:
   autopic:
     defaultInterval: 30000

@@ -18,9 +18,9 @@ noTwoslash: true
 我们以 [Lolicon](https://api.lolicon.app/) 为例，开发一个 Lolicon 图源插件。
 
 ```ts title=lolicon.ts
-import { Context, Quester } from "koishi";
-import { DefinePlugin, RegisterSchema, SchemaProperty, Inject } from "koishi-thirdeye";
-import { PicSourcePlugin, PicsContainer } from "koishi-plugin-pics";
+import { Context, Quester } from "koishi"
+import { DefinePlugin, RegisterSchema, SchemaProperty, Inject } from "koishi-thirdeye"
+import { PicSourcePlugin, PicsContainer } from "koishi-plugin-pics"
 
 @RegisterSchema()
 export class Config {
@@ -46,11 +46,11 @@ export default class LoliconSource extends PicSourcePlugin(Config) {
         num: 1,
         tag: picTags,
       },
-    );
-    const data = result.data[0];
+    )
+    const data = result.data[0]
     if(!data) {
       // 没有找到图片
-      return;
+      return
     }
     return {
       url: data.urls.original,

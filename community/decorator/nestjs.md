@@ -99,6 +99,7 @@ koishi-nestjs 的配置项和 [Koishi 配置项](../../api/core/app.md) 基本�
   - **select:** Selection 对象，指定插件的 [上下文选择器](../../guide/plugin/context.md#配置插件上下文)。
 - **useWs:** `boolean` 是否启用 WebSocket 网关。**异步配置该项应写入异步配置项中**，而不是写在 `useFactory` 中。默认 `false`。
 - **actionErrorMessage:** `string` 指令中发生未知错误时，机器人返回的信息。默认 `Internal Server Error`。
+- **templateParams** 定义注册的 [插值上下文对象](#插值定义)。
 
 #### 不支持的配置项
 
@@ -309,6 +310,45 @@ export class AppService implements OnModuleInit {
     this.ctx.on('message', (session) => {})
   }
 }
+```
+
+## 插值定义
+
+与 [koishi-thirdeye](./thirdeye.md#插值定义) 类似，koishi-nestjs 也提供了插值定义的功能，以灵活给地为。
+
+koishi-nestjs 的选择器和指令方法注册装饰器均支持插值，插值上下文由配置的 templateParams 属性提供。
+
+```ts
+// app.service.ts
+@Injectable()
+export class AppService {
+  @UseCommand('{{dress.commandName}}')
+  onDressCommand(
+    @PutValue('{{dress.color}}') color: string,
+    @PutValue('{{dress.size}}') size: string,
+  ) {
+    return `您穿的裙子是 ${color} 色的，大小是 ${size}。`
+  }
+}
+
+// app.module.ts
+@Module({
+  imports: [
+    KoishiModule.register({
+      templateParams: {
+        dress: {
+          commandName: 'dress',
+          color: '红色',
+          size: 'XL',
+        },
+      },
+    }),
+  ],
+  providers: [
+    AppService,
+  ],
+})
+export class AppModule {}
 ```
 
 ## 使用服务

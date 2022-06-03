@@ -107,7 +107,7 @@ import pluginA from './a'
 import pluginB from './b'
 
 export function apply(ctx: Context) {
-  // 依次安装 a, b 两个插件
+  // 依次加载 a, b 两个插件
   ctx.plugin(pluginA)
   ctx.plugin(pluginB)
 }
@@ -137,10 +137,10 @@ function callback(ctx: Context, options) {
 }
 
 // 加载插件
-app.plugin(callback)
+const dispose = app.plugin(callback)
 
-// 卸载这个插件，取消上面的全部操作
-app.dispose(callback)
+// 卸载这个插件，取消上述全部操作
+dispose()
 ```
 
 看起来很神奇，不过它的实现方式也非常简单。当一个插件被注册时，Koishi 会记录注册过程中定义的所有事件钩子、指令、中间件乃至子插件。当 `ctx.dispose()` 被调用时，再逐一取消上述操作的效应。因此，它的局限性也很明显：它并不能妥善处理除了 Context API 以外的**副作用**。不过，我们也准备了额外的解决办法：
@@ -165,3 +165,32 @@ export function apply(ctx: Context, options) {
 ```
 
 这里的 `ready` 和 `dispose` 被称为**生命周期事件**，我们将会在后续的章节中进一步介绍。
+
+## 在配置文件中加载插件 <Badge text="CLI"/>
+
+配置文件中的 `plugins` 字段记录了插件的信息：
+
+```yaml title=koishi.yml
+plugins:
+  ./local:
+  console:
+  dialogue:
+    prefix: '#'
+```
+
+这里的键对应插件的路径，值则为插件的配置。这个路径允许两种写法：
+
+- 如果是一个绝对路径或者相对路径，则我们会相对配置文件所在的目录进行解析
+- 其他情况下我们将其视为包名，忽略 `koishi-plugin-` 以及 `@koishijs/plugin-` 的前缀，并考虑 scope 带来的影响，具体来说：
+  - 对于 foo，我们将尝试读取 @koishijs/plugin-foo 和 koishi-plugin-foo
+  - 对于 @foo/bar，我们将尝试读取 @foo/koishi-plugin-bar
+
+换言之，上述配置文件相当于下面的代码：
+
+```ts
+app.plugin(require('./local'))
+app.plugin(require('@koishijs/plugin-console').default)
+app.plugin(require('koishi-plugin-dialogue'), { prefix: '#' })
+```
+
+在这个例子中，local 是一个本地插件；console 是官方插件，并且使用了默认导出；dialogue 是社区插件，并且使用了导出整体。配置文件使你得以无视这些区别，每个插件的加载方式都会由 CLI 自动检测。

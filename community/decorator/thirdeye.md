@@ -7,6 +7,19 @@ redirectFrom:
 
 # 开发插件
 
+:::tip
+koishi-thirdeye 利用到了 TypeScript 的一些装饰器的实验性功能。请在项目的 `tsconfig.json` 中设置这些参数以保证 koishi-thirdeye 正常运行：
+
+```json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+  }
+}
+```
+:::
+
 [koishi-thirdeye](https://github.com/koishijs/koishi-thirdeye) 允许您使用类装饰器开发 Koishi 插件。下面是一个一目了然的例子：
 
 ```ts

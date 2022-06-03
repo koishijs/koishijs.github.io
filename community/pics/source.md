@@ -81,8 +81,8 @@ plugins:
 
 `PicSourcePlugin(Config)` 生成基类具有这些预定义属性，可以直接使用。
 
-- **pics**: pics 服务本身，并已标记为服务依赖。
-- **logger**: 日志记录器。
+- **pics:** pics 服务本身，并已标记为服务依赖。
+- **logger:** 日志记录器。
 
 ## 多图源插件
 

@@ -38,7 +38,7 @@ type DomainType = string | RegExp | ((source: string) => any)
 
 ### cmd.removeOption(name)
 
-- **name**: `string` 指令的名称
+- **name:** `string` 指令的名称
 - 返回值: `this`
 
 删除一个选项。注意：如果你为一个选项注册了多个别名，则删除任何一个别名都相当于删除整个选项。

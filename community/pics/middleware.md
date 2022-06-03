@@ -35,12 +35,12 @@ export default class PicDownloaderMiddleware extends PicMiddlewarePlugin(Config)
 
 `PicMiddlewarePlugin(Config)` 生成基类具有这些预定义属性，可以直接使用。
 
-- **pics**: pics 服务本身，并已标记为服务依赖。
-- **logger**: 日志记录器。
+- **pics:** pics 服务本身，并已标记为服务依赖。
+- **logger:** 日志记录器。
 
 ### 中间件配置
 
 `PicMiddlewarePlugin(Config)` 生成的插件基类中，已经内置了一些配置属性，如下。
 
-- **name**: `string` 中间件名称，仅在日志记录中体现。
-- **prepend**: `boolean` 是否在图像中间件链中的前面执行，默认为 `false`。
+- **name:** `string` 中间件名称，仅在日志记录中体现。
+- **prepend:** `boolean` 是否在图像中间件链中的前面执行，默认为 `false`。

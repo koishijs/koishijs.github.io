@@ -99,7 +99,7 @@ koishi-nestjs 的配置项和 [Koishi 配置项](../../api/core/app.md) 基本�
   - **select:** Selection 对象，指定插件的 [上下文选择器](../../guide/plugin/context.md#配置插件上下文)。
 - **useWs:** `boolean` 是否启用 WebSocket 网关。**异步配置该项应写入异步配置项中**，而不是写在 `useFactory` 中。默认 `false`。
 - **actionErrorMessage:** `string` 指令中发生未知错误时，机器人返回的信息。默认 `Internal Server Error`。
-- **templateParams** 定义注册的 [插值上下文对象](#插值定义)。
+- **templateParams:** 定义注册的 [插值上下文对象](#插值定义)。
 
 #### 不支持的配置项
 

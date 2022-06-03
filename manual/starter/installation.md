@@ -21,6 +21,16 @@ redirectFrom:
 3. 输入 `npm install` / `yarn` 安装依赖。
 4. 输入 `npm start` / `yarn start` 开始运行。
 
+::: danger
+
+Koishi 不支持 pnpm 默认的 isolated linker。如果你确实想使用 pnpm，则需要在安装依赖前运行如下命令：
+
+```sh
+echo node-linker=hoisted > .npmrc
+```
+
+:::
+
 ## 使用包管理器创建
 
 在任意目录启动命令行，输入下面的指令：

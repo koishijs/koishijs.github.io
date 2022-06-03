@@ -1069,7 +1069,7 @@ plugins:
 @RegisterSchema()
 export class Config {
   @SchemaProperty()
-  defaultInterval: number;
+  defaultInterval: number
 }
 
 @DefinePlugin()
@@ -1354,7 +1354,7 @@ export default class MyPlugin extends StarterPlugin(MyPluginConfig) {
 ```ts
 declare module 'koishi' {
   interface User {
-    dress: Dress;
+    dress: Dress
   }
 }
 

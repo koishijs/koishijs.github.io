@@ -29,7 +29,7 @@ pics 本身会导出为一个服务，具有这些方法。您可以使用这些
 ## 示例
 
 ```ts
-import type {} from 'koishi-plugin-pics'; // 你需要导入 pics 插件的类型定义
+import type {} from 'koishi-plugin-pics' // 你需要导入 pics 插件的类型定义
 
 await ctx.pics.randomPic(['komeiji koishi'], ['lolicon']) //-> { url: string, description?: string }
 ```

@@ -10,7 +10,17 @@
 
 ## 开发图像中间件插件
 
-图像中间件插件同样是需要使用 [koishi-thirdeye](../decorator/thirdeye.md) 进行开发。推荐在 `package.json` 的 `keywords` 内写上 `required:pics` 以保证正确被 Koishi 插件市场搜索。
+图像中间件插件同样是需要使用 [koishi-thirdeye](../decorator/thirdeye.md) 进行开发。推荐在 `package.json` 内写上下面的内容以保证正确被 Koishi 插件市场搜索。
+
+```json
+{
+  "koishi": {
+    "service": {
+      "required": ["pics"],
+    }
+  }
+}
+```
 
 图像中间件插件从 `PicMiddlewarePlugin(Config)` 基类继承，并实现 use 方法，该方法具有 url 和 next 两个参数，并需要以一个字符串作为返回值。
 

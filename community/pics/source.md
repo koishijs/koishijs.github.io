@@ -13,7 +13,17 @@ noTwoslash: true
 
 ## 开发图源插件
 
-图源插件需要从 `PicSourcePlugin(Config)` 基类进行继承，并实现 `randomPic` 方法，并返回一个包含 `url` 字段的对象。若返回对象带有 `description` 字段，则会在指令的输出中一并显示。此外，推荐在 `package.json` 的 `keywords` 内写上 `required:pics` 以保证正确被 Koishi 插件市场搜索。
+图源插件需要从 `PicSourcePlugin(Config)` 基类进行继承，并实现 `randomPic` 方法，并返回一个包含 `url` 字段的对象。若返回对象带有 `description` 字段，则会在指令的输出中一并显示。此外，推荐在 `package.json` 内写上下面的内容以保证正确被 Koishi 插件市场搜索。
+
+```json
+{
+  "koishi": {
+    "service": {
+      "required": ["pics"],
+    }
+  }
+}
+```
 
 我们以 [Lolicon](https://api.lolicon.app/) 为例，开发一个 Lolicon 图源插件。
 

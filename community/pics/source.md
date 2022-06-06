@@ -37,7 +37,7 @@ import { Context, Schema } from "koishi"
 import { PlainPicSourcePlugin } from "koishi-plugin-pics"
 
 const base = PlainPicSourcePlugin({
-  name: Schema.string('插件名称').default('lolicon'), // 重写 name 方法
+  name: Schema.string('图源名称').default('lolicon'), // 重写 name 方法
   r18: Schema.number('图片的 R18 模式').default(2),
 })
 
@@ -96,7 +96,7 @@ import { PicSourcePlugin, PicsContainer } from "koishi-plugin-pics"
 
 @RegisterSchema()
 export class Config {
-  @SchemaProperty({ description: '插件名称', default: 'lolicon' }) // 推荐覆盖该属性以提供默认值
+  @SchemaProperty({ description: '图源名称', default: 'lolicon' }) // 推荐覆盖该属性以提供默认值
   name: string
   
   @SchemaProperty({ description: '图片的 R18 模式', default: 2 })

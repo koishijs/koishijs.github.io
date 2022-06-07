@@ -7,6 +7,19 @@ redirectFrom:
 
 # 开发插件
 
+:::tip
+koishi-thirdeye 利用到了 TypeScript 的一些装饰器的实验性功能。请在项目的 `tsconfig.json` 中设置这些参数以保证 koishi-thirdeye 正常运行：
+
+```json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+  }
+}
+```
+:::
+
 [koishi-thirdeye](https://github.com/koishijs/koishi-thirdeye) 允许您使用类装饰器开发 Koishi 插件。下面是一个一目了然的例子：
 
 ```ts
@@ -927,8 +940,7 @@ export class MyPhotoRegistry extends StarterPlugin(Config) {
 
 我们配置这些插件的时候，会像下面这样书写配置：
 
-```yaml
-# koishi.yml
+```yaml title=koishi.yml
 plugins:
   autopic:
     instances:
@@ -1039,8 +1051,7 @@ export default class AutoPicPlugin extends MultiInstancePlugin(AutoPicInstancePl
 
 加载多实例插件时，每个实例的配置均在配置的 `instances` 属性下，对应切面插件的配置项。
 
-```yaml
-# koishi.yml
+```yaml title=koishi.yml
 plugins:
   autopic:
     instances:
@@ -1071,15 +1082,14 @@ plugins:
 @RegisterSchema()
 export class Config {
   @SchemaProperty()
-  defaultInterval: number;
+  defaultInterval: number
 }
 
 @DefinePlugin()
 export default class AutoPicPlugin extends MultiInstancePlugin(AutoPicInstancePlugin, Config) {}
 ```
 
-```yaml
-# koishi.yml
+```yaml title=koishi.yml
 plugins:
   autopic:
     defaultInterval: 30000
@@ -1357,7 +1367,7 @@ export default class MyPlugin extends StarterPlugin(MyPluginConfig) {
 ```ts
 declare module 'koishi' {
   interface User {
-    dress: Dress;
+    dress: Dress
   }
 }
 

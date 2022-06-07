@@ -41,9 +41,9 @@ export default (options: DefaultThemeOptions): Theme => ({
     zoom({
       selector: '.theme-default-content :not(a) > img:not(.no-zooming)',
     }),
-    redirect({
-      config: {},
-    }),
+    // redirect({
+    //   config: {},
+    // }),
   ],
 
   extendsPage(page) {

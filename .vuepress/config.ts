@@ -84,7 +84,7 @@ module.exports = {
       }, {
         text: '起步',
         children: [
-          '/manual/starter/node.md',
+          '/manual/starter/nodejs.md',
           '/manual/starter/installation.md',
           '/manual/starter/console.md',
           '/manual/starter/adapter.md',

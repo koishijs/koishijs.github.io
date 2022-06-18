@@ -84,9 +84,6 @@ sidebarDepth: 2
       "implements": ["dialogue"],           // 实现的服务
     },
     "locales": ["en", "zh"],                // 支持的语言
-    "recommends": [                         // 推荐同时安装的插件
-      "dialogue-flow",
-    ],
   }
 }
 ```
@@ -97,4 +94,3 @@ sidebarDepth: 2
   - **optional:** 可选的服务，应该是一个服务名构成的数组
   - **implements:** 实现的服务，应该是一个服务名构成的数组
 - **locales:** 插件支持的语言，应该是一个语言名构成的数组
-- **recommends:** 推荐同时安装的插件，应该是一个插件名构成的数组

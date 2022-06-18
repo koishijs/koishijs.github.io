@@ -126,6 +126,64 @@ export function apply(ctx: Context) {
 }
 ```
 
+## 服务的共享与隔离
+
+在默认情况下，任何上下文中设置的服务都会被同一个应用内的所有上下文共享。这当然非常方便——事实上服务也正是为了这样的需求而设计的，但这意味着你的每种服务只能同时存在一个实例。如果你希望用多个插件实现同一个服务，并分别提供给不同的上下文使用的话，你就要用到服务的隔离功能了。
+
+`ctx.isolate()` 方法接受一个字符串数组，表示要隔离的服务列表，并返回一个新的上下文。新上下文中的上述服务将与外层上下文隔离，但仍然会与新上下文所派生出的子上下文共享。下面是一个简单的例子：
+
+```ts
+declare module 'koishi' {
+  interface Context {
+    foo: Foo
+    bar: Foo
+  }
+}
+interface Foo {
+  value: number
+}
+interface Bar {
+  value: number
+}
+// ---cut---
+const root = new App()
+const ctx1 = root.isolate(['foo'])
+const ctx2 = root.isolate(['bar'])
+
+root.foo = { value: 1 }
+ctx1.foo                        // undefined
+ctx2.foo                        // { value: 1 }
+
+ctx1.bar = { value: 2 }
+root.bar                        // { value: 2 }
+ctx2.bar                        // undefined
+```
+
+在这个例子中，我们创建了两个上下文，分别隔离了 foo 和 bar 服务。作为结果，根上下文中的 foo 服务将只与 `ctx2` 共享，而 bar 服务则只与 `ctx1` 共享。如果我们进一步在 `ctx1` 中实现 foo 服务，我们实际上也就提供了两个 foo 服务的实例。这两个实例互不干扰，并且各自服务于不同的上下文。当一个实例被移除时，也不会影响到另一个实例的作用范围。
+
+### 在配置文件中使用
+
+服务的隔离也可以在配置文件中声明，只需在插件组的配置中添加 `$isolate` 字段即可：
+
+```yaml
+plugins:
+  admin:
+  group:1:
+    $isolate:
+      - database
+    database-mysql:
+    github:
+  group:2:
+    database-mongo:
+    dialogue:
+```
+
+在上面的例子中，我们定义了两个插件组 1 和 2，前者配置了隔离的 database 环境。因此，github 插件内所访问到的 database 服务将是 `database-mysql` 所提供的，而其他地方 (包括 admin 和 dialogue 插件等) 所访问到的 database 服务则都是 `database-mongo` 所提供的。
+
+::: tip
+如果你修改上面的例子，为插件组 2 也设置隔离的 database 环境，那么 koishi 本体也将无法访问到任何 database 服务，这可能并不是你所期望的。
+:::
+
 ## 自定义服务
 
 如果你希望自己插件提供一些接口供其他插件使用，那么最好的办法便是提供自定义服务，就像这样：

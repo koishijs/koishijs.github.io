@@ -37,7 +37,7 @@ export interface State {
 
 ## 过滤器
 
-有关这里的 API，请参见 [使用上下文](../../guide/context.md#使用上下文)。
+有关这里的 API，请参见 [使用上下文](../../guide/plugin/context.md#会话选择器)。
 
 ### ctx.any()
 
@@ -46,7 +46,7 @@ export interface State {
 选取上下文全集。
 
 ::: tip
-这个方法与 `ctx.app` 的区别在于，后者不受插件管理器控制，容易产生内存泄漏。因此我们建议，除非你已经为你的插件声明了副作用，你应当尽量使用这个方法。参见 [插件热重载](../../guide/context.md#插件热重载)。
+这个方法与 `ctx.app` 的区别在于，后者不受插件管理器控制，容易产生内存泄漏。因此我们建议，除非你已经为你的插件声明了副作用，你应当尽量使用这个方法。参见 [插件热重载](../../guide/plugin/events.md#插件热重载)。
 :::
 
 ### ctx.never()
@@ -86,13 +86,6 @@ export interface State {
 - 返回值: `Context` 新的上下文
 
 给出当前上下文和其他上下文的差集。
-
-### ctx.match(session)
-
-- **session:** [`Session`](./session.md) 会话对象
-- 返回值: `boolean` 匹配结果
-
-测试上下文能否匹配会话对象。
 
 ## 钩子与中间件
 
@@ -173,11 +166,18 @@ export interface State {
 
 ## 指令与插件
 
+### ctx.extend(meta)
+
+- **meta:** `Partial<Context.Meta>` 要覆盖的属性
+- 返回值: `this` 新的上下文
+
+以当前上下文为原型创建一个新上下文。`meta` 中的属性将覆盖当前上下文的属性。
+
 ### ctx.plugin(plugin, options?)
 
 - **plugin:** `Plugin` 要安装的插件
-- **options:** `any` 要传入插件的参数，如果为 `false` 则插件不会被安装
-- 返回值: `this`
+- **options:** `any` 要传入插件的参数
+- 返回值: `Fork`
 
 当前上下文中安装一个插件。参见 [认识插件](../../guide/plugin/)。
 
@@ -187,7 +187,14 @@ export interface State {
 - **plugin:** `Plugin` 要安装的插件
 - 返回值: `this`
 
-安装一个存在依赖的插件，参见 [声明依赖关系](../../guide/plugin/service.md#声明依赖关系)。
+安装一个存在服务依赖的插件。参见 [服务的依赖关系](../../guide/plugin/service.md#服务的依赖关系)。
+
+### ctx.isolate(names)
+
+- **keys:** `string[]` 隔离的服务列表
+- 返回值: `this`
+
+以当前上下文为原型创建一个新上下文。`keys` 中指定的服务将在新的上下文中被隔离，其他服务仍然与当前上下文共享。参见 [服务的共享与隔离](../../guide/plugin/service.md#服务的共享与隔离)。
 
 ### ctx.command(def, desc?, config?)
 
@@ -229,7 +236,7 @@ export interface State {
 ### ctx.dispose(plugin?)
 
 - **plugin:** `Plugin` 要移除的插件
-- 返回值: `void`
+- 返回值: `Runtime`
 
 移除插件中所注册的钩子、中间件、指令和子插件等。`plugin` 是默认为当前上下文所在的插件。如果既没有提供 `plugin`，上下文也不是一个插件上下文的话，会抛出一个错误。参见 [卸载插件](../../guide/plugin/#卸载插件)。
 

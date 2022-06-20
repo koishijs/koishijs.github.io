@@ -6,69 +6,11 @@ redirectFrom:
   - /guide/introduction/workspace.html
 ---
 
-# 工作区开发
+# 插件开发
 
-本章节将面向 Koishi 的开发者，继续介绍模板项目的更多特性。
+本章节将介绍如何使用模板项目编写、构建和发布自己的 Koishi 插件。
 
-## 开发模式
-
-在模板项目下运行下面的指令可以启动开发模式：
-
-::: code-group manager
-```npm
-npm run dev
-```
-```yarn
-yarn dev
-```
-:::
-
-这其实相当于在 `start` 指令的基础上添加下面的参数：
-
-```sh
--r esbuild-register
--r yml-register
---watch
-```
-
-这些参数为我们提供了额外的特性。
-
-### TypeScript 支持
-
-Koishi 工作区原生地支持 TypeScript 开发。上面的两组 `-r` 参数允许我们在运行时直接使用工作区插件的 TypeScript 源代码。
-
-如果你想使用其他语言进行开发，你也可以打开 `package.json`，修改 `dev` 指令对应的脚本，向其中添加自己所需的参数：
-
-```sh
--r coffeescript/register        # 以 CoffeeScript 为例
-```
-
-### 模块热替换
-
-如果你开发着一个巨大的 Koishi 项目，可能光是加载一遍全部插件就需要好几秒了。在这种时候，像前端框架一样支持模块热替换就成了一个很棒的主意。Koishi 也做到了！`--watch` 参数实现了插件级别的热替换。每当你修改你的本地文件时，Koishi 就会尝试重载你的插件，并在控制台提醒你。
-
-这里的行为也可以在配置文件中进行定制：
-
-```yaml title=koishi.yml
-watch:
-  # 要忽略的文件列表，支持 glob patterns
-  ignore:
-    - some-file
-```
-
-<!-- 此外，这个指令还支持一些额外的配置项：
-
-- **--log-level:** 控制输出等级
-- **--log-time:** 在日志中显示时间
-- **--debug:** 最高等级输出的命名空间
-
-与输出日志相关的选项请参见 [输出与日志](../service/logger.md) 一章。 -->
-
-## 插件开发
-
-下面将介绍如何使用模板项目编写、构建和发布自己的 Koishi 插件。
-
-### 创建新插件
+## 创建新插件
 
 ::: code-group manager
 ```npm
@@ -121,7 +63,7 @@ export function apply(ctx: Context) {
 <chat-message nickname="Koishi" avatar="/koishi.png">宝塔镇河妖</chat-message>
 </panel-view>
 
-### 构建源代码
+## 构建源代码
 
 在插件正式发布前，你需要将插件的源代码构建为 js 文件。
 
@@ -143,7 +85,7 @@ yarn build [...folder]
 - 后端代码将输出到 `plugins/foo/lib` 目录
 - 前端代码将输出到 `plugins/foo/dist` 目录 (如果存在)
 
-### 更新版本号
+## 更新版本号
 
 ::: code-group manager
 ```npm
@@ -172,7 +114,7 @@ yarn bump [...folder] [-1|-2|-3|-p|-v <ver>] [-r]
   - **-r, --recursive:** 当更新一个插件的版本时，依赖其的插件也随时更新版本
   <!-- - -s, --sync: 与云端进行同步，基于 npm 上的最新版本而非本地版本更新 -->
 
-### 更新依赖
+## 更新依赖
 
 尽管 npm 和 yarn 等包管理器都提供了依赖更新功能，但它们对工作区开发的支持都不是很好。因此，我们也提供了一个简单的指令用于批量更新依赖版本。
 
@@ -187,7 +129,7 @@ yarn dep
 
 上述指令会按照每个 `package.json` 中声明的依赖版本进行更新。举个例子，如果某个依赖的版本是 `^1.1.4`，而这个依赖之后发布了新版本 `1.2.3` 和 `2.3.3`，那么运行该指令后，依赖的版本将会被更新为 `^1.2.3`。
 
-### 发布插件
+## 发布插件
 
 ::: code-group manager
 ```npm

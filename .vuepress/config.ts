@@ -93,7 +93,7 @@ module.exports = {
           '/manual/starter/docker.md',
         ],
       }, {
-        text: '控制台',
+        text: '使用控制台',
         children: [
           '/manual/console/index.md',
           '/manual/console/manager.md',
@@ -102,11 +102,10 @@ module.exports = {
           '/manual/console/chat.md',
         ],
       }, {
-        text: '进阶',
+        text: '命令行工具',
         children: [
-          '/manual/advanced/index.md',
-          '/manual/advanced/config.md',
-          '/manual/advanced/development.md',
+          '/manual/cli/index.md',
+          '/manual/cli/development.md',
         ],
       }],
 

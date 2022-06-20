@@ -6,6 +6,10 @@ redirectFrom:
 
 # 使用 Docker
 
+::: tip
+如果想了解其他安装方式，请移步 [选择安装方式](./index.md)。
+:::
+
 <!-- Koishi 提供了一个 Docker 镜像，方便你在 Docker 容器中运行 Koishi。你需要首先安装 [Docker](https://www.docker.com) 来运行 Docker 镜像。
 
 ## 拉取镜像

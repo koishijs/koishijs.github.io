@@ -129,7 +129,9 @@ export default class MyPlugin {
 
 - `@PluginSchema(Config)` 插件的描述配置模式。可以使用 Koishi 的 Schema 对象，也可使用 schemastery-gen 提供的方法编写的配置类。
 - `@PluginName(name: string)` 插件的名称，默认为类名。
-- `@UsingService(...servers: (keyof Context.Service)[])` 插件的依赖，若有多个则会进行叠加。详见 [声明依赖关系](#声明依赖关系) 一节。
+- `@UsingService(...services: string)` 插件的依赖，若有多个则会进行叠加。详见 [声明依赖关系](#声明依赖关系) 一节。
+- `@Reusable()` 声明插件为可重用插件。
+- `@Isolate(...services: string)` 插件的隔离服务。
 
 ::: warning
 koishi-thirdeye 已经重新导出了 schemastery-gen 这个包。您无需重新安装或导入 schemastery-gen 包。

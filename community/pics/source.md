@@ -45,6 +45,7 @@ export default class LoliconSource extends base {
   // 由于插件元数据无法从基类继承，因此需要手动赋值
   static Config = base.Config
   static using = ['pics'] as const
+  static reusable = true // 注册为可重用插件
 
   async randomPic(tags: string[]) {
     // 从 Lolicon 获取图源
@@ -134,6 +135,8 @@ export default class LoliconSource extends PicSourcePlugin(Config) {
 
 您可以注意到，我们配置的插件选项只有 `name` 和 `r18` 两个属性，但是我们加载插件的时候还使用了 `weight` 和 `isDefault` 等属性，似乎并没有定义。实际上，`PicSourcePlugin` 基类生成器会自动生成图源插件所必需的属性，我们无需在每个插件中都指定一遍。这些字段可以在前面的[配置](./configuration.md#图源插件共同配置)一节中来查看。
 
+此外，`PicSourcePlugin` 基类已经声明自身为可重用插件了，您无需再次使用 `@Reusable()` 装饰器来再次声明。
+
 而真正的 [koishi-plugin-picsource-lolicon](https://npmjs.com/package/koishi-plugin-picsource-lolicon) 插件的逻辑比上面这个例子复杂得多，您可以从参考该插件的源代码了解更多详情。
 
 #### 插件基类
@@ -142,9 +145,3 @@ export default class LoliconSource extends PicSourcePlugin(Config) {
 
 - **pics:** pics 服务本身，并已标记为服务依赖。
 - **logger:** 日志记录器。
-
-## 多图源插件
-
-有些插件，如 [koishi-plugin-picsource-yande](https://npmjs.com/package/koishi-plugin-picsource-yande) 支持多个图源，您可以配置多个图片网站分别作为不同的图源引入机器人中。
-
-这些插件是使用 [koishi-thirdeye](../decorator/thirdeye.md#多实例插件) 的**多实例插件**功能实现的，您可以参考相关文档来了解更多详情。

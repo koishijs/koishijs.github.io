@@ -5,7 +5,7 @@ redirectFrom:
   - /guide/introduction/direct.html
 ---
 
-# 直接调用 Koishi
+# 直接作为库调用
 
 ::: tip
 这篇指南假设你已了解关于 TypeScript 和 Node.js 的中级知识。如果你刚开始学习 JS 开发或者对编写业务代码不感兴趣，建议跳过本章，直接前往 [创建模板项目](./template.md) 章节。

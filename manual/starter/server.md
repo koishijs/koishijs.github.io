@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# 配置服务器
+# 在服务器中安装
 
 ## 使用 nginx
 

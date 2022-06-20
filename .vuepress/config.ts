@@ -84,20 +84,29 @@ module.exports = {
       }, {
         text: '起步',
         children: [
-          '/manual/starter/nodejs.md',
-          '/manual/starter/installation.md',
-          '/manual/starter/console.md',
-          '/manual/starter/adapter.md',
-          '/manual/starter/next-step.md',
+          '/manual/starter/index.md',
+          '/manual/starter/boilerplate.md',
+          '/manual/starter/direct.md',
+          '/manual/starter/desktop.md',
+          '/manual/starter/mobile.md',
+          '/manual/starter/server.md',
+          '/manual/starter/docker.md',
+        ],
+      }, {
+        text: '控制台',
+        children: [
+          '/manual/console/index.md',
+          '/manual/console/manager.md',
+          '/manual/console/adapter.md',
+          '/manual/console/dataview.md',
+          '/manual/console/chat.md',
         ],
       }, {
         text: '进阶',
         children: [
+          '/manual/advanced/index.md',
           '/manual/advanced/config.md',
           '/manual/advanced/development.md',
-          '/manual/advanced/direct.md',
-          '/manual/advanced/server.md',
-          '/manual/advanced/docker.md',
         ],
       }],
 

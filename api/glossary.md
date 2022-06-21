@@ -10,14 +10,14 @@ sidebarDepth: 2
 
 参考：
 
-- [跨平台 / 使用适配器](../adapter/)
-- [API 文档 / 适配器 (Adapter)](../../api/core/adapter.md)
+- [跨平台 / 使用适配器](../guide/adapter/)
+- [API 文档 / 适配器](./core/adapter.md)
 
 ## 应用 (App)
 
 参考：
 
-- [API 文档 / 应用 (App)](../../api/core/app.md)
+- [API 文档 / 应用 (App)](./core/app.md)
 
 ## 资源文件 (Assets)
 
@@ -25,19 +25,19 @@ sidebarDepth: 2
 
 参考：
 
-- [更多功能 / 存储资源文件](../service/assets.md)
+- [更多功能 / 存储资源文件](./service/assets.md)
 
 ## 机器人 (Bot)
 
 参考：
 
-- [API 文档 / 机器人 (Bot)](../../api/core/bot.md)
+- [API 文档 / 机器人 (Bot)](./core/bot.md)
 
 ## 缓存 (Cache)
 
 参考：
 
-- [更多功能 / 使用缓存数据](../service/cache.md)
+- [更多功能 / 使用缓存数据](./service/cache.md)
 
 ## 频道 (Channel)
 
@@ -45,28 +45,28 @@ sidebarDepth: 2
 
 参考：
 
-- [处理交互 / 指令系统初探](../message/command.md)
-- [API 文档 / 指令 (Command)](../../api/core/command.md)
+- [处理交互 / 指令系统初探](../guide/message/command.md)
+- [API 文档 / 指令 (Command)](../core/command.md)
 
 ## 上下文 (Context)
 
 参考：
 
-- [复用性 / 使用上下文](../plugin/context.md)
-- [API 文档 / 上下文 (Context)](../../api/core/context.md)
+- [复用性 / 使用上下文](../guide/plugin/context.md)
+- [API 文档 / 上下文 (Context)](./core/context.md)
 
 ## 数据库 (Database)
 
 参考：
 
-- [数据库 / 使用数据库](../database/)
-- [API 文档 / 数据库 (Database)](../../api/core/database.md)
+- [数据库 / 使用数据库](../guide/database/)
+- [API 文档 / 数据库 (Database)](./core/database.md)
 
 ## 事件 (Events)
 
 参考：
 
-- [API 文档 / 事件 (Events)](../../api/core/events.md)
+- [API 文档 / 事件 (Events)](./core/events.md)
 
 ## 群组 (Guild)
 
@@ -74,26 +74,26 @@ sidebarDepth: 2
 
 参考：
 
-- [API 文档 / 输出日志 (Logger)](../../api/utils/logger.md)
+- [API 文档 / 输出日志 (Logger)](./utils/logger.md)
 
 ## 中间件 (Middleware)
 
 参考：
 
-- [处理交互 / 接收和发送消息](../message/middleware.md)
+- [处理交互 / 接收和发送消息](../guide/message/middleware.md)
 
 ## 数据模型 (Model)
 
 参考：
 
-- [数据库 / 扩展数据模型](../database/database.md#扩展数据模型)
-- [API 文档 / 数据模型 (Model)](../../api/core/model.md)
+- [数据库 / 扩展数据模型](../guide/database/database.md#扩展数据模型)
+- [API 文档 / 数据模型 (Model)](./database/model.md)
 
 ## 观察者 (Observer)
 
 参考：
 
-- [API 文档 / 观察者 (Observer)](../../api/utils/observer.md)
+- [API 文档 / 观察者 (Observer)](./utils/observer.md)
 
 ## 平台 (Platform)
 
@@ -101,7 +101,7 @@ sidebarDepth: 2
 
 参考：
 
-- [复用性 / 使用插件](../plugin/)
+- [复用性 / 使用插件](../guide/plugin/)
 
 ## 协议 (Protocol)
 
@@ -109,21 +109,21 @@ sidebarDepth: 2
 
 参考：
 
-- [更多功能 / 提供网络服务](../service/router.md)
+- [内置服务 / 网络服务 (Router)](./service/router.md)
 
 ## 配置模式 (Schema)
 
 参考：
 
-- [模块化 / 定义配置模式](../plugin/schema.md)
-- [API 文档 / 配置模式 (Schema)](../../api/utils/schema.md)
+- [模块化 / 定义配置模式](../guide/plugin/schema.md)
+- [API 文档 / 配置模式](./utils/schema.md)
 
 ## 消息段 (Segment)
 
 参考：
 
-- [处理交互 / 使用消息段](../message/segment.md)
-- [API 文档 / 消息段 (Segment)](../../api/utils/segment.md)
+- [处理交互 / 使用消息段](../guide/message/segment.md)
+- [API 文档 / 消息段](./utils/segment.md)
 
 ## 服务 (Service)
 
@@ -131,7 +131,7 @@ sidebarDepth: 2
 
 参考：
 
-- [模块化 / 服务与依赖](../plugin/service.md)
+- [模块化 / 服务与依赖](../guide/plugin/service.md)
 
 ## 会话 (Session)
 
@@ -139,7 +139,7 @@ sidebarDepth: 2
 
 参考：
 
-- [处理交互 / 监听会话事件](../message/session.md)
-- [API 文档 / 会话 (Session)](../../api/core/session.md)
+- [处理交互 / 监听会话事件](../guide/message/session.md)
+- [API 文档 / 会话 (Session)](./core/session.md)
 
 ## 用户 (User)

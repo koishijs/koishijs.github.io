@@ -17,7 +17,7 @@ noTwoslash: true
 {
   "koishi": {
     "service": {
-      "required": ["pics"],
+      "required": ["pics"]
     }
   }
 }

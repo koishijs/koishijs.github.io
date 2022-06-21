@@ -19,7 +19,7 @@
 {
   "koishi": {
     "service": {
-      "required": ["pics"],
+      "required": ["pics"]
     }
   }
 }

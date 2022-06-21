@@ -35,7 +35,7 @@ plugins:
     description: 'Lolicon API 的图'
     isDefault: true
     weight: 2
-  picsource-yande@yande: # Yande 图源
+  picsource-yande:yande: # Yande 图源
     name: yande
     tags:
       - anime
@@ -48,7 +48,7 @@ plugins:
     endpoint: https://yande.re/post.json
     pageLimit: 200
     useOriginal: true
-  picsource-yande@konachan: # Konachan 图源
+  picsource-yande:konachan: # Konachan 图源
     name: konachan
     tags:
       - anime

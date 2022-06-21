@@ -48,7 +48,7 @@ const user = await ctx.database.getUser(platform, id)
 await ctx.database.setChannel(platform, id, { assignee: '123456789' })
 ```
 
-你可以在后面的 API 文档中看到全部内置的 [数据库方法](../../api/core/database.md)。
+你可以在后面的 API 文档中看到全部内置的 [数据库方法](../../api/database/database.md)。
 
 ## 获取数据
 

@@ -211,6 +211,17 @@ module.exports = {
           '/api/core/session.md',
         ],
       }, {
+        text: '内置服务',
+        children: [
+          '/api/service/bots.md',
+          '/api/service/i18n.md',
+          '/api/service/lifecycle.md',
+          '/api/service/registry.md',
+          '/api/service/selector.md',
+          '/api/service/router.md',
+          '/api/service/assets.md',
+        ],
+      }, {
         text: '数据库 API',
         children: [
           '/api/database/built-in.md',

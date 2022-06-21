@@ -4,7 +4,7 @@ sidebarDepth: 2
 
 # 事件系统 (Lifecycle)
 
-## 监听器
+## 实例方法
 
 有关这里的 API，请参见 [事件系统](../../guide/lifecycle.md#事件系统)。
 

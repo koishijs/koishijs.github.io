@@ -164,28 +164,20 @@ module.exports = {
           '/guide/i18n/crowdin.md',
         ],
       }, {
-        text: '更多功能',
-        children: [
-          '/guide/service/assets.md',
-          '/guide/service/http.md',
-          '/guide/service/router.md',
-          '/guide/service/logger.md',
-        ],
-      }, {
-        text: '控制台',
+        text: '控制台开发',
         children: [
           '/guide/console/index.md',
           '/guide/console/extension.md',
           '/guide/console/data.md',
         ],
       }, {
-        text: '测试',
+        text: '测试工具',
         children: [
           '/guide/testing/sandbox.md',
           '/guide/testing/unit-tests.md',
         ],
       }, {
-        text: '深入',
+        text: '深入底层',
         children: [
           '/guide/in-depth/module.md',
           '/guide/in-depth/message.md',
@@ -211,7 +203,7 @@ module.exports = {
           '/api/core/session.md',
         ],
       }, {
-        text: '内置服务',
+        text: '服务 API',
         children: [
           '/api/service/bots.md',
           '/api/service/i18n.md',
@@ -220,6 +212,7 @@ module.exports = {
           '/api/service/selector.md',
           '/api/service/router.md',
           '/api/service/assets.md',
+          '/api/service/http.md',
         ],
       }, {
         text: '数据库 API',

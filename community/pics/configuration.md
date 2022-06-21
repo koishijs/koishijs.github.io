@@ -8,7 +8,7 @@ noTwoslash: true
 ## 插件配置
 
 - **commandName:** `string` 指令名称。默认 `pic`。
-- **useAssets:** `boolean` [Assets](../../guide/service/assets.md) 服务可用时，使用 Assets 缓存图片。默认 `true`。
+- **useAssets:** `boolean` [Assets](../../api/service/assets.md) 服务可用时，使用 Assets 缓存图片。默认 `true`。
 - **useBase64:** `boolean` 使用 Base64 发送图片结果。默认 `false`。
 
 ## 图源插件共同配置

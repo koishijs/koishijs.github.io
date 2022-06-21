@@ -187,9 +187,9 @@ module.exports = {
       '/api/': [{
         text: '总览',
         link: '/api/',
-      }, {
-        text: '术语表',
-        link: '/api/glossary.md',
+      // }, {
+      //   text: '术语表',
+      //   link: '/api/glossary.md',
       }, {
         text: '核心 API',
         children: [
@@ -199,7 +199,6 @@ module.exports = {
           '/api/core/command.md',
           '/api/core/context.md',
           '/api/core/events.md',
-          '/api/core/service.md',
           '/api/core/session.md',
         ],
       }, {
@@ -211,8 +210,8 @@ module.exports = {
           '/api/service/registry.md',
           '/api/service/selector.md',
           '/api/service/router.md',
-          '/api/service/assets.md',
           '/api/service/http.md',
+          '/api/service/assets.md',
         ],
       }, {
         text: '数据库 API',

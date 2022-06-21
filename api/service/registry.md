@@ -4,7 +4,31 @@ sidebarDepth: 2
 
 # 插件系统 (Registry)
 
+## 实例属性
+
+以下实例属性都是只读的。
+
+### ctx.state
+
+- 类型: `State`
+
+当前上下文关联的 State 对象。
+
 ## 实例方法
+
+### ctx.extend(meta)
+
+- **meta:** `Partial<Context.Meta>` 要覆盖的属性
+- 返回值: `this` 新的上下文
+
+以当前上下文为原型创建一个新上下文。`meta` 中的属性将覆盖当前上下文的属性。
+
+### ctx.isolate(names)
+
+- **keys:** `string[]` 隔离的服务列表
+- 返回值: `this`
+
+以当前上下文为原型创建一个新上下文。`keys` 中指定的服务将在新的上下文中被隔离，其他服务仍然与当前上下文共享。参见 [服务的共享与隔离](../../guide/plugin/service.md#服务的共享与隔离)。
 
 ### ctx.plugin(plugin, options?)
 
@@ -29,3 +53,6 @@ sidebarDepth: 2
 
 移除插件中所注册的钩子、中间件、指令和子插件等。`plugin` 是默认为当前上下文所在的插件。如果既没有提供 `plugin`，上下文也不是一个插件上下文的话，会抛出一个错误。参见 [卸载插件](../../guide/plugin/#卸载插件)。
 
+## 类：State
+
+## 类：Runtime

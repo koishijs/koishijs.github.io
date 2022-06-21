@@ -4,7 +4,15 @@ sidebarDepth: 2
 
 # 会话选择器 (Selector)
 
-## 过滤器
+## 实例属性
+
+### ctx.filter
+
+- 类型: `(session: Session) => boolean`
+
+当前上下文绑定的会话选择器。
+
+## 实例方法
 
 有关这里的 API，请参见 [使用上下文](../../guide/plugin/context.md#会话选择器)。
 

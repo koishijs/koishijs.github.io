@@ -19,11 +19,16 @@ Koishi 需要 [Node.js](https://nodejs.org/) (最低 v12，推荐使用 LTS) 运
 
 ### 下载安装包
 
-首先我们前往 Node.js 的官方网站：
+首先我们前往 [Node.js](https://nodejs.org/) 的官方网站：
 
 ![home](/manual/starter/nodejs/home.jpg)
 
-在这里可以看到两个巨大的按钮，分别对应着 LTS (长期维护版) 和最新版本。我们建议你选择更加稳定的 LTS 版本，点击按钮即可下载安装包。
+在这里可以看到两个巨大的按钮，分别对应着 **LTS (长期维护版)** 和 **Current (最新版本)**。我们建议你选择更加稳定的 LTS 版本，点击按钮即可下载安装包。
+
+::: tip
+#### Windows 7 用户看这里！
+Windows 7 不支持 v14 以上的版本，因此上述版本你是无法安装的。此时请使用 v12 版本 (也不要下载 v13，因为 Node.js 的奇数版本都是不稳定的)。你可以前往这里的 [镜像链接](https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/v12.22.12/) 以下载 (32 位系统请下载 `x86.msi`，64 位系统请下载 `x64.msi`)。
+:::
 
 ### 完成安装
 

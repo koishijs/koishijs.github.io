@@ -12,6 +12,23 @@ sidebarDepth: 2
 
 ## 实例方法
 
+### ctx.getSelfIds(type?, assignees?)
+
+- **type:** `Platform` 平台名称，如果不写就对应全部平台
+- **assignees:** `string[]` 机器人 ID 列表，如果不写就对应当前平台的全部机器人
+- 返回值: `Record<string, readonly string[]>` 平台名到机器人 ID 列表的键值对
+
+按平台名称对机器人分类。
+
+### ctx.broadcast(channels?, content, forced?)
+
+- **channels:** `string[]` 频道列表
+- **content:** `string` 要发送的内容
+- **forced:** `boolean` 是否无视 silent 标记
+- 返回值: `Promise<string[]>` 成功发送的消息 ID 列表
+
+所有机器人向自己分配的频道广播消息，存在标记 silent 的频道除外。如有失败不会抛出错误。参见 [发送广播消息](../../guide/message.md#发送广播消息)。
+
 ### ctx.bots.get(sid)
 
 - **sid:** `string` 机器人的 sid

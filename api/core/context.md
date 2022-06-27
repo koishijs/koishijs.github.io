@@ -14,6 +14,20 @@ sidebarDepth: 2
 
 ## 实例属性
 
+### ctx.extend(meta)
+
+- **meta:** `Partial<Context.Meta>` 要覆盖的属性
+- 返回值: `this` 新的上下文
+
+以当前上下文为原型创建一个新上下文。`meta` 中的属性将覆盖当前上下文的属性。
+
+### ctx.isolate(names)
+
+- **keys:** `string[]` 隔离的服务列表
+- 返回值: `this`
+
+以当前上下文为原型创建一个新上下文。`keys` 中指定的服务将在新的上下文中被隔离，其他服务仍然与当前上下文共享。参见 [服务的共享与隔离](../../guide/plugin/service.md#服务的共享与隔离)。
+
 ### ctx.command(def, desc?, config?)
 
 - **def:** `string` 指令名以及可能的参数
@@ -26,23 +40,6 @@ sidebarDepth: 2
 - 返回值：[`Command`](./command.md) 注册或修改的指令
 
 在当前上下文中注册或修改一个指令。
-
-### ctx.getSelfIds(type?, assignees?)
-
-- **type:** `Platform` 平台名称，如果不写就对应全部平台
-- **assignees:** `string[]` 机器人 ID 列表，如果不写就对应当前平台的全部机器人
-- 返回值: `Record<string, readonly string[]>` 平台名到机器人 ID 列表的键值对
-
-按平台名称对机器人分类。
-
-### ctx.broadcast(channels?, content, forced?)
-
-- **channels:** `string[]` 频道列表
-- **content:** `string` 要发送的内容
-- **forced:** `boolean` 是否无视 silent 标记
-- 返回值: `Promise<string[]>` 成功发送的消息 ID 列表
-
-所有机器人向自己分配的频道广播消息，存在标记 silent 的频道除外。如有失败不会抛出错误。参见 [发送广播消息](../../guide/message.md#发送广播消息)。
 
 ### ctx.logger(scope?)
 

@@ -16,20 +16,6 @@ sidebarDepth: 2
 
 ## 实例方法
 
-### ctx.extend(meta)
-
-- **meta:** `Partial<Context.Meta>` 要覆盖的属性
-- 返回值: `this` 新的上下文
-
-以当前上下文为原型创建一个新上下文。`meta` 中的属性将覆盖当前上下文的属性。
-
-### ctx.isolate(names)
-
-- **keys:** `string[]` 隔离的服务列表
-- 返回值: `this`
-
-以当前上下文为原型创建一个新上下文。`keys` 中指定的服务将在新的上下文中被隔离，其他服务仍然与当前上下文共享。参见 [服务的共享与隔离](../../guide/plugin/service.md#服务的共享与隔离)。
-
 ### ctx.plugin(plugin, options?)
 
 - **plugin:** `Plugin` 要安装的插件

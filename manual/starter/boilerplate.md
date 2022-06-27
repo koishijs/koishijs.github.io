@@ -75,7 +75,7 @@ yarn create koishi
 4. 输入 `npm start` / `yarn start` 开始运行。
 
 ::: warning
-
+#### pnpm 用户看这里！
 Koishi 不支持 pnpm 默认的 isolated linker。如果你确实想使用 pnpm，请在安装依赖前运行如下命令：
 
 ```sh

@@ -49,10 +49,10 @@ app.plugin(mock)
 
 ::: code-group manager
 ```npm
-npm i typescript ts-node @types/node @types/mocha @types/chai -D
+npm i typescript ts-node @types/node @types/mocha @types/chai tsconfig-paths -D
 ```
 ```yarn
-yarn add typescript ts-node @types/node @types/mocha @types/chai -D
+yarn add typescript ts-node @types/node @types/mocha @types/chai tsconfig-paths -D
 ```
 :::
 

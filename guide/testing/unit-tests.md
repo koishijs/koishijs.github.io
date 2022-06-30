@@ -49,10 +49,10 @@ app.plugin(mock)
 
 ::: code-group manager
 ```npm
-npm i typescript ts-node @types/node @types/mocha @types/chai -D
+npm i typescript esbuild-register @types/node @types/mocha @types/chai -D
 ```
 ```yarn
-yarn add typescript ts-node @types/node @types/mocha @types/chai -D
+yarn add typescript esbuild-register @types/node @types/mocha @types/chai -D
 ```
 :::
 
@@ -62,8 +62,7 @@ yarn add typescript ts-node @types/node @types/mocha @types/chai -D
 module.exports = {
   extension: ['ts'],
   require: [
-    'ts-node/register/transpile-only',
-    'tsconfig-paths/register',
+    'esbuild-register',
   ],
 }
 ```

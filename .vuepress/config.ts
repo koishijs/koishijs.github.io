@@ -228,7 +228,6 @@ module.exports = {
           '/api/utils/segment.md',
           '/api/utils/schema.md',
           '/api/utils/observer.md',
-          '/api/utils/template.md',
           '/api/utils/logger.md',
           '/api/utils/misc.md',
         ],

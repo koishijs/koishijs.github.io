@@ -34,6 +34,5 @@ sidebarDepth: 0
 - [消息段 (Segment)](./utils/segment.md)
 - [配置模式 (Schema)](./utils/schema.md)
 - [观察者 (Observer)](./utils/observer.md)
-- [模板 (Template)](./utils/template.md)
 - [输出日志 (Logger)](./utils/logger.md)
 - [其他工具 (Misc)](./utils/misc.md)

@@ -231,12 +231,6 @@ module.exports = {
           '/api/utils/logger.md',
           '/api/utils/misc.md',
         ],
-      }, {
-        text: '控制台开发',
-        children: [
-          '/api/console/server.md',
-          '/api/console/client.md',
-        ],
       }],
 
       '/plugins/': [{

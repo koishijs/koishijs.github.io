@@ -16,8 +16,18 @@ sidebarDepth: 0
 - [指令 (Command)](./core/command.md)
 - [上下文 (Context)](./core/context.md)
 - [事件 (Events)](./core/events.md)
-- [服务 (Service)](./core/service.md)
 - [会话 (Session)](./core/session.md)
+
+## 服务 API
+
+- [资源存储 (Assets)](./service/assets.md)
+- [机器人管理 (Bots)](./service/bots.md)
+- [网络请求 (HTTP)](./service/http.md)
+- [国际化 (I18n)](./service/i18n.md)
+- [事件系统 (Lifecycle)](./service/lifecycle.md)
+- [插件系统 (Registry)](./service/registry.md)
+- [网络服务 (Router)](./service/router.md)
+- [会话选择器 (Selector)](./service/selector.md)
 
 ## 数据库 API
 

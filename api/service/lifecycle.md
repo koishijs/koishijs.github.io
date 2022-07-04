@@ -4,9 +4,11 @@ sidebarDepth: 2
 
 # 事件系统 (Lifecycle)
 
-## 实例方法
+::: tip
+相关指南：[事件系统](../../guide/plugin/events.md)
+:::
 
-有关这里的 API，请参见 [事件系统](../../guide/lifecycle.md#事件系统)。
+## 实例方法
 
 ### ctx.emit(session?, event, ...param)
 ### ctx.parallel(session?, event, ...param)
@@ -28,8 +30,8 @@ sidebarDepth: 2
 
 依次触发所有 event 事件的能够匹配 session 对象的回调函数。当返回一个 false, null, undefined 以外的值时将这个值作为结果返回。bail 为同步，serial 为异步。
 
-### ctx.chain(session?, event, ...param)
-### ctx.waterfall(session?, event, ...param)
+### ctx.chain(session?, event, ...param) <Badge text="beta" type="warning"/>
+### ctx.waterfall(session?, event, ...param) <Badge text="beta" type="warning"/>
 
 - **session:** [`Session`](./session.md) 会话对象
 - **event:** `string` 事件名称

@@ -11,15 +11,27 @@ sidebarDepth: 2
 ## 指令：authorize
 
 - 别名：auth
-- 基本语法：`authorize <value> -u @{platform}:{userId}`
+- 基本语法：`authorize <value> -u <user>`
 - 最低权限：4
 
 authorize 指令用于设置用户的权限等级。该指令 4 级权限才能调用，且需要满足目标用户的权限和要设定的权限都严格小于自己的权限等级，否则无法设置。
 
-<panel-view title="聊天记录">
-<chat-message nickname="Alice" color="#cc0066">authorize 3 -u @onebot:123456789</chat-message>
-<chat-message nickname="Koishi" avatar="/koishi.png">用户数据已修改。</chat-message>
-</panel-view>
+### 指定用户语法
+
+可以通过三种方式指定用户
+
+- `@user`: 通过直接@人的方式指定
+- `@<userId>`: 必须是纯文本，@符号后面接用户名
+- `@<platform>:<userId>`: 必须是纯文本，指定具体的平台和用户名
+
+例子
+
+```sh
+authorize 3 -u @Koishi              # 通过@人的方式
+authorize 3 -u @123456789           # 通过指定用户名方式
+authorize 3 -u @onebot:123456789    # 指定具体的平台和用户名
+```
+
 
 ## 指令：assign
 

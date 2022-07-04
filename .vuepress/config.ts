@@ -131,12 +131,17 @@ module.exports = {
         text: '模块化',
         children: [
           '/guide/plugin/index.md',
-          '/guide/plugin/context.md',
-          '/guide/plugin/events.md',
           '/guide/plugin/lifecycle.md',
-          '/guide/plugin/service.md',
           '/guide/plugin/schema.md',
           '/guide/plugin/publish.md',
+        ],
+      }, {
+        text: '切面开发',
+        children: [
+          '/guide/aspect/selector.md',
+          '/guide/aspect/events.md',
+          '/guide/aspect/service.md',
+          '/guide/aspect/mixin.md',
         ],
       }, {
         text: '数据库',

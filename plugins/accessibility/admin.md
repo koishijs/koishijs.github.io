@@ -27,7 +27,7 @@ authorize 指令用于设置用户的权限等级。该指令 4 级权限才能�
 例子
 
 ```sh
-authorize 3 -u @Koishi              # 通过@人的方式
+authorize 3 -u @Koishi              # 通过 @ 人的方式
 authorize 3 -u @123456789           # 通过指定用户名方式
 authorize 3 -u @onebot:123456789    # 指定具体的平台和用户名
 ```
@@ -56,7 +56,7 @@ assign 指令可用于设置频道的 [代理者](../../guide/manage.md#平台�
   - `-l, --list` 标记列表
   - `-s, --set` 添加标记（需要 4 级权限）
   - `-S, --unset` 删除标记（需要 4 级权限）
-  - `-u, --user [@user]` 目标用户（user.flag指令。需要 3 级权限）
-  - `-c, --channel [#channel]` 目标频道（channel.flag指令。需要 3 级权限）
+  - `-u, --user [@user]` 目标用户（user.flag 指令。需要 3 级权限）
+  - `-c, --channel [#channel]` 目标频道（channel.flag 指令。需要 3 级权限）
 
 这两个指令用于查看和修改用户或频道的状态标签。如果不提供选项，则会显示当前的状态标签。如果使用了 `-l`，就会列出所有可用的状态标签。如果使用了 `-s` 或 `-S`，则会添加 / 删除 `names` 中的每一个状态标签。

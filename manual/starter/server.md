@@ -13,6 +13,11 @@ sidebarDepth: 2
 下面给出一段 nginx 配置作为参考：
 
 ```
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  '' close;
+}
+
 server {
   # server_name, port, ssl 等设置
 
@@ -27,7 +32,7 @@ server {
     proxy_send_timeout 300s;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "Upgrade";
+    proxy_set_header Connection $connection_upgrade;
   }
 }
 ```

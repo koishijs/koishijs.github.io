@@ -11,7 +11,6 @@
   },
   "devDependencies": {
     "@koishijs/client": "^3.4.3",
-    "@koishijs/market": "^2.0.1",
     "@koishijs/plugin-adapter-discord": "^2.1.2",
     "@koishijs/plugin-adapter-onebot": "^4.2.7",
     "@koishijs/plugin-adapter-telegram": "^2.2.7",
@@ -19,6 +18,7 @@
     "@koishijs/plugin-mock": "^1.0.6",
     "@koishijs/plugin-rate-limit": "^1.1.5",
     "@koishijs/plugin-schedule": "^4.2.1",
+    "@koishijs/registry": "^1.0.0",
     "@rollup/plugin-yaml": "^3.1.0",
     "@types/mocha": "^9.1.1",
     "@types/node": "^17.0.35",

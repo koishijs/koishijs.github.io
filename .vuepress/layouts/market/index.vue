@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 
-import type { AnalyzedPackage } from '@koishijs/market'
+import type { AnalyzedPackage } from '@koishijs/registry'
 import { computed, onMounted, reactive } from 'vue'
 import market from '../../.data/market.json'
 import PackageView from './package.vue'

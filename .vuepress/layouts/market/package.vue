@@ -64,7 +64,7 @@
 
 <script lang="ts" setup>
 
-import type { AnalyzedPackage } from '@koishijs/market'
+import type { AnalyzedPackage } from '@koishijs/registry'
 import { computed, PropType } from 'vue'
 
 defineEmits(['query'])

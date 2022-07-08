@@ -13,6 +13,7 @@ sidebarDepth: 2
 下面给出一段 nginx 配置作为参考：
 
 ```
+# http://nginx.org/en/docs/http/websocket.html
 map $http_upgrade $connection_upgrade {
   default upgrade;
   '' close;

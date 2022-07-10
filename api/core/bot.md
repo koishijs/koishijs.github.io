@@ -12,21 +12,11 @@ sidebarDepth: 2
 
 不同的适配器可能对应了不同的 Bot 配置项，但是有一些配置项是公用的：
 
-### options.disabled
-
-- 类型: `boolean`
-
-是否禁用此机器人。如果禁用，Bot 实例将仍然存在被创建，但是将不会主动连接服务器进行通信。你可以稍后在网页控制台或执行代码以启用它。
-
 ### options.protocol
 
 - 类型: `string`
 
 部分适配器可能提供了多种协议实现，此时你可能需要指定一个协议。
-
-::: tip
-并不是每一个提供多种协议实现的适配器都需要手动指定一个协议。一些适配器可以根据你传入的参数自行判断出所使用的协议。
-:::
 
 ### options.platform
 
@@ -44,9 +34,9 @@ sidebarDepth: 2
 
 ### bot.app
 
-- 类型: [`App`](./app.md)
+- 类型: [`Context`](./context.md)
 
-当前 Bot 所在的 [App](./app.md) 实例。
+当前 Bot 所在的根 [Context](./context.md) 实例。
 
 ### bot.adapter
 
@@ -282,12 +272,3 @@ export interface ChannelInfo {
 - 返回值: `Promise<void>`
 
 处理加群请求。
-
-## 其他方法
-
-### bot.session(session) <Badge text="内置"/>
-
-- **session:** `Partial<Session>` 会话数据
-- 返回值: `Promise<Session>` 新会话
-
-创建一个 send 类型的会话，供 `bot.sendMessage()` 等 API 使用。

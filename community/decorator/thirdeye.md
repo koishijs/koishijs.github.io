@@ -889,10 +889,8 @@ import { Provide, DefinePlugin, BasePlugin } from 'koishi-thirdeye'
 
 // 类型合并定义不可省略
 declare module 'koishi' {
-  namespace Context {
-    interface Services {
-      myService: MyServicePlugin
-    }
+  interface Context {
+    myService: MyServicePlugin
   }
 }
 

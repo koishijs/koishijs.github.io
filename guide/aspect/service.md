@@ -205,10 +205,8 @@ app.private().console instanceof Console // true
 
 ```ts no-extra-header
 declare module 'koishi' {
-  namespace Context {
-    interface Services {
-      console: Console
-    }
+  interface Context {
+    console: console
   }
 }
 ```

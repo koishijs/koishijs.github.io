@@ -1,5 +1,5 @@
 <template>
-  <div class="market-container">
+  <div class="market-container" v-if="market">
     <h1 class="banner">插件市场</h1>
     <div class="banner info">
       当前共有 {{ hasWords ? packages.length + ' / ' : '' }}{{ market.packages.length }} 个可用于 v4 版本的插件
@@ -21,13 +21,18 @@
       :key="data.name"
       :data="data" @query="onQuery"/>
   </div>
+  <div class="market-container loading" v-else-if="error">
+    插件市场加载失败。
+  </div>
+  <div class="market-container loading" v-else>
+    正在加载插件市场...
+  </div>
 </template>
 
 <script lang="ts" setup>
 
 import type { AnalyzedPackage } from '@koishijs/registry'
-import { computed, onMounted, reactive } from 'vue'
-import market from '../../.data/market.json'
+import { computed, onMounted, reactive, ref } from 'vue'
 import PackageView from './package.vue'
 
 const words = reactive([''])
@@ -87,8 +92,22 @@ const hasWords = computed(() => {
   return words.filter(w => w).length > 0
 })
 
+const market = ref()
+const error = ref()
+
+onMounted(async () => {
+  try {
+    const response = await fetch('https://koishi.js.org/registry/market.json')
+    market.value = await response.json()
+    console.log(market.value)
+  } catch (err) {
+    error.value = err
+  }
+})
+
 const packages = computed(() => {
-  return market.packages.filter((data) => {
+  if (!market.value) return []
+  return market.value.packages.filter((data) => {
     return words.every(word => validate(data, word))
   })
 })
@@ -111,6 +130,19 @@ html.dark {
   --c-card-bg: #1F1D26;
   --c-card-border: var(--c-border);
   --c-card-badge: var(--c-text);
+}
+
+.market-container.loading {
+  position: absolute;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .market-container {

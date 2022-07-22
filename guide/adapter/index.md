@@ -34,12 +34,12 @@ plugins:
 
   adapter-onebot:1:
     protocol: ws
-    selfId: "1145144444"
+    selfId: "114514"
     endpoint: ws://0.0.0.0:8080
   adapter-onebot:2:
     protocol: http
-    selfId: "1919810000"
-    endpoint: ws://0.0.0.0:5700
+    selfId: "1919810"
+    endpoint: http://0.0.0.0:5700
 ```
 ```ts
 app.plugin('adapter-discord', {

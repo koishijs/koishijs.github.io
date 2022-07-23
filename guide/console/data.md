@@ -53,7 +53,7 @@ import { Context } from '@koishijs/client'
 import Page from './custom-page.vue'
 
 export default (ctx: Context) => {
-  ctx.addPage({
+  ctx.page({
     name: '页面标题',
     path: '/custom-page',
     // 只有当获得了 custom 数据，才可以访问页面
@@ -133,7 +133,7 @@ ctx.console.addListener('get-greeting', () => {
 ```
 
 ```ts title=client/index.ts
-ctx.addPage({
+ctx.page({
   name: '页面标题',
   path: '/custom-page',
   // 只有已登录并且权限等级不低于 3 的用户才能访问此界面

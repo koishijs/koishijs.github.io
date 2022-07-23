@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vuepress dev . --port 7070 --open",
-    "build": "vuepress build ."
+    "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 vuepress build ."
   },
   "devDependencies": {
     "@koishijs/client": "^4.1.0",
@@ -26,10 +26,8 @@
     "@vuepress/plugin-pwa": "2.0.0-beta.43",
     "@vuepress/plugin-pwa-popup": "2.0.0-beta.43",
     "@vuepress/plugin-register-components": "2.0.0-beta.43",
-    "axios": "^0.24.0",
+    "cross-env": "^7.0.3",
     "diacritics": "^1.3.0",
-    "esbuild": "^0.14.48",
-    "esbuild-register": "^3.3.3",
     "fs-extra": "^10.1.0",
     "koishi": "^4.8.1",
     "remark-shiki-twoslash": "^3.0.9",

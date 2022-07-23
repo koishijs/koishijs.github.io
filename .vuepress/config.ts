@@ -96,7 +96,7 @@ module.exports = {
         text: '使用控制台',
         children: [
           '/manual/console/index.md',
-          '/manual/console/manager.md',
+          '/manual/console/market.md',
           '/manual/console/adapter.md',
           '/manual/console/dataview.md',
           '/manual/console/chat.md',
@@ -300,7 +300,7 @@ module.exports = {
           '/plugins/console/dataview.md',
           '/plugins/console/insight.md',
           '/plugins/console/logger.md',
-          '/plugins/console/manager.md',
+          '/plugins/console/market.md',
           '/plugins/console/sandbox.md',
           '/plugins/console/status.md',
         ],

@@ -66,7 +66,7 @@ sidebarDepth: 2
   - [@koishijs/plugin-dataview](../plugins/console/dataview.md)：数据库操作
   - [@koishijs/plugin-insight](../plugins/console/insight.md)：插件依赖图
   - [@koishijs/plugin-logger](../plugins/console/logger.md)：日志管理
-  - [@koishijs/plugin-manager](../plugins/console/manager.md)：插件管理
+  - [@koishijs/plugin-market](../plugins/console/market.md)：插件管理
   - [@koishijs/plugin-sandbox](../plugins/console/sandbox.md)：沙盒调试
 
 ### 移除的包

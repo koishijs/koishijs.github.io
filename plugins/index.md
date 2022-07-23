@@ -58,7 +58,7 @@ Koishi 官方提供了许多插件。为了更好地模块化开发，它们被�
 - [@koishijs/plugin-dataview](./console/dataview.md)：数据库操作
 - [@koishijs/plugin-insight](./console/insight.md)：插件依赖图
 - [@koishijs/plugin-logger](./console/logger.md)：日志管理
-- [@koishijs/plugin-manager](./console/manager.md)：插件管理
+- [@koishijs/plugin-market](./console/market.md)：插件管理
 - [@koishijs/plugin-status](./console/status.md)：运行状态
 
 ## 其他官方插件

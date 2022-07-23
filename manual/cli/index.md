@@ -16,7 +16,7 @@ koishi start [file] [options]
 ```
 
 ::: tip
-基于这个逻辑，你也可以将你的配置文件的后缀名改为 ts 等，但动态的配置文件格式将不再支持 @koishijs/plugin-manager，这意味着你将无法使用插件市场。
+基于这个逻辑，你也可以将你的配置文件的后缀名改为 ts 等，但动态的配置文件格式将不再支持 @koishijs/plugin-market，这意味着你将无法使用插件市场。
 :::
 
 ### 使用环境变量

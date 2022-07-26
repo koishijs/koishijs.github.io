@@ -14,6 +14,14 @@ sidebarDepth: 2
 
 ## 实例属性
 
+### ctx.baseDir
+
+- 类型: `string`
+
+当前的 Koishi 默认路径。如果你使用配置文件，则这个路径是配置文件所在的路径；否则这个路径是当前工作路径。
+
+## 实例方法
+
 ### ctx.extend(meta)
 
 - **meta:** `Partial<Context.Meta>` 要覆盖的属性

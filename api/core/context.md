@@ -44,7 +44,7 @@ sidebarDepth: 2
   - **checkUnknown:** `boolean` 是否对未知选项进行检测，默认为 `false`
   - **checkArgCount:** `boolean` 是否对参数个数进行检测，默认为 `false`
   - **authority:** `number` 最低调用权限，默认为 `1`
-  - **showWarning:** `boolean` 当小于最短间隔时是否进行提醒，默认为 `false`
+  - **showWarning:** `boolean` 当小于最短间隔时是否进行提醒，默认为 `true`
 - 返回值：[`Command`](./command.md) 注册或修改的指令
 
 在当前上下文中注册或修改一个指令。

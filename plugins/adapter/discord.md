@@ -13,31 +13,29 @@ sidebarDepth: 2
 4. 打开生成的链接，选择你具有管理权限的服务器，就成功把机器人添加进去了
 5. 将上面的 token 作为机器人配置项即可使用
 
-## 机器人选项
+## 配置项
 
-### options(.bots[]).token
+包括全部的 [`WsClient`](../adapter.md#类-adapter-wsclient) 选项和下列额外选项：
+
+### options.token
 
 - 类型: `string`
 
 机器人账户的令牌。
 
-### options(.bots[]).endpoint
+### options.endpoint
 
 - 类型: `string`
 - 默认值: `'https://discord.com/api/v8'`
 
 API 请求的终结点。
 
-### options(.bots[]).proxyAgent
+### options.proxyAgent
 
 - 类型: `string`
 - 默认值: [`app.options.request.proxyAgent`](../../api/core/app.md#options-request-proxyagent)
 
 请求时默认使用的网络代理。
-
-## 适配器选项
-
-包括全部的 [`WsClient`](../adapter.md#类-adapter-wsclient) 选项和下列额外选项：
 
 ### options.endpoint
 

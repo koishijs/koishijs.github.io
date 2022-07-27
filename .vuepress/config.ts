@@ -245,7 +245,7 @@ module.exports = {
         text: '适配器支持',
         children: [
           '/plugins/adapter/discord.md',
-          '/plugins/adapter/kaiheila.md',
+          '/plugins/adapter/kook.md',
           '/plugins/adapter/onebot.md',
           '/plugins/adapter/qqguild.md',
           '/plugins/adapter/telegram.md',

@@ -28,7 +28,7 @@ sidebarDepth: 2
 - 类型: `string`
 - 默认值: `'https://discord.com/api/v8'`
 
-API 请求的终结点。
+要连接的服务器地址。
 
 ### options.proxyAgent
 
@@ -37,12 +37,21 @@ API 请求的终结点。
 
 请求时默认使用的网络代理。
 
-### options.endpoint
+### options.gateway
 
 - 类型: `string`
-- 默认值: `'https://discord.com/api/v8'`
+- 默认值: `'wss://gateway.discord.gg/?v=8&encoding=json'`
 
-要请求的 API 网址。
+要连接的 WebSocket 网关。
+
+### options.intents
+
+- 类型: `number`
+- 默认值: `GUILD_MESSAGES | GUILD_MESSAGE_REACTIONS | DIRECT_MESSAGES | DIRECT_MESSAGE_REACTIONS`
+
+需要订阅的机器人事件。这是一个以 bitset 形式表达的正整数，每一位代表一类事件。
+
+参考：[Gateway Intents](https://discord.com/developers/docs/topics/gateway#gateway-intents)
 
 ### options.handleExternalAsset
 

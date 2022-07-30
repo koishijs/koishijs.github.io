@@ -163,3 +163,7 @@ type AsyncTransformer =
 - **ignore:** `boolean` 当无法发送匿名消息时，如果此项为 `true`，则直接删去此前缀码；否则将不产生任何输出
 
 ### Markdown (markdown)
+
+### HTML (html)
+
+

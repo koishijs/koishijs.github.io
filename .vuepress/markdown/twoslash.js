@@ -16,7 +16,7 @@ async function setup() {
 }
 
 function render(code, lang, attrs) {
-  if (process.env.NODE_ENV !== 'production') return null
+  if (!process.env.TWOSLASH) return null
 
   if (!twoslashSupportedList.includes(lang)) return null
 

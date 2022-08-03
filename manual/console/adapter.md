@@ -7,7 +7,7 @@ sidebarDepth: 2
 Koishi 支持多个聊天平台，对于不同的平台，你也需要做好相应的准备工作。
 
 - [Discord](../../plugins/adapter/discord.md)
-- [开黑啦](../../plugins/adapter/kaiheila.md)
+- [KOOK(原开黑啦)](../../plugins/adapter/kook.md)
 - [OneBot](../../plugins/adapter/onebot.md)
 - [QQ 频道](../../plugins/adapter/qqguild.md)
 - [Telegram](../../plugins/adapter/telegram.md)

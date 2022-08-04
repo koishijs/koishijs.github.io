@@ -3,7 +3,7 @@ const { escapeHtml } = require('markdown-it/lib/common/utils')
 const { resolve } = require('path')
 const twoslash = require('./twoslash')
 
-const cliAliases = ['npm', 'yarn']
+const cliAliases = ['npm', 'yarn', 'podman', 'docker']
 
 module.exports = {
   name: 'enhanced-highlight',

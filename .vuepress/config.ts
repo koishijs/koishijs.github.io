@@ -90,7 +90,7 @@ module.exports = {
           '/manual/starter/desktop.md',
           '/manual/starter/mobile.md',
           '/manual/starter/server.md',
-          '/manual/starter/docker.md',
+          '/manual/starter/container.md',
         ],
       }, {
         text: '使用控制台',

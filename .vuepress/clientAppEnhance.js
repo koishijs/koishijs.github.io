@@ -11,6 +11,7 @@ export default defineClientAppEnhance(({ app }) => {
     manager: 'yarn',
     language: 'ts',
     config: 'yaml',
+    container: 'podman',
   }
   if (typeof localStorage !== 'undefined') {
     const config = localStorage.getItem(key)

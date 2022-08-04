@@ -37,6 +37,7 @@
 
 const titleMap = {
   manager: '命令行',
+  container: '命令行',
 }
 
 export default {
@@ -97,7 +98,7 @@ $textShadow: 1px 1px 1px rgba(23, 31, 35, 0.5);
   background-color: var(--c-bg-dark);
   transition: background-color ease 0.3s;
 
-  &.manager {
+  &.manager, &.container {
     background-color: #032f62;
   }
 

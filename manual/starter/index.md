@@ -14,4 +14,4 @@ Koishi 提供了多种安装方式，你可以根据自己的需求选择：
     - 个人电脑：[使用启动器](./desktop.md)
     - 手机：[在手机上运行](./mobile.md)
     - 服务器：[在服务器上安装](./server.md)
-    - Docker：[使用 Docker](./docker.md)
+    - 容器：[使用容器](./container.md)

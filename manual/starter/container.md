@@ -42,14 +42,14 @@ docker pull koishijs/koishi:latest-puppeteer
 
 ::: code-group container
 ```podman
-podman run -p 5120:5120 koishijs/koishi
+podman run -p 5140:5140 koishijs/koishi
 ```
 ```docker
-docker run -p 5120:5120 koishijs/koishi
+docker run -p 5140:5140 koishijs/koishi
 ```
 :::
 
-启动后将会绑定 koishi 控制台到 5120 端口。
+启动后将会绑定 koishi 控制台到 5140 端口。
 
 ## 安装插件
 

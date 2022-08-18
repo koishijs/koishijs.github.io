@@ -34,7 +34,7 @@ npm init
 npm i koishi @koishijs/plugin-adapter-onebot @koishijs/plugin-echo
 
 # 安装 TypeScript 相关依赖 (如不使用请忽略此步骤)
-npm i typescript @types/node esbuild-register -D
+npm i typescript @types/node esbuild esbuild-register -D
 ```
 ```yarn
 # 初始化项目

@@ -20,8 +20,8 @@
 
 <script lang="ts" setup>
 
-import { useThemeLocaleData, resolveArraySidebarItems } from '@vuepress/theme-default/lib/client/composables'
-import SidebarItem from '@vuepress/theme-default/lib/client/components/SidebarItem.vue'
+import { useThemeLocaleData, resolveArraySidebarItems } from '@vuepress/theme-default/client'
+import SidebarItem from '@vuepress/theme-default/components/SidebarItem.vue'
 
 defineEmits(['scroll-screen'])
 

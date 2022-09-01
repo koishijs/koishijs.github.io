@@ -1,10 +1,12 @@
-const { setupForFile, transformAttributesToHTML } = require('remark-shiki-twoslash')
-const { ScriptTarget, ModuleKind, ModuleResolutionKind } = require('typescript')
+import { setupForFile, transformAttributesToHTML } from 'remark-shiki-twoslash'
+import { readFileSync } from 'fs'
+import { resolve } from 'path'
+import ts from 'typescript'
+
+const { ScriptTarget, ModuleKind, ModuleResolutionKind } = ts
 
 const twoslashSupportedList = ['ts', 'twoslash']
-const extraHeader = require('fs').readFileSync(
-  require('path').resolve(__dirname, 'header.ts')
-)
+const extraHeader = readFileSync(resolve(__dirname, 'header.ts'))
 
 let twoslashHighlighters
 

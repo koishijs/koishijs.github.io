@@ -1,7 +1,7 @@
-const { getHighlighter, loadTheme } = require('shiki')
-const { escapeHtml } = require('markdown-it/lib/common/utils')
-const { resolve } = require('path')
-const twoslash = require('./twoslash')
+import { getHighlighter, loadTheme } from 'shiki'
+import { escapeHtml } from 'markdown-it/lib/common/utils.js'
+import { resolve } from 'path'
+import { setup, render } from './twoslash'
 
 const cliAliases = ['npm', 'yarn', 'podman', 'docker']
 
@@ -11,7 +11,7 @@ module.exports = {
   async extendsMarkdown(md) {
     const tomorrow = await loadTheme(resolve(__dirname, 'tomorrow.json'))
 
-    await twoslash.setup()
+    await setup()
 
     const highlighter1 = await getHighlighter({
       theme: 'monokai',
@@ -31,7 +31,7 @@ module.exports = {
       if (!lang) {
         return `<pre v-pre><code>${escapeHtml(code)}</code></pre>`
       }
-      const twoslashHtml = twoslash.render(code, lang, attrs)
+      const twoslashHtml = render(code, lang, attrs)
       if (twoslashHtml) return twoslashHtml.replace('<pre', '<pre v-pre')
       const h = lang === 'cli' || cliAliases.includes(lang) ? highlighter2 : highlighter1
       code = code

@@ -75,8 +75,8 @@ function validate(data: AnalyzedPackage, word: string) {
   } else if (word.startsWith('email:')) {
     return data.author?.email === word.slice(6)
   } else if (word.startsWith('is:')) {
-    if (word === 'is:official') {
-      return data.official
+    if (word === 'is:verified') {
+      return data.verified
     } else {
       return true
     }

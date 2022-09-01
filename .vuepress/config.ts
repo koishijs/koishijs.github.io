@@ -2,8 +2,8 @@ import { resolve } from 'path'
 import { remove as removeDiacritics } from 'diacritics'
 import { readdirSync } from 'fs'
 import { viteBundler } from 'vuepress'
+import yaml from '@rollup/plugin-yaml'
 import theme from './theme'
-import './patchRedirect'
 
 const communitySidebar = [{
   text: '总览',
@@ -14,14 +14,16 @@ const communityFolder = resolve(__dirname, '../community')
 const dirents = readdirSync(communityFolder, { withFileTypes: true })
 for (const dirent of dirents) {
   if (!dirent.isDirectory() && !dirent.isSymbolicLink()) continue
-  communitySidebar.push(require(communityFolder + '/' + dirent.name))
+  try {
+    communitySidebar.push(await import(communityFolder + '/' + dirent.name + '/index.js'))
+  } catch {}
 }
 
 const hash = process.env.GITHUB_SHA
   ? ` (${process.env.GITHUB_SHA.slice(0, 7)})`
   : ''
 
-module.exports = {
+export default {
   base: '/',
   title: 'Koishi',
 
@@ -352,7 +354,7 @@ module.exports = {
         },
       },
       plugins: [
-        require('@rollup/plugin-yaml')(),
+        yaml(),
       ],
       // build: {
       //   // fix for monaco workers

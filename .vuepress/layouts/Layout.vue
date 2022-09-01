@@ -32,8 +32,8 @@
 import HomePage from './home/index.vue'
 import MarketPage from './market/index.vue'
 import { usePageFrontmatter } from '@vuepress/client'
-import { useDarkMode } from '@vuepress/theme-default/lib/client/composables'
-import ParentLayout from '@vuepress/theme-default/lib/client/layouts/Layout.vue'
+import { useDarkMode } from '@vuepress/theme-default/client'
+import ParentLayout from '@vuepress/theme-default/layouts/Layout.vue'
 
 const frontmatter = usePageFrontmatter()
 

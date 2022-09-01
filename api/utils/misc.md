@@ -129,7 +129,7 @@ sidebarDepth: 2
 ### Random.real(start?, end)
 
 - **start:** `number` 下界，默认为 0
-- **end:** `end` 上界
+- **end:** `number` 上界
 - 返回值: `number` 一个 [start, end) 之间的随机实数
 
 生成一个随机实数。
@@ -137,7 +137,7 @@ sidebarDepth: 2
 ### Random.int(start?, end)
 
 - **start:** `number` 下界，默认为 0
-- **end:** `end` 上界
+- **end:** `number` 上界
 - 返回值: `number` 一个 [start, end) 之间的随机整数
 
 生成一个随机实数。

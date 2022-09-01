@@ -74,3 +74,11 @@ jobs:
           publish_dir: .vuepress/dist
           publish_branch: pages
           force_orphan: true
+
+      - name: Install vercel
+        run: yarn global add vercel
+
+      - name: Deploy vercel
+        run: |
+          rm .vuepress/dist/CNAME
+          vercel deploy .vuepress/dist -n koishi-website --token ${{ secrets.VERCEL_TOKEN }} --prod --yes

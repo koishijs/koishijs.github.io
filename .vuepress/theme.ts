@@ -14,8 +14,10 @@ export default (options: DefaultThemeOptions): Theme => ({
   plugins: [
     [require('./markdown/highlight')],
     [require('./markdown/github')],
-    pwa({}),
-    popup({}),
+    ...process.env.ENABLE_PWA ? [
+      pwa({}),
+      popup({}),
+    ] : [],
     docsearch({
       appId: 'JDPYQL1A66',
       apiKey: '22055314b65e8198e43399540003b84b',

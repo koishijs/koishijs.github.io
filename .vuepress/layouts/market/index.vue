@@ -2,7 +2,7 @@
   <div class="market-container" v-if="market">
     <h1 class="banner">插件市场</h1>
     <div class="banner info">
-      当前共有 {{ hasWords ? packages.length + ' / ' : '' }}{{ market.packages.length }} 个可用于 v4 版本的插件
+      当前共有 {{ hasWords ? packages.length + ' / ' : '' }}{{ market.objects.length }} 个可用于 v4 版本的插件
       <span class="timestamp">({{ new Date(market.timestamp).toLocaleString() }})</span>
     </div>
     <div class="banner card search-box">
@@ -97,7 +97,7 @@ const error = ref()
 
 onMounted(async () => {
   try {
-    const response = await fetch('https://koishi.js.org/registry/market.json')
+    const response = await fetch('https://registry.koishi.chat/market.json')
     market.value = await response.json()
     console.log(market.value)
   } catch (err) {
@@ -107,7 +107,7 @@ onMounted(async () => {
 
 const packages = computed(() => {
   if (!market.value) return []
-  return market.value.packages.filter((data) => {
+  return market.value.objects.filter((data) => {
     return words.every(word => validate(data, word))
   })
 })

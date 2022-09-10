@@ -9,11 +9,11 @@
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 vuepress build ."
   },
   "devDependencies": {
-    "@koishijs/client": "^4.5.2",
+    "@koishijs/client": "^4.5.3",
     "@koishijs/plugin-adapter-discord": "^3.1.0",
     "@koishijs/plugin-adapter-onebot": "^5.1.1",
     "@koishijs/plugin-adapter-telegram": "^3.3.0",
-    "@koishijs/plugin-console": "^4.5.2",
+    "@koishijs/plugin-console": "^4.5.3",
     "@koishijs/plugin-mock": "^2.1.0",
     "@koishijs/plugin-rate-limit": "^1.1.7",
     "@koishijs/plugin-schedule": "^4.3.1",

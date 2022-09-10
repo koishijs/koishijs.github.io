@@ -49,13 +49,6 @@ interface segment {
 
 取消一段文本的消息段转义。
 
-### segment.from(source)
-
-- **source:** `string` 源文本
-- 返回值: `segment` 消息段的类型和参数
-
-将一个消息段文本解析成对象。
-
 ### segment.parse(source)
 
 - **source:** `string` 源文本

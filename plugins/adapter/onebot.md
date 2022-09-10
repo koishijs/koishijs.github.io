@@ -353,19 +353,30 @@ export default {
 ### go-cqhttp 扩展 API
 
 - [`onebot.sendGroupForwardMsg()`](https://docs.go-cqhttp.org/api/#发送合并转发-群) 发送合并转发 (群)
+- [`onebot.markMsgAsRead()`](https://docs.go-cqhttp.org/api/#标记消息已读) 标记消息已读
+- [`onebot.sendGroupSign()`](https://docs.go-cqhttp.org/api/#群打卡) 群打卡
+- [`onebot.qidianGetAccountInfo()`](https://docs.go-cqhttp.org/api/#获取企点账号信息) 获取企点账号信息
+- [`onebot.setQqProfile()`](https://docs.go-cqhttp.org/api/#设置登录号资料) 设置登录号资料
+- [`onebot.getUnidirectionalFriendList()`](https://docs.go-cqhttp.org/api/#获取单向好友列表) 获取单向好友列表
 - [`onebot.deleteFriend()`](https://docs.go-cqhttp.org/api/#删除好友) 删除好友
 - [`onebot.setGroupPortrait()`](https://docs.go-cqhttp.org/api/#设置群头像) 设置群头像
 - [`onebot.getWordSlices()`](https://docs.go-cqhttp.org/api/#获取中文分词-隐藏-api) 获取中文分词
 - [`onebot.ocrImage()`](https://docs.go-cqhttp.org/api/#图片-ocr) 图片 OCR
 - [`onebot.getGroupSystemMsg()`](https://docs.go-cqhttp.org/api/#获取群系统消息) 获取群系统消息
+- [`onebot.uploadPrivateFile()`](https://docs.go-cqhttp.org/api/#上传私聊文件) 上传私聊文件
 - [`onebot.uploadGroupFile()`](https://docs.go-cqhttp.org/api/#上传群文件) 上传群文件
 - [`onebot.getGroupFileSystemInfo()`](https://docs.go-cqhttp.org/api/#获取群文件系统信息) 获取群文件系统信息
 - [`onebot.getGroupRootFiles()`](https://docs.go-cqhttp.org/api/#获取群根目录文件列表) 获取群根目录文件列表
 - [`onebot.getGroupFilesByFolder()`](https://docs.go-cqhttp.org/api/#获取群子目录文件列表) 获取群子目录文件列表
+- [`onebot.createGroupFileFolder()`](https://docs.go-cqhttp.org/api/#创建群文件文件夹) 创建群文件文件夹
+- [`onebot.deleteGroupFolder()`](https://docs.go-cqhttp.org/api/#删除群文件文件夹) 删除群文件文件夹
+- [`onebot.deleteGroupFile()`](https://docs.go-cqhttp.org/api/#删除群文件) 删除群文件
 - [`onebot.getGroupFileUrl()`](https://docs.go-cqhttp.org/api/#获取群文件资源链接) 获取群文件资源链接
 - [`onebot.getGroupAtAllRemain()`](https://docs.go-cqhttp.org/api/#获取群-全体成员-剩余次数) 获取群 @全体成员 剩余次数
 - [`onebot.getVipInfo()`](https://docs.go-cqhttp.org/api/#获取VIP信息) 获取 VIP 信息
 - [`onebot.sendGroupNotice()`](https://docs.go-cqhttp.org/api/#发送群公告) 发送群公告
+- [`onebot.getGroupNotice()`](https://docs.go-cqhttp.org/api/#获取群公告) 获取群公告
+- [`onebot.reloadEventFilter()`](https://docs.go-cqhttp.org/api/#重载事件过滤器) 重载事件过滤器
 - [`onebot.downloadFile()`](https://docs.go-cqhttp.org/api/#下载文件到缓存目录) 下载文件到缓存目录
 - [`onebot.getOnlineClients()`](https://docs.go-cqhttp.org/api/#获取当前账号在线客户端列表) 获取当前账号在线客户端列表
 - [`onebot.getGroupMsgHistory()`](https://docs.go-cqhttp.org/api/#获取群消息历史记录) 获取群消息历史记录
@@ -375,10 +386,13 @@ export default {
 - [`onebot.checkUrlSafely()`](https://docs.go-cqhttp.org/api/#检查链接安全性) 检查链接安全性 <sup>[3]</sup>
 - [`onebot.getModelShow()`](https://docs.go-cqhttp.org/api/#获取在线机型) 获取在线机型
 - [`onebot.setModelShow()`](https://docs.go-cqhttp.org/api/#设置在线机型) 设置在线机型
+- [`onebot.delete_unidirectional_friend()`](https://docs.go-cqhttp.org/api/#删除单项好友) 删除单项好友 <sup>[4]</sup>
+- [`onebot.send_private_forward_msg()`](https://docs.go-cqhttp.org/api/#发送合并转发-好友) 发送合并转发 (好友)
 
 注释：
 
 3. 这个方法名与 go-cqhttp 一致，并不是拼写错误
+4. 原文为「单项」，此处保持一致
 
 ### QQ 频道 API <Badge type="warning" text="meta"/>
 

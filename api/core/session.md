@@ -103,7 +103,7 @@ sidebarDepth: 2
 ### session.sendQueued(message, delay?)
 
 - **message:** `string` 要发送的内容
-- **delay:** `number` 与下一条消息的时间间隔，缺省时会使用 [`app.options.delay.queue`](./app.md#options-delay)
+- **delay:** `number` 与下一条消息的时间间隔，缺省时会使用 [`app.config.delay.queue`](./app.md#options-delay)
 - 返回值: `Promise<void>`
 
 在当前上下文发送消息，并与下一条通过 `session.sendQueued` 发送的消息之间保持一定的时间间隔。
@@ -124,7 +124,7 @@ sidebarDepth: 2
 
 ### session.prompt(timeout?) <Badge text="beta" type="warning"/>
 
-- **timeout:** `number` 中间件的生效时间，缺省时会使用 [`app.options.delay.prompt`](./app.md#options-delay)
+- **timeout:** `number` 中间件的生效时间，缺省时会使用 [`app.config.delay.prompt`](./app.md#options-delay)
 - 返回值: `Promise<string>` 用户输入
 
 等待当前会话的下一次输入，如果超时则会返回空串。
@@ -136,7 +136,7 @@ sidebarDepth: 2
 - **options.next:** [`Next?`](../../guide/message/middleware.md#注册和取消中间件) 回调函数
 - **options.prefix:** `string?` 显示在候选输入前的文本
 - **options.suffix:** `string` 当只有一个选项时，显示在候选输入后的文本
-- **options.coefficient:** `number` 用于模糊匹配的相似系数，缺省时会使用 [`app.options.minSimilarity`](./app.md#options-minsimilarity)
+- **options.coefficient:** `number` 用于模糊匹配的相似系数，缺省时会使用 [`app.config.minSimilarity`](./app.md#options-minsimilarity)
 - **options.apply:** `(suggestion: string, next: Next) => void` 确认后执行的操作
 - 返回值: `Promise<void>`
 

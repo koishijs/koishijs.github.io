@@ -134,7 +134,7 @@ dnf install ffmpeg ffmpeg-devel
 ### options.proxyAgent
 
 - 类型: `string`
-- 默认值: [`app.options.request.proxyAgent`](../../api/core/app.md#options-request-proxyagent)
+- 默认值: [`app.config.request.proxyAgent`](../../api/core/app.md#options-request-proxyagent)
 
 请求时默认使用的网络代理。
 

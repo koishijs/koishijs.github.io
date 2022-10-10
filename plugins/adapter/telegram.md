@@ -43,7 +43,7 @@ sidebarDepth: 2
 ### options.proxyAgent
 
 - 类型: `string`
-- 默认值: [`app.options.request.proxyAgent`](../../api/core/app.md#options-request-proxyagent)
+- 默认值: [`app.config.request.proxyAgent`](../../api/core/app.md#options-request-proxyagent)
 
 请求时默认使用的网络代理。
 
@@ -74,4 +74,4 @@ sidebarDepth: 2
 
 - 类型：`string`
 
-Koishi 服务暴露在公网的地址，会覆盖 [`app.options.selfUrl`](../../api/app.md#options-selfurl) 的值。
+Koishi 服务暴露在公网的地址，会覆盖 [`app.config.selfUrl`](../../api/app.md#options-selfurl) 的值。

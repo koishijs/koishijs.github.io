@@ -166,7 +166,7 @@ interface Selection {
 
 ## 实例属性和方法
 
-### app.options
+### app.config
 
 - 类型: `AppOptions`
 

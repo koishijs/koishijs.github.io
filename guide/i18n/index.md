@@ -120,7 +120,7 @@ session.text('remain', [123456 /* 毫秒数 */])
 - 频道语言 (`session.channel.locale`)
 - 群组语言 (`session.guild.locale`)
 - 用户语言 (`session.user.locale`)
-- 默认语言 (`app.options.locale`)
+- 默认语言 (`app.config.locale`)
 - 无语言 (`''`)
 - 其他任何语言
 

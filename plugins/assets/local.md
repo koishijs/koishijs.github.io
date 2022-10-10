@@ -25,7 +25,7 @@ sidebarDepth: 2
 ### selfUrl
 
 - 类型: `string`
-- 默认值: `app.options.selfUrl`
+- 默认值: `app.config.selfUrl`
 
 Koishi 暴露在公网的地址。
 

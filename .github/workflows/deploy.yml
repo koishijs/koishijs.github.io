@@ -51,17 +51,10 @@ jobs:
           repository: koishijs/koishi-plugin-eval
           path: .external/eval
 
-      - name: Checkout koishi-plugin-github
-        uses: actions/checkout@v3
-        with:
-          repository: koishijs/koishi-plugin-github
-          path: .external/github
-
       - name: Create Symlinks
         run: |
           ln -s ../.external/dialogue/docs ./community/dialogue
           ln -s ../.external/eval/docs ./community/eval
-          ln -s ../.external/github/docs ./community/github
 
       - name: Build
         run: yarn build
@@ -122,17 +115,10 @@ jobs:
           repository: koishijs/koishi-plugin-eval
           path: .external/eval
 
-      - name: Checkout koishi-plugin-github
-        uses: actions/checkout@v3
-        with:
-          repository: koishijs/koishi-plugin-github
-          path: .external/github
-
       - name: Create Symlinks
         run: |
           ln -s ../.external/dialogue/docs ./community/dialogue
           ln -s ../.external/eval/docs ./community/eval
-          ln -s ../.external/github/docs ./community/github
 
       - name: Build
         run: yarn build

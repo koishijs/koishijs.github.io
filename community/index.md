@@ -12,7 +12,6 @@ sidebarDepth: 2
 
 - [koishi-plugin-dialogue](./dialogue/)：教学系统
 - [koishi-plugin-eval](./eval/)：执行脚本
-- [koishi-plugin-github](./github/)：接入 GitHub
 
 ## 装饰器支持
 

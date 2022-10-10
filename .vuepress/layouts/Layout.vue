@@ -18,11 +18,9 @@
       </div>
     </template>
 
-    <template #page v-if="frontmatter.home">
-      <home-page></home-page>
-    </template>
-    <template #page v-else-if="frontmatter.market">
-      <market-page></market-page>
+    <template #page>
+      <home-page v-if="frontmatter.home"></home-page>
+      <market-page v-else-if="frontmatter.market"></market-page>
     </template>
   </parent-layout>
 </template>

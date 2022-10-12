@@ -10,8 +10,8 @@ sidebarDepth: 2
 
 ## 下载
 
-- Windows: <a href="http://koishi.cdn.ilharper.com/desktop/v0.6.1/koishi-desktop-win-x64-v0.6.1.zip" referrerpolicy="origin">Portable (.zip)</a>
-- Windows: <a href="http://koishi.cdn.ilharper.com/desktop/v0.6.1/koishi-desktop-win-x64-v0.6.1.msi" referrerpolicy="origin">Windows Installer (.msi)</a>
-- macOS: <a href="http://koishi.cdn.ilharper.com/desktop/v0.6.1/koishi-desktop-osx-x64-v0.6.1.zip" referrerpolicy="origin">Portable (.zip)</a>
-- macOS: <a href="http://koishi.cdn.ilharper.com/desktop/v0.6.1/koishi-desktop-osx-x64-v0.6.1.pkg" referrerpolicy="origin">Installation Package (.pkg)</a>
-- Linux: <a href="http://koishi.cdn.ilharper.com/desktop/v0.6.1/koishi-desktop-linux-x64-v0.6.1.zip" referrerpolicy="origin">Portable (.zip)</a>
+- Windows: [便携包 (.zip)](http://ghproxy.com/https://github.com/koishijs/koishi-desktop/releases/download/v0.6.3/koishi-desktop-win-x64-v0.6.3.zip)
+- Windows: [安装包 (.msi)](http://ghproxy.com/https://github.com/koishijs/koishi-desktop/releases/download/v0.6.3/koishi-desktop-win-x64-v0.6.3.msi)
+- macOS: [便携包 (.zip)](http://ghproxy.com/https://github.com/koishijs/koishi-desktop/releases/download/v0.6.3/koishi-desktop-osx-x64-v0.6.3.zip)
+- macOS: [安装包 (.pkg)](http://ghproxy.com/https://github.com/koishijs/koishi-desktop/releases/download/v0.6.3/koishi-desktop-osx-x64-v0.6.3.pkg)
+- Linux: [便携包 (.zip)](http://ghproxy.com/https://github.com/koishijs/koishi-desktop/releases/download/v0.6.3/koishi-desktop-linux-x64-v0.6.3.zip)

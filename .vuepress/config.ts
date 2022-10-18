@@ -109,6 +109,9 @@ export default {
           '/manual/cli/index.md',
           '/manual/cli/development.md',
         ],
+      }, {
+        text: '常见问题',
+        link: '/manual/faq.md',
       }],
 
       '/guide/': [{
@@ -317,9 +320,6 @@ export default {
       '/community/': communitySidebar,
 
       '/about/': [{
-        text: '常见问题',
-        link: '/about/faq.md',
-      }, {
         text: '更新与迁移',
         children: [
           '/about/history.md',

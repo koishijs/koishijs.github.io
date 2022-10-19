@@ -127,6 +127,7 @@ jobs:
         run: yarn global add vercel
 
       - name: Deploy vercel
+        if: ${{ github.repository == 'koishijs/koishijs.github.io' && github.ref == 'refs/heads/docs' }}
         run: |
           rm .vuepress/dist/CNAME
           vercel deploy .vuepress/dist -n koishi-website --token ${{ secrets.VERCEL_TOKEN }} --prod --yes

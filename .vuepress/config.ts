@@ -75,7 +75,7 @@ export default {
       children: ['/market.md', '/plugins/', '/community/'],
     }, {
       text: '更多',
-      link: '/about/faq.md',
+      link: '/about/history.md',
       activeMatch: '/about/',
     }],
 

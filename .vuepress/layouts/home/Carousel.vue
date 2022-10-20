@@ -1,5 +1,5 @@
 <template>
-  <img :src="$withBase(imgset[index])" @click="index = (index + 1) % 5">
+  <img class="image" :src="$withBase(imgset[index])" @click="index = (index + 1) % 5">
 </template>
 
 <script lang="ts" setup>
@@ -17,3 +17,9 @@ const imgset = [
 ]
 
 </script>
+
+<style lang="scss" scoped>
+.image {
+  cursor: pointer;
+}
+</style>

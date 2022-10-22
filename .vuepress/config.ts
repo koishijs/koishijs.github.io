@@ -5,20 +5,6 @@ import { viteBundler } from 'vuepress'
 import yaml from '@rollup/plugin-yaml'
 import theme from './theme'
 
-const communitySidebar = [{
-  text: '总览',
-  link: '/community/',
-}]
-
-const communityFolder = resolve(__dirname, '../community')
-const dirents = readdirSync(communityFolder, { withFileTypes: true })
-for (const dirent of dirents) {
-  if (!dirent.isDirectory() && !dirent.isSymbolicLink()) continue
-  try {
-    communitySidebar.push(await import(communityFolder + '/' + dirent.name + '/index.js'))
-  } catch {}
-}
-
 const hash = process.env.GITHUB_SHA
   ? ` (${process.env.GITHUB_SHA.slice(0, 7)})`
   : ''
@@ -72,7 +58,7 @@ export default {
       link: '/api/',
     }, {
       text: '生态',
-      children: ['/market.md', '/plugins/', '/community/'],
+      children: ['/market.md', '/plugins/'],
     }, {
       text: '更多',
       link: '/about/history.md',
@@ -316,8 +302,6 @@ export default {
           '/plugins/other/puppeteer.md',
         ],
       }],
-
-      '/community/': communitySidebar,
 
       '/about/': [{
         text: '更新与迁移',

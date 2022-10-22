@@ -39,23 +39,6 @@ jobs:
       - name: Install
         run: yarn
 
-      - name: Checkout koishi-plugin-dialogue
-        uses: actions/checkout@v3
-        with:
-          repository: koishijs/koishi-plugin-dialogue
-          path: .external/dialogue
-
-      - name: Checkout koishi-plugin-eval
-        uses: actions/checkout@v3
-        with:
-          repository: koishijs/koishi-plugin-eval
-          path: .external/eval
-
-      - name: Create Symlinks
-        run: |
-          ln -s ../.external/dialogue/docs ./community/dialogue
-          ln -s ../.external/eval/docs ./community/eval
-
       - name: Build
         run: yarn build
         env:
@@ -102,23 +85,6 @@ jobs:
 
       - name: Install
         run: yarn
-
-      - name: Checkout koishi-plugin-dialogue
-        uses: actions/checkout@v3
-        with:
-          repository: koishijs/koishi-plugin-dialogue
-          path: .external/dialogue
-
-      - name: Checkout koishi-plugin-eval
-        uses: actions/checkout@v3
-        with:
-          repository: koishijs/koishi-plugin-eval
-          path: .external/eval
-
-      - name: Create Symlinks
-        run: |
-          ln -s ../.external/dialogue/docs ./community/dialogue
-          ln -s ../.external/eval/docs ./community/eval
 
       - name: Build
         run: yarn build

@@ -61,7 +61,7 @@ export default {
       children: ['/market.md', '/plugins/'],
     }, {
       text: '更多',
-      link: '/about/history.md',
+      link: '/about/contact.md',
       activeMatch: '/about/',
     }],
 
@@ -304,6 +304,9 @@ export default {
       }],
 
       '/about/': [{
+        text: '加入讨论',
+        link: '/about/contact.md',
+      }, {
         text: '更新与迁移',
         children: [
           '/about/history.md',

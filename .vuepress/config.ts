@@ -60,7 +60,7 @@ export default {
       text: '生态',
       children: ['/market.md', '/plugins/'],
     }, {
-      text: '更多',
+      text: '关于',
       link: '/about/contact.md',
       activeMatch: '/about/',
     }],

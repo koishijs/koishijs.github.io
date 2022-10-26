@@ -44,10 +44,10 @@ const choices = {
     text: '用于搭建机器人服务',
     caption: '我的运行环境是……',
     children: {
-      'Windows': './desktop',
-      'macOS': './desktop',
-      'Linux': './desktop',
-      'Android': './mobile',
+      'Windows': './manual/starter/desktop',
+      'macOS': './manual/starter/desktop',
+      'Linux': './manual/starter/desktop',
+      'Android': './manual/starter/mobile',
     },
   },
   dev: {

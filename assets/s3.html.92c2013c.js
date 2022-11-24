@@ -1,0 +1,1 @@
+import{_ as s,o as t,c as a,a as e,b as o}from"./app.d641dd0e.js";const i={},c=e("h1",{id:"koishijs-plugin-s3",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#koishijs-plugin-s3","aria-hidden":"true"},"#"),o(" @koishijs/plugin-s3")],-1),n=[c];function r(_,d){return t(),a("div",null,n)}const l=s(i,[["render",r],["__file","s3.html.vue"]]);export{l as default};

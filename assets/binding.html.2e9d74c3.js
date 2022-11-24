@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-558a0f20","path":"/guide/adapter/binding.html","title":"\u8DE8\u5E73\u53F0\u8D26\u53F7\u7ED1\u5B9A","lang":"en-US","frontmatter":{"sidebarDepth":2},"excerpt":"","headers":[],"git":{"updatedTime":1669254259000},"filePathRelative":"guide/adapter/binding.md"}');export{e as data};

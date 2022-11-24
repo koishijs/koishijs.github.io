@@ -1,0 +1,1 @@
+import{_ as t,o as i,c as s,a as e,b as a}from"./app.d641dd0e.js";const o={},c=e("h1",{id:"koishijs-plugin-git",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#koishijs-plugin-git","aria-hidden":"true"},"#"),a(" @koishijs/plugin-git")],-1),n=[c];function r(_,d){return i(),s("div",null,n)}const l=t(o,[["render",r],["__file","git.html.vue"]]);export{l as default};

@@ -10,8 +10,6 @@ sidebarDepth: 2
 
 ## 下载
 
-- Windows: [便携包 (.zip)](http://ghproxy.com/https://github.com/koishijs/koishi-desktop/releases/download/v0.7.3/koishi-desktop-win-x64-v0.7.3.zip)
-- Windows: [安装包 (.msi)](http://ghproxy.com/https://github.com/koishijs/koishi-desktop/releases/download/v0.7.3/koishi-desktop-win-x64-v0.7.3.msi)
-- macOS: [便携包 (.zip)](http://ghproxy.com/https://github.com/koishijs/koishi-desktop/releases/download/v0.7.3/koishi-desktop-osx-x64-v0.7.3.zip)
-- macOS: [安装包 (.pkg)](http://ghproxy.com/https://github.com/koishijs/koishi-desktop/releases/download/v0.7.3/koishi-desktop-osx-x64-v0.7.3.pkg)
-- Linux: [便携包 (.zip)](http://ghproxy.com/https://github.com/koishijs/koishi-desktop/releases/download/v0.7.3/koishi-desktop-linux-x64-v0.7.3.zip)
+- Windows: [安装包 (.msi)](https://k.ilharp.cc/win.msi)
+- macOS: [安装包 (.pkg)](https://k.ilharp.cc/osx.pkg)
+- Linux: [AppImage (.AppImage)](https://k.ilharp.cc/linux.AppImage)
